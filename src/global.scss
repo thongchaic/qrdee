@@ -16,5 +16,11 @@
 
 ion-content{
     // --ion-background-color:#111D12;
-    --background: #488aff url('/assets/shapes.svg') no-repeat center center / cover;
+    --background: #488aff url('/assets/bg1.jpg') no-repeat center center / cover;
+}
+
+.qrdee-card{
+    background-color: #ffffff!important;
+    // --background: transparent;
+    // --ion-color-base: transparent !important;
 }

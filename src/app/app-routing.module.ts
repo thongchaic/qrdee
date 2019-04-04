@@ -4,18 +4,14 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'accept-payment',
     pathMatch: 'full'
   },
-  {
-    path: 'home',
-    loadChildren: './home/home.module#HomePageModule'
-  },
-  {
-    path: 'list',
-    loadChildren: './list/list.module#ListPageModule'
-  },
-  { path: 'products', loadChildren: './products/products.module#ProductsPageModule' }
+  { path: 'home', loadChildren: './home/home.module#HomePageModule' },
+  { path: 'list', loadChildren: './list/list.module#ListPageModule' },
+  { path: 'products', loadChildren: './products/products.module#ProductsPageModule' },
+  { path: 'accept-payment', loadChildren: './accept-payment/accept-payment.module#AcceptPaymentPageModule' }
+
 ];
 
 @NgModule({

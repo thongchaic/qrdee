@@ -1,0 +1,16 @@
+<ion-input type="search" inputmode="text" placeholder="ค้นหาสินค้า" (keyup)="$searchTerm.next($event.target.value)"></ion-input>
+<ion-list lines="none" *ngIf="results?.length > 0">
+  <ion-list-header>
+    <ion-label>รายการค้นหา</ion-label>
+  </ion-list-header>
+  <ion-item *ngFor="let result of results">
+    {{ result.product_th }}
+  </ion-item>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-list>

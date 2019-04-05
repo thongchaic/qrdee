@@ -1,32 +1,35 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+import { SharedModule } from '../shared/shared.module';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AcceptPaymentPage } from './accept-payment.page';
+import { CartPage } from './cart.page';
 import { PriceComponent } from './price/price.component';
 import { ProductsComponent } from './products/products.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: AcceptPaymentPage
+    component: CartPage
   }
 ];
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule,
+    SharedModule,
     IonicModule,
     RouterModule.forChild(routes)
   ],
   declarations: [
-    AcceptPaymentPage,
+    CartPage,
     PriceComponent,
     ProductsComponent
+  ],
+  providers: [
+
   ]
 })
-export class AcceptPaymentPageModule {}
+export class CartPageModule {}

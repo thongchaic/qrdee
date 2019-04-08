@@ -4,7 +4,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { HttpClientInterceptor } from './interceptors/httpclient.interceptor';
-import { ProductService } from './services/product.service';
+import { ToastService } from './services/toast.service';
 
 
 @NgModule({
@@ -15,7 +15,7 @@ import { ProductService } from './services/product.service';
     HttpClientModule
   ],
   providers: [
-    ProductService,
+    ToastService,
     { provide: HTTP_INTERCEPTORS, useClass: HttpClientInterceptor, multi: true }
   ]
 })

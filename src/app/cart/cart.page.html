@@ -8,6 +8,15 @@
 </ion-header>
 
 <ion-content>
-  <app-price></app-price>
-  <app-products></app-products>
+  <app-price
+    [price]="price">
+  </app-price>
+  <app-list 
+    [cart]="cart" 
+    (removeFromCartChange)="removeFromCart($event)">
+  </app-list>  
 </ion-content>
+
+<ion-footer>
+  <ion-button expand="full" color="primary">ชำระเงินด้วย QR Code</ion-button>
+</ion-footer>

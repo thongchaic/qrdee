@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { ProductsPage } from './products.page';
 import { ListComponent } from './list/list.component';
+import { ProductService } from './shared/product.service';
 
 
 const routes: Routes = [
@@ -25,6 +26,9 @@ const routes: Routes = [
   declarations: [
     ProductsPage,
     ListComponent
+  ],
+  providers: [
+    ProductService
   ]
 })
 export class ProductsPageModule {}

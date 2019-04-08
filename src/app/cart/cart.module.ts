@@ -7,7 +7,9 @@ import { IonicModule } from '@ionic/angular';
 
 import { CartPage } from './cart.page';
 import { PriceComponent } from './price/price.component';
-import { ProductsComponent } from './products/products.component';
+import { ListComponent } from './list/list.component';
+
+import { CartService } from './shared/cart.service';
 
 const routes: Routes = [
   {
@@ -26,10 +28,10 @@ const routes: Routes = [
   declarations: [
     CartPage,
     PriceComponent,
-    ProductsComponent
+    ListComponent
   ],
   providers: [
-
+    CartService
   ]
 })
 export class CartPageModule {}

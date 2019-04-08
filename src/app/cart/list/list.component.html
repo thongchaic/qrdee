@@ -1,0 +1,21 @@
+<ion-list *ngIf="cart?.length > 0">
+  <ion-list-header>
+    <ion-label>ตะกร้าสินค้า</ion-label>
+  </ion-list-header>
+
+  <ng-container *ngFor="let product of cart">
+    <ion-item *ngIf="product.qty != 0">
+      <ion-avatar slot="start">
+        <img src="">
+      </ion-avatar>
+      {{ product.product_th }}
+      <ion-badge color="primary" slot="end" *ngIf="product.qty > 0">{{ product.qty }}</ion-badge>
+      <ion-button fill="clear" color="danger" slot="end" *ngIf="product.qty > 0" (click)="removeFromCart(product)">
+        <ion-icon slot="icon-only" name="close" *ngIf="product.qty == 1"></ion-icon>
+        <ion-icon slot="icon-only" name="remove" *ngIf="product.qty > 1"></ion-icon>
+      </ion-button>
+      
+    </ion-item>
+  </ng-container>
+  
+</ion-list>

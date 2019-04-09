@@ -30,6 +30,27 @@ export class CartService {
     return price;
   }
 
+  addToCart(product) {
+    let cartArr = [];
+    let allowPush = true;
+
+    product.qty = 1;
+    
+    if(localStorage.getItem('cart')) cartArr = JSON.parse(localStorage.getItem('cart'));
+
+    for(let i = 0; i < cartArr.length; i++) {
+      if(cartArr[i].id === product.id) {
+        cartArr[i].qty += 1;
+        allowPush = false;
+        break;
+      }
+    }
+
+    if(allowPush) cartArr.push(product);
+    localStorage.setItem('cart', JSON.stringify(cartArr));  
+    product.instock -= 1;
+  }
+
   removeProduct(product) {
     let cartArray = new Array();
     cartArray = this.cart.getValue();

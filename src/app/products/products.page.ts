@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ProductService } from './shared/product.service';
 import { ToastService } from '../shared/services/toast.service';
 import { BehaviorSubject } from 'rxjs';
-import { Product } from './shared/product';
+// import { Product } from './shared/product';
 import { IonInfiniteScroll } from '@ionic/angular';
+import { CartService } from '../cart/shared/cart.service';
 
 @Component({
   selector: 'app-products',
@@ -18,6 +19,7 @@ export class ProductsPage implements OnInit {
   
   constructor(
     private productService: ProductService,
+    private cartService: CartService,
     private toastService: ToastService
   ) {
     this.productService.search(this.$searchTerm, this.page).subscribe(res => {   
@@ -34,26 +36,8 @@ export class ProductsPage implements OnInit {
   }
 
   addToCart(product) {
-    let cartArr = [];
-    let allowPush = true;
-
-    product.qty = 1;
-    
-    if(localStorage.getItem('cart')) cartArr = JSON.parse(localStorage.getItem('cart'));
-
-    for(let i = 0; i < cartArr.length; i++) {
-      if(cartArr[i].id === product.id) {
-        cartArr[i].qty += 1;
-        allowPush = false;
-        break;
-      }
-    }
-
-    if(allowPush) cartArr.push(product);
-    localStorage.setItem('cart', JSON.stringify(cartArr));  
-    product.instock -= 1;
+    this.cartService.addToCart(product);
     this.toastService.showToast(`เพิ่ม ${product.product_th} ลงในตะกร้า`, 'bottom');
-    // console.log(JSON.parse(localStorage.getItem('cart')));
   }
 
   loadData(infiniteScroll: IonInfiniteScroll) {

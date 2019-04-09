@@ -11,7 +11,7 @@ import { CartService } from '../cart/shared/cart.service';
   templateUrl: './products.page.html',
   styleUrls: ['./products.page.scss'],
 })
-export class ProductsPage implements OnInit {
+export class ProductsPage {
 
   products = [];
   page = 1;
@@ -28,7 +28,8 @@ export class ProductsPage implements OnInit {
     });
   }
 
-  ngOnInit() {
+  ionViewWillEnter() {
+    this.loadProducts();
   }
 
   search(query) {
@@ -38,6 +39,10 @@ export class ProductsPage implements OnInit {
   addToCart(product) {
     this.cartService.addToCart(product);
     this.toastService.showToast(`เพิ่ม ${product.product_th} ลงในตะกร้า`, 'bottom');
+  }
+
+  loadProducts() {
+    this.productService.getAll().subscribe(res => this.products = res.data);
   }
 
   loadData(infiniteScroll: IonInfiniteScroll) {

@@ -1,17 +1,17 @@
 <ion-input type="search" inputmode="text" placeholder="ค้นหาสินค้า" (keyup)="search($event.target.value)"></ion-input>
-<ion-list *ngIf="products?.length > 0">
+<ion-list>
   <ion-list-header>
-    <ion-label>รายการค้นหา</ion-label>
+    <ion-label>สินค้า</ion-label>
   </ion-list-header>
   <ion-item *ngFor="let product of products">
     <ion-avatar slot="start">
       <img src="">
     </ion-avatar>
-    {{ product.product_th }}
-    <ion-badge color="primary" slot="end" *ngIf="product.instock > 0">{{ product.instock }}</ion-badge>
+    {{ product.product_th }}&nbsp;
+    <ion-badge color="success" *ngIf="product.instock > 0">{{ product.instock }}</ion-badge>
     <ion-badge color="danger" slot="end" *ngIf="product.instock == 0">หมดสต๊อค</ion-badge>
-    <ion-button fill="clear" color="success" slot="end" *ngIf="product.instock > 0" (click)="addToCart(product);">
-      <ion-icon slot="icon-only" name="add"></ion-icon>
+    <ion-button fill="clear" color="primary" slot="end" *ngIf="product.instock > 0" (click)="addToCart(product);">
+      <ion-icon slot="icon-only" name="basket"></ion-icon>
     </ion-button>
     
   </ion-item>

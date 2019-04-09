@@ -17,7 +17,7 @@ export class ProductService {
   ) { }
 
   getAll() {
-    return this.http.get<Product>(`${this.baseUrl}`);
+    return this.http.get<any>(`${this.baseUrl}`);
   }
 
   get(id) {
@@ -33,7 +33,7 @@ export class ProductService {
   }
 
   searchEntries(term, page) {
-    return this.http.get<any>(`${this.baseUrl}?t=search&query=${term}&page=${page}`);
+    return this.http.get<any>(`${this.baseUrl}?t=search&query=${term == '' ? true : term}&page=${page}`);
   }
 
 }

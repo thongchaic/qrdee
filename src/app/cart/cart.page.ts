@@ -61,13 +61,13 @@ export class CartPage {
 
   addItem(product) {
     this.cartService.addItem(product);
-    this.toastService.showToast(`เพิ่ม ${product.product_th} 1ชิ้น`, 'bottom')
+    this.toastService.showToast(`เพิ่ม ${product.product_th} 1ชิ้น`, 'top')
     this.getCart();
   }
 
   removeFromCart(product) {
     this.cartService.removeProduct(product);
-    this.toastService.showToast(`ลบ ${product.product_th}`, 'bottom')
+    this.toastService.showToast(`ลบ ${product.product_th}`, 'top')
     this.getCart();
   }
 

@@ -1,4 +1,4 @@
-<ion-input type="search" inputmode="text" placeholder="ค้นหาสินค้า" (keyup)="search($event.target.value)"></ion-input>
+<ion-searchbar placeholder="ชื่อ/รหัสสินค้า" color="primary" animated (ionChange)="search($event.target.value)"></ion-searchbar>
 <ion-list>
   <ion-list-header>
     <ion-label>สินค้า</ion-label>
@@ -7,10 +7,13 @@
     <ion-avatar slot="start">
       <img src="">
     </ion-avatar>
-    {{ product.product_th }}&nbsp;
-    <!-- <ion-badge color="success" *ngIf="product.instock > 0">{{ product.instock }}</ion-badge> -->
-    <ion-badge color="danger" slot="end" *ngIf="product.instock == 0">หมดสต๊อค</ion-badge>
-    <ion-button fill="clear" color="primary" slot="end" *ngIf="product.instock > 0" (click)="addToCart(product);">
+    <ion-label text-wrap>
+      <h5><ion-text color="dark">รหัส: {{ product.code_product ? product.code_product : '-' }}</ion-text></h5>
+      <h5><ion-text color="dark">ชื่อ: {{ product.product_th }}</ion-text></h5>
+    </ion-label>
+    <ion-badge slot="end" color="success" *ngIf="product.incart == 1">เพิ่มลงในตะกร้าแล้ว</ion-badge>
+    <ion-badge color="danger" slot="end" *ngIf="product.instock == 0 && product.allowAdd == 0">หมดสต๊อค</ion-badge>
+    <ion-button fill="clear" color="primary" slot="end" *ngIf="product.incart == 0 && product.allowAdd == 1" (click)="addToCart(product);">
       <ion-icon slot="icon-only" name="basket"></ion-icon>
     </ion-button>
     

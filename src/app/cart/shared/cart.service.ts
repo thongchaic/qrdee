@@ -6,12 +6,12 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class CartService {
 
-  cart = new BehaviorSubject<[]>(localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : []);
+  cart = new BehaviorSubject<[]>(localStorage.getItem('cart') ? this.getItem() : []);
 
   constructor() { }
 
   getCart() {
-    this.cart.next(JSON.parse(localStorage.getItem('cart')));
+    this.cart.next(this.getItem());
     return this.cart;
   }
 
@@ -30,6 +30,8 @@ export class CartService {
   }
 
   addToCart(product) {
+    if(this.checkInCart(product)) return;
+    
     let cartArr = this.getItem() ? this.getItem() : [];
 
     product.qty = 1;
@@ -65,6 +67,15 @@ export class CartService {
     localStorage.setItem('cart', JSON.stringify(cartArr));
     this.cart.next(cartArr);
     // console.log('remove');
+  }
+
+  checkInCart(product) {
+    let cartArr = this.getItem() ? this.getItem() : [];
+    let idx = cartArr.map(e => e.id).indexOf(product.id);
+
+    if(idx == -1) return false;
+
+    return true;
   }
 
   getItem() {

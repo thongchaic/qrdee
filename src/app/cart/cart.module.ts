@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module';
 import { QRCodeModule } from 'angularx-qrcode';
-// import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx'
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx'
 
 import { IonicModule } from '@ionic/angular';
 
@@ -13,6 +13,7 @@ import { ListComponent } from './list/list.component';
 
 import { CartService } from './shared/cart.service';
 import { QrmodalComponent } from './qrmodal/qrmodal.component';
+import { AddComponent } from './add/add.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,7 @@ const routes: Routes = [
     CartPage,
     PriceComponent,
     ListComponent,
+    AddComponent,
     QrmodalComponent
   ],
   entryComponents: [
@@ -40,7 +42,7 @@ const routes: Routes = [
   ],
   providers: [
     CartService,
-    // BarcodeScanner
+    BarcodeScanner
   ]
 })
 export class CartPageModule {}

@@ -21,7 +21,8 @@ export class ListComponent implements OnInit {
     this.searchChange.emit(query);
   }
 
-  addToCart(product: Product) {
+  addToCart(product) {
+    product.incart = 1;
     this.addToCartChange.emit(product);
   }
 

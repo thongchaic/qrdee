@@ -33,6 +33,8 @@ export class ProductService {
   }
 
   searchEntries(term, page) {
+    // let queryString = isNaN(term) ? `t=search_code&query=${term == '' ? true : term}&page=${page}` ? `?t=search&query=${term == '' ? true : term}&page=${page}`: 
+    // console.log(isNaN(term));
     return this.http.get<any>(`${this.baseUrl}?t=search&query=${term == '' ? true : term}&page=${page}`);
   }
 

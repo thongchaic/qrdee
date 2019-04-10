@@ -8,6 +8,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class ListComponent implements OnInit {
   @Input('cart') cart;
   @Output() removeFromCartChange = new EventEmitter;
+  @Output() addItemChange = new EventEmitter;
   
   constructor(
 
@@ -15,6 +16,10 @@ export class ListComponent implements OnInit {
 
   ngOnInit() {
     // console.log(this.cart);
+  }
+
+  addItem(product) {
+    this.addItemChange.emit(product);
   }
 
   removeFromCart(product) {

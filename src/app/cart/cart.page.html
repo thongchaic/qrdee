@@ -13,7 +13,8 @@
   </app-price>
   <app-list 
     [cart]="cart" 
-    (removeFromCartChange)="removeFromCart($event)">
+    (removeFromCartChange)="removeFromCart($event)" 
+    (addItemChange)="addItem($event)">
   </app-list>  
 </ion-content>
 

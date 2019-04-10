@@ -21,45 +21,53 @@ export class CartService {
 
     cartArray = this.cart.getValue() ? this.cart.getValue() : [];
     // console.log(cartArray);
-    
 
-    cartArray.forEach(product => {      
-      price += product['cost'] * product['qty'];      
+    cartArray.forEach(product => {
+      price += product['price'] * product['qty'];      
     })
 
     return price;
   }
 
   addToCart(product) {
-    let cartArr = [];
-    let allowPush = true;
+    let cartArr = this.getItem() ? this.getItem() : [];
 
     product.qty = 1;
-    
-    if(localStorage.getItem('cart')) cartArr = JSON.parse(localStorage.getItem('cart'));
-
-    for(let i = 0; i < cartArr.length; i++) {
-      if(cartArr[i].id === product.id) {
-        cartArr[i].qty += 1;
-        allowPush = false;
-        break;
-      }
-    }
-
-    if(allowPush) cartArr.push(product);
-    localStorage.setItem('cart', JSON.stringify(cartArr));  
     product.instock -= 1;
+
+    cartArr.push(product);
+
+    let distinctCartArr = cartArr.filter((value, index, self) => {
+      return cartArr.map(item => item.id).indexOf(value.id) === index;
+    });
+
+    localStorage.setItem('cart', JSON.stringify(distinctCartArr));  
+  }
+
+  addItem(product) {
+    let cartArr = this.getItem();
+    let idx = cartArr.map(e => e.id).indexOf(product.id);
+
+    cartArr[idx].qty += 1;
+    cartArr[idx].instock -= 1;
+
+    localStorage.setItem('cart', JSON.stringify(cartArr));
+    this.cart.next(cartArr);
   }
 
   removeProduct(product) {
-    let cartArray = new Array();
-    cartArray = this.cart.getValue();
-    
-    const index = cartArray.map(item => item.id).indexOf(product.id);
+    let cartArr = this.getItem();
+    let idx = cartArr.map(e => e.id).indexOf(product.id);
 
-    cartArray[index].qty -= 1;
-    if(cartArray[index].qty == 0) cartArray.splice(index, 1);
-    localStorage.setItem('cart', JSON.stringify(cartArray));
+    cartArr[idx].qty -= 1;
+    cartArr[idx].instock += 1;
+    if(cartArr[idx].qty == 0) cartArr.splice(idx, 1);
+    localStorage.setItem('cart', JSON.stringify(cartArr));
+    this.cart.next(cartArr);
     // console.log('remove');
+  }
+
+  getItem() {
+    return localStorage.getItem('cart') ? JSON.parse(localStorage.getItem('cart')) : null;
   }
 }

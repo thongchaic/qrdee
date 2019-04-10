@@ -43,9 +43,6 @@ export class CartPage {
         {
           text: 'ตกลง',
           handler: () => {
-            // this.qrService.generateQRCode().then(function(success) {
-            // this.QRModal();
-            // })
             this.transactionService.newTransaction(this.cart, this.price).subscribe(trn => {
               this.qrService.generatePromptPayQR(trn.data).subscribe(qr => {
                 this.QRModal(qr);
@@ -57,10 +54,15 @@ export class CartPage {
     });
     
   }
-
   getCart() {
     this.cartService.getCart().subscribe(data => this.cart = data);
     this.price = this.cartService.getPrice();
+  }
+
+  addItem(product) {
+    this.cartService.addItem(product);
+    this.toastService.showToast(`เพิ่ม ${product.product_th} 1ชิ้น`, 'bottom')
+    this.getCart();
   }
 
   removeFromCart(product) {

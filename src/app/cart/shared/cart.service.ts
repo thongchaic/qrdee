@@ -34,6 +34,7 @@ export class CartService {
     
     let cartArr = this.getItem() ? this.getItem() : [];
 
+    product.incart = 1;
     product.qty = 1;
     product.instock -= 1;
 

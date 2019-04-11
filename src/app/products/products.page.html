@@ -11,14 +11,9 @@
 </ion-header>
 
 <ion-content>
-  <app-list 
-    [products]="products" 
-    (searchChange)="search($event)" 
-    (addToCartChange)="addToCart($event)" 
-    (loadDataChange)="loadData($event)"></app-list>
+  <ion-router-outlet></ion-router-outlet>
 </ion-content>
 
-
 <ion-footer>
-  <ion-button expand="full" [routerDirection]="'backward'" [routerLink]="'/cart'" color="danger">เสร็จสิ้น</ion-button>
+  <!-- <ion-button expand="full" [routerDirection]="'backward'" [routerLink]="'/cart'" color="danger">เสร็จสิ้น</ion-button> -->
 </ion-footer>

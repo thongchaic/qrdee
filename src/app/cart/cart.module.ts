@@ -14,6 +14,7 @@ import { ListComponent } from './list/list.component';
 import { CartService } from './shared/cart.service';
 import { QrmodalComponent } from './qrmodal/qrmodal.component';
 import { AddComponent } from './add/add.component';
+import { ProductService } from '../products/shared/product.service';
 
 const routes: Routes = [
   {
@@ -42,6 +43,7 @@ const routes: Routes = [
   ],
   providers: [
     CartService,
+    ProductService,
     BarcodeScanner
   ]
 })

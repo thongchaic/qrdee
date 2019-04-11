@@ -6,16 +6,16 @@
 
 <ion-content>
   <ion-card>
-    <qrcode [qrdata]="transaction.promptpay" [size]="256" [level]="'M'"></qrcode>
+    <qrcode [qrdata]="qr.promptpay" [size]="256" [level]="'M'"></qrcode>
     <ion-card-header>
-      <ion-card-title>ร้าน {{ transaction.store_name }}</ion-card-title>
+      <ion-card-title>ร้าน {{ qr.store_name }}</ion-card-title>
     </ion-card-header>
     <ion-card-content>
       <ion-list>
         <ion-list-header>
           <ion-label>รายการสินค้า</ion-label>
         </ion-list-header>
-        <ion-item *ngFor="let item of transaction.items">
+        <ion-item *ngFor="let item of qr.items">
           <ion-avatar slot="start">
             <img src="">
           </ion-avatar>
@@ -28,7 +28,7 @@
           <h3>ราคารวม</h3>
         </div>
         <div slot="end">
-          <h2>{{ transaction.price | number }} ฿</h2>
+          <h2>{{ qr.price | number }} ฿</h2>
         </div>
       </ion-item-divider>
     </ion-card-content>
@@ -40,10 +40,10 @@
 <ion-footer>
   <ion-row>
     <ion-col size="6">
-      <ion-button expand="full" color="primary">เสร็จสิ้น</ion-button>
+      <ion-button expand="full" color="primary" (click)="verifyTransaction()">เสร็จสิ้น</ion-button>
     </ion-col>
     <ion-col size="6">
-      <ion-button expand="full" color="danger" (click)="closeModal()">ยกเลิก</ion-button>
+      <ion-button expand="full" color="danger" (click)="closeModal(0)">ยกเลิก</ion-button>
     </ion-col>
   </ion-row>  
 </ion-footer>

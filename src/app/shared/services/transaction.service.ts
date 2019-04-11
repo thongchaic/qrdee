@@ -7,7 +7,7 @@ import { environment } from '../../../environments/environment';
 })
 export class TransactionService {
 
-  baseUrl = `${environment.api_url}/new_transaction`;
+  baseUrl = `${environment.api_url}`;
 
   constructor(
     private http: HttpClient
@@ -21,10 +21,10 @@ export class TransactionService {
 
     console.log(body);
 
-    return this.http.post<any>(this.baseUrl, body);
+    return this.http.post<any>(`${this.baseUrl}/new_transaction`, body);
   }
 
-  verifyTransaction() {
-
+  verifyTransaction(transaction) {
+    return this.http.post<any>(`${this.baseUrl}/verify_transaction`, transaction);
   }
 }

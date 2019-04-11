@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { BarcodeScanner, BarcodeScannerOptions, BarcodeScanResult } from '@ionic-native/barcode-scanner/ngx';
 
 @Component({
   selector: 'app-add',
@@ -7,11 +7,10 @@ import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-sca
   styleUrls: ['./add.component.scss'],
 })
 export class AddComponent implements OnInit {
+  @Output() scanChange = new EventEmitter;
 
   barcodeScannerOptions: BarcodeScannerOptions = {
-    preferFrontCamera : true,
-    showFlipCameraButton : true,
-    formats : "QR_CODE,PDF_417"
+    formats : "QR_CODE,EAN_13"
   };
 
   constructor(
@@ -21,8 +20,10 @@ export class AddComponent implements OnInit {
   ngOnInit() {}
 
   letScan() {
-    this.barcodeScanner.scan(this.barcodeScannerOptions).then(barcodeData => {
-      console.log('Barcode data', barcodeData);
+    this.barcodeScanner.scan(this.barcodeScannerOptions).then((result: BarcodeScanResult) => {
+      console.log(result);
+      this.scanChange.emit(result.text);
+      // this.presentAlert(result.text);
     }).catch(err => {
       console.log('Error', err);
     });

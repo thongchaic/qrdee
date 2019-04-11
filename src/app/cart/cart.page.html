@@ -20,6 +20,8 @@
 </ion-content>
 
 <ion-footer>
-  <app-add></app-add>
+  <app-add 
+    (scanChange)="scan($event)">
+  </app-add>
   <ion-button expand="full" color="primary" (click)="newTransaction()">ชำระเงินด้วย QR Code</ion-button>
 </ion-footer>

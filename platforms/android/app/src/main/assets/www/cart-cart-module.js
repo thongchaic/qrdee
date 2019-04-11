@@ -954,20 +954,26 @@ __webpack_require__.r(__webpack_exports__);
 var AddComponent = /** @class */ (function () {
     function AddComponent(barcodeScanner) {
         this.barcodeScanner = barcodeScanner;
+        this.scanChange = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"];
         this.barcodeScannerOptions = {
-            preferFrontCamera: true,
-            showFlipCameraButton: true,
-            formats: "QR_CODE,PDF_417"
+            formats: "QR_CODE,EAN_13"
         };
     }
     AddComponent.prototype.ngOnInit = function () { };
     AddComponent.prototype.letScan = function () {
-        this.barcodeScanner.scan(this.barcodeScannerOptions).then(function (barcodeData) {
-            console.log('Barcode data', barcodeData);
+        var _this = this;
+        this.barcodeScanner.scan(this.barcodeScannerOptions).then(function (result) {
+            console.log(result);
+            _this.scanChange.emit(result.text);
+            // this.presentAlert(result.text);
         }).catch(function (err) {
             console.log('Error', err);
         });
     };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
+    ], AddComponent.prototype, "scanChange", void 0);
     AddComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-add',
@@ -1007,6 +1013,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_cart_service__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./shared/cart.service */ "./src/app/cart/shared/cart.service.ts");
 /* harmony import */ var _qrmodal_qrmodal_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./qrmodal/qrmodal.component */ "./src/app/cart/qrmodal/qrmodal.component.ts");
 /* harmony import */ var _add_add_component__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./add/add.component */ "./src/app/cart/add/add.component.ts");
+/* harmony import */ var _products_shared_product_service__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../products/shared/product.service */ "./src/app/products/shared/product.service.ts");
+
 
 
 
@@ -1051,6 +1059,7 @@ var CartPageModule = /** @class */ (function () {
             ],
             providers: [
                 _shared_cart_service__WEBPACK_IMPORTED_MODULE_11__["CartService"],
+                _products_shared_product_service__WEBPACK_IMPORTED_MODULE_14__["ProductService"],
                 _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_6__["BarcodeScanner"]
             ]
         })
@@ -1069,7 +1078,7 @@ var CartPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>รับชำระเงิน</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <app-price\r\n    [price]=\"price\">\r\n  </app-price>  \r\n  <app-list \r\n    [cart]=\"cart\" \r\n    (removeFromCartChange)=\"removeFromCart($event)\" \r\n    (addItemChange)=\"addItem($event)\">\r\n  </app-list>\r\n  \r\n</ion-content>\r\n\r\n<ion-footer>\r\n  <app-add></app-add>\r\n  <ion-button expand=\"full\" color=\"primary\" (click)=\"newTransaction()\">ชำระเงินด้วย QR Code</ion-button>\r\n</ion-footer>\r\n"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>รับชำระเงิน</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <app-price\r\n    [price]=\"price\">\r\n  </app-price>  \r\n  <app-list \r\n    [cart]=\"cart\" \r\n    (removeFromCartChange)=\"removeFromCart($event)\" \r\n    (addItemChange)=\"addItem($event)\">\r\n  </app-list>\r\n  \r\n</ion-content>\r\n\r\n<ion-footer>\r\n  <app-add \r\n    (scanChange)=\"scan($event)\">\r\n  </app-add>\r\n  <ion-button expand=\"full\" color=\"primary\" (click)=\"newTransaction()\">ชำระเงินด้วย QR Code</ion-button>\r\n</ion-footer>\r\n"
 
 /***/ }),
 
@@ -1099,25 +1108,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_cart_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shared/cart.service */ "./src/app/cart/shared/cart.service.ts");
 /* harmony import */ var _shared_services_transaction_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../shared/services/transaction.service */ "./src/app/shared/services/transaction.service.ts");
 /* harmony import */ var _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../shared/services/toast.service */ "./src/app/shared/services/toast.service.ts");
-/* harmony import */ var _shared_services_alert_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/services/alert.service */ "./src/app/shared/services/alert.service.ts");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _qrmodal_qrmodal_component__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./qrmodal/qrmodal.component */ "./src/app/cart/qrmodal/qrmodal.component.ts");
-/* harmony import */ var _shared_services_qr_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../shared/services/qr.service */ "./src/app/shared/services/qr.service.ts");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _qrmodal_qrmodal_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./qrmodal/qrmodal.component */ "./src/app/cart/qrmodal/qrmodal.component.ts");
+/* harmony import */ var _shared_services_qr_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../shared/services/qr.service */ "./src/app/shared/services/qr.service.ts");
+/* harmony import */ var _products_shared_product_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../products/shared/product.service */ "./src/app/products/shared/product.service.ts");
 
 
 
 
 
+// import { AlertService } from '../shared/services/alert.service';
 
 
 
 
 var CartPage = /** @class */ (function () {
-    function CartPage(cartService, transactionService, toastService, alertService, qrService, modalController) {
+    function CartPage(cartService, transactionService, productService, toastService, 
+    // private alertService: AlertService,
+    qrService, modalController) {
         this.cartService = cartService;
         this.transactionService = transactionService;
+        this.productService = productService;
         this.toastService = toastService;
-        this.alertService = alertService;
         this.qrService = qrService;
         this.modalController = modalController;
         this.price = 0;
@@ -1127,26 +1139,31 @@ var CartPage = /** @class */ (function () {
     };
     CartPage.prototype.newTransaction = function () {
         var _this = this;
-        this.alertService.showAlert({
-            header: 'คุณต้องการชำระเงินด้วย QR Code ใช่หรือไม่',
-            sub_header: '',
-            message: '',
-            buttons: [
-                {
-                    text: 'ยกเลิก',
-                    role: 'cancel'
-                },
-                {
-                    text: 'ตกลง',
-                    handler: function () {
-                        _this.transactionService.newTransaction(_this.cart, _this.price).subscribe(function (trn) {
-                            _this.qrService.generatePromptPayQR(trn.data).subscribe(function (qr) {
-                                _this.QRModal(qr);
-                            });
-                        });
-                    }
-                }
-            ]
+        // this.alertService.showAlert({
+        //   header: 'คุณต้องการชำระเงินด้วย QR Code ใช่หรือไม่',
+        //   sub_header: '',
+        //   message: '',
+        //   buttons: [
+        //     {
+        //       text: 'ยกเลิก',
+        //       role: 'cancel'
+        //     },
+        //     {
+        //       text: 'ตกลง',
+        //       handler: () => {
+        //         this.transactionService.newTransaction(this.cart, this.price).subscribe(trn => {
+        //           this.qrService.generatePromptPayQR(trn.data).subscribe(qr => {
+        //             this.QRModal(qr);
+        //           });              
+        //         });
+        //       }
+        //     }        
+        //   ]
+        // });
+        this.transactionService.newTransaction(this.cart, this.price).subscribe(function (trn) {
+            _this.qrService.generatePromptPayQR(trn.data).subscribe(function (qr) {
+                _this.QRModal(qr);
+            });
         });
     };
     CartPage.prototype.getCart = function () {
@@ -1164,13 +1181,31 @@ var CartPage = /** @class */ (function () {
         this.toastService.showToast("\u0E25\u0E1A " + product.product_th, 'top');
         this.getCart();
     };
+    CartPage.prototype.scan = function (product_code) {
+        var _this = this;
+        this.productService.getByProductCode(product_code).subscribe(function (product) {
+            if (Object.keys(product).length === 0 && product.constructor === Object) {
+                _this.toastService.showToast("\u0E44\u0E21\u0E48\u0E1E\u0E1A\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32\u0E43\u0E19\u0E23\u0E30\u0E1A\u0E1A", 'top');
+            }
+            else {
+                if (product.instock === 0) {
+                    _this.toastService.showToast("\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32 " + product.product_th + " \u0E44\u0E21\u0E48\u0E21\u0E35\u0E43\u0E19\u0E2A\u0E15\u0E4A\u0E2D\u0E04\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32", 'top');
+                }
+                else {
+                    _this.cartService.addToCart(product);
+                    _this.toastService.showToast("\u0E40\u0E1E\u0E34\u0E48\u0E21 " + product.product_th + " 1\u0E0A\u0E34\u0E49\u0E19", 'top');
+                    _this.getCart();
+                }
+            }
+        });
+    };
     CartPage.prototype.QRModal = function (response) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var modal;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.modalController.create({
-                            component: _qrmodal_qrmodal_component__WEBPACK_IMPORTED_MODULE_7__["QrmodalComponent"],
+                            component: _qrmodal_qrmodal_component__WEBPACK_IMPORTED_MODULE_6__["QrmodalComponent"],
                             componentProps: {
                                 'transaction': response.data
                             }
@@ -1191,10 +1226,10 @@ var CartPage = /** @class */ (function () {
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_shared_cart_service__WEBPACK_IMPORTED_MODULE_2__["CartService"],
             _shared_services_transaction_service__WEBPACK_IMPORTED_MODULE_3__["TransactionService"],
+            _products_shared_product_service__WEBPACK_IMPORTED_MODULE_8__["ProductService"],
             _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_4__["ToastService"],
-            _shared_services_alert_service__WEBPACK_IMPORTED_MODULE_5__["AlertService"],
-            _shared_services_qr_service__WEBPACK_IMPORTED_MODULE_8__["QrService"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["ModalController"]])
+            _shared_services_qr_service__WEBPACK_IMPORTED_MODULE_7__["QrService"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["ModalController"]])
     ], CartPage);
     return CartPage;
 }());

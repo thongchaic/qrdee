@@ -1,5 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { TransactionService } from 'src/app/shared/services/transaction.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-qrmodal',
@@ -8,21 +10,28 @@ import { ModalController } from '@ionic/angular';
 })
 export class QrmodalComponent {
   @Input() transaction;
-  // @Input() testQR;
-
-  // qrcode: any;
+  @Input() qr;
 
   constructor(
-    private modalController: ModalController
-  ) { }
+    private transactionService: TransactionService,
+    private modalController: ModalController,
+    private router: Router
+  ) {
+ 
+   }
 
   ionViewWillEnter() {
-    console.log(this.transaction);
-    // this.qrcode = this.transaction.promptpay;
+
   }
 
-  async closeModal() {
-    await this.modalController.dismiss();
+  verifyTransaction() {
+    this.transactionService.verifyTransaction(this.transaction).subscribe(res => {
+      this.closeModal(1);
+    });
+  }
+
+  async closeModal(status) {
+    await this.modalController.dismiss(status);
   }
 
 }

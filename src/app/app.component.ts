@@ -10,9 +10,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 })
 export class AppComponent {
   public appPages = [
-    { title: 'หน้าแรก', url: '/home', icon: 'home' },
+    { title: 'หน้าแรก', url: '/cart', icon: 'home' },
     { title: 'สินค้า', url: '/products', icon: 'cube' },
-    { title: 'ตะกร้าสินค้า', url: '/cart', icon: 'basket' },
+    // { title: 'ตะกร้าสินค้า', url: '/cart', icon: 'basket' },
   ];
 
   constructor(

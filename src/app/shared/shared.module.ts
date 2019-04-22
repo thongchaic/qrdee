@@ -25,6 +25,9 @@ import { QrService } from './services/qr.service';
     AlertService,
     QrService,
     { provide: HTTP_INTERCEPTORS, useClass: HttpClientInterceptor, multi: true }
+  ],
+  exports: [
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

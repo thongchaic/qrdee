@@ -90,6 +90,8 @@ ext {
 }
 
 // PLUGIN GRADLE EXTENSIONS START
+apply from: "../cordova-plugin-telerik-imagepicker/starter-ignorelinterrors.gradle"
+apply from: "../cordova-plugin-telerik-imagepicker/starter-androidtarget.gradle"
 apply from: "../phonegap-plugin-barcodescanner/starter-barcodescanner.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
@@ -267,7 +269,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: '*.jar')
     // SUB-PROJECT DEPENDENCIES START
     implementation(project(path: ":CordovaLib"))
+    implementation "com.android.support:support-v4:24.1.1+"
     implementation "com.android.support:support-annotations:27.+"
+    implementation "com.android.support:appcompat-v7:23+"
     implementation "com.android.support:support-v4:27.+"
     // SUB-PROJECT DEPENDENCIES END
 }

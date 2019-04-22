@@ -12,6 +12,10 @@ import { FormComponent } from './form/form.component';
 import { ProductService } from './shared/product.service';
 import { CartService } from '../cart/shared/cart.service';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
+import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 const routes: Routes = [
   {
@@ -58,7 +62,11 @@ const routes: Routes = [
   providers: [
     ProductService,
     CartService,
-    BarcodeScanner
+    BarcodeScanner,
+    File,
+    Camera,
+    ImagePicker,
+    WebView
   ]
 })
 export class ProductsPageModule {}

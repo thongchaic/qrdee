@@ -957,9 +957,9 @@ var AppComponent = /** @class */ (function () {
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
         this.appPages = [
-            { title: 'หน้าแรก', url: '/home', icon: 'home' },
+            { title: 'หน้าแรก', url: '/cart', icon: 'home' },
             { title: 'สินค้า', url: '/products', icon: 'cube' },
-            { title: 'ตะกร้าสินค้า', url: '/cart', icon: 'basket' },
+            { title: 'นำเข้าสินค้า', url: '/products/create', icon: 'arrow-round-up' }
         ];
         this.initializeApp();
     }

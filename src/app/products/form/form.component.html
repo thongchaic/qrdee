@@ -1,25 +1,28 @@
-<ion-content formGroupName="form">
+<ion-content [formGroup]="productForm">
   <ion-card>
     <ion-card-header>
       <ion-card-title>เพิ่มสินค้า</ion-card-title>
     </ion-card-header>
-    <ion-card-content>
 
+    <ion-card-content>
       <ion-item-group>
         <ion-item lines="none">
-          <ion-img src="/assets/noimg.png"></ion-img>
+          <ion-img [src]="imageSrc || '/assets/noimg.png'"></ion-img>
         </ion-item>
         <ion-grid>
           <ion-row justify-content-center>
-            <ion-button size="small" color="primary">ถ่ายรูปสินค้า</ion-button>
+            <ion-button size="small" color="primary" (click)="takePhoto()">ถ่ายรูปสินค้า</ion-button>
+            <ion-button size="small" color="secondary" (click)="selectPhoto()">เลือกจากอัลบั้ม</ion-button>
           </ion-row>
         </ion-grid>        
       </ion-item-group>
       
       <ion-item>
         <ion-label position="floating">รหัสสินค้า</ion-label>
-        <ion-input type="text" formControlName="code_product"></ion-input>
+        <ion-input type="text" formControlName="code_product" (ionFocus)="letScan()" [value]="show_code_product"></ion-input>
+        <!-- <ion-button slot="end" size="small" color="success" *ngIf="scan" (click)="letScan()">สแกน</ion-button>         -->
       </ion-item>
+
       <ion-item>
         <ion-label position="floating">ชื่อสินค้า</ion-label>
         <ion-input type="text" formControlName="product_th"></ion-input>
@@ -47,8 +50,8 @@
       <ion-item>
         <ion-label position="floating">จำนวนในสต๊อค</ion-label>
         <ion-input type="number" formControlName="instock"></ion-input>
-      </ion-item>      
+      </ion-item>
     </ion-card-content>
-    <ion-button type="submit" expand="full" color="success">บันทึก</ion-button>
+    <ion-button type="submit" expand="full" color="success" (click)="submit()">บันทึก</ion-button>
   </ion-card>  
 </ion-content>

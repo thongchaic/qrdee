@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Product } from './product';
 import { Observable } from 'rxjs';
@@ -22,6 +22,20 @@ export class ProductService {
 
   get(id) {
     return this.http.get<Product>(`${this.baseUrl}/${id}`);
+  }
+
+  post(form) {
+    const formData = new FormData();
+
+    // formData.append('image', form.image);
+    formData.append('code_product', form.code_product);
+    formData.append('product_th', form.product_th);
+    formData.append('details_th', form.details_th);
+    formData.append('price', form.price);
+    formData.append('cost', form.cost);
+    formData.append('instock', form.instock);
+
+    return this.http.post<any>(`${this.baseUrl}`, formData);
   }
 
   getByProductCode(product_code) {

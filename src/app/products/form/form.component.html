@@ -24,13 +24,24 @@
       </ion-item>
 
       <ion-item>
+        <ion-label position="floating">ประเภทสินค้า</ion-label>
+        <ion-select formControlName="product_category_id">
+          <ion-select-option *ngFor="let cat of product_category" [value]="cat.id">
+            {{ cat.cat_th }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
         <ion-label position="floating">ชื่อสินค้า</ion-label>
         <ion-input type="text" formControlName="product_th"></ion-input>
       </ion-item>
+
       <ion-item>
         <ion-label position="floating">รายละเอียดสินค้า</ion-label>
         <ion-textarea formControlName="details_th"></ion-textarea>
       </ion-item>
+
       <ion-grid>
         <ion-row>
           <ion-col>
@@ -47,10 +58,12 @@
           </ion-col>
         </ion-row>
       </ion-grid>
+
       <ion-item>
         <ion-label position="floating">จำนวนในสต๊อค</ion-label>
         <ion-input type="number" formControlName="instock"></ion-input>
       </ion-item>
+      
     </ion-card-content>
     <ion-button type="submit" expand="full" color="success" (click)="submit()">บันทึก</ion-button>
   </ion-card>  

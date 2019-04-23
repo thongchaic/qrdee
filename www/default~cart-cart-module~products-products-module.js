@@ -2268,22 +2268,21 @@ var ProductService = /** @class */ (function () {
     };
     ProductService.prototype.post = function (form) {
         var formData = new FormData();
-        var httpOptions = {
-            headers: new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({
-                'Content-Type': undefined
-            })
-        };
-        formData.append('image', form.image);
+        formData.append('thumbnail', form.image);
         formData.append('code_product', form.code_product);
+        formData.append('product_category_id', form.product_category_id);
         formData.append('product_th', form.product_th);
         formData.append('details_th', form.details_th);
         formData.append('price', form.price);
         formData.append('cost', form.cost);
         formData.append('instock', form.instock);
-        return this.http.post("" + this.baseUrl, formData, httpOptions);
+        return this.http.post("" + this.baseUrl, formData);
     };
     ProductService.prototype.getByProductCode = function (product_code) {
         return this.http.get(this.baseUrl + "?t=product_code&code=" + product_code);
+    };
+    ProductService.prototype.getProductCategory = function () {
+        return this.http.get(_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].api_url + "/ref/product_category");
     };
     ProductService.prototype.search = function (terms, page) {
         var _this = this;
@@ -2335,16 +2334,16 @@ var HttpClientInterceptor = /** @class */ (function () {
                 }
             });
         }
-        if (!request.headers.has('Content-Type')) {
-            request = request.clone({
-                setHeaders: {
-                    'Content-type': 'application/json'
-                }
-            });
-        }
-        request = request.clone({
-            headers: request.headers.set('Accept', 'application/json')
-        });
+        // if(!request.headers.has('Content-Type')) {
+        //   request = request.clone({
+        //     setHeaders: {
+        //       'Content-type': 'application/json'
+        //     }
+        //   });
+        // }
+        // request = request.clone({
+        //   headers: request.headers.set('Accept', 'application/json')
+        // });
         return next.handle(request).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_2__["map"])(function (event) {
             // if(event instanceof HttpResponse) {
             //   console.log('event-->>>', event);

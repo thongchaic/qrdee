@@ -7,7 +7,7 @@
     <ion-item-sliding *ngFor="let product of products">
       <ion-item>
         <ion-avatar slot="start" routerDirection="forward" routerLink="/products/{{ product.id }}">
-          <img src="/assets/no-product-image.jpg">
+          <img [src]="url+product.thumbnail || '/assets/no-product-image.jpg'">
         </ion-avatar>
         <ion-label text-wrap>
           <h5><ion-text color="dark">รหัส: {{ product.code_product ? product.code_product : '-' }}</ion-text></h5>

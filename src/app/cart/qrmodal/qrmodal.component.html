@@ -7,18 +7,12 @@
 <ion-content>
   <ion-card>
     <qrcode [qrdata]="qr.promptpay" [size]="256" [level]="'M'"></qrcode>
-    <ion-card-header>
-      <ion-card-title>ร้าน {{ qr.store_name }}</ion-card-title>
-    </ion-card-header>
     <ion-card-content>
       <ion-list>
         <ion-list-header>
           <ion-label>รายการสินค้า</ion-label>
         </ion-list-header>
         <ion-item *ngFor="let item of qr.items">
-          <ion-avatar slot="start">
-            <img src="">
-          </ion-avatar>
           {{ item.product_th }}
           <ion-label slot="end">{{ item.price | number}} ฿</ion-label>
         </ion-item>

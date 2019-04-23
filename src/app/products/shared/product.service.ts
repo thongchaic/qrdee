@@ -27,8 +27,9 @@ export class ProductService {
   post(form) {
     const formData = new FormData();
 
-    // formData.append('image', form.image);
+    formData.append('thumbnail', form.image);
     formData.append('code_product', form.code_product);
+    formData.append('product_category_id', form.product_category_id);
     formData.append('product_th', form.product_th);
     formData.append('details_th', form.details_th);
     formData.append('price', form.price);
@@ -40,6 +41,10 @@ export class ProductService {
 
   getByProductCode(product_code) {
     return this.http.get<Product>(`${this.baseUrl}?t=product_code&code=${product_code}`);
+  }
+
+  getProductCategory() {
+    return this.http.get(`${environment.api_url}/ref/product_category`);
   }
 
   search(terms: Observable<string>, page: number) {

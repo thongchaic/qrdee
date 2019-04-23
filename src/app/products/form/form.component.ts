@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from '../shared/product';
 import { ProductService } from '../shared/product.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
@@ -9,6 +9,7 @@ import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { ToastService } from '../../shared/services/toast.service';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-form',
@@ -19,6 +20,7 @@ export class FormComponent {
 
   productForm: FormGroup = this.builder.group({
     code_product: ['', Validators.required],
+    product_category_id: ['', Validators.required],
     product_th: ['', Validators.required],
     details_th: ['', Validators.required],
     price: ['', Validators.required],
@@ -30,6 +32,7 @@ export class FormComponent {
   imageSrc = '';
   scan = false;
   show_code_product = '';
+  product_category: any;
 
   // validation_messages = {
   //   'code_product': [
@@ -54,6 +57,7 @@ export class FormComponent {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private productService: ProductService,
     private barcodeScanner: BarcodeScanner,
     private builder: FormBuilder,
@@ -61,23 +65,20 @@ export class FormComponent {
     private imagePicker: ImagePicker,
     private file: File,
     private webView: WebView,
-    private toastService: ToastService
+    private toastService: ToastService,
+    private loadingController: LoadingController
   ) { }
 
-  ionViewDidLoad() {
-    console.log(this.route.snapshot.data['formType'])
-  }
-
   ionViewWillEnter() {
-    // this.buildForm();
+    this.productService.getProductCategory().subscribe(data => this.product_category = data);
   }
 
   submit() {
-    console.log(this.productForm.value)
-    this.productService.post(this.productForm.value).subscribe(console.log);
-    // this.productService.post(this.productForm.value).subscribe(console.log);
-    // console.log(this.productForm.value);
-    // this.loadPhoto(this.productForm.controls['image'].value);
+    // console.log(this.productForm.value)
+    this.productService.post(this.productForm.value).subscribe(res => {
+      this.toastService.showToast('เพิ่มสินค้าเรียบร้อยแล้ว', 'top');
+      this.router.navigateByUrl('/products');
+    }, err => console.log(err));
   }
 
   letScan() {
@@ -99,14 +100,12 @@ export class FormComponent {
       destinationType: this.camera.DestinationType.FILE_URI,
       sourceType: this.camera.PictureSourceType.CAMERA,
       encodingType: this.camera.EncodingType.JPEG,
-      // cameraDirection: this.camera.Direction.FRONT,
-      // mediaType: this.camera.MediaType.PICTURE
+      cameraDirection: this.camera.Direction.FRONT,
+      mediaType: this.camera.MediaType.PICTURE
     }).then(
       imageData => {
         this.imageSrc = this.webView.convertFileSrc(imageData);
         this.loadPhoto(imageData);
-        // this.loadPhoto(imageData);
-        // this.productForm.controls['image'].setValue(imageData);
       },
       err => {
         console.log(err);
@@ -118,32 +117,15 @@ export class FormComponent {
     this.camera.getPicture({
       destinationType: this.camera.DestinationType.FILE_URI,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-      // cameraDirection: this.camera.Direction.FRONT,
-      // mediaType: this.camera.MediaType.PICTURE
     }).then(
       imageData => {
         this.imageSrc = this.webView.convertFileSrc(imageData);
         this.loadPhoto(imageData);
-        // this.loadPhoto(imageData);
-        // this.productForm.controls['image'].setValue(imageData);
       },
       err => {
         console.log(err);
       }
     );
-    // this.imagePicker.getPictures({
-    //   maximumImagesCount: 1,
-    //   quality: 100
-    // }).then(
-    //   imageData => {        
-    //     this.imageSrc = this.webView.convertFileSrc(imageData[0]);
-    //     // this.loadPhoto(imageData[0]);
-    //     this.productForm.controls['image'].setValue(imageData[0]);
-    //   },
-    //   err => {
-    //     console.log(err);
-    //   }
-    // );
   }
 
   private loadPhoto(imageFileUri: any) {
@@ -158,51 +140,12 @@ export class FormComponent {
     const reader = new FileReader();
 
     reader.onloadend = () => {
-      const formData = new FormData;
       const imgBlob = new Blob([reader.result], { type: file.type });
 
       this.productForm.controls['image'].setValue(imgBlob);
-
-      // formData.append('image', imgBlob, file.name);
-      // formData.append('code_product', this.productForm.get('code_product').value);
-      // formData.append('product_th', this.productForm.get('product_th').value);
-      // formData.append('details_th', this.productForm.get('details_th').value);
-      // formData.append('price', this.productForm.get('price').value);
-      // formData.append('cost', this.productForm.get('cost').value);
-      // formData.append('instock', this.productForm.get('instock').value);
-
-      // this.postData(formData);
     }
 
     reader.readAsArrayBuffer(file);
-  }
-
-  private postData(formData) {
-    // console.log(this.productForm.value);
-    // console.log(formData.get('image'));
-    // console.log(formData.get('code_product'));
-    // console.log(formData.get('product_th'));
-    // console.log(formData.get('details_th'));
-    // console.log(formData.get('price'));
-    // console.log(formData.get('cost'));
-    // console.log(formData.get('instock'));
-    // this.productService.post(formData).subscribe(console.log);
-  }
-
-  // buildForm() {
-  //   this.productForm = this.builder.group({
-  //     code_product: [''],
-  //     product_th: [''],
-  //     details_th: [''],
-  //     price: [''],
-  //     cost: [''],
-  //     instock: [''],
-  //     image: null
-  //   });
-  // }
-
-  toggleScan() {
-    this.scan = !this.scan;
   }
 
 }

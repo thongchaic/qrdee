@@ -19,12 +19,13 @@ export class TransactionService {
       products: products
     }
 
-    console.log(body);
+    // console.log(body);
 
     return this.http.post<any>(`${this.baseUrl}/new_transaction`, body);
   }
 
   verifyTransaction(transaction) {
+    console.log(transaction);
     return this.http.post<any>(`${this.baseUrl}/verify_transaction`, transaction);
   }
 }

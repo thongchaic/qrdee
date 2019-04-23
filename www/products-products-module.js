@@ -1024,7 +1024,7 @@ var WebView = /** @class */ (function (_super) {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-content [formGroup]=\"productForm\">\n  <ion-card>\n    <ion-card-header>\n      <ion-card-title>เพิ่มสินค้า</ion-card-title>\n    </ion-card-header>\n\n    <ion-card-content>\n      <ion-item-group>\n        <ion-item lines=\"none\">\n          <ion-img [src]=\"imageSrc || '/assets/noimg.png'\"></ion-img>\n        </ion-item>\n        <ion-grid>\n          <ion-row justify-content-center>\n            <ion-button size=\"small\" color=\"primary\" (click)=\"takePhoto()\">ถ่ายรูปสินค้า</ion-button>\n            <ion-button size=\"small\" color=\"secondary\" (click)=\"selectPhoto()\">เลือกจากอัลบั้ม</ion-button>\n          </ion-row>\n        </ion-grid>        \n      </ion-item-group>\n      \n      <ion-item>\n        <ion-label position=\"floating\">รหัสสินค้า</ion-label>\n        <ion-input type=\"text\" formControlName=\"code_product\" (ionFocus)=\"letScan()\" [value]=\"show_code_product\"></ion-input>\n        <!-- <ion-button slot=\"end\" size=\"small\" color=\"success\" *ngIf=\"scan\" (click)=\"letScan()\">สแกน</ion-button>         -->\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"floating\">ชื่อสินค้า</ion-label>\n        <ion-input type=\"text\" formControlName=\"product_th\"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label position=\"floating\">รายละเอียดสินค้า</ion-label>\n        <ion-textarea formControlName=\"details_th\"></ion-textarea>\n      </ion-item>\n      <ion-grid>\n        <ion-row>\n          <ion-col>\n            <ion-item>\n              <ion-label position=\"floating\">ราคาขาย</ion-label>\n              <ion-input type=\"number\" formControlName=\"price\"></ion-input>\n            </ion-item>\n          </ion-col>\n          <ion-col>\n            <ion-item>\n              <ion-label position=\"floating\">ราคาต้นทุน</ion-label>\n              <ion-input type=\"number\" formControlName=\"cost\"></ion-input>\n            </ion-item>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n      <ion-item>\n        <ion-label position=\"floating\">จำนวนในสต๊อค</ion-label>\n        <ion-input type=\"number\" formControlName=\"instock\"></ion-input>\n      </ion-item>\n    </ion-card-content>\n    <ion-button type=\"submit\" expand=\"full\" color=\"success\" (click)=\"submit()\">บันทึก</ion-button>\n  </ion-card>  \n</ion-content>"
+module.exports = "<ion-content [formGroup]=\"productForm\">\n  <ion-card>\n    <ion-card-header>\n      <ion-card-title>เพิ่มสินค้า</ion-card-title>\n    </ion-card-header>\n\n    <ion-card-content>\n      <ion-item-group>\n        <ion-item lines=\"none\">\n          <ion-img [src]=\"imageSrc || '/assets/noimg.png'\"></ion-img>\n        </ion-item>\n        <ion-grid>\n          <ion-row justify-content-center>\n            <ion-button size=\"small\" color=\"primary\" (click)=\"takePhoto()\">ถ่ายรูปสินค้า</ion-button>\n            <ion-button size=\"small\" color=\"secondary\" (click)=\"selectPhoto()\">เลือกจากอัลบั้ม</ion-button>\n          </ion-row>\n        </ion-grid>        \n      </ion-item-group>\n      \n      <ion-item>\n        <ion-label position=\"floating\">รหัสสินค้า</ion-label>\n        <ion-input type=\"text\" formControlName=\"code_product\" (ionFocus)=\"letScan()\" [value]=\"show_code_product\"></ion-input>\n        <!-- <ion-button slot=\"end\" size=\"small\" color=\"success\" *ngIf=\"scan\" (click)=\"letScan()\">สแกน</ion-button>         -->\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"floating\">ประเภทสินค้า</ion-label>\n        <ion-select formControlName=\"product_category_id\">\n          <ion-select-option *ngFor=\"let cat of product_category\" [value]=\"cat.id\">\n            {{ cat.cat_th }}\n          </ion-select-option>\n        </ion-select>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"floating\">ชื่อสินค้า</ion-label>\n        <ion-input type=\"text\" formControlName=\"product_th\"></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label position=\"floating\">รายละเอียดสินค้า</ion-label>\n        <ion-textarea formControlName=\"details_th\"></ion-textarea>\n      </ion-item>\n\n      <ion-grid>\n        <ion-row>\n          <ion-col>\n            <ion-item>\n              <ion-label position=\"floating\">ราคาขาย</ion-label>\n              <ion-input type=\"number\" formControlName=\"price\"></ion-input>\n            </ion-item>\n          </ion-col>\n          <ion-col>\n            <ion-item>\n              <ion-label position=\"floating\">ราคาต้นทุน</ion-label>\n              <ion-input type=\"number\" formControlName=\"cost\"></ion-input>\n            </ion-item>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n\n      <ion-item>\n        <ion-label position=\"floating\">จำนวนในสต๊อค</ion-label>\n        <ion-input type=\"number\" formControlName=\"instock\"></ion-input>\n      </ion-item>\n      \n    </ion-card-content>\n    <ion-button type=\"submit\" expand=\"full\" color=\"success\" (click)=\"submit()\">บันทึก</ion-button>\n  </ion-card>  \n</ion-content>"
 
 /***/ }),
 
@@ -1060,6 +1060,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/ionic-webview/ngx */ "./node_modules/@ionic-native/ionic-webview/ngx/index.js");
 /* harmony import */ var _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/file/ngx */ "./node_modules/@ionic-native/file/ngx/index.js");
 /* harmony import */ var _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../shared/services/toast.service */ "./src/app/shared/services/toast.service.ts");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+
 
 
 
@@ -1092,8 +1094,9 @@ var FormComponent = /** @class */ (function () {
     //     { type: 'required', message: 'กรุณาระบุจำนวนสินค้า' },
     //   ]
     // }
-    function FormComponent(route, productService, barcodeScanner, builder, camera, imagePicker, file, webView, toastService) {
+    function FormComponent(route, router, productService, barcodeScanner, builder, camera, imagePicker, file, webView, toastService, loadingController) {
         this.route = route;
+        this.router = router;
         this.productService = productService;
         this.barcodeScanner = barcodeScanner;
         this.builder = builder;
@@ -1102,8 +1105,10 @@ var FormComponent = /** @class */ (function () {
         this.file = file;
         this.webView = webView;
         this.toastService = toastService;
+        this.loadingController = loadingController;
         this.productForm = this.builder.group({
             code_product: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
+            product_category_id: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
             product_th: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
             details_th: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
             price: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
@@ -1116,18 +1121,17 @@ var FormComponent = /** @class */ (function () {
         this.scan = false;
         this.show_code_product = '';
     }
-    FormComponent.prototype.ionViewDidLoad = function () {
-        console.log(this.route.snapshot.data['formType']);
-    };
     FormComponent.prototype.ionViewWillEnter = function () {
-        // this.buildForm();
+        var _this = this;
+        this.productService.getProductCategory().subscribe(function (data) { return _this.product_category = data; });
     };
     FormComponent.prototype.submit = function () {
-        console.log(this.productForm.value);
-        this.productService.post(this.productForm.value).subscribe(console.log);
-        // this.productService.post(this.productForm.value).subscribe(console.log);
-        // console.log(this.productForm.value);
-        // this.loadPhoto(this.productForm.controls['image'].value);
+        var _this = this;
+        // console.log(this.productForm.value)
+        this.productService.post(this.productForm.value).subscribe(function (res) {
+            _this.toastService.showToast('เพิ่มสินค้าเรียบร้อยแล้ว', 'top');
+            _this.router.navigateByUrl('/products');
+        }, function (err) { return console.log(err); });
     };
     FormComponent.prototype.letScan = function () {
         var _this = this;
@@ -1148,11 +1152,11 @@ var FormComponent = /** @class */ (function () {
             destinationType: this.camera.DestinationType.FILE_URI,
             sourceType: this.camera.PictureSourceType.CAMERA,
             encodingType: this.camera.EncodingType.JPEG,
+            cameraDirection: this.camera.Direction.FRONT,
+            mediaType: this.camera.MediaType.PICTURE
         }).then(function (imageData) {
             _this.imageSrc = _this.webView.convertFileSrc(imageData);
             _this.loadPhoto(imageData);
-            // this.loadPhoto(imageData);
-            // this.productForm.controls['image'].setValue(imageData);
         }, function (err) {
             console.log(err);
         });
@@ -1165,31 +1169,12 @@ var FormComponent = /** @class */ (function () {
         }).then(function (imageData) {
             _this.imageSrc = _this.webView.convertFileSrc(imageData);
             _this.loadPhoto(imageData);
-            // this.loadPhoto(imageData);
-            // this.productForm.controls['image'].setValue(imageData);
         }, function (err) {
             console.log(err);
         });
-        // this.imagePicker.getPictures({
-        //   maximumImagesCount: 1,
-        //   quality: 100
-        // }).then(
-        //   imageData => {        
-        //     this.imageSrc = this.webView.convertFileSrc(imageData[0]);
-        //     // this.loadPhoto(imageData[0]);
-        //     this.productForm.controls['image'].setValue(imageData[0]);
-        //   },
-        //   err => {
-        //     console.log(err);
-        //   }
-        // );
     };
     FormComponent.prototype.loadPhoto = function (imageFileUri) {
         var _this = this;
-        if (!imageFileUri) {
-            this.toastService.showToast('คุณไม่ได้เลือกรูปภาพ', 'top');
-            return;
-        }
         this.file.resolveLocalFilesystemUrl(imageFileUri).then(function (entry) {
             entry['file'](function (file) {
                 _this.readFile(file);
@@ -1200,44 +1185,10 @@ var FormComponent = /** @class */ (function () {
         var _this = this;
         var reader = new FileReader();
         reader.onloadend = function () {
-            var formData = new FormData;
             var imgBlob = new Blob([reader.result], { type: file.type });
             _this.productForm.controls['image'].setValue(imgBlob);
-            // formData.append('image', imgBlob, file.name);
-            // formData.append('code_product', this.productForm.get('code_product').value);
-            // formData.append('product_th', this.productForm.get('product_th').value);
-            // formData.append('details_th', this.productForm.get('details_th').value);
-            // formData.append('price', this.productForm.get('price').value);
-            // formData.append('cost', this.productForm.get('cost').value);
-            // formData.append('instock', this.productForm.get('instock').value);
-            // this.postData(formData);
         };
         reader.readAsArrayBuffer(file);
-    };
-    FormComponent.prototype.postData = function (formData) {
-        // console.log(this.productForm.value);
-        // console.log(formData.get('image'));
-        // console.log(formData.get('code_product'));
-        // console.log(formData.get('product_th'));
-        // console.log(formData.get('details_th'));
-        // console.log(formData.get('price'));
-        // console.log(formData.get('cost'));
-        // console.log(formData.get('instock'));
-        // this.productService.post(formData).subscribe(console.log);
-    };
-    // buildForm() {
-    //   this.productForm = this.builder.group({
-    //     code_product: [''],
-    //     product_th: [''],
-    //     details_th: [''],
-    //     price: [''],
-    //     cost: [''],
-    //     instock: [''],
-    //     image: null
-    //   });
-    // }
-    FormComponent.prototype.toggleScan = function () {
-        this.scan = !this.scan;
     };
     FormComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1246,6 +1197,7 @@ var FormComponent = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./form.component.scss */ "./src/app/products/form/form.component.scss")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
             _shared_product_service__WEBPACK_IMPORTED_MODULE_3__["ProductService"],
             _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_5__["BarcodeScanner"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_4__["FormBuilder"],
@@ -1253,7 +1205,8 @@ var FormComponent = /** @class */ (function () {
             _ionic_native_image_picker_ngx__WEBPACK_IMPORTED_MODULE_7__["ImagePicker"],
             _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_9__["File"],
             _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_8__["WebView"],
-            _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_10__["ToastService"]])
+            _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_10__["ToastService"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_11__["LoadingController"]])
     ], FormComponent);
     return FormComponent;
 }());

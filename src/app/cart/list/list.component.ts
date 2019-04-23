@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-list',
@@ -9,6 +10,8 @@ export class ListComponent implements OnInit {
   @Input('cart') cart;
   @Output() removeFromCartChange = new EventEmitter;
   @Output() addItemChange = new EventEmitter;
+
+  url = environment.url;
   
   constructor(
 

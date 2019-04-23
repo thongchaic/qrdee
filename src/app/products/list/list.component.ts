@@ -5,6 +5,7 @@ import { IonInfiniteScroll } from '@ionic/angular';
 // import { Product } from '../shared/product';
 import { CartService } from 'src/app/cart/shared/cart.service';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-list',
@@ -12,6 +13,8 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./list.component.scss'],
 })
 export class ListComponent {
+
+  url = environment.url;
   products = [];
   page = 1;
   $searchTerm = new BehaviorSubject<string>('');

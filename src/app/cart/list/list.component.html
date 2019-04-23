@@ -6,7 +6,7 @@
   <ng-container *ngFor="let product of cart">
     <ion-item *ngIf="product.qty != 0">
       <ion-avatar slot="start">
-        <img src="">
+        <img [src]="url+product.thumbnail || '/assets/no-product-image.jpg'">
       </ion-avatar>
       {{ product.product_th }}&nbsp;
       <ion-badge color="danger" *ngIf="product.instock == 0">หมดสต๊อค</ion-badge>

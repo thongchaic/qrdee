@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ProductService } from '../shared/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { Product } from '../shared/product';
+import { environment } from 'src/environments/environment';
 // import { CartService } from '../../cart/shared/cart.service';
 // import { ToastService } from 'src/app/shared/services/toast.service';
 
@@ -13,6 +14,7 @@ import { Product } from '../shared/product';
 export class ShowComponent {
 
   product: Product;
+  url = environment.url;
 
   constructor(
     private productService: ProductService,

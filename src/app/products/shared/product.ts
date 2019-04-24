@@ -5,8 +5,8 @@ export interface Product {
   product_category_id: number;
   product_th: string;
   product_en: string;
-  detail_th: string;
-  detail_en: string;
+  details_th: string;
+  details_en: string;
   cost: number;
   price: number;
   instock: number;

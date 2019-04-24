@@ -9,7 +9,8 @@ import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { ToastService } from '../../shared/services/toast.service';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, NavController } from '@ionic/angular';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-form',
@@ -33,6 +34,7 @@ export class FormComponent {
   scan = false;
   show_code_product = '';
   product_category: any;
+  title = '';
 
   // validation_messages = {
   //   'code_product': [
@@ -66,19 +68,50 @@ export class FormComponent {
     private file: File,
     private webView: WebView,
     private toastService: ToastService,
-    private loadingController: LoadingController
+    private loadingController: LoadingController,
+    private navCtrl: NavController
   ) { }
 
   ionViewWillEnter() {
+    if(this.route.snapshot.data.formType === 'CREATE') {
+      this.formType = 'CREATE';
+      this.title = 'เพิ่มสินค้า';
+    } else {
+      this.title = 'แก้ไขสินค้า';
+      this.formType = 'EDIT';
+      // console.log(this.route.snapshot.params['id']);
+      this.productService.get(this.route.snapshot.params['id']).subscribe(data => {
+        this.productForm.setValue({
+          code_product: data.code_product,
+          product_category_id: data.product_category_id,
+          product_th: data.product_th,
+          details_th: data.details_th,
+          price: data.price,
+          cost: data.cost,
+          instock: data.instock,
+          image: null
+        });
+
+        this.imageSrc = environment.url + data.thumbnail;
+      });
+    }
     this.productService.getProductCategory().subscribe(data => this.product_category = data);
   }
 
   submit() {
     // console.log(this.productForm.value)
-    this.productService.post(this.productForm.value).subscribe(res => {
-      this.toastService.showToast('เพิ่มสินค้าเรียบร้อยแล้ว', 'top');
-      this.router.navigateByUrl('/products');
-    }, err => console.log(err));
+    if(this.formType === 'CREATE') {
+      this.productService.createProduct(this.productForm.value).subscribe(res => {
+        this.toastService.showToast('เพิ่มสินค้าเรียบร้อยแล้ว', 'top');
+        this.router.navigateByUrl('/products');
+      }, err => console.log(err));
+    } else {
+      this.productService.updateProduct(this.productForm.value, this.route.snapshot.params['id']).subscribe(res => {
+        this.toastService.showToast('แก้ไขสินค้าเรียบร้อยแล้ว', 'top');
+        this.router.navigateByUrl('/products');
+      }, err => console.log(err));
+    }
+    
   }
 
   letScan() {

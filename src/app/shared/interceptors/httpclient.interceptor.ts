@@ -15,7 +15,7 @@ import { map, catchError } from 'rxjs/operators';
 export class HttpClientInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token: string = 'Bearer Q1o1TWVocmNseW5FUUY3cXNMRjhSc1hiSFVpbWU0bTVwQXVwR2t6U1NQVTBCUmhkSFRTV2lqd0lRTEowSkRrWTdLNkV5YlJleXhKa1FDejZaMmx5NWpwZVp3c1VDOFNqNEtZREJMb1NPYmtydDU5R2J2YzlucGlKcTVJclNMeFY=';
+    const token: string = 'Bearer djk0eXRPMDF5MVl2NWlHSXdRUEF5OGJTMFpvUXdUR1c1Vnl5UWtoQVRTWUx4eDBLaE9LQTQzRWVtbjI4cUVvQzFGTEt6YkFvMGV1NDRDbGY0WENCRzdqQ3J2a0NtblJsOVVITjZmSG5Tb1VqS2NCQ2JPb2ltRmd6TXFucHFlNmk=';
 
     if(token) {
       request = request.clone({

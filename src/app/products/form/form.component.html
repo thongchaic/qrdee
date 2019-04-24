@@ -1,7 +1,7 @@
 <ion-content [formGroup]="productForm">
   <ion-card>
     <ion-card-header>
-      <ion-card-title>เพิ่มสินค้า</ion-card-title>
+      <ion-card-title>{{ title }}</ion-card-title>
     </ion-card-header>
 
     <ion-card-content>
@@ -26,7 +26,10 @@
       <ion-item>
         <ion-label position="floating">ประเภทสินค้า</ion-label>
         <ion-select formControlName="product_category_id">
-          <ion-select-option *ngFor="let cat of product_category" [value]="cat.id">
+          <ion-select-option 
+            *ngFor="let cat of product_category" 
+            [value]="cat.id" 
+            [selected]="cat.id === productForm.get('product_category_id').value">
             {{ cat.cat_th }}
           </ion-select-option>
         </ion-select>
@@ -38,8 +41,8 @@
       </ion-item>
 
       <ion-item>
-        <ion-label position="floating">รายละเอียดสินค้า</ion-label>
-        <ion-textarea formControlName="details_th"></ion-textarea>
+        <ion-label position="stacked">รายละเอียดสินค้า</ion-label>
+        <ion-textarea autofocus="true" formControlName="details_th"></ion-textarea>
       </ion-item>
 
       <ion-grid>

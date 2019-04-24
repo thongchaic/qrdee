@@ -24,19 +24,16 @@ export class ProductService {
     return this.http.get<Product>(`${this.baseUrl}/${id}`);
   }
 
-  post(form) {
-    const formData = new FormData();
+  createProduct(data) {
+    return this.http.post<any>(`${this.baseUrl}`, this.createFormData(data));
+  }
 
-    formData.append('thumbnail', form.image);
-    formData.append('code_product', form.code_product);
-    formData.append('product_category_id', form.product_category_id);
-    formData.append('product_th', form.product_th);
-    formData.append('details_th', form.details_th);
-    formData.append('price', form.price);
-    formData.append('cost', form.cost);
-    formData.append('instock', form.instock);
+  updateProduct(data, id) {
+    return this.http.post<any>(`${this.baseUrl}/update_product/${id}`, this.createFormData(data));
+  }
 
-    return this.http.post<any>(`${this.baseUrl}`, formData);
+  deleteProduct(id) {
+    return this.http.delete(`${this.baseUrl}/${id}`);
   }
 
   getByProductCode(product_code) {
@@ -47,18 +44,29 @@ export class ProductService {
     return this.http.get(`${environment.api_url}/ref/product_category`);
   }
 
-  search(terms: Observable<string>, page: number) {
-    return terms.pipe(
-      debounceTime(400),
-      distinctUntilChanged(),
-      switchMap(term => this.searchEntries(term, page))
-    );
+  search(term, page: number) {
+    return this.http.get<any>(`${this.baseUrl}?t=search&query=${term == '' || term == 'null' ? true : term}&page=${page}`);
   }
 
-  searchEntries(term, page) {
-    // let queryString = isNaN(term) ? `t=search_code&query=${term == '' ? true : term}&page=${page}` ? `?t=search&query=${term == '' ? true : term}&page=${page}`: 
-    // console.log(isNaN(term));
-    return this.http.get<any>(`${this.baseUrl}?t=search&query=${term == '' ? true : term}&page=${page}`);
+  // searchEntries(term, page) {
+  //   // let queryString = isNaN(term) ? `t=search_code&query=${term == '' ? true : term}&page=${page}` ? `?t=search&query=${term == '' ? true : term}&page=${page}`: 
+  //   // console.log(isNaN(term));
+  //   return this.http.get<any>(`${this.baseUrl}?t=search&query=${term == '' || term == 'null' ? true : term}&page=${page}`);
+  // }
+
+  createFormData(data): FormData {
+    const fd = new FormData();
+
+    if(data.image) fd.append('thumbnail', data.image);
+    fd.append('code_product', data.code_product);
+    fd.append('product_category_id', data.product_category_id);
+    fd.append('product_th', data.product_th);
+    fd.append('details_th', data.details_th);
+    fd.append('price', data.price);
+    fd.append('cost', data.cost);
+    fd.append('instock', data.instock);
+
+    return fd;
   }
 
 }

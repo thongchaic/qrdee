@@ -20,23 +20,25 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
   styleUrls: ['./cart.page.scss'],
 })
 export class CartPage {
-   @Output() scanChange = new EventEmitter;
+
+  @Output() scanChange = new EventEmitter;
 
 
-product_code:any= '';
-  
-
-
+  product_code:any= '';
   product_all: any;
   productFound:boolean = false;
-  // product_code:  any;
- searchTerm = '';
+  searchTerm = '';
   query: any = '';
-    page = 1;
+  page = 1;
 
- barcodeScannerOptions: BarcodeScannerOptions = {
+  tab = 0;
+  tab_titles = ["คำสั่งซื้อ","รับชำระเงิน"];
+
+
+  barcodeScannerOptions: BarcodeScannerOptions = {
     formats : "QR_CODE,EAN_13"
   };
+
 
   usertype: string = '';
   cart: any;
@@ -52,7 +54,13 @@ product_code:any= '';
   store_id : number = 0;
   latitude_store:any;
   longitude_store:any;
+
+  products:any[] = [1,2,3];
+  store:any;
+
+
   @ViewChild('mapElement',{static:false}) mapNativeElement: ElementRef;
+
   constructor(
     private cartService: CartService,
     private transactionService: TransactionService,
@@ -66,74 +74,106 @@ product_code:any= '';
     private route: ActivatedRoute,
     private geolocation: Geolocation,
     private barcodeScanner: BarcodeScanner,
-      private builder: FormBuilder,
-  ) { 
-     this.productService.getAll().subscribe(resp => {
-           this.product_all = resp.products.data;
-        console.log('product_all',this.product_all);
-           
-     });
+    private builder: FormBuilder
+  ) {
 
-    this.usertype = localStorage.getItem('usertype');
-    
-    this.route.queryParams.subscribe(params => {
-      console.log(params);
-      if (params && params.special) {
-        this.store_id = JSON.parse(params.special);
-        console.log('store_id: ',this.store_id);
- 
-      }
-    });
-    
-}
+     // this.productService.getAll().subscribe(resp => {
+     //   this.product_all = resp.products.data;
+     //   alert(this.product_all);
+     //    //console.log('product_all',this.product_all);
+     // });
+
+     this.store = JSON.parse(localStorage.getItem('store'));
+
+     //alert(JSON.stringify(this.store));
+     //alert(JSON.stringify(this.store));
+
+    //
+    // this.usertype = localStorage.getItem('usertype');
+    //
+    // this.route.queryParams.subscribe(params => {
+    //   console.log(params);
+    //   if (params && params.special) {
+    //     this.store_id = JSON.parse(params.special);
+    //     //console.log('store_id: ',this.store_id);
+    //
+    //   }
+    // });
+
+  }
+
   ionViewWillEnter() {
-    this.getCart();
-    this.http.get<any>(`http://qrdee.co/api/v1/store`).subscribe(console.log);
+    this.getOrders();
+    this.getProducts();
+    // this.http.get<any>(`http://qrdee.co/api/v1/store`).subscribe(console.log);
     // this.test = localStorage.getItem('test');
   }
 
-ngAfterViewInit(): void {
-                this.geolocation.getCurrentPosition().then((resp) => {
-        console.log(resp);
+  ngAfterViewInit(): void {
 
-        this.latitude = resp.coords.latitude;
-        this.longitude = resp.coords.longitude;
-       
-        const map = new google.maps.Map(this.mapNativeElement.nativeElement, {
-          center: {lat: resp.coords.latitude, lng: resp.coords.longitude},
-          zoom: 6,
-        });
+    // this.geolocation.getCurrentPosition().then((resp) => {
+    //
+    // this.latitude = resp.coords.latitude;
+    // this.longitude = resp.coords.longitude;
+    //
+    //     const map = new google.maps.Map(this.mapNativeElement.nativeElement, {
+    //       center: {lat: resp.coords.latitude, lng: resp.coords.longitude},
+    //       zoom: 6,
+    //     });
+    //
+    //
+    //     var icon = {
+    //      // https://www.clipartmax.com/png/middle/127-1273790_features-last-mile-delivery-icon.png
+    //         url:'https://cdn0.iconfinder.com/data/icons/maps-and-navigation-3-1/52/150-512.png',
+    //         scaledSize: new google.maps.Size(50, 50), // scaled size
+    //     };
+    //     //var image = 'https://cdn0.iconfinder.com/data/icons/maps-and-navigation-3-1/52/150-512.png';
+    //     //code
+    //     var marker = new google.maps.Marker({
+    //         position: {lat: resp.coords.latitude, lng: resp.coords.longitude},
+    //         map: map,
+    //         icon: icon
+    //     });
+    //
+    //     const infoWindow = new google.maps.InfoWindow;
+    //     const pos = {
+    //       lat: this.latitude,
+    //       lng: this.longitude
+    //     };
+    //     infoWindow.setPosition(pos);
+    //     infoWindow.setContent('ตำแหน่งของคุณ.');
+    //     infoWindow.open(map);
+    //     map.setCenter(pos);
+    //
+    //     }).catch((error) => {
+    //       //alert('เกิดข้อผิดพลาดในการรับตำแหน่ง');
+    // });
 
-        var icon = {
-         // https://www.clipartmax.com/png/middle/127-1273790_features-last-mile-delivery-icon.png
-            url:'https://cdn0.iconfinder.com/data/icons/maps-and-navigation-3-1/52/150-512.png',
-            scaledSize: new google.maps.Size(50, 50), // scaled size
-        };
-        //var image = 'https://cdn0.iconfinder.com/data/icons/maps-and-navigation-3-1/52/150-512.png';
-        
-        var marker = new google.maps.Marker({
-            position: {lat: resp.coords.latitude, lng: resp.coords.longitude},
-            map: map,
-            icon: icon
-        });
+}
+changeTab(tab){
+  this.tab = tab;
+  if(this.tab == 0){
+    this.getOrders();
+    this.store_customers(this.store.id);
+  }else{
+    this.getProducts();
+  }
+}
 
-        const infoWindow = new google.maps.InfoWindow;
-        const pos = {
-          lat: this.latitude,
-          lng: this.longitude
-        };
-        infoWindow.setPosition(pos);
-        infoWindow.setContent('ตำแหน่งของคุณ.');
-        infoWindow.open(map);
-        map.setCenter(pos); 
+getOrders(){
+  this.cartService.getOrders(this.store.id).subscribe((data:any)=>{
 
-        // this.loadStoreDistance();
+  });
+}
+getProducts(){
 
-        }).catch((error) => { 
-      console.log('เกิดข้อผิดพลาดในการรับตำแหน่ง', error);
-    });
-  
-} 
+}
+addToCart(product){
+  this.cartService.addToCart(product);
+  this.toastService.showToast(`เพิ่ม xx ใส่ตะกร้าแล้ว`, 'top');
+}
+
+
 
   newTransaction() {
     this.alertService.showAlert({
@@ -157,13 +197,13 @@ ngAfterViewInit(): void {
             },
 
           role: 'cancel',
-        }, 
+        },
         {
           text: 'ตกลง',
 
           handler: () => {
             if(this.store_id){
-              
+
                this.cartService.getStorePromptpay(this.store_id).subscribe(res => {
                 this.promptpay =  res.data[0].promptpay;
                  console.log(res);
@@ -179,15 +219,15 @@ ngAfterViewInit(): void {
                   this.mobile_number = res.data.mobile_number;
                   this.store_id;
 
-                   
+
                   this.transactionService.newTransaction(this.cart, this.price, this.latitude, this.longitude, this.firstname, this.lastname,this.mobile_number,this.latitude_store,this.longitude_store, this.store_id,this.promptpay, this.verified = 1).subscribe(trn => {
                 console.log('user_map',this.latitude,this.longitude);
                     this.qrService.generatePromptPayQRs(trn.data).subscribe(qr => {
                        this.QRModal(qr, trn);
                        // console.log(22);
                        // console.log(qr);
-                    }); 
-                     
+                    });
+
                   });
                  });
                });
@@ -203,18 +243,18 @@ ngAfterViewInit(): void {
                     this.QRModal(qr, trn);
                      // console.log(33);
                      // console.log(qr);
-                 }); 
-                  
-                  // }); 
+                 });
+
+                  // });
                });
             }
           }
-        }        
+        }
       ]
     });
-  }  
+  }
 
-  
+
   getCart() {
     this.cartService.getCart().subscribe(data => this.cart = data);
     this.price = this.cartService.getPrice();
@@ -223,11 +263,8 @@ ngAfterViewInit(): void {
 
   addItem(product) {
     this.cartService.addItem(product);
-    this.toastService.showToast(`เพิ่ม ${product.product_th} 1ชิ้น`, 'top')
+    this.toastService.showToast(`เพิ่ม ${product.product_th} 1 ชิ้น`, 'top')
     this.getCart();
-
-    
-
   }
 
   removeFromCart(product) {
@@ -241,9 +278,9 @@ ngAfterViewInit(): void {
      this.productService.getAll().subscribe(resp => {
            this.product_all = resp.products.data;
         console.log('product_all',this.product_all);
-           
+
       });
-         
+
       console.log("product_code",product_code);
 
       this.productService.getByProductCode(product_code).subscribe(product => {
@@ -254,9 +291,9 @@ ngAfterViewInit(): void {
           this.cartService.addToCart(product);
           this.toastService.showToast(`เพิ่ม ${product.product_th} 1ชิ้น`, 'top');
           this.getCart()
-        } 
+        }
      });
-  
+
 }
 
 
@@ -272,7 +309,7 @@ ngAfterViewInit(): void {
 //           this.getCart();
 //     });
 //       });
-  
+
 // }
 
  // letScan(product_code) {
@@ -290,8 +327,8 @@ ngAfterViewInit(): void {
  //          this.cartService.addToCart(product);
  //          this.toastService.showToast(`เพิ่ม ${product.product_th} 1ชิ้น`, 'top');
  //          this.getCart();
-        
- //      }      
+
+ //      }
  //    });
  //      // this.scan;
  //      // this.presentAlert(result.text);
@@ -301,17 +338,16 @@ ngAfterViewInit(): void {
  //  }
 
 
- 
+
 getProduc() {
-      this.productService.getAll().subscribe(resp => {
-           this.product_all = resp.products.data;
-        console.log('product_all',this.product_all);
-           
-      });
+  this.productService.getAll().subscribe(resp => {
+    this.product_all = resp.products.data;
+    console.log('product_all',this.product_all);
+  });
 }
 
 // letScan(product_code){
-//     this.barcodeScanner.scan().then(barcodeData =>{ 
+//     this.barcodeScanner.scan().then(barcodeData =>{
 //       this.scanChange = barcodeData.text;
 //       this.product_all = this.product_code;
 
@@ -322,12 +358,11 @@ getProduc() {
 //           this.cartService.addToCart(product);
 //           this.toastService.showToast(`เพิ่ม ${product.product_th} 1ชิ้น`, 'top');
 //           this.getCart();
-       
-//       }      
+//       }
 //     });
 //     })
-
 //   }
+
   async QRModal(qr_data, trn_data) {
     const modal = await this.modalController.create({
       component: QrmodalComponent,
@@ -344,7 +379,7 @@ getProduc() {
           this.cartService.clearCart();
           this.getCart();
           this.toastService.showToast(`ชำระเงินเรียบร้อยแล้ว`, 'top');
-        }        
+        }
       });
 
     return await modal.present();
@@ -355,10 +390,7 @@ getProduc() {
   submit(){
         this.toastService.showToast('กำลังตรวจสอบข้อมูล', 'top');
         this.router.navigateByUrl('/customer');
-     
-   
   }
-
 
  store_customers(store_id){
     let navigationExtras: NavigationExtras = {

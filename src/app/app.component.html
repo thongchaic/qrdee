@@ -10,17 +10,17 @@
 
         <ion-list>
           <ion-menu-toggle auto-hide="false" >
-            <ion-item *ngIf="usertype == 1" (click)="home()">
+            <ion-item *ngIf="store.store_type_id == 5" (click)="home()">
               <ion-label>
                    หน้าแรก
               </ion-label>
             </ion-item>
-            <ion-item *ngIf="usertype == 1" (click)="product()">
+            <ion-item *ngIf="store.store_type_id == 5" (click)="product()">
               <ion-label>
                    สินค้า
               </ion-label>
             </ion-item>
-             <ion-item *ngIf="usertype == 1" (click)="postproduct()">
+             <ion-item *ngIf="store.store_type_id == 5" (click)="postproduct()">
               <ion-label >
                    นำเข้าสินค้า
               </ion-label>
@@ -30,27 +30,27 @@
                    สั่งสินค้า
               </ion-label>
             </ion-item> -->
-            <ion-item *ngIf="usertype == 1" (click)="store()">
+            <ion-item *ngIf="store.store_type_id == 5" (click)="profile()">
               <ion-label >
                    ข้อมูลร้าน
               </ion-label>
             </ion-item>
-            <ion-item *ngIf="usertype == 2" (click)="logistic()">
+            <ion-item *ngIf="store.store_type_id == 4" (click)="logistic()">
               <ion-label >
                    ขนส่งสินค้า
               </ion-label>
             </ion-item >
-            <ion-item *ngIf="usertype == 3" (click)="customer()">
+            <ion-item  (click)="customer()">
               <ion-label>
-                   สั่งสินค้าจากร้าน
+                   สั่งซื้อสินค้า
               </ion-label>
             </ion-item>
-             <ion-item  *ngIf="usertype == 1" (click)="stats()">
+             <ion-item  *ngIf="store.store_type_id == 5" (click)="stats()">
               <ion-label>
                    สถิติ
               </ion-label>
             </ion-item>
-            <ion-item *ngIf="usertype == 1" (click)="sell()">
+            <ion-item *ngIf="store.store_type_id == 5" (click)="sell()">
               <ion-label >
                    สรุปการขาย
               </ion-label>
@@ -97,9 +97,9 @@
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
-      </ion-content> 
+      </ion-content>
     </ion-menu>
     <ion-router-outlet main></ion-router-outlet>
-  </ion-split-pane> 
+  </ion-split-pane>
 </ion-app>
  -->

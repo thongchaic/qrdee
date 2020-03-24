@@ -3,65 +3,41 @@
     <ion-buttons slot="start">
       <!-- <ion-menu-button></ion-menu-button>  -->
     </ion-buttons>
-    <ion-title>ร้านค้า</ion-title>
-    <ion-buttons slot="end">
-      <ion-back-button></ion-back-button>
+    <ion-title>เปิดร้านออนไลน์</ion-title>
+    <ion-buttons>
+      <ion-back-button defaultHref="login"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
- <ion-content  class="app-background">
+ <ion-content>
   <ion-card style="background:#FFFFFF;">
     <ion-card-content>
-       <ion-list>
-       <ion-item>
-        <ion-label position="floating"></ion-label>
-        <ion-input type="text" [(ngModel)]="store_name" placeholder="ชื่อร้าน"></ion-input>
-      </ion-item>
-      <!-- <ion-item>
-        <ion-label position="floating" ></ion-label>
-        <ion-input type="text" [(ngModel)]="firstname" placeholder="ชื่อ"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating"></ion-label>
-         <ion-input type="text"  [(ngModel)]="lastname" placeholder="นามสกุล"></ion-input>
-      </ion-item> -->
-       <ion-item>
-        <ion-label position="floating"></ion-label>
-        <ion-input type="text" [(ngModel)]="promptpay" placeholder="พร้อมเพย์/เบอร์โทรศัพท์"></ion-input>
-      </ion-item>
-      <!-- <ion-item>
-        <ion-label position="floating" ></ion-label>
-        <ion-input type="text"  [(ngModel)]="mobile_number" placeholder="เบอร์โทร"></ion-input>
-      </ion-item> -->
-      <!-- <ion-item>
-        <ion-label position="floating"></ion-label>
-        <ion-input type="text" [(ngModel)]="email" placeholder="อีเมล์"></ion-input>
-      </ion-item> -->
+      <ion-label position="floating">ตำแหน่งร้าน</ion-label>
+      <div #mapElement style="height:250px;" ></div>
+      <ion-list>
         <ion-item>
-        <ion-label position="floating"></ion-label>
-        <ion-input type="password"  [(ngModel)]="password" placeholder="รหัสผ่าน"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="floating" ></ion-label>
-        <ion-input type="password"  [(ngModel)]="repassword" placeholder="ยืนยันรหัสผ่าน"></ion-input>
-      </ion-item>
+          <ion-label position="floating"></ion-label>
+          <ion-input type="text" [(ngModel)]="store_name" placeholder="ชื่อร้าน"></ion-input>
+        </ion-item>
 
-    <!--  <p> ตำแหน่งปัจจุบันของร้านค้า</p>
-      <ion-item>
-        <ion-label position="floating" ></ion-label>
-        <ion-input type="text"  [(ngModel)]="latitude"></ion-input>
-      </ion-item>
-       <ion-item>
-        <ion-label position="floating" ></ion-label>
-        <ion-input type="text"  [(ngModel)]="longitude"></ion-input>
-      </ion-item> -->
-      <!-- <div #mapElements id="mapElements" width="100%" height="100px">x</div> -->
-     <ion-button type="submit" expand="full" color="success" (click)="Register_store()">ลงทะเบียน</ion-button>
- </ion-list>
+        <ion-item>
+          <ion-label position="floating"></ion-label>
+          <ion-input type="text" [(ngModel)]="promptpay" placeholder="พร้อมเพย์/เบอร์โทรศัพท์"></ion-input>
+        </ion-item>
 
-</ion-card-content>
-</ion-card>
-<div class="mapElements" id="mapElements" #mapElements></div>
+        <ion-item>
+          <ion-label position="floating"></ion-label>
+          <ion-input type="password"  [(ngModel)]="password" placeholder="รหัสผ่าน"></ion-input>
+        </ion-item>
 
+        <ion-item>
+          <ion-label position="floating" ></ion-label>
+          <ion-input type="password"  [(ngModel)]="repassword" placeholder="ยืนยันรหัสผ่าน"></ion-input>
+        </ion-item>
+
+        <ion-button type="submit" expand="full" color="success" (click)="registStore()">ลงทะเบียน</ion-button>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

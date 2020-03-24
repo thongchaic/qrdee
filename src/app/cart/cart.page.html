@@ -3,89 +3,76 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>รับชำระเงิน</ion-title>
+    <ion-title>{{tab_titles[tab]}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
- <!--  <app-price
-    [price]="price">
-  </app-price>  --> 
+<ion-content *ngIf="tab == 0">
 
-<ion-item-divider style="background:#f2f2f2;">
-  <div slot="start">
-    <h3>ราคารวม</h3>
-  </div>
-  <div slot="end">
-    <h2>{{ price | number }} ฿</h2>
-  </div>
-</ion-item-divider> 
-
-
-  <app-list 
-    [cart]="cart" 
-    (removeFromCartChange)="removeFromCart($event)" 
-    (addItemChange)="addItem($event)">
-  </app-list>
-   <div #mapElement ></div>
 
 
 </ion-content>
 
+<ion-content *ngIf="tab == 1">
+  <!-- <ion-searchbar placeholder="ชื่อ/รหัสสินค้า" color="primary" animated debounce="500" (ionChange)="search($event.target.value)">
+  </ion-searchbar> -->
+
+  <ion-item-divider style="background:#f2f2f2;">
+    <div slot="start">
+      <h3>จำนวนเงิน</h3>
+    </div>
+    <div slot="end">
+      <ion-input style="text-align: right;font-size: 20px" type="number" [(ngModel)]="price" clearInput></ion-input>
+    </div>
+  </ion-item-divider>
+
+  <app-list
+    [cart]="cart"
+    (removeFromCartChange)="removeFromCart($event)"
+    (addItemChange)="addItem($event)">
+  </app-list>
+
+  <ion-list>
+
+    <ion-list-header >
+      <ion-label>รายการสินค้า</ion-label>
+    </ion-list-header>
+
+    <ion-item-sliding *ngFor="let product of products">
+      <ion-item>
+        <ion-avatar slot="start">
+            <img src="/assets/noimg.png">
+        </ion-avatar>
+        <ion-label>
+          <h5><ion-text color="dark">ชื่อ</ion-text></h5>
+        </ion-label>
+        <div slot="end">
+        <h5><ion-text color="dark">ชื่อ</ion-text></h5>
+        <ion-button fill="clear" color="primary" (click)="addToCart(product);">
+
+          <ion-icon slot="icon-only" name="basket"></ion-icon>
+        </ion-button>
+        </div>
+      </ion-item>
+    </ion-item-sliding>
+
+  </ion-list>
+
+</ion-content>
+
 <ion-footer style="background:#FFFFFF;">
-  <ion-row >
-
- <!--   <ion-item>
-        <ion-label position="floating">รหัสสินค้า</ion-label>
-        <ion-input type="text" name="code_product"  ></ion-input>
-        <ion-button slot="end" size="small" color="success" *ngIf="scan" (click)="letScan()">สแกน</ion-button>     (click)="letScan() "   
-      </ion-item> -->
-
-
- <ion-col size="12" *ngIf="usertype == 3">
-    <ion-button expand="block" (click)="store_customers(store_id)" color="success">
-      <ion-icon slot="end" name="add"></ion-icon>
-      ซื้อสินค้าเพิ่ม 
-    </ion-button>
-  </ion-col>
-
-
-  <ion-col size="12" *ngIf="usertype == 1" >
-
-     <!-- <ion-item > -->
-        <!-- <ion-label position="floating">รหัสสินค้า</ion-label> -->
-        <!-- <ion-input type="text" name="code_product" (ionFocus)="letScan()"></ion-input> -->
-        <!-- <ion-button slot="end" size="small" color="success" *ngIf="scan" (click)="letScan()">สแกน</ion-button>         -->
-      <!-- </ion-item> -->
-
-
-     <ion-searchbar placeholder="รหัสสินค้า" color="primary" animated debounce="500" (ionChange)="search($event.target.value)">
-  </ion-searchbar>
-
-
-
-
-   <!--  <ion-button expand="block" color="secondary" (ionFocus)="letScan()" >
-      <ion-icon slot="end" name="qr-scanner"></ion-icon>
-      สแกนสินค้า
-    </ion-button> -->
-  </ion-col>  
-
- <!--  <ion-col size="12" *ngIf="usertype == 1" >
-    <ion-button expand="block" color="secondary" (ionFocus)="scan()" >
-      <ion-icon slot="end" name="qr-scanner"></ion-icon>
-      สแกนสินค้า2
-    </ion-button>
-  </ion-col>   -->
-
-</ion-row>
-
- <!-- <ion-item (click)="store_product(store_distances.id)"> -->
-  <ion-button expand="full" color="primary" (click)="newTransaction()">
-  {{ usertype == 1 ? 'รับชำระเงินด้วย QR Code' : 'ชำระเงินด้วย QR Code' }}</ion-button>
-  
+  <ion-row>
+   <ion-col size="6">
+      <ion-button expand="block" (click)="changeTab(0)" color="danger">
+        <ion-icon name="add"></ion-icon>
+        คำสั่งซื้อสินค้า
+      </ion-button>
+    </ion-col>
+    <ion-col size="6">
+       <ion-button expand="block" (click)="changeTab(1)" color="primary">
+         <ion-icon  name="add"></ion-icon>
+         รับชำระเงินด้วย QR
+       </ion-button>
+     </ion-col>
+  </ion-row>
 </ion-footer>
-
-
-
-

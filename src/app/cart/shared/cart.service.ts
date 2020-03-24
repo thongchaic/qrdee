@@ -14,7 +14,11 @@ export class CartService {
 
   constructor(
     private http: HttpClient
-    ) { }
+  ) { }
+
+  getOrders(store_id){
+    return this.http.get<any>(`https://qrdee.co/api/v2/orders/${store_id}`);
+  }
 
   getStoreMaps(store_id) {
     return this.http.get<any>(`https://qrdee.co/api/v1/transaction_store_maps/${store_id}`);
@@ -37,7 +41,7 @@ export class CartService {
     // console.log(cartArray);
 
     cartArray.forEach(product => {
-      price += product['price'] * product['qty'];      
+      price += product['price'] * product['qty'];
     })
 
     return price;
@@ -45,7 +49,7 @@ export class CartService {
 
   addToCart(product) {
     if(this.checkInCart(product)) return;
-    
+
     let cartArr = this.getItem() ? this.getItem() : [];
 
     product.incart = 1;
@@ -58,7 +62,7 @@ export class CartService {
       return cartArr.map(item => item.id).indexOf(value.id) === index;
     });
 
-    localStorage.setItem('cart', JSON.stringify(distinctCartArr));  
+    localStorage.setItem('cart', JSON.stringify(distinctCartArr));
   }
 
   addItem(product) {

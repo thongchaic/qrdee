@@ -8,26 +8,20 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class RegisterStoreService {
-baseUrl = `${ environment.api_url }`;
   constructor(private http: HttpClient)
-  { }
+  {
 
-registerstore(password,firstname,lastname,promptpay,mobile_number,store_name,email,latitude,longitude){
-  const body = {
-      // username : username,
+  }
+  registerstore(password,promptpay,store_name,latitude,longitude,store_type_id){
+    const body = {
       password : password,
-      firstname : firstname,
-      lastname  : lastname,
       promptpay : promptpay,
-      mobile_number : mobile_number,
       store_name:store_name,
-      email:email,
       latitude:latitude,
       longitude:longitude,
-
+      store_type_id:store_type_id
     }
-    console.log(body);
-  return this.http.post<any>(`https://qrdee.co/api/v1/register`,body);
-}
+    return this.http.post<any>(`https://qrdee.co/api/v2/register`,body);
+  }
 
 }

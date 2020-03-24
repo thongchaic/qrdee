@@ -1,13 +1,12 @@
 <ion-content>
   <ion-searchbar placeholder="ชื่อ/รหัสสินค้า" color="primary" animated debounce="500" (ionChange)="search($event.target.value)">
   </ion-searchbar>
+  
   <ion-list>
-    <!-- <ion-card> -->
     <ion-list-header >
       <ion-label>สินค้า</ion-label>
     </ion-list-header>
-
-    <ion-list>
+  <ion-list>
 
   <!-- Sliding item with icon start options on end side -->
   <ion-item-sliding *ngFor="let product of products">
@@ -26,7 +25,7 @@
           </ion-avatar>
 
         <ion-label>
-          
+
           <h5><ion-text color="dark">รหัส: {{ product.code_product ? product.code_product : '-' }}</ion-text></h5>
           <h5><ion-text color="dark">ชื่อ: {{ product.product_th }}</ion-text></h5>
         </ion-label>
@@ -35,7 +34,7 @@
         <ion-button fill="clear" color="primary" slot="end" *ngIf="product.incart == 0 && product.allowAdd == 1" (click)="addToCart(product);">
           <ion-icon slot="icon-only" name="basket"></ion-icon>
         </ion-button>
-        
+
       </ion-item>
 
     <ion-item-options *ngIf="usertype == 1">
@@ -77,12 +76,12 @@
         loadingSpinner="bubbles">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll> -->
-  
 
 
 
 
-</ion-list> 
+
+</ion-list>
 </ion-content>
 
 <ion-footer>

@@ -12,9 +12,9 @@ import { Router  } from '@angular/router';
 })
 export class AppComponent {
 
-   usertype: string = '';
+  store:any;
 
-    appPages = [ 
+  appPages = [
     { title: 'หน้าแรก', url: '/cart', icon: 'home' },
     { title: 'สินค้า', url: '/products', icon: 'cube' },
     { title: 'นำเข้าสินค้า', url: '/products/create', icon: 'arrow-round-up' },
@@ -28,9 +28,7 @@ export class AppComponent {
     { title: 'สถิติ', url: '/stats', icon: 'cart' },
     { title: 'ล็อคอิน', url: '/login', icon: 'pin' },
     { title: 'ออกจากระบบ', url: '/logout', icon: 'pin' },
-  ]; 
-
-
+  ];
 
   constructor(
     private platform: Platform,
@@ -40,11 +38,13 @@ export class AppComponent {
     private router: Router,
   ) {
 
-    this.event.subscribe('user:changed',type=>{
-       this.usertype = type
-     });
-    this.usertype = localStorage.getItem('usertype');
-    console.log(this.usertype);  
+    this.event.subscribe('store:changed',type=>{
+       this.store = type;
+
+    });
+
+    this.store = JSON.parse(localStorage.getItem('store'));
+    //alert(JSON.stringify(this.store));
 
 
     this.initializeApp();
@@ -53,7 +53,7 @@ export class AppComponent {
    login(){
      this.router.navigate(['login']);
   }
- 
+
    home(){
       this.router.navigate(['cart']);
    }
@@ -73,7 +73,7 @@ export class AppComponent {
    }
 
 
-   store(){
+   profile(){
        this.router.navigate(['profile']);
    }
 

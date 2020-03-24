@@ -8,40 +8,37 @@
   },
   "installed_plugins": {
     "cordova-plugin-camera": {
-      "PACKAGE_NAME": "io.ionic.starter"
+      "PACKAGE_NAME": "io.ionic.qrdee-emarket"
     },
     "cordova-plugin-device": {
-      "PACKAGE_NAME": "io.ionic.starter"
+      "PACKAGE_NAME": "io.ionic.qrdee-emarket"
     },
     "cordova-plugin-file": {
-      "PACKAGE_NAME": "io.ionic.starter"
+      "PACKAGE_NAME": "io.ionic.qrdee-emarket"
     },
     "cordova-plugin-geolocation": {
-      "PACKAGE_NAME": "io.ionic.starter"
-    },
-    "cordova-plugin-googlemaps": {
-      "PACKAGE_NAME": "io.ionic.starter"
+      "PACKAGE_NAME": "io.ionic.qrdee-emarket"
     },
     "cordova-plugin-ionic-keyboard": {
-      "PACKAGE_NAME": "io.ionic.starter"
+      "PACKAGE_NAME": "io.ionic.qrdee-emarket"
     },
     "cordova-plugin-ionic-webview": {
-      "PACKAGE_NAME": "io.ionic.starter"
+      "PACKAGE_NAME": "io.ionic.qrdee-emarket"
     },
     "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "io.ionic.starter"
+      "PACKAGE_NAME": "io.ionic.qrdee-emarket"
     },
     "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "io.ionic.starter"
+      "PACKAGE_NAME": "io.ionic.qrdee-emarket"
     },
     "cordova-plugin-whitelist": {
-      "PACKAGE_NAME": "io.ionic.starter"
+      "PACKAGE_NAME": "io.ionic.qrdee-emarket"
     },
     "cordova-sqlite-storage": {
-      "PACKAGE_NAME": "io.ionic.starter"
+      "PACKAGE_NAME": "io.ionic.qrdee-emarket"
     },
     "phonegap-plugin-barcodescanner": {
-      "PACKAGE_NAME": "io.ionic.starter"
+      "PACKAGE_NAME": "io.ionic.qrdee-emarket"
     }
   },
   "dependent_plugins": {}

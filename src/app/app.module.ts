@@ -9,7 +9,6 @@ import { IonicStorageModule } from '@ionic/storage';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { GoogleMaps } from '@ionic-native/google-maps/ngx';
 
 import { File } from '@ionic-native/file/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
@@ -29,7 +28,6 @@ import { WebView } from '@ionic-native/ionic-webview/ngx';
     StatusBar,
     SplashScreen,
     Geolocation,
-    GoogleMaps,
     File,
     Camera,
     // ImagePicker,

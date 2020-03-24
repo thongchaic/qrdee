@@ -1,15 +1,32 @@
 <ion-content>
-  <ion-searchbar placeholder="ชื่อ/รหัสสินค้า" color="primary" animated debounce="500" (ionChange)="search($event.target.value)"></ion-searchbar>
+  <ion-searchbar placeholder="ชื่อ/รหัสสินค้า" color="primary" animated debounce="500" (ionChange)="search($event.target.value)">
+  </ion-searchbar>
   <ion-list>
-    <ion-list-header>
+    <!-- <ion-card> -->
+    <ion-list-header >
       <ion-label>สินค้า</ion-label>
     </ion-list-header>
-    <ion-item-sliding *ngFor="let product of products">
+
+    <ion-list>
+
+  <!-- Sliding item with icon start options on end side -->
+  <ion-item-sliding *ngFor="let product of products">
       <ion-item>
-        <ion-avatar slot="start" routerDirection="forward" routerLink="/products/{{ product.id }}">
-          <img [src]="url+product.thumbnail || '/assets/no-product-image.jpg'">
-        </ion-avatar>
-        <ion-label text-wrap>
+        <!--  store -->
+          <ion-avatar slot="start" *ngIf="usertype == 1">
+            <a routerLink="/products/{{ product.id }}">
+              <img [src]="url+product.thumbnail || '/assets/noimg.png'">
+            </a>
+          </ion-avatar>
+      <!-- customer -->
+          <ion-avatar slot="start" *ngIf="usertype == 3" (click)="user_customer(product.id)">
+            <a routerLink="/products/{{ product.id }}">
+              <img [src]="url+product.thumbnail || '/assets/noimg.png'">
+            </a>
+          </ion-avatar>
+
+        <ion-label>
+          
           <h5><ion-text color="dark">รหัส: {{ product.code_product ? product.code_product : '-' }}</ion-text></h5>
           <h5><ion-text color="dark">ชื่อ: {{ product.product_th }}</ion-text></h5>
         </ion-label>
@@ -20,7 +37,30 @@
         </ion-button>
         
       </ion-item>
-      <ion-item-options side="end">
+
+    <ion-item-options *ngIf="usertype == 1">
+      <ion-item-option color="light">
+         <ion-button fill="clear" size="large" color="secondary" routerDirection="forward" routerLink="/products/{{ product.id }}/edit">
+            <ion-icon name="create"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" size="large" color="danger" (click)="deleteProduct(product.id);">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+        </ion-item-option>
+    </ion-item-options>
+  </ion-item-sliding>
+
+   <ion-infinite-scroll threshold="10%" (ionInfinite)="loadData($event.target)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+</ion-list>
+
+
+
+      <!-- <ion-item-options side="end" *ngIf="usertype == 1">
         <ion-item-option color="light">
           <ion-button fill="clear" size="large" color="secondary" routerDirection="forward" routerLink="/products/{{ product.id }}/edit">
             <ion-icon name="create"></ion-icon>
@@ -36,6 +76,18 @@
       <ion-infinite-scroll-content
         loadingSpinner="bubbles">
       </ion-infinite-scroll-content>
-    </ion-infinite-scroll>
-  </ion-list>
+    </ion-infinite-scroll> -->
+  
+
+
+
+
+</ion-list> 
 </ion-content>
+
+<ion-footer>
+  <ion-button  routerLink="/cart" type="submit" (click)="submit()" expand="full" color="success">
+        <ion-icon ios="ios-cart" md="md-cart"></ion-icon>
+    &nbsp;ตะกร้าสินค้า
+  </ion-button>
+</ion-footer>

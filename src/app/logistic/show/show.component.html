@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>    
+      <ion-title>ขนส่ง</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-background">
+    <ion-item>
+    <ion-label><b>ประวัติการขนส่งสินค้า</b></ion-label>
+  </ion-item>
+
+<ion-grid >
+      <ion-row>
+        <ion-col size="12" >
+           <ion-item-sliding *ngFor="let deliveryshow of deliveryshows">
+          <div expand="block" >
+            <ion-item>
+                <ion-avatar slot="start">
+                  <img src="https://www.openghong.com/wp-content/uploads/2018/06/delive-300x300.png">
+                </ion-avatar>
+                <ion-label text-wrap>
+                  <b>ส่งถึง</b>&nbsp;คุณ {{deliveryshow.firstname}} {{deliveryshow.lastname}}<br>
+                  <b>เมื่อ</b> {{deliveryshow.updated_at}}
+                
+             </ion-label>
+            </ion-item> 
+              
+             <ion-item-options side="end">
+              <ion-item-option color="light">
+                <ion-button fill="clear" size="large" color="danger" (click)="deleteLogistic(deliveryshow.id);">
+                  <ion-icon name="close"></ion-icon>
+                </ion-button>
+              </ion-item-option>
+            </ion-item-options>
+          </div>
+        </ion-item-sliding> 
+          <br><br><br><br><br><br>
+        </ion-col> 
+      </ion-row>
+  </ion-grid> 
+</ion-content>
+
+
+
+
+
+
+<!-- 
+<ion-content class="app-background"> 
+  <ion-card-content>
+  <ion-item>
+    <ion-label><b>ประวัติการขนส่งสินค้า</b></ion-label>
+  </ion-item>
+  <ion-item-sliding *ngFor="let deliveryshow of deliveryshows">
+         <ion-item>
+          <ion-avatar slot="start">
+            <img src="https://www.openghong.com/wp-content/uploads/2018/06/delive-300x300.png">
+          </ion-avatar>
+          <ion-label text-wrap>
+            <b>ส่งถึง</b>&nbsp;คุณ {{deliveryshow.firstname}} {{deliveryshow.lastname}}<br>
+            <b>เมื่อ</b> {{deliveryshow.updated_at}}
+          </ion-label>
+         </ion-item>
+         <ion-item-options side="end">
+              <ion-item-option color="light">
+                <ion-button fill="clear" size="large" color="danger" (click)="deleteLogistic(deliveryshow.id);">
+                  <ion-icon name="close"></ion-icon>
+                </ion-button>
+              </ion-item-option>
+            </ion-item-options>
+         </ion-item-sliding> 
+</ion-card-content>
+</ion-content>
+ -->
+

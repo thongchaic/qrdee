@@ -1,3 +1,57 @@
+## [4.1.3](https://github.com/ionic-team/cordova-plugin-ionic-webview/compare/v4.1.2...v4.1.3) (2019-10-30)
+
+
+### Bug Fixes
+
+* **android:** return proper mimeType for .mjs files ([#455](https://github.com/ionic-team/cordova-plugin-ionic-webview/issues/455)) ([173a313](https://github.com/ionic-team/cordova-plugin-ionic-webview/commit/173a313))
+* **ios:** mitigate media memory usage ([#459](https://github.com/ionic-team/cordova-plugin-ionic-webview/issues/459)) ([cbd526d](https://github.com/ionic-team/cordova-plugin-ionic-webview/commit/cbd526d))
+* **ios:** remove itms-services private scheme ([#464](https://github.com/ionic-team/cordova-plugin-ionic-webview/issues/464)) ([d7d2600](https://github.com/ionic-team/cordova-plugin-ionic-webview/commit/d7d2600))
+
+## [4.1.2](https://github.com/ionic-team/cordova-plugin-ionic-webview/compare/v4.1.1...v4.1.2) (2019-09-25)
+
+
+### Bug Fixes
+
+* **android:** allow schemes that start by https ([#437](https://github.com/ionic-team/cordova-plugin-ionic-webview/issues/437)) ([fab9d1f](https://github.com/ionic-team/cordova-plugin-ionic-webview/commit/fab9d1f))
+* **Android:** return proper mimeType for wasm files ([0eb8a37](https://github.com/ionic-team/cordova-plugin-ionic-webview/commit/0eb8a37))
+* **ios:** make programmatically focus work on iOS 13 ([#438](https://github.com/ionic-team/cordova-plugin-ionic-webview/issues/438)) ([7a514b0](https://github.com/ionic-team/cordova-plugin-ionic-webview/commit/7a514b0)), closes [#435](https://github.com/ionic-team/cordova-plugin-ionic-webview/issues/435)
+
+## [4.1.1](https://github.com/ionic-team/cordova-plugin-ionic-webview/compare/v4.1.0...v4.1.1) (2019-06-26)
+
+
+### Bug Fixes
+
+* **ios:** show error message when app fails to load ([#382](https://github.com/ionic-team/cordova-plugin-ionic-webview/issues/382)) ([cb1f026](https://github.com/ionic-team/cordova-plugin-ionic-webview/commit/cb1f026))
+
+# [4.1.0](https://github.com/ionic-team/cordova-plugin-ionic-webview/compare/v4.0.1...v4.1.0) (2019-06-10)
+
+
+### Features
+
+* **ios:** Add WKSuspendInBackground preference ([#356](https://github.com/ionic-team/cordova-plugin-ionic-webview/issues/356)) ([3613602](https://github.com/ionic-team/cordova-plugin-ionic-webview/commit/3613602))
+
+## [4.0.1](https://github.com/ionic-team/cordova-plugin-ionic-webview/compare/v4.0.0...v4.0.1) (2019-03-26)
+
+
+### Bug Fixes
+
+* **ios:** Fix autofocus on iOS 12.2 ([#334](https://github.com/ionic-team/cordova-plugin-ionic-webview/issues/334)) ([cb4c491](https://github.com/ionic-team/cordova-plugin-ionic-webview/commit/cb4c491)), closes [#330](https://github.com/ionic-team/cordova-plugin-ionic-webview/issues/330)
+* account port on resolving uri path ([#321](https://github.com/ionic-team/cordova-plugin-ionic-webview/issues/321)) ([fdfe8aa](https://github.com/ionic-team/cordova-plugin-ionic-webview/commit/fdfe8aa))
+
+# [4.0.0](https://github.com/ionic-team/cordova-plugin-ionic-webview/compare/v3.1.2...v4.0.0) (2019-02-18)
+
+
+### Features
+
+* **ios:** Make iOS app Scheme configurable with a preference ([#307](https://github.com/ionic-team/cordova-plugin-ionic-webview/issues/307)) ([d52d37e](https://github.com/ionic-team/cordova-plugin-ionic-webview/commit/d52d37e)), closes [#282](https://github.com/ionic-team/cordova-plugin-ionic-webview/issues/282)
+* **ios:** Remove WKSuspendInBackground preference ([#309](https://github.com/ionic-team/cordova-plugin-ionic-webview/issues/309)) ([73b6659](https://github.com/ionic-team/cordova-plugin-ionic-webview/commit/73b6659)), closes [#286](https://github.com/ionic-team/cordova-plugin-ionic-webview/issues/286)
+
+
+### BREAKING CHANGES
+
+* **ios:** Remove the WKSuspendInBackground preference, so app relying on that prefere will
+not behave as expected
+
 ## [3.1.2](https://github.com/ionic-team/cordova-plugin-ionic-webview/compare/v3.1.1...v3.1.2) (2019-02-04)
 
 

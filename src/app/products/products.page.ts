@@ -1,21 +1,15 @@
-import { Component } from '@angular/core';
-// import { ActivatedRoute } from '@angular/router';
-
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.page.html',
   styleUrls: ['./products.page.scss'],
 })
-export class ProductsPage {
+export class ProductsPage implements OnInit {
 
+  constructor() { }
 
-  constructor(
-    // private route: ActivatedRoute
-  ) { }
-
-  ionViewWillEnter() {
-
+  ngOnInit() {
   }
 
 }

@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>    
+    <ion-title>เรียกคนส่งสินค้า</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-background">
+<ion-grid>
+      <ion-row>
+        <ion-col size="12">
+            <ion-item *ngFor="let product_logistic of product_logistics">
+                <img src="assets/images/map_logistic.png" class="img_store_logistic">
+                  <p class="font_size">
+                  {{product_logistic.firstname}}
+                  <br> 
+                  <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
+                  {{product_logistic.delivery_status.delivery_status_th}}<br>
+                  {{product_logistic.delivery_type.delivery_type_th}} <br>
+                  โทร: {{product_logistic.mobile_number}}<br>
+                </p>
+              </ion-item> 
+          <br><br><br><br><br><br>
+        </ion-col> 
+      </ion-row>
+  </ion-grid>  
+</ion-content>

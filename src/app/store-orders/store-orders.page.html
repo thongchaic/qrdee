@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>    
+    <ion-title>ออเดอร์สินค้า</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-button expand="full" color="success"  (click)="hide()">
+    <ion-icon name="arrow-dropright"></ion-icon>
+    &nbsp;เรียกคนส่งของ</ion-button>
+<!-- 
+    <ion-button expand="full" color="success"  (click)="!hide()">
+      <ion-icon name="arrow-down"></ion-icon>
+      &nbsp;ออเดอร์สินค้า</ion-button> -->
+    
+<br>
+<div *ngIf="hideMe" > 
+  
+  <ion-row >
+    <ion-col size="12" >
+      <ion-item *ngFor="let product_logistic of product_logistics">
+        <img src="assets/images/map_logistic.png" class="img_store_logistic">
+        <p class="font_size">
+        {{product_logistic.firstname}}
+        <br> 
+        <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
+        {{product_logistic.delivery_status.delivery_status_th}}<br>
+        {{product_logistic.delivery_type.delivery_type_th}} <br>
+        โทร: {{product_logistic.mobile_number}}<br>
+        </p>
+      </ion-item> 
+    </ion-col> 
+  </ion-row>
+
+</div>
+
+
+
+<ion-grid *ngIf="!hideMe" >
+      <ion-row>
+        <ion-col size="12" >
+           <ion-item-sliding *ngFor="let order of orders">
+          <div expand="block" >
+            <ion-item (click)="order_store_product(order.code_randoms)">
+                 <img slot="start" src="https://www.tmbfoundation.or.th/img/icon/shop/img-cart-empty@2x.png?1545205815"class="img_store" >
+                 <p style="font-weight: bold; font-size: 14px;">
+                  คุณ{{order.firstname}}  {{order.lastname}} <br> 
+                  {{ order.updated_at}}<br> 
+                  รหัสส่งสินค้า {{ order.code_randoms}}
+                </p> 
+                 <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>
+              </ion-item> 
+              
+             <ion-item-options side="end">
+              <ion-item-option color="light">
+                <ion-button fill="clear" size="large" color="danger" (click)="deleteOrder(order.id);">
+                  <ion-icon name="close"></ion-icon>
+                </ion-button>
+              </ion-item-option>
+            </ion-item-options>
+          </div>
+        </ion-item-sliding> 
+          <br><br><br><br><br><br>
+        </ion-col> 
+      </ion-row>
+  </ion-grid>  
+
+
+
+</ion-content>

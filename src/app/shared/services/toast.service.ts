@@ -21,6 +21,20 @@ export class ToastService {
     toast.present();
   }
 
+
+  async showToasts(message: string, position: 'top' | 'bottom' | 'middle') {
+    const toast = await this.toastController.create({
+      message: message,
+      position: position,
+      duration: 1000,
+      color: '#FFFFFF'
+    });
+
+    toast.present();
+  }
+
+
+
   // hideToast() {
 
   // }

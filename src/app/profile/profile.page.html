@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>    
+    <ion-title>ข้อมูลร้าน</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-background">
+  <ion-card style="background:#FFFFFF;">
+    <ion-card-content *ngIf="store">
+       <ion-list>
+        <ion-item> 
+          <ion-avatar slot="start">
+            <ion-img [src]="url+store.store_pic || 'assets/noimg.png'" ></ion-img> 
+          <!-- <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y"> -->
+          </ion-avatar>
+            <h2 slot="end"> ร้าน {{store.store_name}} </h2>
+        </ion-item>
+        <ion-item>
+          <b slot="start">พร้อมเพย์</b><h2 slot="end"> {{store.promptpay}} </h2>
+        </ion-item> 
+        <ion-item>
+          <b slot="start">ชื่อ</b><h2 slot="end" >  {{store.firstname}}</h2>
+        </ion-item> 
+        <ion-item>
+          <b slot="start">นามสกุล</b><h2 slot="end">{{store.lastname}}</h2>
+        </ion-item> 
+        <ion-item>
+          <b slot="start">เบอร์โทร:</b><h2 slot="end" >{{store.mobile_number}}</h2>
+        </ion-item> 
+        <ion-item>
+          <b slot="start">ประเภทร้านค้า</b><h2 slot="end" >{{store.store_type.store_type_th}}</h2>
+        </ion-item>
+        
+      </ion-list><br>
+        <ion-button type="submit" expand="full" color="success" routerDirection="forward" routerLink="/profile/{{ store.id }}">
+           <ion-icon name="create"></ion-icon>
+           &nbsp;ปรับปรุงข้อมูล
+        </ion-button>
+    </ion-card-content>
+  </ion-card>  
+</ion-content>  

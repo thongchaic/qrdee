@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>    
+    <ion-title>ข้อมูลส่งสินค้า</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+ <div #mapElement id="map" style="width: 100%;height: 60%;"></div>
+<!--  <ion-list-header >
+      <ion-label>สินค้า</ion-label>
+    </ion-list-header> -->
+    <ion-item-sliding *ngFor="let searchcoed of searchcoeds">
+
+    <ion-list>
+    <ion-item>
+      <b slot="start">
+        <!-- <h6 slot="end"> {{code_randoms}} </h6> -->
+       <ion-label><b><h6>
+       <ion-icon name="person"></ion-icon>
+       ชื่อลูกค้า</h6></b></ion-label>
+      </b>
+      <h6 slot="end">คุณ {{searchcoed.firstname}} {{searchcoed.lastname}} </h6>
+       <!-- <h6 slot="end">   </h6> -->
+    </ion-item> 
+    <ion-item >
+      <b slot="start">
+        <ion-label ><b><h6>
+        <ion-icon name="call"></ion-icon>
+        เบอร์โทร</h6></b></ion-label>
+      </b>
+      <h6 slot="end"> {{searchcoed.mobile_number}}</h6>
+      
+    </ion-item>
+    </ion-list> <br>
+      <ion-button type="submit" expand="full" (click)="submit()" color="success">
+        <ion-icon name="cloud-download"></ion-icon>
+        &nbsp;บันทึกการส่งสินค้า
+      </ion-button>
+    </ion-item-sliding>
+</ion-content>

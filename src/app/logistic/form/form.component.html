@@ -1,0 +1,109 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>    
+    <ion-title>แก้ไขข้อมูล</ion-title>
+     <ion-buttons slot="end">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  class="app-background">
+  <form [formGroup]="logisticForm">
+  <ion-card style="background:#FFFFFF;">
+    <!-- <ion-card-header>
+      <ion-card-title>{{ title }}</ion-card-title>
+    </ion-card-header> -->
+
+    <ion-card-content>
+      <ion-item-group>
+        <ion-item lines="none">
+          <ion-img [src]="imageSrc || '/assets/noimg.png'"></ion-img>
+        </ion-item>
+        <ion-grid>
+          <ion-row justify-content-center>
+            <ion-button size="small" color="primary" (click)="takePhoto()">ถ่ายรูปสินค้า</ion-button>
+            <ion-button size="small" color="secondary" (click)="selectPhoto()">เลือกจากอัลบั้ม</ion-button>
+          </ion-row>
+        </ion-grid>        
+      </ion-item-group>
+      <ion-item>
+        <b slot="start">
+          ชื่อ 
+        </b>
+        <ion-input  type="text" formControlName="firstname"></ion-input>
+      </ion-item> 
+      <ion-item>
+        <b slot="start">
+          นามสกุล 
+        </b>
+        <ion-input  type="text" formControlName="lastname"></ion-input>
+      </ion-item> 
+     <!--  <ion-item>
+        <b slot="start">
+          อายุ  
+        </b>
+        <ion-input  type="text" formControlName="age"></ion-input>
+      </ion-item> --> 
+       <ion-item>
+        <b slot="start">
+          เบอร์โทรศัทพ์  
+        </b>
+        <ion-input  type="text" formControlName="mobile_number"></ion-input>
+      </ion-item> 
+     <!--  <ion-item>
+        <b slot="start">
+          ที่อยู่  
+        </b>
+        <ion-input  type="text" formControlName="address"></ion-input>
+      </ion-item> -->
+      <ion-item>
+        <ion-label position="floating"><b slot="start">ประเภทรถขนส่ง</b></ion-label>
+        <ion-select formControlName="delivery_type_id">
+          <ion-select-option
+            *ngFor="let delivery_type of delivery_types"
+            [value]="delivery_type.id"
+            [selected]="delivery_type.id === logisticForm.get('delivery_type_id').value">
+            {{ delivery_type.delivery_type_th }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <b slot="start">
+          เลขทะเบียนรถ  
+        </b>
+        <ion-input  type="text" formControlName="car_number"></ion-input>
+      </ion-item>
+       <ion-item>
+        <ion-label position="floating"><b slot="start">เลือกสถานะส่งสินค้า</b></ion-label>
+          <ion-select formControlName="delivery_status_id">
+            <ion-select-option 
+                *ngFor="let delivery_statu of delivery_status" 
+                [value]="delivery_statu.id" 
+                [selected]="delivery_statu.id === logisticForm.get('delivery_status_id').value">
+                {{ delivery_statu.delivery_status_th }}
+            </ion-select-option>
+          </ion-select>
+      </ion-item>
+
+     <!--  <ion-item>
+        <b slot="start">
+          latitude 
+        </b>
+        <ion-input  type="text" formControlName="latitude"></ion-input>
+      </ion-item>
+      <ion-item>
+        <b slot="start">
+          longitude 
+        </b>
+        <ion-input  type="text" formControlName="longitude"></ion-input>
+      </ion-item> -->
+    </ion-card-content>
+    <ion-button type="submit" expand="full" color="success" (click)="submit()">
+     <ion-icon name="logo-buffer"></ion-icon>
+    &nbsp;บันทึก</ion-button>
+  </ion-card>  
+</form>
+</ion-content>

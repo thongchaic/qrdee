@@ -1,56 +1,48 @@
 import { Injectable } from '@angular/core';
+import { Storage } from '@ionic/storage';
+import { IonicStorageModule } from '@ionic/storage';
 import { 
   HttpInterceptor, 
   HttpRequest, 
   HttpResponse, 
   HttpHandler, 
   HttpEvent, 
-  HttpErrorResponse 
+  HttpErrorResponse ,
 } from '@angular/common/http';
 
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 
-@Injectable()
+@Injectable() 
 export class HttpClientInterceptor implements HttpInterceptor {
+  access_token:string =''; 
+ 
+  constructor(
+  private storage: Storage
+  ) {
+      localStorage.getItem('access_token');
+      console.log( localStorage.getItem('access_token'));
+      }
 
-  intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    const token: string = 'Bearer djk0eXRPMDF5MVl2NWlHSXdRUEF5OGJTMFpvUXdUR1c1Vnl5UWtoQVRTWUx4eDBLaE9LQTQzRWVtbjI4cUVvQzFGTEt6YkFvMGV1NDRDbGY0WENCRzdqQ3J2a0NtblJsOVVITjZmSG5Tb1VqS2NCQ2JPb2ltRmd6TXFucHFlNmk=';
-
-    if(token) {
+  intercept(request: HttpRequest<any>, next: HttpHandler,): Observable<HttpEvent<any>> {   
+     // const token: string = 'Bearer YkVNRDBITDc2TTBFMDFzZldiT2xMa09DQ1BYYUQxMjFjZzVWR3poZ3JWTlVyR2lkNERqbnR6blRXdFFHaVp5SlR6blFVdFZjaTRqTDQ1UnhyMHRjeEs1VnVrdzM3cDFLSUw1bWZtd1J0d1ZPODV5V0hlb3FvZWQxSWJSaGowZEg=';
+      const token: string = 'Bearer ' +localStorage.getItem('access_token');
+     
+    if(token) {    
       request = request.clone({
         setHeaders: {
           'Authorization': token
-        }
+        } 
       });
     }
     
-    // if(!request.headers.has('Content-Type')) {
-    //   request = request.clone({
-    //     setHeaders: {
-    //       'Content-type': 'application/json'
-    //     }
-    //   });
-    // }
-
-    // request = request.clone({
-    //   headers: request.headers.set('Accept', 'application/json')
-    // });
-
     return next.handle(request).pipe(
       map((event: HttpEvent<any>) => {
-
-        // if(event instanceof HttpResponse) {
-        //   console.log('event-->>>', event);
-        // }
-
+        if(event instanceof HttpResponse) { 
+        } 
         return event;
       }),
-      // catchError((error: HttpErrorResponse) => {
-      //   if(error.status === 401) {
-          
-      //   }
-      // });
     );
   }
 }
+ 

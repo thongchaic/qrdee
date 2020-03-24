@@ -1,0 +1,7 @@
+{
+  "name": "qrdee",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

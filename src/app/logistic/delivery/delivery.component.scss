@@ -1,0 +1,28 @@
+.btn1 {
+	height: 150px;
+	--background: #33FFCC ; 
+	
+}
+
+.input {
+  --background:  #FFFFFF;
+  // border:3px solid #00BFFF;
+}
+
+.inputs {
+width: 200px;
+height: 200px;
+position: absolute;
+top: 60%;
+left: 50%;
+margin-top: -100px;
+margin-left: -100px;
+// box-shadow: 5px 5px 10px 10px rgba(50,50,50,.4);
+}
+
+.bg {
+	 --background: url('/assets/bg1.jpg') 0 0/100% 100% no-repeat;
+   // --background : linear-gradient(90deg, #33CCFF 50%, #CCFFFF 50%); 
+
+} 
+

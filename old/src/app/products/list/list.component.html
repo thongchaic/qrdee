@@ -1,0 +1,41 @@
+<ion-content>
+  <ion-searchbar placeholder="ชื่อ/รหัสสินค้า" color="primary" animated debounce="500" (ionChange)="search($event.target.value)"></ion-searchbar>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>สินค้า</ion-label>
+    </ion-list-header>
+    <ion-item-sliding *ngFor="let product of products">
+      <ion-item>
+        <ion-avatar slot="start" routerDirection="forward" routerLink="/products/{{ product.id }}">
+          <img [src]="url+product.thumbnail || '/assets/no-product-image.jpg'">
+        </ion-avatar>
+        <ion-label text-wrap>
+          <h5><ion-text color="dark">รหัส: {{ product.code_product ? product.code_product : '-' }}</ion-text></h5>
+          <h5><ion-text color="dark">ชื่อ: {{ product.product_th }}</ion-text></h5>
+        </ion-label>
+        <ion-badge slot="end" color="success" *ngIf="product.incart == 1">เพิ่มลงในตะกร้าแล้ว</ion-badge>
+        <ion-badge color="danger" slot="end" *ngIf="product.instock == 0 && product.allowAdd == 0">หมดสต๊อค</ion-badge>
+        <ion-button fill="clear" color="primary" slot="end" *ngIf="product.incart == 0 && product.allowAdd == 1" (click)="addToCart(product);">
+          <ion-icon slot="icon-only" name="basket"></ion-icon>
+        </ion-button>
+        
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="light">
+          <ion-button fill="clear" size="large" color="secondary" routerDirection="forward" routerLink="/products/{{ product.id }}/edit">
+            <ion-icon name="create"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" size="large" color="danger" (click)="deleteProduct(product.id);">
+            <ion-icon name="close"></ion-icon>
+          </ion-button>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+
+    <ion-infinite-scroll threshold="10%" (ionInfinite)="loadData($event.target)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ion-list>
+</ion-content>

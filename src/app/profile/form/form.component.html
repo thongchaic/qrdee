@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>    
+    <ion-title>แก้ไขข้อมูล</ion-title>
+     <ion-buttons slot="end">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-background">
+  <form [formGroup]="profileForm">
+    <ion-card style="background:#FFFFFF;">
+      <ion-card-content>
+      <ion-item-group>
+        <ion-item lines="none">
+          <ion-img [src]="imageSrc || '/assets/noimg.png'"></ion-img>
+        </ion-item>
+        <ion-grid>
+          <ion-row justify-content-center>
+            <ion-button size="small" color="primary" (click)="takePhoto()">ถ่ายรูปสินค้า</ion-button>
+            <ion-button size="small" color="secondary" (click)="selectPhoto()">เลือกจากอัลบั้ม</ion-button>
+          </ion-row>
+        </ion-grid>        
+      </ion-item-group>
+        <ion-item>
+          <b slot="start"> ร้าน</b>
+          <ion-input  type="text" formControlName="store_name"></ion-input>
+        </ion-item> 
+        <ion-item>
+          <b slot="start">พร้อมเพย์</b>
+          <ion-input  type="text" formControlName="promptpay"></ion-input>
+        </ion-item> 
+         <ion-item>
+          <b slot="start">ชื่อ</b>
+          <ion-input  type="text" formControlName="firstname"></ion-input>
+        </ion-item> 
+        <ion-item>
+          <b slot="start"> นามสกุล</b>
+          <ion-input  type="text" formControlName="lastname"></ion-input>
+        </ion-item>
+        <ion-item>
+          <b slot="start">เบอร์โทร</b>
+          <ion-input  type="text" formControlName="mobile_number"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating"><b slot="start">ประเภทร้าน</b></ion-label>
+          <ion-select formControlName="store_type_id">
+            <ion-select-option 
+              *ngFor="let store_type of store_types" 
+              [value]="store_type.id" 
+              [selected]="store_type.id === profileForm.get('store_type_id').value">
+              {{ store_type.store_type_th }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-card-content>
+      <ion-button type="submit" expand="full" color="success" (click)="submit()">
+       <ion-icon name="logo-buffer"></ion-icon>
+      &nbsp;บันทึก</ion-button>
+    </ion-card>  
+  </form>
+</ion-content>

@@ -1,0 +1,14 @@
+<ion-row>
+  <ion-col size="6">
+    <ion-button expand="block" [routerLink]="'/products'" color="success">
+      <ion-icon slot="end" name="add"></ion-icon>
+      เพิ่มสินค้า
+    </ion-button>
+  </ion-col>
+  <ion-col size="6">
+    <ion-button expand="block" color="secondary" (click)="letScan()">
+      <ion-icon slot="end" name="qr-scanner"></ion-icon>
+      สแกนสินค้า
+    </ion-button>
+  </ion-col>  
+</ion-row>

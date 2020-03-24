@@ -1,0 +1,19 @@
+<ion-content>
+  <ion-card *ngIf="customers">
+    <ion-img [src]="url+customers.thumbnail || 'assets/noimg.png'"></ion-img>
+    <ion-card-header>
+      <!-- <ion-card-subtitle>รหัสสินค้า {{ customer.code_product }}</ion-card-subtitle> -->
+      <ion-card-title>
+        {{ customers.product_th }}
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <h4><strong>ราคา: </strong>{{ customers.price }}</h4>
+      <h4><strong>รายละเอียด: </strong><br> {{ customers.details_th }}</h4>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-button expand="full" color="primary" (click)="store_customer(customers.store_id)" routerDirection="backward">กลับ</ion-button>
+</ion-footer>

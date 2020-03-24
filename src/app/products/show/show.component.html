@@ -1,6 +1,6 @@
 <ion-content>
   <ion-card *ngIf="product">
-    <ion-img [src]="url+product.thumbnail || '/assets/no-product-image.jpg'"></ion-img>
+    <ion-img [src]="url+product.thumbnail || 'assets/noimg.png'"></ion-img>
     <ion-card-header>
       <ion-card-subtitle>รหัสสินค้า {{ product.code_product ? product.code_product : '-'}}</ion-card-subtitle>
       <ion-card-title>

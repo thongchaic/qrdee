@@ -7,14 +7,14 @@ import { environment } from '../../../environments/environment';
 })
 export class QrService {
 
-  baseUrl = `${environment.api_url}/promptpayQR`;
+  baseUrl = `${environment.api_url}/promptpayQRs`;
 
   constructor(
     private http: HttpClient,
     // private barcodeScanner: BarcodeScanner
   ) { }
 
-  generatePromptPayQR(transaction) {
+  generatePromptPayQRs(transaction) {
     return this.http.post<any>(this.baseUrl, transaction);
   }
 

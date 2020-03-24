@@ -1,0 +1,26 @@
+.img_store{
+	width: 45px; height: 45px;
+}
+.app-background{
+	 --background: url('/assets/bg1.jpg') 0 0/100% 100% no-repeat;
+}
+.img_store_logistic{
+	width: 50px; height: 50px;
+}
+input#show, input#hide {
+    display:none;
+}
+
+div#content {
+    display:none;
+}
+input#show:checked ~ div#content {
+  display:block;
+}
+
+input#hide:checked ~ span#content {
+    display:none;
+}
+.app-background{
+	--background: url('/assets/bg1.jpg');
+}

@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>    
+    <ion-title>ออเดอร์สินค้า</ion-title>
+  </ion-toolbar>
+</ion-header>
+<div class="ion-text-center backgrounds height">
+    <p> <b>รายการสินค้าที่ต้องจัดส่ง</b></p>
+</div>
+
+<ion-content class="app-background">
+	<ion-card style="background:#FFFFFF;">
+       
+		<ion-grid>
+			  <ion-row class="ion-justify-content-between" style="background:#FFDAB9">
+			  	 <ion-col size="4">
+			      <b style="font-size: 14px;">
+			       รหัสสินค้า
+			      </b>
+			    </ion-col>
+			    <ion-col size="5">
+			      <b style="font-size: 14px;">
+			       ชื่อสินค้า
+			      </b>
+			    </ion-col>
+			    <ion-col size="3">
+			      <b style="font-size: 14px;">
+			       จำนวน
+			      </b>
+			    </ion-col>
+			  </ion-row>
+			</ion-grid>
+	    <div *ngFor="let product_order of product_orders">
+	    	  <!-- <b slot="start">{{ product_order.product_th }}</b><b slot="end" >{{ product_order.amount }}</b> -->
+			<ion-grid>
+			  <ion-row class="ion-justify-content-between">
+			  	 <ion-col size="4">
+			      <div>
+			      {{ product_order.code_product }}
+			      </div>
+			    </ion-col>
+			    <ion-col size="5">
+			      <div>
+			       {{ product_order.product_th }}
+			      </div>
+			    </ion-col>
+			    <ion-col size="2">
+			    <div>
+			      <ion-badge> 
+			      {{ product_order.amount }}
+			      </ion-badge>
+			    </div>
+			    </ion-col>
+			  </ion-row>
+			</ion-grid>
+				
+		        <!-- <ion-list>
+				  <ion-item>
+				    <p>{{ product_order.product_th }}</p>
+				    <button ion-button clear item-end>{{ product_order.amount }}</button>
+				  </ion-item>
+				</ion-list -->
+	       
+	    </div>
+  </ion-card>
+</ion-content>
+

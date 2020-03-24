@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>    
+    <ion-title>ขนส่ง</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content  class="bg">
+
+ <div #mapElement ></div>
+ <form [formGroup]="directionForm">
+   <ion-item class="inputs"> 
+        <ion-input type="text"  placeholder="ใส่รหัสส่งสินค้า" class="input"
+        (ionChange)="search($event.target.value)">
+        </ion-input> 
+ 
+
+  <ion-button type="submit"  color="success" (click)="search_code(code_randoms)">
+    <ion-icon name="arrow-dropright"></ion-icon>
+  </ion-button>
+
+
+  </ion-item>
+
+
+
+ <div *ngFor="let searchcode of searchcodes">
+      <ion-item>
+       <!--  <ion-avatar slot="start" routerDirection="forward" routerLink="/products/{{ product.id  }}">
+          <img [src]="url+product.thumbnail || '/assets/noimg.png'">
+        </ion-avatar> -->
+        <ion-label text-wrap>
+          
+          <h5><ion-text color="dark">รหัส: {{ searchcode.firstname  }}</ion-text></h5>
+        </ion-label>
+      </ion-item>
+ </div>
+
+
+
+
+ 
+
+  <br><br><br>
+</form>
+<!-- 
+ <div #mapElement style="width: 100%;height: 60%;"></div>
+  <form [formGroup]="directionForm" (ngSubmit)="calculateAndDisplayRoute(directionForm.value)">
+     <ion-item>
+      <ion-label position="floating" >ใส่รหัสส่งสินค้า</ion-label>
+      <ion-input formControlName="destination"></ion-input>
+      <br><br>
+    </ion-item><br><br><br>
+
+    <ion-button expand="full" type="submit" [disabled]="!directionForm.valid">Get Direction</ion-button>
+  </form>
+
+  <div #mapElement class="map"></div> -->
+   
+  <!--   <ion-item>
+      <ion-label position="floating">Destination</ion-label>
+      <ion-input formControlName="destination"></ion-input>
+    </ion-item> -->
+
+
+
+  <!-- <div  id="mapElement" style="width: 100%;height: 60%;"></div> -->
+   <!--  <ion-item>
+      <ion-label><b><h6>ที่อยู่ในการจัดส่ง</h6></b></ion-label>
+    </ion-item> -->
+    <!-- <ion-list>
+    <ion-item>
+      <b slot="start">
+          <ion-label><b><h6>สรุปยอดรวมทั้งสิ้น</h6></b></ion-label>
+      </b>
+      <h6 slot="end">1,200  บาท</h6>
+    </ion-item>
+    <ion-item>
+      <b slot="start">
+       <ion-label><b><h6>ค่าจัดส่ง</h6></b></ion-label>
+      </b>
+      <h6 slot="end">  45 บาท </h6>
+    </ion-item> 
+    <ion-item>
+      <ion-label><b><h6>ค่าจัดส่งระยะทางใกล้เคียง 5 กิโล ราคา 45 บ.  </h6></b></ion-label>
+    </ion-item> 
+    <ion-item>
+      <b slot="start">
+        <ion-label><b><h6>วันที่ 16/6/2562 </h6></b></ion-label>
+      </b>
+      <h6 slot="end">  เวลา 16:30 น.</h6>
+    </ion-item>
+    </ion-list> -->
+
+     <!--  <br><br><br><br><br><br><br> -->
+
+      <!-- <ion-button type="submit" expand="full" color="success">
+        <ion-icon name="logo-buffer"></ion-icon>
+        &nbsp;บันทึก
+      </ion-button> -->
+
+
+</ion-content>
+
+

@@ -1,5 +1,4 @@
-cordova.define("cordova-plugin-file.FileWriter", function(require, exports, module) {
-/*
+cordova.define("cordova-plugin-file.FileWriter", function(require, exports, module) { /*
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -22,6 +21,7 @@ cordova.define("cordova-plugin-file.FileWriter", function(require, exports, modu
 
 var exec = require('cordova/exec');
 var FileError = require('./FileError');
+var FileReader = require('./FileReader');
 var ProgressEvent = require('./ProgressEvent');
 
 /**

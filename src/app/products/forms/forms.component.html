@@ -1,0 +1,25 @@
+<ion-content class="bg">
+
+    <p> ตำแหน่ง</p>
+{{ latitude}}
+{{ longitude}}
+
+
+  <ion-grid >
+     
+      <ion-row>
+        <ion-col size="12" >
+           <div #mapElement ></div>
+          <div class="btn2" expand="block"  *ngFor="let store_distance of store_distancess;">
+              <ion-item (click)="store_product(store_distance.id)">
+                 <img slot="start" [src]="url+store_distance.store_pic || '/assets/noimg.png'" 
+                  class="img_store" >
+                  <p style="font-weight: bold; font-size: 13px;">
+                  {{store_distance.store_name}}<br> <ion-icon ios="ios-pin" md="md-pin"></ion-icon>ระยะทาง{{store_distance.distance}} กม.
+                </p>
+              </ion-item> 
+             </div> <br><br><br><br><br><br> <br> 
+        </ion-col> 
+      </ion-row>
+  </ion-grid> 
+</ion-content>

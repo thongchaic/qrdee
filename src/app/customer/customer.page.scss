@@ -1,0 +1,28 @@
+.btn1 {
+	height: 100px;
+	--background: #33FFCC ; 
+	
+}
+.btn2 {
+	height: 100px;
+	--background: #66CCFF ; 
+
+}
+.img_store{
+	width: 80px; height: 80px;
+}
+.bk {
+	width:100px;
+	height: 60px;
+	position: absolute;
+	top: 65%;
+	left:65%;
+	margin-top: -100px;
+	margin-left: -100px;
+	// box-shadow: 5px 5px 10px 10px rgba(50,50,50,.4);
+	}
+.bg {
+		--background: url('https://image.freepik.com/free-vector/city-background-design_1300-380.jpg');
+	  // --background : linear-gradient(90deg, #33CCFF 50%, #CCFFFF 50%); 
+   
+   } 

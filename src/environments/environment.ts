@@ -3,9 +3,10 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  profile : true,	
   production: false,
-  api_url: 'https://myapp4test.com/api/v1',
-  url: 'https://myapp4test.com'
+  api_url: 'https://qrdee.co/api/v1',
+  url: 'https://qrdee.co',
 };
 
 /*

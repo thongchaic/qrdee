@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>    
+    <ion-title>ข้อมูลผู้ขนส่ง</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-background">
+  <ion-card style="background:#FFFFFF;">
+    <ion-card-content *ngIf="delivery">
+       <!-- <ion-list> -->
+      <ion-item> <br>
+        <ion-avatar slot="start">
+          <img [src]="url+delivery.delivery_pic || '/assets/noimg.png'">
+        </ion-avatar>
+          <h2 slot="end">คุณ {{delivery.firstname}} {{delivery.lastname}}  </h2>
+      </ion-item>
+     <!--  <ion-item>
+        <b class="text" slot="start">
+          อายุ  
+        </b>
+          <h2 slot="end">  {{delivery.age}} ปี </h2> 
+      </ion-item>  -->
+      <ion-item>
+        <b class="text" slot="start">
+          เบอร์โทร: 
+        </b>
+          <h2 slot="end">  {{delivery.mobile_number}} </h2>
+      </ion-item> 
+     <!--  <ion-item>
+        <b class="text" slot="start">
+          ที่อยู่  
+        </b>
+          <h2 slot="end">  {{delivery.address}}</h2>
+      </ion-item>  -->
+            <ion-item>
+        <b  class="text" slot="start">
+          ประเภทรถ  
+        </b>
+          <h2 slot="end"> {{delivery.delivery_type.delivery_type_th}}</h2>
+      </ion-item> 
+      <ion-item>
+        <b class="text" slot="start">
+          เลขทะเบียนรถ  
+        </b>
+          <h2 slot="end"> {{delivery.car_number}}</h2>
+      </ion-item>
+       <ion-item>
+        <b slot="start" style="color: red; font-size: 16px;">
+          สถานะขนส่ง  
+        </b>
+          <h2 slot="end"> {{delivery.delivery_status.delivery_status_th}}</h2>
+      </ion-item> <br>
+    <!-- </ion-list> -->
+
+
+    <ion-button type="submit" expand="full" color="success" routerDirection="forward" routerLink="/logistic/history{{ delivery.id }}">
+        <ion-icon name="logo-buffer"></ion-icon>
+       &nbsp;ปรับปรุงข้อมูล
+    </ion-button>
+  </ion-card-content>
+  </ion-card>  
+</ion-content>
+
+

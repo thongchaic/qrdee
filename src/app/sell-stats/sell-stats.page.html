@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>    
+    <ion-title>สรุปการขาย</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="app-background"> 
+	 <ion-card *ngFor="let sellstats of sellstatss" style="background:#FFFFFF;">
+  <ion-item>
+    <ion-avatar slot="start">
+      <img src="https://coffeeprincesurat.files.wordpress.com/2009/01/logo_final4.jpg?w=300&h=300">
+    </ion-avatar>
+    <ion-label text-wrap>
+      <b>{{ sellstats.product_th}}</b><br>
+      ล่าสุด {{ sellstats.updated_at}}<br><br>
+      ขาย/บริการ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{ sellstats.amount}}</b> ชั้น/ครั้ง
+    </ion-label>
+  </ion-item>
+</ion-card>
+   <ion-infinite-scroll threshold="10%" (ionInfinite)="loadData($event.target)">
+      <ion-infinite-scroll-content
+        loadingSpinner="bubbles">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+
+  <!--  <ion-button (click)="toggleInfiniteScroll()" expand="block">
+    Toggle Infinite Scroll
+  </ion-button>
+  <ion-list></ion-list>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+    loadingSpinner="bubbles">
+  
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll> -->
+
+
+</ion-content>

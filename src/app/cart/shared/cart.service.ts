@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +12,17 @@ export class CartService {
 
   cart = new BehaviorSubject<[]>(localStorage.getItem('cart') ? this.getItem() : []);
 
-  constructor() { }
+  constructor(
+    private http: HttpClient
+    ) { }
+
+  getStoreMaps(store_id) {
+    return this.http.get<any>(`https://qrdee.co/api/v1/transaction_store_maps/${store_id}`);
+  }
+
+ getStorePromptpay(store_id) {
+    return this.http.get<any>(`https://qrdee.co/api/v1/store_promptpay/${store_id}`);
+  }
 
   getCart() {
     this.cart.next(this.getItem());

@@ -1,35 +1,40 @@
-<ion-content [formGroup]="productForm">
-  <ion-card>
+<ion-content [formGroup]="productForm" class="app-background">
+  <ion-card style="background:#FFFFFF;">
     <ion-card-header>
       <ion-card-title>{{ title }}</ion-card-title>
     </ion-card-header>
 
-    <ion-card-content>
-      <ion-item-group>
+    <ion-card-content >
+      <ion-item-group >
         <ion-item lines="none">
-          <ion-img [src]="imageSrc || '/assets/noimg.png'"></ion-img>
+          <!-- <ion-img [src]="imageData || '/assets/noimg.png'" *ngIf="imageData" ></ion-img> -->
+          <ion-img [src]="imageData || '/assets/noimg.png'" *ngIf="imageData"></ion-img>
         </ion-item>
         <ion-grid>
           <ion-row justify-content-center>
-            <ion-button size="small" color="primary" (click)="takePhoto()">ถ่ายรูปสินค้า</ion-button>
-            <ion-button size="small" color="secondary" (click)="selectPhoto()">เลือกจากอัลบั้ม</ion-button>
+            <ion-button size="small" color="primary" (click)="getPicture(1)">ถ่ายรูปสินค้า</ion-button>
+            <ion-button size="small" color="secondary" (click)="getPicture(0)">เลือกจากอัลบั้ม</ion-button>
           </ion-row>
-        </ion-grid>        
-      </ion-item-group>
-      
+        </ion-grid>  
+        <!-- <p *ngIf="useURI">
+          Your URI is {{ imageData }}
+        </p> -->
+       
+      </ion-item-group> 
+
       <ion-item>
         <ion-label position="floating">รหัสสินค้า</ion-label>
         <ion-input type="text" formControlName="code_product" (ionFocus)="letScan()" [value]="show_code_product"></ion-input>
-        <!-- <ion-button slot="end" size="small" color="success" *ngIf="scan" (click)="letScan()">สแกน</ion-button>         -->
+      <!-- <ion-button slot="end" size="small" color="success" *ngIf="scan" (click)="letScan()">สแกน</ion-button>         -->
       </ion-item>
 
       <ion-item>
         <ion-label position="floating">ประเภทสินค้า</ion-label>
-        <ion-select formControlName="product_category_id">
+        <ion-select formControlName="product_type_id">
           <ion-select-option 
-            *ngFor="let cat of product_category" 
+            *ngFor="let cat of product_types" 
             [value]="cat.id" 
-            [selected]="cat.id === productForm.get('product_category_id').value">
+            [selected]="cat.id === productForm.get('product_type_id').value">
             {{ cat.cat_th }}
           </ion-select-option>
         </ion-select>
@@ -68,6 +73,62 @@
       </ion-item>
       
     </ion-card-content>
-    <ion-button type="submit" expand="full" color="success" (click)="submit()">บันทึก</ion-button>
+    <ion-button type="submit" expand="full" color="success" (click)="submit()">
+     <ion-icon name="logo-buffer"></ion-icon>
+    &nbsp;บันทึก</ion-button>
   </ion-card>  
 </ion-content>
+
+
+
+
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Ionic 4 Camera
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="ion-padding">
+    <ion-grid>
+      <ion-row class="center">
+        <ion-col size-sm-6>
+          <ion-button size="small" (click)="getPicture(1)">Show Camera</ion-button>
+        </ion-col>
+        <ion-col size-sm-6>
+          <ion-button size="small" (click)="getPicture(0)">Show Album</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <ion-item lines="none">
+      <ion-label>Return image file URI</ion-label>
+      <ion-toggle energized [(ngModel)]="useURI"></ion-toggle>
+    </ion-item>
+
+    <ion-card>
+      <ion-card-content>
+        <img [src]="imageData" *ngIf="imageData"/>
+      </ion-card-content>
+      <ion-card-header>
+        <ion-card-title>
+          <div *ngIf="useURI">
+            Using URI
+          </div>
+          <div *ngIf="!useURI">
+            Using Base64
+          </div>
+          <p *ngIf="useURI">
+            Your URI is {{ imageData }}
+          </p>
+          <p *ngIf="!useURI">
+            Your Base64 image has {{ (imageData + '').length }} bytes
+          </p>
+        </ion-card-title>
+      </ion-card-header>
+    </ion-card>
+  </div>
+</ion-content> -->
+

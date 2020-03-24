@@ -1,0 +1,73 @@
+<ion-content [formGroup]="productForm">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ title }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item-group>
+        <ion-item lines="none">
+          <ion-img [src]="imageSrc || '/assets/noimg.png'"></ion-img>
+        </ion-item>
+        <ion-grid>
+          <ion-row justify-content-center>
+            <ion-button size="small" color="primary" (click)="takePhoto()">ถ่ายรูปสินค้า</ion-button>
+            <ion-button size="small" color="secondary" (click)="selectPhoto()">เลือกจากอัลบั้ม</ion-button>
+          </ion-row>
+        </ion-grid>        
+      </ion-item-group>
+      
+      <ion-item>
+        <ion-label position="floating">รหัสสินค้า</ion-label>
+        <ion-input type="text" formControlName="code_product" (ionFocus)="letScan()" [value]="show_code_product"></ion-input>
+        <!-- <ion-button slot="end" size="small" color="success" *ngIf="scan" (click)="letScan()">สแกน</ion-button>         -->
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">ประเภทสินค้า</ion-label>
+        <ion-select formControlName="product_category_id">
+          <ion-select-option 
+            *ngFor="let cat of product_category" 
+            [value]="cat.id" 
+            [selected]="cat.id === productForm.get('product_category_id').value">
+            {{ cat.cat_th }}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">ชื่อสินค้า</ion-label>
+        <ion-input type="text" formControlName="product_th"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">รายละเอียดสินค้า</ion-label>
+        <ion-textarea autofocus="true" formControlName="details_th"></ion-textarea>
+      </ion-item>
+
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating">ราคาขาย</ion-label>
+              <ion-input type="number" formControlName="price"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-label position="floating">ราคาต้นทุน</ion-label>
+              <ion-input type="number" formControlName="cost"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <ion-item>
+        <ion-label position="floating">จำนวนในสต๊อค</ion-label>
+        <ion-input type="number" formControlName="instock"></ion-input>
+      </ion-item>
+      
+    </ion-card-content>
+    <ion-button type="submit" expand="full" color="success" (click)="submit()">บันทึก</ion-button>
+  </ion-card>  
+</ion-content>

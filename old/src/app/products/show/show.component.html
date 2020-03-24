@@ -1,0 +1,25 @@
+<ion-content>
+  <ion-card *ngIf="product">
+    <ion-img [src]="url+product.thumbnail || '/assets/no-product-image.jpg'"></ion-img>
+    <ion-card-header>
+      <ion-card-subtitle>รหัสสินค้า {{ product.code_product ? product.code_product : '-'}}</ion-card-subtitle>
+      <ion-card-title>
+        {{ product.product_th }}
+        <!-- <ion-badge color="success" *ngIf="product.incart == 1">เพิ่มลงในตะกร้าแล้ว</ion-badge>
+        <ion-button size="small" fill="clear" color="primary" *ngIf="product.incart == 0 && product.allowAdd == 1" (click)="addToCart(product);">
+          <ion-icon slot="icon-only" name="basket"></ion-icon>
+        </ion-button> -->
+      </ion-card-title>
+    </ion-card-header>
+  
+    <ion-card-content>
+      <p><strong>ราคาขาย: </strong>{{ product.price }}</p>
+      <p><strong>ราคาต้นทุน: </strong>{{ product.cost }}</p>
+      <p><strong>จำนวนที่เหลืออยู่ในสต๊อค: </strong>{{ product.instock }}</p>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-button expand="full" color="primary" routerLink="/products" routerDirection="backward">กลับ</ion-button>
+</ion-footer>

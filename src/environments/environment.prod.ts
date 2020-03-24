@@ -1,5 +1,6 @@
 export const environment = {
+  profile : true,
   production: true,
-  api_url: 'https://myapp4test.com/api/v1',
-  url: 'https://myapp4test.com'
+  api_url: 'https://qrdee.co/api/v1',
+  url: 'https://qrdee.co'
 };

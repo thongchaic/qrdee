@@ -2,15 +2,22 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {
-    path: '',
-    redirectTo: 'cart',
-    pathMatch: 'full'
-  },
-  { path: 'home', loadChildren: './home/home.module#HomePageModule' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'logout', loadChildren: './logout/logout.module#LogoutPageModule' },
   { path: 'products', loadChildren: './products/products.module#ProductsPageModule' },
-  { path: 'cart', loadChildren: './cart/cart.module#CartPageModule' }
-
+  { path: 'cart', loadChildren: './cart/cart.module#CartPageModule' },
+  { path: 'customer', loadChildren: './customer/customer.module#CustomerPageModule' },
+  { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
+  { path: 'register-logistic', loadChildren: './register-logistic/register-logistic.module#RegisterLogisticPageModule' },
+  { path: 'register-customer', loadChildren: './register-customer/register-customer.module#RegisterCustomerPageModule' },
+  { path: 'logistic', loadChildren: './logistic/logistic.module#LogisticPageModule' },
+  { path: 'profile', loadChildren: './profile/profile.module#ProfilePageModule' },
+  { path: 'store-orders', loadChildren: './store-orders/store-orders.module#StoreOrdersPageModule' },
+  { path: 'store-logistic', loadChildren: './store-logistic/store-logistic.module#StoreLogisticPageModule' },
+  { path: 'sell-stats', loadChildren: './sell-stats/sell-stats.module#SellStatsPageModule' },
+  { path: 'stats', loadChildren: './stats/stats.module#StatsPageModule' },
 ];
 
 @NgModule({
@@ -19,4 +26,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

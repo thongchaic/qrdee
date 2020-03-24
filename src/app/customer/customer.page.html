@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>    
+    <ion-title>เลือกร้านค้า</ion-title>
+    <ion-buttons slot="end">
+      <!-- <ion-back-button></ion-back-button> -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="bg"> 
+
+  <!-- <ion-button class="bk" expand="full" color="success"  (click)="hide()" >
+    <ion-icon name="arrow-dropright"></ion-icon>
+    &nbsp;เลือกร้านค้า</ion-button>
+    <p> ตำแหน่ง</p>
+      {{ latitude}}   *ngIf="hideMe"
+      {{ longitude}} -->
+  <ion-grid >
+      <div #mapElement>   </div>
+      <ion-row>
+        <ion-col size="12"  >
+          <div class="btn2" *ngFor="let store_distances of store_distance;">
+              <ion-item (click)="store_product(store_distances.id)">
+                 <img slot="start" [src]="url+store_distances.store_pic || '/assets/noimg.png'" 
+                  class="img_store" >
+                  <p style="font-weight: bold; font-size: 13px;">
+                  {{store_distances.store_name}}<br> <ion-icon ios="ios-pin" md="md-pin"></ion-icon>ระยะทาง{{store_distances.distance}} กม.
+                </p>
+              </ion-item> 
+            </div> <br><br><br><br><br><br> <br> 
+        </ion-col> 
+      </ion-row>
+  </ion-grid> 
+
+
+
+
+  <!-- <ion-grid >
+    <div #mapElement ></div>
+    <ion-row>
+      <ion-col size="12">
+        <div class="btn2" expand="block"  *ngFor="let store_distances of store_distance;">
+            <ion-item (click)="store_product(store_distances.id)">
+               <img slot="start" [src]="url+store_distances.store_pic || '/assets/noimg.png'" 
+                class="img_store" >
+                <p style="font-weight: bold; font-size: 13px;">
+                {{store_distances.store_name}}<br> <ion-icon ios="ios-pin" md="md-pin"></ion-icon>ระยะทาง{{store_distances.distance}} กม.
+              </p>
+            </ion-item> 
+           </div> <br><br><br><br><br><br> <br> 
+      </ion-col> 
+    </ion-row>
+</ion-grid>  -->
+
+
+
+<!-- </ion-card> -->
+</ion-content>

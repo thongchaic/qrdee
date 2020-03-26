@@ -1,53 +1,71 @@
 <ion-content>
-  <ion-searchbar placeholder="ชื่อ/รหัสสินค้า" color="primary" animated debounce="500" (ionChange)="search($event.target.value)">
-  </ion-searchbar>
-  
+  <!-- <ion-searchbar placeholder="ชื่อ/รหัสสินค้า" color="primary" animated debounce="500" (ionChange)="search($event.target.value)">
+  </ion-searchbar> -->
+
   <ion-list>
     <ion-list-header >
       <ion-label>สินค้า</ion-label>
     </ion-list-header>
   <ion-list>
 
-  <!-- Sliding item with icon start options on end side -->
+
+
+
   <ion-item-sliding *ngFor="let product of products">
       <ion-item>
-        <!--  store -->
-          <ion-avatar slot="start" *ngIf="usertype == 1">
-            <a routerLink="/products/{{ product.id }}">
-              <img [src]="url+product.thumbnail || '/assets/noimg.png'">
-            </a>
-          </ion-avatar>
-      <!-- customer -->
-          <ion-avatar slot="start" *ngIf="usertype == 3" (click)="user_customer(product.id)">
-            <a routerLink="/products/{{ product.id }}">
-              <img [src]="url+product.thumbnail || '/assets/noimg.png'">
-            </a>
-          </ion-avatar>
+        <!-- <ion-avatar slot="start" *ngIf="usertype == 1">
+          <a routerLink="/products/{{ product.id }}">
+            <img [src]="url+product.thumbnail || '/assets/noimg.png'">
+          </a>
+        </ion-avatar> -->
+
+        <ion-avatar slot="start">
+          <img *ngIf="product.thumbnail" [src]="'https://qrdee.co/app/'+product.thumbnail">
+          <img *ngIf="!product.thumbnail" src="/assets/noimg.png">
+          <!-- <a routerLink="/products/{{ product.id }}">
+
+          </a> -->
+        </ion-avatar>
 
         <ion-label>
-
-          <h5><ion-text color="dark">รหัส: {{ product.code_product ? product.code_product : '-' }}</ion-text></h5>
-          <h5><ion-text color="dark">ชื่อ: {{ product.product_th }}</ion-text></h5>
+          <ion-text color="dark">{{ product.product_th }}</ion-text>
         </ion-label>
-        <ion-badge slot="end" color="success" *ngIf="product.incart == 1">เพิ่มลงในตะกร้าแล้ว</ion-badge>
-        <ion-badge color="danger" slot="end" *ngIf="product.instock == 0 && product.allowAdd == 0">หมดสต๊อค</ion-badge>
-        <ion-button fill="clear" color="primary" slot="end" *ngIf="product.incart == 0 && product.allowAdd == 1" (click)="addToCart(product);">
+        <ion-label>
+          <ion-text color="dark">{{ product.price }}฿</ion-text>
+        </ion-label>
+
+        <!-- <ion-button fill="clear" color="primary" slot="end" (click)="addToCart(product);">
           <ion-icon slot="icon-only" name="basket"></ion-icon>
-        </ion-button>
+        </ion-button> -->
+        <ion-button fill="clear" size="large" slot="end" color="secondary" routerLink="/products/{{ product.id }}/edit">
+           <ion-icon name="create"></ion-icon>
+         </ion-button>
+         <!-- <ion-button fill="clear" size="large" color="danger" (click)="deleteProduct(product.id);">
+           <ion-icon name="close"></ion-icon>
+         </ion-button> -->
 
       </ion-item>
 
-    <ion-item-options *ngIf="usertype == 1">
+    <ion-item-options>
       <ion-item-option color="light">
-         <ion-button fill="clear" size="large" color="secondary" routerDirection="forward" routerLink="/products/{{ product.id }}/edit">
+         <!-- <ion-button fill="clear" size="large" color="secondary" routerLink="/products/{{ product.id }}/edit">
             <ion-icon name="create"></ion-icon>
-          </ion-button>
+          </ion-button> -->
           <ion-button fill="clear" size="large" color="danger" (click)="deleteProduct(product.id);">
             <ion-icon name="close"></ion-icon>
           </ion-button>
         </ion-item-option>
     </ion-item-options>
   </ion-item-sliding>
+
+  <ion-item>
+    <ion-label slot="end">
+      <ion-text color="dark"> เพิ่มสินค้า </ion-text>
+    </ion-label>
+    <ion-button fill="clear" size="large" slot="end" color="primary" routerLink="/products/create">
+       <ion-icon name="md-add-circle"></ion-icon>
+     </ion-button>
+  </ion-item>
 
    <ion-infinite-scroll threshold="10%" (ionInfinite)="loadData($event.target)">
       <ion-infinite-scroll-content
@@ -57,36 +75,30 @@
 
 </ion-list>
 
-
-
-      <!-- <ion-item-options side="end" *ngIf="usertype == 1">
-        <ion-item-option color="light">
-          <ion-button fill="clear" size="large" color="secondary" routerDirection="forward" routerLink="/products/{{ product.id }}/edit">
-            <ion-icon name="create"></ion-icon>
-          </ion-button>
-          <ion-button fill="clear" size="large" color="danger" (click)="deleteProduct(product.id);">
-            <ion-icon name="close"></ion-icon>
-          </ion-button>
-        </ion-item-option>
-      </ion-item-options>
+    <!-- <ion-item-options side="end" *ngIf="usertype == 1">
+    <ion-item-option color="light">
+    <ion-button fill="clear" size="large" color="secondary" routerDirection="forward" routerLink="/products/{{ product.id }}/edit">
+    <ion-icon name="create"></ion-icon>
+    </ion-button>
+    <ion-button fill="clear" size="large" color="danger" (click)="deleteProduct(product.id);">
+    <ion-icon name="close"></ion-icon>
+    </ion-button>
+    </ion-item-option>
+    </ion-item-options>
     </ion-item-sliding>
-
     <ion-infinite-scroll threshold="10%" (ionInfinite)="loadData($event.target)">
-      <ion-infinite-scroll-content
-        loadingSpinner="bubbles">
-      </ion-infinite-scroll-content>
+    <ion-infinite-scroll-content
+    loadingSpinner="bubbles">
+    </ion-infinite-scroll-content>
     </ion-infinite-scroll> -->
-
-
-
 
 
 </ion-list>
 </ion-content>
 
 <ion-footer>
-  <ion-button  routerLink="/cart" type="submit" (click)="submit()" expand="full" color="success">
+  <!-- <ion-button  routerLink="/cart" type="submit" (click)="submit()" expand="full" color="success">
         <ion-icon ios="ios-cart" md="md-cart"></ion-icon>
     &nbsp;ตะกร้าสินค้า
-  </ion-button>
+  </ion-button> -->
 </ion-footer>

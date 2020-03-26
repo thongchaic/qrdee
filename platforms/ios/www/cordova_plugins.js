@@ -300,6 +300,14 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
       "clobbers": [
         "cordova.plugins.barcodeScanner"
       ]
+    },
+    {
+      "id": "mx.ferreyra.callnumber.CallNumber",
+      "file": "plugins/mx.ferreyra.callnumber/www/CallNumber.js",
+      "pluginId": "mx.ferreyra.callnumber",
+      "clobbers": [
+        "call"
+      ]
     }
   ];
   module.exports.metadata = {
@@ -313,6 +321,7 @@ cordova.define('cordova/plugin_list', function(require, exports, module) {
     "cordova-plugin-statusbar": "2.4.2",
     "cordova-plugin-whitelist": "1.3.3",
     "cordova-sqlite-storage": "3.4.0",
-    "phonegap-plugin-barcodescanner": "8.1.0"
+    "phonegap-plugin-barcodescanner": "8.1.0",
+    "mx.ferreyra.callnumber": "0.0.2"
   };
 });

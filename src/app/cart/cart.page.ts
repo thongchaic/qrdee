@@ -5,6 +5,7 @@ import { ToastService } from '../shared/services/toast.service';
 import { AlertService } from '../shared/services/alert.service';
 import { ModalController } from '@ionic/angular';
 import { QrmodalComponent } from './qrmodal/qrmodal.component';
+import { DvrmodalComponent } from './dvrmodal/dvrmodal.component';
 import { QrService } from '../shared/services/qr.service';
 import { ProductService } from '../products/shared/product.service';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -12,6 +13,11 @@ import { Router } from '@angular/router';
 import { ActivatedRoute,NavigationExtras  } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { BarcodeScanner, BarcodeScanResult, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
+// import { CallNumber } from '@ionic-native/call-number';
+import { CallNumber } from '@ionic-native/call-number/ngx';
+//import { CallNumber } from '@ionic-native/call-number';
+
+
 declare var google;
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 @Component({
@@ -22,7 +28,6 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 export class CartPage {
 
   @Output() scanChange = new EventEmitter;
-
 
   product_code:any= '';
   product_all: any;
@@ -55,8 +60,12 @@ export class CartPage {
   latitude_store:any;
   longitude_store:any;
 
-  products:any[] = [1,2,3];
+
+  products:any[] = [];
+  orders:any[] = [];
   store:any;
+  prompt_payload:any;
+
 
 
   @ViewChild('mapElement',{static:false}) mapNativeElement: ElementRef;
@@ -74,7 +83,8 @@ export class CartPage {
     private route: ActivatedRoute,
     private geolocation: Geolocation,
     private barcodeScanner: BarcodeScanner,
-    private builder: FormBuilder
+    private builder: FormBuilder,
+    private callNumber: CallNumber
   ) {
 
      // this.productService.getAll().subscribe(resp => {
@@ -103,10 +113,8 @@ export class CartPage {
   }
 
   ionViewWillEnter() {
-    this.getOrders();
-    this.getProducts();
-    // this.http.get<any>(`http://qrdee.co/api/v1/store`).subscribe(console.log);
-    // this.test = localStorage.getItem('test');
+     this.getOrders();
+     this.getProducts();
   }
 
   ngAfterViewInit(): void {
@@ -148,13 +156,12 @@ export class CartPage {
     //     }).catch((error) => {
     //       //alert('เกิดข้อผิดพลาดในการรับตำแหน่ง');
     // });
-
 }
+
 changeTab(tab){
   this.tab = tab;
   if(this.tab == 0){
     this.getOrders();
-    this.store_customers(this.store.id);
   }else{
     this.getProducts();
   }
@@ -162,123 +169,162 @@ changeTab(tab){
 
 getOrders(){
   this.cartService.getOrders(this.store.id).subscribe((data:any)=>{
-
+    this.orders = data;
   });
 }
-getProducts(){
 
+getProducts(){
+  this.cartService.getProducts(this.store.id).subscribe((data:any)=>{
+    this.products = data;
+  });
 }
+
 addToCart(product){
   this.cartService.addToCart(product);
-  this.toastService.showToast(`เพิ่ม xx ใส่ตะกร้าแล้ว`, 'top');
+  this.getCart();
 }
 
+getCart() {
+  this.cartService.getCart().subscribe(data => this.cart = data);
+  this.price = this.cartService.getPrice();
+  console.log(this.price);
+}
+
+addItem(product) {
+  this.cartService.addItem(product);
+  this.getCart();
+}
+
+removeFromCart(product) {
+  this.cartService.removeProduct(product);
+  this.getCart();
+}
+onKeyUp(event){
 
 
-  newTransaction() {
-    this.alertService.showAlert({
-      header: 'คุณต้องการชำระเงินด้วย QR Code ใช่หรือไม่',
-      sub_header: '',
-      message: '',
-      buttons: [
-        {
-          text: 'ยกเลิก',
-           handler: () => {
-              if(this.store_id){
-                  this.transactionService.newTransaction(this.cart, this.price, this.latitude, this.longitude, this.firstname, this.lastname,this.mobile_number,this.latitude_store,this.longitude_store, this.store_id,this.promptpay, this.verified = 0).subscribe(trn => {
-                    console.log(trn);
-                     this.toastService.showToast('ยกเลิกการซื้อสินค้าแล้ว', 'top');
-                  });
-              }else{
-                    this.transactionService.newTransactionStore(this.cart, this.price,this.verified = 0).subscribe(trn => {
-                    this.toastService.showToast('ยกเลิกการซื้อสินค้าแล้ว', 'top');
-                  });
-              }
-            },
+  this.cartService.clearCart();
+  this.getCart();
+  this.price = event.target.value;
+}
+makeClall(mnumber){
+  this.callNumber.callNumber(`${mnumber}`, true)
+    .then(res => {  })
+    .catch(err => { alert(JSON.stringify(err)); });
+}
+deleteOrder(member_id){
+  this.alertService.showAlert({
+    header: `ท่านต้องการลบคำสั่งซื้อนี้จริงหรือไม่?`,
+    sub_header: '',
+    message: '',
+    buttons: [
+      {
+        text: 'ยกเลิก',
+         handler: () => {
 
-          role: 'cancel',
-        },
-        {
-          text: 'ตกลง',
+           this.getOrders();
 
-          handler: () => {
-            if(this.store_id){
+          },
+        role: 'cancel',
+      },
+      {
+        text: 'ตกลง',
 
-               this.cartService.getStorePromptpay(this.store_id).subscribe(res => {
-                this.promptpay =  res.data[0].promptpay;
-                 console.log(res);
-                 console.log(this.promptpay);
-              this.cartService.getStoreMaps(this.store_id).subscribe(res => {
-                this.latitude_store = res.data[0].latitude;
-                this.longitude_store = res.data[0].longitude;
-                console.log('store_map',this.latitude_store,this.longitude_store );
+        handler: () => {
 
-              this.transactionService.getUser().subscribe(res => {
-                  this.firstname = res.data.firstname;
-                  this.lastname = res.data.lastname;
-                  this.mobile_number = res.data.mobile_number;
-                  this.store_id;
+            this.cartService.deleteOrder(this.store.id,member_id).subscribe((data:any)=>{
+              this.getOrders();
+            },err=>{
+              //alert(JSON.stringify(err));
+            });
 
-
-                  this.transactionService.newTransaction(this.cart, this.price, this.latitude, this.longitude, this.firstname, this.lastname,this.mobile_number,this.latitude_store,this.longitude_store, this.store_id,this.promptpay, this.verified = 1).subscribe(trn => {
-                console.log('user_map',this.latitude,this.longitude);
-                    this.qrService.generatePromptPayQRs(trn.data).subscribe(qr => {
-                       this.QRModal(qr, trn);
-                       // console.log(22);
-                       // console.log(qr);
-                    });
-
-                  });
-                 });
-               });
-              });
-            }else{
-               // this.cartService.getStorePromptpay(this.store_id).subscribe(res => {
-               //  this.promptpay =  res.data[0].promptpay;
-               //   console.log(res);
-               //   console.log(this.promptpay);
-              this.transactionService.newTransactionStore(this.cart, this.price,this.verified = 1).subscribe(trn => {
-               console.log(this.cart, this.price,this.verified);
-                  this.qrService.generatePromptPayQRs(trn.data).subscribe(qr => {
-                    this.QRModal(qr, trn);
-                     // console.log(33);
-                     // console.log(qr);
-                 });
-
-                  // });
-               });
-            }
           }
         }
       ]
     });
   }
-
-
-  getCart() {
-    this.cartService.getCart().subscribe(data => this.cart = data);
-    this.price = this.cartService.getPrice();
-    console.log(this.price);
+  async QRModal(price, promptpay, prompt_payload) {
+    const modal = await this.modalController.create({
+      component: QrmodalComponent,
+      componentProps: {
+        'price': price,
+        'promptpay': promptpay,
+        'prompt_payload': prompt_payload
+      }
+    });
+    modal.onDidDismiss()
+      .then(status => {
+        if(status.data == 1) {
+          this.transactionService.insertTransaction(this.products, this.prompt_payload, this.price, this.store.id).subscribe((data:any)=>{
+            this.cartService.clearCart();
+            this.getCart();
+          });
+        }else{
+          this.getCart();
+        }
+      });
+    return await modal.present();
+  }
+  delivery(order){
+    this.dvrModal(order);
+  }
+  async dvrModal(order) {
+    const modal = await this.modalController.create({
+      component: DvrmodalComponent,
+      componentProps: {
+        'order': order
+      }
+    });
+    modal.onDidDismiss().then(status => {
+      if(status.data == 1){
+        this.cartService.completeOrder(this.store.id,order.member_id).subscribe((data:any)=>{
+          this.getOrders();
+        });
+      }else{
+      }
+    });
+    return await modal.present();
   }
 
-  addItem(product) {
-    this.cartService.addItem(product);
-    this.toastService.showToast(`เพิ่ม ${product.product_th} 1 ชิ้น`, 'top')
-    this.getCart();
-  }
+  newTransaction() {
+    this.transactionService.genQR(this.store.promptpay, this.price).subscribe((data:any)=>{
+      this.prompt_payload = data.prompt_payload;
+      this.QRModal(data.price, data.promptpay, data.prompt_payload);
+    });
 
-  removeFromCart(product) {
-    this.cartService.removeProduct(product);
-    this.toastService.showToast(`ลบ ${product.product_th}`, 'top')
-    this.getCart();
+    // this.alertService.showAlert({
+    //   header: `สร้าง QR หมายเลข ${this.store.promptpay} จำนวน ${this.price} บาท?`,
+    //   sub_header: '',
+    //   message: '',
+    //   buttons: [
+    //     {
+    //       text: 'ยกเลิก',
+    //        handler: () => {
+    //           this.cartService.clearCart();
+    //           this.getCart();
+    //         },
+    //       role: 'cancel',
+    //     },
+    //     {
+    //       text: 'ตกลง',
+    //       handler: () => {
+    //
+    //         this.transactionService.genQR(this.store.promptpay, this.price).subscribe((data:any)=>{
+    //           this.prompt_payload = data.prompt_payload;
+    //           this.QRModal(data.price, data.promptpay, data.prompt_payload);
+    //         });
+    //
+    //       }
+    //     }
+    //   ]
+    // });
+
   }
 
 // test
   search(product_code) {
      this.productService.getAll().subscribe(resp => {
-           this.product_all = resp.products.data;
+        this.product_all = resp.products.data;
         console.log('product_all',this.product_all);
-
       });
 
       console.log("product_code",product_code);
@@ -363,27 +409,7 @@ getProduc() {
 //     })
 //   }
 
-  async QRModal(qr_data, trn_data) {
-    const modal = await this.modalController.create({
-      component: QrmodalComponent,
-      componentProps: {
-        'transaction': trn_data.data,
-        'qr': qr_data.data
-      }
-    });
 
-
-    modal.onDidDismiss()
-      .then(status => {
-        if(status.data == 1) {
-          this.cartService.clearCart();
-          this.getCart();
-          this.toastService.showToast(`ชำระเงินเรียบร้อยแล้ว`, 'top');
-        }
-      });
-
-    return await modal.present();
-  }
 
 
 
@@ -399,7 +425,5 @@ getProduc() {
         }
     };
         this.router.navigate(['products'], navigationExtras);
-    // console.log(id);
-        console.log(navigationExtras);
   }
 }

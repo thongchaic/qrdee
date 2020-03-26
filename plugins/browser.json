@@ -39,6 +39,9 @@
     },
     "phonegap-plugin-barcodescanner": {
       "PACKAGE_NAME": "io.ionic.qrdee-emarket"
+    },
+    "mx.ferreyra.callnumber": {
+      "PACKAGE_NAME": "io.ionic.qrdee-emarket"
     }
   },
   "dependent_plugins": {}

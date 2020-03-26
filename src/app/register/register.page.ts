@@ -28,8 +28,8 @@ export class RegisterPage{
    private router: Router,
    public registerService: RegisterStoreService,
    private geolocation: Geolocation,
-   private toastService: ToastService,
-  	) { }
+   private toastService: ToastService
+   ) { }
 
   ngAfterViewInit(): void {
     this.latitude = 14.8718084;
@@ -76,12 +76,16 @@ export class RegisterPage{
         alert("กรุณาระบุ ชื่อร้าน");
         return;
       }
+      //alert("Register");
 
       this.registerService.registerstore(this.password,this.promptpay,this.store_name,this.latitude,this.longitude,5).subscribe(trn => {
-        localStorage.setItem('store', JSON.stringify(trn));
-        this.router.navigateByUrl('/cart');
+
+          localStorage.setItem('store', JSON.stringify(trn));
+          this.router.navigateByUrl('/cart');
+        
+
       }, err=>{
-        alert("Unknown error!");
+        alert("Network error!");
       });
   }
 }

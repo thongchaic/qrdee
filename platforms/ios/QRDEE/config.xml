@@ -53,6 +53,9 @@
     <feature name="BarcodeScanner">
         <param name="ios-package" value="CDVBarcodeScanner" />
     </feature>
+    <feature name="CallNumber">
+        <param name="ios-package" value="CFCallNumber" />
+    </feature>
     <name>QRDEE</name>
     <description>QRDEE e-market</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
@@ -65,7 +68,7 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <allow-navigation href="http://192.168.6.104:8100" sessionid="d1bd71ae" />
-    <allow-navigation href="http://localhost:8100" sessionid="dbd076da" />
+    <allow-navigation href="http://localhost:8100" sessionid="510095f2" />
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
     <icon height="57" src="resources/ios/icon/icon.png" width="57" />

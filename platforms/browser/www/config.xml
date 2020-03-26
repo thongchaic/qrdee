@@ -11,6 +11,10 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <access launch-external="yes" origin="tel:*" />
+    <access launch-external="yes" origin="mailto:*" />
+    <allow-navigation href="http://192.168.6.104:8100" sessionid="d1bd71ae" />
+    <allow-navigation href="http://localhost:8100" sessionid="4b7c6299" />
     <preference name="ScrollEnabled" value="false" />
     <preference name="android-minSdkVersion" value="19" />
     <preference name="BackupWebStorage" value="none" />

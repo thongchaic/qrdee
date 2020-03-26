@@ -31,6 +31,13 @@ getProfile() {
     // console.log('https://qrdee.co/api/v1/stores');
   }
 
+  updateProfile(data, store_id) {
+    console.log(data);
+    console.log(store_id);
+    return this.http.put<any>(`https://qrdee.co/api/v2/store/${store_id}`, data);
+  }
+
+
 
 get(id) {
     return this.http.get<any>(`${this.baseUrl}/${id}`);
@@ -40,10 +47,7 @@ getStoreTypes() {
     return this.http.get(`https://qrdee.co/api/v1/ref?type=store_types`);
   }
 
-updateProfile(data, id) {
-  console.log(data)
-    return this.http.post<any>(`https://qrdee.co/api/v1/update_store/${id}`, this.createFormData(data));
-  }
+
 
 createFormData(data): FormData {
     const fd = new FormData();
@@ -58,7 +62,7 @@ createFormData(data): FormData {
     // fd.append('latitude', data.latitude);
     // fd.append('longitude', data.longitude);
     fd.append('store_type_id', data.store_type_id);
-   
+
     return fd;
   }
 

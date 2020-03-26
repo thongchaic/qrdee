@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
-    </ion-buttons>    
+    </ion-buttons>
     <ion-title>ชำระเงินด้วยQR</ion-title>
     <ion-buttons slot="end">
       <ion-back-button></ion-back-button>
@@ -11,65 +11,34 @@
 </ion-header>
 
 <ion-content class="app-background">
-  <div #mapElement ></div>
+
   <ion-card style="background:#FFFFFF;">
-    <qrcode [qrdata]="qr.promptpay" [size]="256" [level]="'M'"></qrcode>
+    <qrcode [qrdata]="prompt_payload" [size]="256" [level]="'M'"></qrcode>
     <ion-card-content>
-      <ion-list>
-          <ion-label><h2><b>รายการสินค้า</b></h2></ion-label>
-        <ion-item *ngFor="let item of qr.items">
-           <div slot="start">
-          <h3> {{ item.product_th }}</h3>
-        </div>
-        <div slot="end">
-          <ion-badge> 
-          <h3>{{ item.price | number}}$</h3>
-        </ion-badge> 
-        </div>
-        </ion-item> 
-      </ion-list>
-      <ion-item-divider>
-        <div slot="start">
-          <h3>ราคารวม</h3>
-        </div>
-        <div slot="end">
-          <ion-badge color="danger">
-          <h3>{{ qr.price | number }}$</h3>
-        </ion-badge>
-        </div>
-      </ion-item-divider>
 
-      <!--  <ion-item-divider>
-        <div slot="start">
-          <h3>{{latitude }}</h3>
-        </div>
-        <div slot="end">
-          <h2>{{longitude }}</h2>
-        </div>
-      </ion-item-divider> -->
-
+    <ion-row>
+      <ion-col size="12">
+        ราคารวม
+        <ion-badge color="danger">
+        <h2>{{ price | number }}</h2>
+      </ion-badge> บาท
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="6">
+        <ion-button expand="full" shape="round" color="success" (click)="forceDissmiss(1)">สำเร็จ</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="full" shape="round" color="primary"  (click)="forceDissmiss(0)">ยกเลิก</ion-button>
+      </ion-col>
+    </ion-row>
     </ion-card-content>
   </ion-card>
 
-<!-- <form [formGroup]="profileForm">
-        <ion-item>
-          <ion-input  type="text" formControlName="latitude">ferfref</ion-input>
-            <ion-input  type="text" formControlName="longitude">fefr</ion-input>
-        </ion-item> 
-      
-  </form>
- -->
 
 
 </ion-content>
 
 <ion-footer>
-  <ion-row>
-    <ion-col size="12">
-      <ion-button expand="full" color="primary" type="submit"  (click)="verifyTransaction(id)">เสร็จสิ้น</ion-button>
-    </ion-col>
-<!--     <ion-col size="6">
-      <ion-button expand="full" color="danger"  (click)="closeModal(0)">ยกเลิก</ion-button>
-    </ion-col> -->
-  </ion-row>  
+
 </ion-footer>

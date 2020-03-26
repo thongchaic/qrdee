@@ -9,20 +9,48 @@
 
 <ion-content *ngIf="tab == 0">
 
+  <ion-list>
 
-
+    <ion-list-header >
+      <ion-label>รายการคำสั่งซื้อ (รวมค่าขนส่ง)</ion-label>
+    </ion-list-header>
+    <ion-item-sliding *ngFor="let order of orders">
+      <ion-item>
+        <ion-label>
+          <h5><ion-text color="dark">{{order.member.firstname}} {{order.member.lastname }} </ion-text> <ion-badge color="danger"> {{ order.price }} </ion-badge> <ion-text color="dark">  บาท </ion-text> </h5>
+        </ion-label>
+        <ion-button fill="clear" color="danger" slot="end" (click)="deleteOrder(order.member.id);">
+          <ion-icon slot="icon-only" name="ios-trash"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" color="primary" slot="end" (click)="makeClall(order.member.mobile_number);">
+          <ion-icon slot="icon-only" name="ios-call"></ion-icon>
+        </ion-button>
+        <ion-button fill="clear" color="primary" slot="end" (click)="delivery(order);">
+          <ion-icon slot="icon-only" name="md-bicycle"></ion-icon>
+        </ion-button>
+      </ion-item>
+      <ion-item *ngFor="let item of order.orders">
+        <ion-avatar slot="start">
+            <img *ngIf="item.product.thumbnail" [src]="'https://qrdee.co/app/'+item.product.thumbnail">
+            <img *ngIf="!item.product.thumbnail" src="/assets/noimg.png">
+        </ion-avatar>
+        <ion-label>
+          <h5><ion-text color="dark">{{item.product.product_th}} : {{item.product.price}} บาท x {{ item.qty }} ชิ้น</ion-text></h5>
+        </ion-label>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>
 
 <ion-content *ngIf="tab == 1">
   <!-- <ion-searchbar placeholder="ชื่อ/รหัสสินค้า" color="primary" animated debounce="500" (ionChange)="search($event.target.value)">
   </ion-searchbar> -->
-
   <ion-item-divider style="background:#f2f2f2;">
     <div slot="start">
       <h3>จำนวนเงิน</h3>
     </div>
     <div slot="end">
-      <ion-input style="text-align: right;font-size: 20px" type="number" [(ngModel)]="price" clearInput></ion-input>
+      <ion-input style="text-align: right;font-size: 20px" type="number" [(ngModel)]="price" (keyup)="onKeyUp($event)" clearInput></ion-input>
     </div>
   </ion-item-divider>
 
@@ -41,22 +69,31 @@
     <ion-item-sliding *ngFor="let product of products">
       <ion-item>
         <ion-avatar slot="start">
-            <img src="/assets/noimg.png">
+          <img *ngIf="product.thumbnail" [src]="'https://qrdee.co/app/'+product.thumbnail">
+          <img *ngIf="!product.thumbnail" src="/assets/noimg.png">
         </ion-avatar>
         <ion-label>
-          <h5><ion-text color="dark">ชื่อ</ion-text></h5>
+          <h5><ion-text color="dark">{{ product.product_th }} </ion-text> <ion-badge color="danger"> {{ product.price }} </ion-badge> <ion-text color="dark">  บาท </ion-text> </h5>
         </ion-label>
-        <div slot="end">
-        <h5><ion-text color="dark">ชื่อ</ion-text></h5>
-        <ion-button fill="clear" color="primary" (click)="addToCart(product);">
 
+        <ion-button fill="clear" color="primary" slot="end" (click)="addToCart(product);">
           <ion-icon slot="icon-only" name="basket"></ion-icon>
         </ion-button>
-        </div>
+
+      </ion-item>
+    </ion-item-sliding>
+    <ion-item-sliding>
+      <ion-item>
+        <ion-button slot="end" size=6 (click)="newTransaction();" color="primary">
+          <ion-icon  name="add"></ion-icon>
+          สร้าง QR
+        </ion-button>
       </ion-item>
     </ion-item-sliding>
 
   </ion-list>
+
+
 
 </ion-content>
 

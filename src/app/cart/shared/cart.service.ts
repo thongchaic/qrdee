@@ -19,6 +19,19 @@ export class CartService {
   getOrders(store_id){
     return this.http.get<any>(`https://qrdee.co/api/v2/orders/${store_id}`);
   }
+  deleteOrder(store_id,member_id){
+    return this.http.delete<any>(`https://qrdee.co/api/v2/orders/${store_id}/${member_id}`);
+  }
+  getProducts(store_id){
+    //alert(`https://qrdee.co/api/v2/products/${store_id}`);
+    return this.http.get<any>(`https://qrdee.co/api/v2/products/${store_id}`);
+  }
+  completeOrder(store_id,member_id){
+    const body = {
+      member_id:member_id
+    }
+    return this.http.put<any>(`https://qrdee.co/api/v2/orders/${store_id}`,body);
+  }
 
   getStoreMaps(store_id) {
     return this.http.get<any>(`https://qrdee.co/api/v1/transaction_store_maps/${store_id}`);
@@ -54,7 +67,6 @@ export class CartService {
 
     product.incart = 1;
     product.qty = 1;
-    product.instock -= 1;
 
     cartArr.push(product);
 

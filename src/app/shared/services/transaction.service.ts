@@ -16,18 +16,37 @@ export class TransactionService {
   get(id) {
     return this.http.get<any>(`${this.baseUrl}/${id}`);
   }
+////////////////// v2 ///////////////////
+  genQR(promptpay, price){
+    return this.http.get<any>(`https://qrdee.co/api/v2/qr?promptpay=${promptpay}&price=${price}`);
+  }
 
+  insertTransaction(products, prompt_payload, price, store_id){
+     const body = {
+       price: price,
+       prompt_payload:prompt_payload,
+       products: products
+     }
+     return this.http.post<any>(`https://qrdee.co/api/v2/trnqr/${store_id}`,body);
+   }
+
+   getOrders(store_id){
+      return this.http.get<any>(`https://qrdee.co/api/v2/orders/${store_id}`);
+   }
+   
+
+////////////////// v1 ///////////////////
   // latitude,longitude
 
   orderProduct() {
      console.log(`https://qrdee.co/api/v1/order`);
     return this.http.get<any>(`https://qrdee.co/api/v1/order`);
-    
+
   }
  orderProducts() {
      console.log(`https://qrdee.co/api/v1/orders`);
     return this.http.get<any>(`https://qrdee.co/api/v1/orders`);
-    
+
   }
 
 
@@ -49,9 +68,9 @@ getUser() {
       longitude: longitude,
       firstname: firstname,
       lastname: lastname,
-      mobile_number: mobile_number, 
-      latitude_store: latitude_store, 
-      longitude_store: longitude_store, 
+      mobile_number: mobile_number,
+      latitude_store: latitude_store,
+      longitude_store: longitude_store,
       store_id: store_id,
       promptpay:promptpay,
       verified:verified,
@@ -68,13 +87,12 @@ getUser() {
       verified:verified,
     }
     console.log(bodystore);
-
     return this.http.post<any>(`https://qrdee.co/api/v1/new_transactionstore`,bodystore);
   }
 
 
  getverifiedcart(id) {
-   
+
 
     return this.http.get<any>(`https://qrdee.co/api/v1/verified_transactionstore/${id}`);
   }
@@ -96,7 +114,7 @@ newTransactionOrder(firstname, lastname,mobile_number,store_id,code_randoms) {
     const bodystorder = {
       firstname: firstname,
       lastname: lastname,
-      mobile_number: mobile_number, 
+      mobile_number: mobile_number,
       store_id: store_id,
       code_randoms:code_randoms,
     }
@@ -115,7 +133,7 @@ verifyTransactions(transaction) {
     // console.log(transaction);
     return this.http.post<any>(`${this.baseUrl}/verify_transactions`, transaction);
   }
- 
+
 
 // postUser(firstname,lastname) {
 //     const name = {

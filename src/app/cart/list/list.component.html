@@ -6,11 +6,12 @@
   <ng-container *ngFor="let product of cart">
     <ion-item *ngIf="product.qty != 0">
       <ion-avatar slot="start">
-        <img [src]="url+product.thumbnail || '/assets/no-product-image.jpg'">
+        <img *ngIf="product.thumbnail" [src]="'https://qrdee.co/app/'+product.thumbnail">
+        <img *ngIf="!product.thumbnail" src="/assets/noimg.png">
       </ion-avatar>
       {{ product.product_th }}&nbsp;
-      <ion-badge color="danger" *ngIf="product.instock == 0">หมดสต๊อค</ion-badge>
-      <ion-badge color="primary" slot="end" *ngIf="product.qty > 0">{{ product.qty }}</ion-badge>
+      <!-- <ion-badge color="danger" *ngIf="product.instock == 0">หมดสต๊อค</ion-badge> -->
+      <ion-badge color="primary" slot="end">{{ product.qty }}</ion-badge>
       <ion-button slot="end" size="large" fill="clear" color="success" [disabled]="product.instock == 0" (click)="addItem(product)">
         <ion-icon name="add"></ion-icon>
       </ion-button>

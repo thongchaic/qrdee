@@ -23,7 +23,7 @@ const routes: Routes = [
     path: '',
     component: ProductsPage,
     children: [
-     {
+      {
         path: '',
         component: ListComponent,
         data: { title: 'รายการสินค้า' }
@@ -31,30 +31,28 @@ const routes: Routes = [
       {
         path: 'imgs',
         component: FormsComponent,
-         data: { title: 'เพิ่มรูป', formType: 'IMGS' }
+        data: { title: 'เพิ่มรูป', formType: 'IMGS' }
       },
       {
         path: 'create',
         component: FormComponent,
         data: { title: 'นำเข้าสินค้า', formType: 'CREATE' }
-      },    
+      },
       {
         path: ':id/edit',
         component: FormComponent,
         data: { title: 'แก้ไขสินค้า', formType: 'EDIT' }
       },
-     {
+      {
         path: ':id',
         component: ShowComponent,
         data: { title: 'รายละเอียดสินค้า' }
       },
-       {
+      {
         path: 'show/customer',
         component: ShowCustomerComponent,
-         data: { title: 'ขนส่ง' }
-
-        },
-       
+        data: { title: 'ขนส่ง' }
+      }
     ]
   }
 ];

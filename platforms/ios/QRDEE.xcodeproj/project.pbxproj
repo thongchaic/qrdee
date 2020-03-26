@@ -41,6 +41,7 @@
 		AB73EF994A1A4B75BA94355B /* scannerOverlay.xib in Resources */ = {isa = PBXBuildFile; fileRef = D83FB15254434BB2A3149933 /* scannerOverlay.xib */; };
 		9DB74C8A205546A5A4CB4FE3 /* CDVBarcodeScanner.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B35127D143964338B03B6364 /* CDVBarcodeScanner.bundle */; };
 		94064A6B66E545C89634CB5A /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A87ABE55AF65427787380E4D /* AudioToolbox.framework */; };
+		5BA79B7786E842CB99679AB9 /* CFCallNumber.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D1CD8CAC29746ADB1619182 /* CFCallNumber.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +136,8 @@
 		D83FB15254434BB2A3149933 /* scannerOverlay.xib */ = {isa = PBXFileReference; name = "scannerOverlay.xib"; path = "scannerOverlay.xib"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = file.xib; explicitFileType = undefined; includeInIndex = 0; };
 		B35127D143964338B03B6364 /* CDVBarcodeScanner.bundle */ = {isa = PBXFileReference; name = "CDVBarcodeScanner.bundle"; path = "CDVBarcodeScanner.bundle"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.plug-in; explicitFileType = undefined; includeInIndex = 0; };
 		A87ABE55AF65427787380E4D /* AudioToolbox.framework */ = {isa = PBXFileReference; name = "AudioToolbox.framework"; path = "System/Library/Frameworks/AudioToolbox.framework"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = wrapper.framework; explicitFileType = undefined; includeInIndex = 0; };
+		3D1CD8CAC29746ADB1619182 /* CFCallNumber.m */ = {isa = PBXFileReference; name = "CFCallNumber.m"; path = "mx.ferreyra.callnumber/CFCallNumber.m"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; explicitFileType = undefined; includeInIndex = 0; };
+		9EB01114BA6F4B49A079E081 /* CFCallNumber.h */ = {isa = PBXFileReference; name = "CFCallNumber.h"; path = "mx.ferreyra.callnumber/CFCallNumber.h"; sourceTree = "<group>"; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -291,6 +294,8 @@
 				59E19E7A6BD74632A6A63DBC /* PSPDFThreadSafeMutableDictionary.h */,
 				AA3160ED6CE84AB7B2287C6E /* sqlite3.h */,
 				67ACC2A2B9E844C1B745977F /* CDVBarcodeScanner.mm */,
+				3D1CD8CAC29746ADB1619182 /* CFCallNumber.m */,
+				9EB01114BA6F4B49A079E081 /* CFCallNumber.h */,
 			);
 			name = Plugins;
 			path = "QRDEE/Plugins";
@@ -437,6 +442,7 @@
 				605E5F4C1ACA49C0B9521228 /* PSPDFThreadSafeMutableDictionary.m in Sources */,
 				B67AF051443E40FAAD873AD0 /* sqlite3.c in Resources */,
 				7265EB69B4934F92868D799D /* CDVBarcodeScanner.mm in Resources */,
+				5BA79B7786E842CB99679AB9 /* CFCallNumber.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,17 +9,16 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 export class LoginStoreService {
 
   baseUrl = `${ environment.api_url }`;
-  constructor(private http: HttpClient) 
+  constructor(private http: HttpClient)
   { }
 
 
-logintore(email,password){
-  const body = {
-  	  email:email,
-      password : password,
-    }
-    console.log(body);
-  return this.http.post<any>(`https://qrdee.co/api/v1/login`,body);
-}
+  logintore(promptpay,password){
+    const body = {
+    	  promptpay:promptpay,
+        password : password
+      }
+    return this.http.post<any>(`https://qrdee.co/api/v2/login`,body);
+  }
 
 }

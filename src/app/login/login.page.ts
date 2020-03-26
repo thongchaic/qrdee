@@ -17,7 +17,7 @@ export class LoginPage  {
 
    token:string ='';
    login:any = {};
-   email:string ='';
+   promptpay:string ='';
    password:string ='';
    // is_disabled:boolean = false;
 
@@ -37,29 +37,38 @@ export class LoginPage  {
   }
 
   loginForm() {
-    this.loginService.logintore(this.email,this.password).subscribe(trn => {
-      console.log(trn);
-      this.email = trn.data;
-      this.token = trn.access_token;
+    this.loginService.logintore(this.promptpay,this.password).subscribe(trn => {
 
-      // console.log("test",this.token);
-      // console.log('access_token ' + this.token);
-      localStorage.setItem('access_token', this.token);
-      localStorage.setItem('usertype', trn.usertype);
-      // console.log('usertype' + trn.usertype);
+      //alert(JSON.stringify(trn));
+      localStorage.setItem('store', JSON.stringify(trn));
+      if(trn.store_type_id == 5){
+        this.router.navigateByUrl('/cart');
+      }else if(trn.store_type_id == 4){
+         this.router.navigateByUrl('/logistic');
+      }
 
-      if(trn.usertype == 1){
-              this.router.navigateByUrl('/cart');
-       }
+      this.event.publish('store:changed',trn);
 
-       if(trn.usertype == 2){
-              this.router.navigateByUrl('/logistic');
-       }
-       if(trn.usertype == 3){
-              this.router.navigateByUrl('/customer');
-       }
-
-       this.event.publish('user:changed',trn.usertype);
+      // console.log(trn);
+      // this.email = trn.data;
+      // this.token = trn.access_token;
+      //
+      // // console.log("test",this.token);
+      // // console.log('access_token ' + this.token);
+      // localStorage.setItem('access_token', this.token);
+      // localStorage.setItem('usertype', trn.usertype);
+      // // console.log('usertype' + trn.usertype);
+      //
+      // if(trn.usertype == 1){
+      //         this.router.navigateByUrl('/cart');
+      //  }
+      //
+      //  if(trn.usertype == 2){
+      //         this.router.navigateByUrl('/logistic');
+      //  }
+      //  if(trn.usertype == 3){
+      //         this.router.navigateByUrl('/customer');
+      //  }
 
      });
 

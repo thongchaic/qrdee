@@ -18,6 +18,10 @@ const routes: Routes = [
   { path: 'store-logistic', loadChildren: './store-logistic/store-logistic.module#StoreLogisticPageModule' },
   { path: 'sell-stats', loadChildren: './sell-stats/sell-stats.module#SellStatsPageModule' },
   { path: 'stats', loadChildren: './stats/stats.module#StatsPageModule' },
+  {
+    path: 'delivery',
+    loadChildren: () => import('./delivery/delivery.module').then( m => m.DeliveryPageModule)
+  },
 ];
 
 @NgModule({

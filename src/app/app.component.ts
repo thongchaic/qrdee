@@ -14,21 +14,21 @@ export class AppComponent {
 
   store:any;
 
-  appPages = [
-    { title: 'หน้าแรก', url: '/cart', icon: 'home' },
-    { title: 'สินค้า', url: '/products', icon: 'cube' },
-    { title: 'นำเข้าสินค้า', url: '/products/create', icon: 'arrow-round-up' },
-    { title: 'เพิ่มรูป', url: '/products/froms', icon: 'arrow-round-up' },
-    { title: 'ข้อมูลร้าน', url: '/profile', icon: 'albums' },
-    { title: 'ออเดอร์สินค้า', url: '/store-orders', icon: 'cart' },
-    { title: 'เรียกคนส่งของ', url: '/store-logistic', icon: 'pin' },
-    { title: 'ขนส่งสินค้า', url: '/logistic', icon: 'pin' },
-    { title: 'สรุปการขาย', url: '/sell-stats', icon: 'albums' },
-    { title: 'เลือกร้านค้า', url: '/customer', icon: 'albums' },
-    { title: 'สถิติ', url: '/stats', icon: 'cart' },
-    { title: 'ล็อคอิน', url: '/login', icon: 'pin' },
-    { title: 'ออกจากระบบ', url: '/logout', icon: 'pin' },
-  ];
+  // appPages = [
+  //   { title: 'หน้าแรก', url: '/cart', icon: 'home' },
+  //   { title: 'สินค้า', url: '/products', icon: 'cube' },
+  //   { title: 'นำเข้าสินค้า', url: '/products/create', icon: 'arrow-round-up' },
+  //   { title: 'เพิ่มรูป', url: '/products/froms', icon: 'arrow-round-up' },
+  //   { title: 'ข้อมูลร้าน', url: '/profile', icon: 'albums' },
+  //   { title: 'ออเดอร์สินค้า', url: '/store-orders', icon: 'cart' },
+  //   { title: 'เรียกคนส่งของ', url: '/store-logistic', icon: 'pin' },
+  //   { title: 'ขนส่งสินค้า', url: '/logistic', icon: 'pin' },
+  //   { title: 'สรุปการขาย', url: '/sell-stats', icon: 'albums' },
+  //   { title: 'เลือกร้านค้า', url: '/customer', icon: 'albums' },
+  //   { title: 'สถิติ', url: '/stats', icon: 'cart' },
+  //   { title: 'ล็อคอิน', url: '/login', icon: 'pin' },
+  //   { title: 'ออกจากระบบ', url: '/logout', icon: 'pin' },
+  // ];
 
   constructor(
     private platform: Platform,
@@ -38,12 +38,16 @@ export class AppComponent {
     private router: Router,
   ) {
 
-    this.event.subscribe('store:changed',type=>{
-       this.store = type;
-
+    this.event.subscribe('store:changed',trn=>{
+       this.store = trn;
     });
+    try{
+      this.store = JSON.parse(localStorage.getItem('store'));
+    }catch(e){
+      localStorage.removeItem('store');
+      this.router.navigateByUrl('/login');
+    }
 
-    this.store = JSON.parse(localStorage.getItem('store'));
     //alert(JSON.stringify(this.store));
 
 

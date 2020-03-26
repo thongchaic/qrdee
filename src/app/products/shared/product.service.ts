@@ -24,34 +24,38 @@ export class ProductService {
     return this.http.get<any>(`${this.baseUrl}/${id}`);
   }
 
-
   getUser() {
     return this.http.get<any>(`https://qrdee.co/api/v1/users`);
+  }
+  getProduct(product_id){
+    return this.http.get<any>(`https://qrdee.co/api/v2/products?id=${product_id}`);
+  }
+  getProducts(store_id,limit=0,offset=0){
+    return this.http.get<any>(`https://qrdee.co/api/v2/products/${store_id}?limit=${limit}&offset=${offset}`);
   }
 
   getAllproduct(id){
   // console.log('https://qrdee.co/api/v1/transaction_code/${code_randoms}');
-  return this.http.get<any>(`https://qrdee.co/api/v1/allproduct/${id}`);
+    return this.http.get<any>(`https://qrdee.co/api/v1/allproduct/${id}`);
   }
 
-  createProduct(data) {
-    return this.http.post<any>(`${this.baseUrl}`, this.createFormData(data));
+  createProduct(data,store_id) {
+    return this.http.post<any>(`https://qrdee.co/api/v2/products/${store_id}`,data);
   }
 
   updateProduct(data, id) {
-    return this.http.post<any>(`${this.baseUrl}/update_product/${id}`, this.createFormData(data));
+    return this.http.put<any>(`https://qrdee.co/api/v2/products/${id}`, data );
   }
 
-  deleteProduct(id) {
-    return this.http.delete(`${this.baseUrl}/${id}`);
+  deleteProduct(product_id) {
+    return this.http.delete(`https://qrdee.co/api/v2/products/${product_id}`);
   }
 
   getByProductCode(product_code) {
     return this.http.get<any>(`${this.baseUrl}?t=product_code&code=${product_code}`);
   }
-
-  getProductCategory() {
-    return this.http.get(`https://qrdee.co/api/v1/ref?type=produtc_types`);
+  getProductTypes() {
+    return this.http.get(`https://qrdee.co/api/v2/refs?t=product_types`);
   }
 
   search(term, page: number) {
@@ -71,17 +75,13 @@ export class ProductService {
   }
 
   getProductStore_id(id){
-     // console.log(`https://qrdee.co/api/v1/store_id/${id}`); 
+     // console.log(`https://qrdee.co/api/v1/store_id/${id}`);
     return this.http.get<any>(`https://qrdee.co/api/v1/store_id/${id}`);
   }
 
-
-
-  
-
   getStoredistances(latitude,longitude) {
     console.log(`http://qrdee.co/api/v1/diss?latitude=${latitude}&longitude=${longitude}`);
-  return this.http.get(`http://qrdee.co/api/v1/diss?latitude=${latitude}&longitude=${longitude}`);
+    return this.http.get(`http://qrdee.co/api/v1/diss?latitude=${latitude}&longitude=${longitude}`);
   }
 
 
@@ -91,7 +91,7 @@ export class ProductService {
 
 
   // searchEntries(term, page) {
-  //   // let queryString = isNaN(term) ? `t=search_code&query=${term == '' ? true : term}&page=${page}` ? `?t=search&query=${term == '' ? true : term}&page=${page}`: 
+  //   // let queryString = isNaN(term) ? `t=search_code&query=${term == '' ? true : term}&page=${page}` ? `?t=search&query=${term == '' ? true : term}&page=${page}`:
   //   // console.log(isNaN(term));
   //   return this.http.get<any>(`${this.baseUrl}?t=search&query=${term == '' || term == 'null' ? true : term}&page=${page}`);
   // }
@@ -100,21 +100,18 @@ export class ProductService {
     const fd = new FormData();
     // if(data.image) fd.append('thumbnail', data.image);
     // if(data.thumbnail) fd.append('thumbnail', data.thumbnail);
-    if(data.imageData) fd.append('thumbnail', data.imageData);
-    fd.append('code_product', data.code_product);
+    // if(data.imageData) fd.append('thumbnail', data.imageData);
     fd.append('product_type_id', data.product_type_id);
     fd.append('product_th', data.product_th);
     fd.append('details_th', data.details_th);
     fd.append('price', data.price);
     fd.append('cost', data.cost);
-    fd.append('instock', data.instock);
 
     return fd;
   }
- 
- 
+
+
 
 
 
 }
- 

@@ -2,7 +2,10 @@ import { NgModule,NO_ERRORS_SCHEMA,CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
+
 import { QrmodalComponent } from './qrmodal/qrmodal.component';
+import { DvrmodalComponent } from './dvrmodal/dvrmodal.component';
+
 import { IonicModule } from '@ionic/angular';
 import { SharedModule } from '../shared/shared.module';
 import { CartPage } from './cart.page';
@@ -13,10 +16,7 @@ import { ListComponent } from './list/list.component';
 import { AddComponent } from './add/add.component';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx'
 import { QRCodeModule } from 'angularx-qrcode';
-
-// import { QRScanner } from '@ionic-native/qr-scanner/ngx';
-
-
+import { CallNumber } from '@ionic-native/call-number/ngx';
 const routes: Routes = [
   {
     path: '',
@@ -26,6 +26,10 @@ const routes: Routes = [
     path: 'qrmodal',
     component: QrmodalComponent
   },
+   {
+    path: 'dvrmodal',
+    component: DvrmodalComponent
+  }
 ];
 
 @NgModule({
@@ -44,6 +48,7 @@ const routes: Routes = [
     ListComponent,
     AddComponent,
     QrmodalComponent,
+    DvrmodalComponent
   ],
   entryComponents: [
     QrmodalComponent
@@ -52,6 +57,7 @@ const routes: Routes = [
     CartService,
     ProductService,
     BarcodeScanner,
+    CallNumber
   ],
    schemas: [
         CUSTOM_ELEMENTS_SCHEMA,

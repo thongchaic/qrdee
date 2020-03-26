@@ -8,7 +8,7 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserService {
-	
+
 baseUrl = `${ environment.api_url }/user`;
 
   constructor(
@@ -22,10 +22,10 @@ get(id) {
 getUser() {
     return this.http.get<any>(`${this.baseUrl}`);
   }
-getStoreDistance(latitude,longitude) {
+getStores(latitude,longitude) {
   console.log(`https://qrdee.co/api/v1/dis?latitude=${latitude}&longitude=${longitude}`);
-    return this.http.get<any>(`https://qrdee.co/api/v1/dis?latitude=${latitude}&longitude=${longitude}`);
-  }
+  return this.http.get<any>(`https://qrdee.co/api/v2/stores?latitude=${latitude}&longitude=${longitude}`);
+}
 
 updateUser(data,id) {
     return this.http.post<any>(`https://qrdee.co/api/v1/update_user/${id}`, this.createFormData(data));

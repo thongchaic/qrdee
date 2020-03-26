@@ -4,6 +4,7 @@ import { RegisterStoreService } from './shared/register-store.service';
 import { Router  } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ToastService } from '../shared/services/toast.service';
+import { ModalController,Events } from '@ionic/angular';
 
 declare var google;
 
@@ -28,7 +29,8 @@ export class RegisterPage{
    private router: Router,
    public registerService: RegisterStoreService,
    private geolocation: Geolocation,
-   private toastService: ToastService
+   private toastService: ToastService,
+   private event : Events,
    ) { }
 
   ngAfterViewInit(): void {
@@ -57,8 +59,8 @@ export class RegisterPage{
       position: latLng
     });
     marker.addListener('dragend', function() {
-      this.latitude = marker.getPosition().lat();
-      this.longitude = marker.getPosition().lng();
+      localStorage.setItem("regis_lat",marker.getPosition().lat());
+      localStorage.setItem("regis_lng",marker.getPosition().lng());
       this.map.setCenter(marker.getPosition());
     });
 
@@ -78,11 +80,27 @@ export class RegisterPage{
       }
       //alert("Register");
 
+      this.latitude = localStorage.getItem('regis_lat');
+      this.longitude = localStorage.getItem('regis_lng');
+
       this.registerService.registerstore(this.password,this.promptpay,this.store_name,this.latitude,this.longitude,5).subscribe(trn => {
 
+          localStorage.removeItem('regis_lat');
+          localStorage.removeItem('regis_lng');
           localStorage.setItem('store', JSON.stringify(trn));
+          this.event.publish('store:changed',trn);
+          const member = {
+            mobile_number:trn.mobile_number,
+            latitude:trn.latitude,
+            longitude:trn.longitude,
+            firstname:trn.firstname,
+            lastname:trn.lastname
+          }
+
+          localStorage.setItem('member', JSON.stringify(member));
+          console.log(member);
+
           this.router.navigateByUrl('/cart');
-        
 
       }, err=>{
         alert("Network error!");

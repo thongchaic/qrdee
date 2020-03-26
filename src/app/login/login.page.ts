@@ -40,7 +40,19 @@ export class LoginPage  {
     this.loginService.logintore(this.promptpay,this.password).subscribe(trn => {
 
       //alert(JSON.stringify(trn));
+      console.log(trn);
       localStorage.setItem('store', JSON.stringify(trn));
+      const member = {
+        mobile_number:trn.mobile_number,
+        latitude:trn.latitude,
+        longitude:trn.longitude,
+        firstname:trn.firstname,
+        lastname:trn.lastname
+      }
+
+      localStorage.setItem('member', JSON.stringify(member));
+      console.log(member);
+
       if(trn.store_type_id == 5){
         this.router.navigateByUrl('/cart');
       }else if(trn.store_type_id == 4){

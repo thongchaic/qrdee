@@ -153,7 +153,7 @@ submit() {
    });
 
  } else {
-
+   console.log(this.productForm.value);
    this.productService.updateProduct(this.productForm.value, this.route.snapshot.params['id']).subscribe(res => {
      //alert(JSON.stringify(res));
      //this.toastService.showToast('แก้ไขสินค้าเรียบร้อยแล้ว', 'top');

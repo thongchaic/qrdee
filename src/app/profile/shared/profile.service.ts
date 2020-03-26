@@ -32,12 +32,10 @@ getProfile() {
   }
 
   updateProfile(data, store_id) {
-    console.log(data);
-    console.log(store_id);
-    return this.http.put<any>(`https://qrdee.co/api/v2/store/${store_id}`, data);
+    // console.log(data);
+    // console.log(store_id);
+    return this.http.put<any>(`https://qrdee.co/api/v2/stores/${store_id}`, data);
   }
-
-
 
 get(id) {
     return this.http.get<any>(`${this.baseUrl}/${id}`);

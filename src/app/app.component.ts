@@ -63,7 +63,8 @@ export class AppComponent {
    }
 
    logout(){
-      this.router.navigate(['logout']);
+     localStorage.removeItem('store');
+     this.router.navigateByUrl('/login');
    }
    product(){
        this.router.navigate(['products']);
@@ -105,9 +106,6 @@ export class AppComponent {
     order(){
        this.router.navigate(['store-orders']);
    }
-
-
-
 
   initializeApp() {
     this.platform.ready().then(() => {

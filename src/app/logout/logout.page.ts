@@ -19,7 +19,7 @@ export class LogoutPage{
   	public toastController: ToastController,
     private http: HttpClient,
     private logoutservice: LogoutService,
-    private router: Router, 
+    private router: Router,
     private storage: Storage,
     private toastService: ToastService,
   	) {

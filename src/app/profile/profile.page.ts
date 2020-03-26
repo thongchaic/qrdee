@@ -49,11 +49,20 @@ export class ProfilePage {
     this.store.latitude = localStorage.getItem('store_lat');
     this.store.longitude = localStorage.getItem('store_lng');
     localStorage.setItem('store', JSON.stringify(this.store));
-    //alert(JSON.stringify(this.store));
-    // this.store = JSON.parse(localStorage.getItem('store'));
-    // console.log(this.store);
+
     this.profileservice.updateProfile(this.store,this.store.id).subscribe((data:any)=>{
-    
+      console.log(data);
+      const member = {
+        mobile_number:this.store.mobile_number,
+        latitude:this.store.latitude,
+        longitude:this.store.longitude,
+        firstname:this.store.firstname,
+        lastname:this.store.lastname
+      }
+      localStorage.setItem('member', JSON.stringify(member));
+      console.log(member);
+      localStorage.removeItem('store_lat');
+      localStorage.removeItem('store_lng');
     });
   }
   loadMap() {

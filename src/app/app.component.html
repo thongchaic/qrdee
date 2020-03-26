@@ -10,14 +10,14 @@
 
         <ion-list>
           <ion-menu-toggle auto-hide="false" >
-            <ion-item *ngIf="store.store_type_id == 5" (click)="home()">
+            <ion-item *ngIf="store" (click)="home()">
               <ion-label>
                    หน้าแรก
               </ion-label>
             </ion-item>
-            <ion-item *ngIf="store.store_type_id == 5" (click)="product()">
+            <ion-item *ngIf="store" (click)="product()">
               <ion-label>
-                   สินค้า
+                   สินค้าของฉัน
               </ion-label>
             </ion-item>
              <!-- <ion-item *ngIf="store.store_type_id == 5" (click)="postproduct()">
@@ -30,22 +30,22 @@
                    สั่งสินค้า
               </ion-label>
             </ion-item> -->
-          <ion-item  *ngIf="store.store_type_id == 5" (click)="stats()">
+          <ion-item  *ngIf="store" (click)="stats()">
              <ion-label>
-                  สรุปยอดขาย
+               สรุปยอดขาย
              </ion-label>
            </ion-item>
-            <ion-item *ngIf="store.store_type_id == 5" (click)="profile()">
+            <ion-item *ngIf="store" (click)="profile()">
               <ion-label >
-                   จัดการร้านค้า
+                จัดการร้านค้า
               </ion-label>
             </ion-item>
 
-            <ion-item *ngIf="store.store_type_id == 4" (click)="logistic()">
+            <!-- <ion-item *ngIf="store" (click)="logistic()">
               <ion-label >
                    ขนส่งสินค้า
               </ion-label>
-            </ion-item >
+            </ion-item > -->
 
 
             <!-- <ion-item *ngIf="store.store_type_id == 5" (click)="sell()">

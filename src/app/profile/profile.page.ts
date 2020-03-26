@@ -20,6 +20,8 @@ export class ProfilePage {
   longitude = 103.4962797;
 
   store:any;
+  store_types:any;
+
   constructor(
   	private profileservice: ProfileService,
     private geolocation: Geolocation,
@@ -34,7 +36,9 @@ export class ProfilePage {
 
   ionViewWillEnter() {
 	   //this.loadProfile();
+     this.loadStoreTypes();
   }
+
 
   ngAfterViewInit(): void {
     this.geolocation.getCurrentPosition().then((resp) => {
@@ -50,6 +54,8 @@ export class ProfilePage {
     this.store.longitude = localStorage.getItem('store_lng');
     localStorage.setItem('store', JSON.stringify(this.store));
 
+    console.log(this.store);
+
     this.profileservice.updateProfile(this.store,this.store.id).subscribe((data:any)=>{
       console.log(data);
       const member = {
@@ -64,6 +70,13 @@ export class ProfilePage {
       localStorage.removeItem('store_lat');
       localStorage.removeItem('store_lng');
     });
+  }
+  loadStoreTypes(){
+    this.profileservice.getStoreTypes().subscribe((data:any)=>{
+      this.store_types = data;
+      console.log(this.store_types);
+    })
+
   }
   loadMap() {
 

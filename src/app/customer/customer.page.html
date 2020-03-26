@@ -19,7 +19,6 @@
     <ion-list-header >
       <ion-label>รายการสินค้า</ion-label>
     </ion-list-header>
-
       <ion-item  *ngFor="let store of stores">
         <ion-avatar slot="start">
           <img *ngIf="store.store_pic" [src]="'https://qrdee.co/app/'+store.store_pic">
@@ -30,12 +29,12 @@
           <small *ngIf="store.firstname">{{store.firstname}} {{store.lastname}}</small>
         </ion-text>
         <ion-text slot="end">
-          <small>x</small>
+          <small *ngIf="store.store_type">{{store.store_type.store_type_th}}</small><br>
+          <small *ngIf="store.store_type">ระยะ x km</small>
         </ion-text>
-        <ion-button fill="clear" color="primary" slot="end" (click)="addToCart(store);">
-          <ion-icon slot="icon-only" name="md-book"></ion-icon>
+        <ion-button fill="clear" color="primary" slot="end" (click)="viewStore(store);">
+          <ion-icon slot="icon-only" name="md-eye"></ion-icon>
         </ion-button>
-
       </ion-item>
 
 
@@ -72,8 +71,8 @@
                     <ion-label>ร้านค้าไกล้ๆนี้</ion-label>
                 </ion-tab-button>
                 <ion-tab-button color="primary" (click)="getCurrentPos()" >
-                    <ion-icon name="ios-map"></ion-icon>
-                    <ion-label>จุดรับสินค้า</ion-label>
+                    <ion-icon name="md-cart"></ion-icon>
+                    <ion-label>รายการซื้อ</ion-label>
                 </ion-tab-button>
               </ion-tab-bar>
             </ion-tabs>

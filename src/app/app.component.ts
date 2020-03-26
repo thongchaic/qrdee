@@ -41,6 +41,7 @@ export class AppComponent {
     this.event.subscribe('store:changed',trn=>{
        this.store = trn;
     });
+    
     try{
       this.store = JSON.parse(localStorage.getItem('store'));
     }catch(e){

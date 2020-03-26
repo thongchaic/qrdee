@@ -37,12 +37,12 @@ getProfile() {
     return this.http.put<any>(`https://qrdee.co/api/v2/stores/${store_id}`, data);
   }
 
-get(id) {
+  get(id) {
     return this.http.get<any>(`${this.baseUrl}/${id}`);
   }
 
-getStoreTypes() {
-    return this.http.get(`https://qrdee.co/api/v1/ref?type=store_types`);
+  getStoreTypes() {
+    return this.http.get(`https://qrdee.co/api/v2/refs?t=store_types`);
   }
 
 

@@ -11,55 +11,53 @@
   <ion-label position="floating">ตำแหน่งร้าน</ion-label>
   <div #map id="map" style="height:250px;"></div>
 
+  <ion-list>
+    <ion-item>
+        <b>แก้ไขข้อมูลร้านค้า</b>
+    </ion-item>
+     <ion-item>
+         <ion-avatar slot="start">
+           <ion-img [src]="store.store_pic || 'assets/camera.png'" ></ion-img>
+         </ion-avatar>
+         <ion-input slot="end" color="primary" type="text" [(ngModel)]="store.store_name" ></ion-input>
+     </ion-item>
+     <ion-item>
+         <b slot="start">พร้อมเพย์</b>
+         <ion-input slot="end"  color="primary" type="text" [(ngModel)]="store.promptpay" ></ion-input>
+     </ion-item>
+     <ion-item>
+         <b slot="start">โทรศัพท์</b>
+         <ion-input slot="end" color="primary" type="text" [(ngModel)]="store.mobile_number" ></ion-input>
+     </ion-item>
+     <ion-item>
+         <b slot="start">ชื่อ</b>
+         <ion-input slot="end" color="primary" type="text" [(ngModel)]="store.firstname" ></ion-input>
+     </ion-item>
+     <ion-item>
+         <b slot="start">นามสกุล</b>
+         <ion-input slot="end" color="primary" type="text" [(ngModel)]="store.lastname" ></ion-input>
+     </ion-item>
+
+     <ion-item>
+       <ion-label color="primary" position="stacked">ประเภทร้านค้า</ion-label>
+       <ion-select [(ngModel)]="store.store_type_id">
+         <ion-select-option
+           *ngFor="let type of store_types"
+           [value]="type.id"
+           [selected]="type.id === store.store_type_id">
+           {{ type.store_type_th }}
+         </ion-select-option>
+       </ion-select>
+     </ion-item>
+
+
+ </ion-list>
+
 
   <ion-card style="background:#FFFFF0;">
     <ion-card-content *ngIf="store">
 
-       <ion-list>
-        <ion-item>
-          <ion-avatar slot="start">
-            <ion-img [src]="store.store_pic || 'assets/noimg.png'" ></ion-img>
-          </ion-avatar>
-            <!-- <h2 slot="end"> ร้าน {{store.store_name}} </h2> -->
-            <ion-item slot="end">
-              <ion-input  color="primary" type="text" [(ngModel)]="store.store_name" ></ion-input>
-            </ion-item>
-        </ion-item>
-        <ion-item>
-          <b slot="start">พร้อมเพย์</b>
-            <ion-item slot="end" >
-              <ion-input  color="primary" type="text" [(ngModel)]="store.promptpay" ></ion-input>
-            </ion-item>
-        </ion-item>
-        <!-- <ion-item>
-          <b slot="start">ชื่อ</b><h2 slot="end" >  {{store.firstname}}</h2>
-        </ion-item>
-        <ion-item>
-          <b slot="start">นามสกุล</b><h2 slot="end">{{store.lastname}}</h2>
-        </ion-item> -->
-        <ion-item>
-          <b slot="start">โทรศัพท์</b>
-          <ion-item slot="end" >
-            <ion-input  color="primary" type="text" [(ngModel)]="store.mobile_number" ></ion-input>
-          </ion-item>
-        </ion-item>
-        <ion-item>
-          <b slot="start">ชื่อ</b>
-          <ion-item slot="end" >
-            <ion-input  color="primary" type="text" [(ngModel)]="store.firstname" ></ion-input>
-          </ion-item>
-        </ion-item>
-        <ion-item>
-          <b slot="start">นามสกุล</b>
-          <ion-item slot="end" >
-            <ion-input  color="primary" type="text" [(ngModel)]="store.lastname" ></ion-input>
-          </ion-item>
-        </ion-item>
-        <!-- <ion-item>
-          <b slot="start">ประเภทร้านค้า</b><h2 slot="end" >{{store.store_type.store_type_th}}</h2>
-        </ion-item> -->
 
-      </ion-list><br>
         <ion-button type="submit" shape="round" expand="full" color="primary" (click)="submit()">
            <ion-icon name="create"></ion-icon>
            &nbsp;ปรับปรุงข้อมูล

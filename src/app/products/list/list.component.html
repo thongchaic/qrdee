@@ -13,11 +13,7 @@
 
   <ion-item-sliding *ngFor="let product of products">
       <ion-item>
-        <!-- <ion-avatar slot="start" *ngIf="usertype == 1">
-          <a routerLink="/products/{{ product.id }}">
-            <img [src]="url+product.thumbnail || '/assets/noimg.png'">
-          </a>
-        </ion-avatar> -->
+
 
         <ion-avatar slot="start">
           <img *ngIf="product.thumbnail" [src]="'https://qrdee.co/app/'+product.thumbnail">

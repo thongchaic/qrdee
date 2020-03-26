@@ -112,6 +112,9 @@ export class CustomerPage implements AfterViewInit{
   search(event){
     console.log(event);
   }
+  viewStore(store){
+    console.log(store);
+  }
 
 
 hide() {

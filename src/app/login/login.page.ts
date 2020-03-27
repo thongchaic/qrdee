@@ -53,11 +53,7 @@ export class LoginPage  {
       localStorage.setItem('member', JSON.stringify(member));
       console.log(member);
 
-      if(trn.store_type_id == 5){
-        this.router.navigateByUrl('/cart');
-      }else if(trn.store_type_id == 4){
-         this.router.navigateByUrl('/logistic');
-      }
+      this.router.navigateByUrl('/cart');
 
       this.event.publish('store:changed',trn);
 

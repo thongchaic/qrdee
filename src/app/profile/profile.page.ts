@@ -2,6 +2,7 @@ import { Component, OnInit,ElementRef,ViewChild} from '@angular/core';
 import { ProfileService } from './shared/profile.service';
 import { ActivatedRoute } from '@angular/router';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { ToastService } from '../shared/services/toast.service';
 
 
 declare var google;
@@ -25,6 +26,7 @@ export class ProfilePage {
   constructor(
   	private profileservice: ProfileService,
     private geolocation: Geolocation,
+    private toastService:ToastService,
     private route: ActivatedRoute
   ){
 
@@ -41,11 +43,11 @@ export class ProfilePage {
 
 
   ngAfterViewInit(): void {
-    this.geolocation.getCurrentPosition().then((resp) => {
-        this.store.latitude = resp.coords.latitude;
-        this.store.longitude = resp.coords.longitude;
-        this.loadMap();
-    });
+    // this.geolocation.getCurrentPosition().then((resp) => {
+    //     this.store.latitude = resp.coords.latitude;
+    //     this.store.longitude = resp.coords.longitude;
+    //     this.loadMap();
+    // });
     this.loadMap();
 
   }
@@ -58,6 +60,7 @@ export class ProfilePage {
 
     this.profileservice.updateProfile(this.store,this.store.id).subscribe((data:any)=>{
       console.log(data);
+
       const member = {
         mobile_number:this.store.mobile_number,
         latitude:this.store.latitude,
@@ -69,6 +72,7 @@ export class ProfilePage {
       console.log(member);
       localStorage.removeItem('store_lat');
       localStorage.removeItem('store_lng');
+      this.toastService.showToast(`ปรับปรุงข้อมูลเรียบร้อยแล้ว`, 'top');
     });
   }
   loadStoreTypes(){

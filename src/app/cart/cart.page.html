@@ -12,24 +12,33 @@
   <ion-list>
 
     <ion-list-header >
-      <ion-label>รายการคำสั่งซื้อ (รวมค่าขนส่ง)</ion-label>
+      <ion-label>รายการคำสั่งซื้อ (ค่าส่ง {{store.delivery_price}} บาท)</ion-label>
     </ion-list-header>
+
+
     <ion-item-sliding *ngFor="let order of orders">
+
       <ion-item>
+
         <ion-label>
-          <h5><ion-text color="dark">{{order.member.firstname}} {{order.member.lastname }} </ion-text> <ion-badge color="danger"> {{ order.price }} </ion-badge> <ion-text color="dark">  บาท </ion-text> </h5>
+          <h5>
+            <ion-text color="dark">{{order.member.firstname}} {{order.member.lastname }} </ion-text>
+            <ion-badge color="danger"> {{ order.price+store.delivery_price }} </ion-badge> <ion-text color="dark"> บาท </ion-text>
+          </h5>
         </ion-label>
         <ion-button fill="clear" color="danger" slot="end" (click)="deleteOrder(order.member.id);">
-          <ion-icon slot="icon-only" name="ios-trash"></ion-icon>
+          <ion-icon name="ios-trash"></ion-icon>
         </ion-button>
-        <ion-button fill="clear" color="primary" slot="end" (click)="makeClall(order.member.mobile_number);">
-          <ion-icon slot="icon-only" name="ios-call"></ion-icon>
+        <ion-button fill="clear" size="small" color="primary" slot="end" (click)="makeClall(order.member.mobile_number);">
+          <ion-icon name="ios-call"></ion-icon>
         </ion-button>
         <ion-button fill="clear" color="primary" slot="end" (click)="delivery(order);">
-          <ion-icon slot="icon-only" name="md-bicycle"></ion-icon>
+          <ion-icon name="md-bicycle"></ion-icon>
         </ion-button>
+
       </ion-item>
-      <ion-item *ngFor="let item of order.orders">
+
+      <ion-item *ngFor="let item of order.orders" lines="none">
         <ion-avatar slot="start">
             <img *ngIf="item.product.thumbnail" [src]="'https://qrdee.co/app/'+item.product.thumbnail">
             <img *ngIf="!item.product.thumbnail" src="/assets/noimg.png">
@@ -38,7 +47,11 @@
           <h5><ion-text color="dark">{{item.product.product_th}} : {{item.product.price}} บาท x {{ item.qty }} ชิ้น</ion-text></h5>
         </ion-label>
       </ion-item>
+
+
     </ion-item-sliding>
+
+
   </ion-list>
 </ion-content>
 

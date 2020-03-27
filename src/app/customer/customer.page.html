@@ -3,34 +3,31 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>เลือกซื้อสินค้า</ion-title>
-
+    <ion-title>ซื้อสินค้า</ion-title>
   </ion-toolbar>
-
-
 </ion-header>
 
-<ion-content *ngIf="stores">
-  <ion-searchbar placeholder="ค้นหาร้าน" color="primary" (ionChange)="search($event.target.value)">
+<ion-content *ngIf="stores && tab == 0" style="background:#FFFFFF;">
+  <ion-searchbar placeholder="ค้นหาร้าน" color="primary" (ionChange)="searchStores($event.target.value)">
   </ion-searchbar>
-  <div #map id="map"></div>
-  <ion-list >
 
-    <ion-list-header >
-      <ion-label>รายการสินค้า</ion-label>
-    </ion-list-header>
+  <ion-list >
+      <ion-list-header >
+        <ion-label>รายการสินค้า</ion-label>
+      </ion-list-header>
+
       <ion-item  *ngFor="let store of stores">
         <ion-avatar slot="start">
           <img *ngIf="store.store_pic" [src]="'https://qrdee.co/app/'+store.store_pic">
           <img *ngIf="!store.store_pic" src="/assets/noimg.png">
         </ion-avatar>
         <ion-text>
-          <small><b>{{store.store_name}}</b></small><br>
-          <small *ngIf="store.firstname">{{store.firstname}} {{store.lastname}}</small>
+          <small *ngIf="store.store_name"><b>{{store.store_name}}</b></small><br>
+          <small *ngIf="store.store_type">{{store.store_type.store_type_th}}</small>
         </ion-text>
         <ion-text slot="end">
-          <small *ngIf="store.store_type">{{store.store_type.store_type_th}}</small><br>
-          <small *ngIf="store.store_type">ระยะ x km</small>
+          <small *ngIf="store.delivery_price">ระยะ {{store.distance | number }} km</small><br>
+          <small *ngIf="store.delivery_price">ค่าส่ง {{store.delivery_price}} ฿</small>
         </ion-text>
         <ion-button fill="clear" color="primary" slot="end" (click)="viewStore(store);">
           <ion-icon slot="icon-only" name="md-eye"></ion-icon>
@@ -38,39 +35,28 @@
       </ion-item>
 
 
+
   </ion-list>
 
-  <!-- <ion-grid >
+  <!-- <ion-infinite-scroll threshold="50%" (ionInfinite)="infinitStores($event.target)">
+     <ion-infinite-scroll-content>
+     </ion-infinite-scroll-content>
+   </ion-infinite-scroll> -->
 
-
-
-      <ion-row>
-        <ion-col size="12"  >
-          <div class="btn2" *ngFor="let store_distances of store_distance;">
-              <ion-item (click)="store_product(store_distances.id)">
-                 <img slot="start" [src]="url+store_distances.store_pic || '/assets/noimg.png'"
-                  class="img_store" >
-                  <p style="font-weight: bold; font-size: 13px;">
-                  {{store_distances.store_name}}<br> <ion-icon ios="ios-pin" md="md-pin"></ion-icon>ระยะทาง{{store_distances.distance}} กม.
-                </p>
-              </ion-item>
-            </div>
-        </ion-col>
-      </ion-row>
-  </ion-grid> -->
 </ion-content>
-
-
+<ion-content *ngIf="tab == 1">
+  t1
+</ion-content>
 
 <ion-footer style="background:#FFFFFF;">
   <ion-toolbar>
           <ion-tabs>
               <ion-tab-bar slot="bottom">
-                <ion-tab-button color="primary" (click)="getCurrentPos()" >
+                <ion-tab-button color="primary" (click)="changeTab(0)" >
                     <ion-icon name="md-locate"></ion-icon>
                     <ion-label>ร้านค้าไกล้ๆนี้</ion-label>
                 </ion-tab-button>
-                <ion-tab-button color="primary" (click)="getCurrentPos()" >
+                <ion-tab-button color="primary" (click)="changeTab(1)" >
                     <ion-icon name="md-cart"></ion-icon>
                     <ion-label>รายการซื้อ</ion-label>
                 </ion-tab-button>

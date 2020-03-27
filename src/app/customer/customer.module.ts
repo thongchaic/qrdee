@@ -7,16 +7,19 @@ import { SharedModule } from '../shared/shared.module';
 import { CustomerPage } from './customer.page';
 import { UserService } from './shared/user.service';
 import { FormsService } from '../products/shared/forms.service';
+
+
 const routes: Routes = [
   {
     path: '',
     component: CustomerPage
-  },
-   {
-    path: ':id',
-        component: CustomerPage,
-        data: { title: 'แก้ไขข้อมูล', formType: 'update' }
-  },
+  }
+  // ,
+  //  {
+  //   path: ':id',
+  //       component: CustomerPage,
+  //       data: { title: 'แก้ไขข้อมูล', formType: 'update' }
+  // },
 ];
 
 @NgModule({
@@ -27,7 +30,9 @@ const routes: Routes = [
     SharedModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [CustomerPage],
+  declarations: [
+    CustomerPage
+  ],
    providers: [UserService,FormsService],
 })
 export class CustomerPageModule {}

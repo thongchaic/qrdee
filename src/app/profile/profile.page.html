@@ -30,6 +30,10 @@
          <ion-input slot="end" color="primary" type="text" [(ngModel)]="store.mobile_number" ></ion-input>
      </ion-item>
      <ion-item>
+         <b slot="start">ค่าขนส่ง</b>
+         <ion-input slot="end" color="primary" type="number" [(ngModel)]="store.delivery_price" ></ion-input>
+     </ion-item>
+     <ion-item>
          <b slot="start">ชื่อ</b>
          <ion-input slot="end" color="primary" type="text" [(ngModel)]="store.firstname" ></ion-input>
      </ion-item>
@@ -49,8 +53,6 @@
          </ion-select-option>
        </ion-select>
      </ion-item>
-
-
  </ion-list>
 
 

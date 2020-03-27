@@ -2,15 +2,10 @@
   <!-- <ion-searchbar placeholder="ชื่อ/รหัสสินค้า" color="primary" animated debounce="500" (ionChange)="search($event.target.value)">
   </ion-searchbar> -->
 
-  <ion-list>
-    <ion-list-header >
+    <!-- <ion-list-header >
       <ion-label>สินค้า</ion-label>
-    </ion-list-header>
+    </ion-list-header> -->
   <ion-list>
-
-
-
-
   <ion-item-sliding *ngFor="let product of products">
       <ion-item>
 
@@ -24,10 +19,10 @@
         </ion-avatar>
 
         <ion-label>
-          <ion-text color="dark">{{ product.product_th }}</ion-text>
+          <h5><ion-text color="dark">{{ product.product_th }}</ion-text></h5>
         </ion-label>
         <ion-label>
-          <ion-text color="dark">{{ product.price }}฿</ion-text>
+          <h5><ion-text color="dark">{{ product.price }}฿</ion-text></h5>
         </ion-label>
 
         <!-- <ion-button fill="clear" color="primary" slot="end" (click)="addToCart(product);">
@@ -44,14 +39,12 @@
 
     <ion-item-options>
       <ion-item-option color="light">
-         <!-- <ion-button fill="clear" size="large" color="secondary" routerLink="/products/{{ product.id }}/edit">
-            <ion-icon name="create"></ion-icon>
-          </ion-button> -->
           <ion-button fill="clear" color="danger" (click)="deleteProduct(product.id);">
             <ion-icon name="close"></ion-icon>
           </ion-button>
         </ion-item-option>
     </ion-item-options>
+
   </ion-item-sliding>
 
   <ion-item>
@@ -89,7 +82,6 @@
     </ion-infinite-scroll> -->
 
 
-</ion-list>
 </ion-content>
 
 <ion-footer>

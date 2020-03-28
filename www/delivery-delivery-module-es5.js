@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>delivery</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>delivery</ion-title>\n    <ion-buttons>\n      <ion-back-button defaultHref=\"cart\"></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n  <ion-card style=\"background:#FFFFFF;\">\n    <ion-card-content>\n      <ion-label position=\"floating\">ตำแหน่งผู้รับ</ion-label>\n      <div #mapElement style=\"height:250px;\"></div>\n    </ion-card-content>\n  </ion-card>\n  \n</ion-content>\n"
 
 /***/ }),
 
@@ -119,20 +119,85 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DeliveryPage", function() { return DeliveryPage; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/geolocation/ngx */ "./node_modules/@ionic-native/geolocation/ngx/index.js");
+
+
 
 
 var DeliveryPage = /** @class */ (function () {
-    function DeliveryPage() {
+    function DeliveryPage(route, router, geolocation) {
+        var _this = this;
+        this.route = route;
+        this.router = router;
+        this.geolocation = geolocation;
+        this.latitude = 14.8718084;
+        this.longitude = 103.4962797;
+        this.mylatitude = 14.8718084;
+        this.mylongitude = 103.4962797;
+        this.route.queryParams.subscribe(function (params) {
+            if (params && params.special) {
+                _this.order = JSON.parse(params.special);
+                alert(JSON.stringify(_this.order));
+                _this.latitude = _this.order.member.latitude;
+                _this.longitude = _this.order.member.longitude;
+            }
+        });
     }
     DeliveryPage.prototype.ngOnInit = function () {
     };
+    DeliveryPage.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        this.geolocation.getCurrentPosition().then(function (resp) {
+            _this.mylatitude = resp.coords.latitude;
+            _this.mylongitude = resp.coords.longitude;
+        });
+        this.loadMap();
+    };
+    DeliveryPage.prototype.loadMap = function () {
+        var latLng = new google.maps.LatLng(this.latitude, this.longitude);
+        this.map = new google.maps.Map(this.mapElement.nativeElement, {
+            zoom: 15,
+            center: latLng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+        var marker = new google.maps.Marker({
+            map: this.map,
+            animation: google.maps.Animation.DROP,
+            position: latLng
+        });
+        marker.addListener('dragend', function () {
+            this.latitude = marker.getPosition().lat();
+            this.longitude = marker.getPosition().lng();
+            this.map.setCenter(marker.getPosition());
+        });
+        var mymarker = new google.maps.Marker({
+            map: this.map,
+            animation: google.maps.Animation.DROP,
+            position: new google.maps.LatLng(this.mylatitude, this.mylongitude),
+            icon: {
+                url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+            }
+        });
+    };
+    DeliveryPage.ctorParameters = function () { return [
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
+        { type: _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_3__["Geolocation"] }
+    ]; };
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('mapElement', { static: false }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+    ], DeliveryPage.prototype, "mapElement", void 0);
     DeliveryPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-delivery',
             template: __webpack_require__(/*! raw-loader!./delivery.page.html */ "./node_modules/raw-loader/index.js!./src/app/delivery/delivery.page.html"),
             styles: [__webpack_require__(/*! ./delivery.page.scss */ "./src/app/delivery/delivery.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"],
+            _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_3__["Geolocation"]])
     ], DeliveryPage);
     return DeliveryPage;
 }());

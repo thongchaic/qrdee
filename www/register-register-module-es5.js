@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <!-- <ion-menu-button></ion-menu-button>  -->\n    </ion-buttons>\n    <ion-title>เปิดร้านออนไลน์</ion-title>\n    <ion-buttons>\n      <ion-back-button defaultHref=\"login\"></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n <ion-content>\n  <ion-card style=\"background:#FFFFFF;\">\n    <ion-card-content>\n      <ion-label position=\"floating\">ตำแหน่งร้าน</ion-label>\n      <div #mapElement style=\"height:250px;\" ></div>\n      <ion-list>\n        <ion-item>\n          <ion-label position=\"floating\"></ion-label>\n          <ion-input type=\"text\" [(ngModel)]=\"store_name\" placeholder=\"ชื่อร้าน\"></ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label position=\"floating\"></ion-label>\n          <ion-input type=\"text\" [(ngModel)]=\"promptpay\" placeholder=\"เบอร์โทรศัพท์\"></ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label position=\"floating\"></ion-label>\n          <ion-input type=\"password\"  [(ngModel)]=\"password\" placeholder=\"รหัสผ่าน\"></ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label position=\"floating\" ></ion-label>\n          <ion-input type=\"password\"  [(ngModel)]=\"repassword\" placeholder=\"ยืนยันรหัสผ่าน\"></ion-input>\n        </ion-item>\n\n        <ion-button type=\"submit\" expand=\"full\" color=\"success\" (click)=\"registStore()\">ลงทะเบียน</ion-button>\n      </ion-list>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n    </ion-buttons>\n    <ion-title>เปิดร้านออนไลน์</ion-title>\n    <ion-buttons>\n      <ion-back-button defaultHref=\"login\"></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n <ion-content>\n  <ion-card style=\"background:#FFFFFF;\">\n    <ion-card-content>\n      <ion-label position=\"floating\">ตำแหน่งร้าน</ion-label>\n      <div #mapElement style=\"height:250px;\" ></div>\n      <ion-list>\n        <ion-item>\n          <ion-label position=\"floating\"></ion-label>\n          <ion-input type=\"text\" [(ngModel)]=\"store_name\" placeholder=\"ชื่อร้าน\"></ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label position=\"floating\"></ion-label>\n          <ion-input type=\"text\" [(ngModel)]=\"promptpay\" placeholder=\"เบอร์โทรศัพท์\"></ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label position=\"floating\"></ion-label>\n          <ion-input type=\"password\"  [(ngModel)]=\"password\" placeholder=\"รหัสผ่าน\"></ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label position=\"floating\" ></ion-label>\n          <ion-input type=\"password\"  [(ngModel)]=\"repassword\" placeholder=\"ยืนยันรหัสผ่าน\"></ion-input>\n        </ion-item>\n\n        <ion-button type=\"submit\" expand=\"full\" color=\"success\" (click)=\"registStore()\">ลงทะเบียน</ion-button>\n      </ion-list>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n"
 
 /***/ }),
 
@@ -89,6 +89,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/geolocation/ngx */ "./node_modules/@ionic-native/geolocation/ngx/index.js");
 /* harmony import */ var _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/services/toast.service */ "./src/app/shared/services/toast.service.ts");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+
 
 
 
@@ -98,11 +100,12 @@ __webpack_require__.r(__webpack_exports__);
 var RegisterPage = /** @class */ (function () {
     function RegisterPage(
     // public navCtrl: NavController,
-    router, registerService, geolocation, toastService) {
+    router, registerService, geolocation, toastService, event) {
         this.router = router;
         this.registerService = registerService;
         this.geolocation = geolocation;
         this.toastService = toastService;
+        this.event = event;
         this.password = '';
         this.repassword = '';
         this.promptpay = '';
@@ -135,8 +138,8 @@ var RegisterPage = /** @class */ (function () {
             position: latLng
         });
         marker.addListener('dragend', function () {
-            this.latitude = marker.getPosition().lat();
-            this.longitude = marker.getPosition().lng();
+            localStorage.setItem("regis_lat", marker.getPosition().lat());
+            localStorage.setItem("regis_lng", marker.getPosition().lng());
             this.map.setCenter(marker.getPosition());
         });
     };
@@ -155,9 +158,23 @@ var RegisterPage = /** @class */ (function () {
             return;
         }
         //alert("Register");
+        this.latitude = localStorage.getItem('regis_lat');
+        this.longitude = localStorage.getItem('regis_lng');
         this.registerService.registerstore(this.password, this.promptpay, this.store_name, this.latitude, this.longitude, 5).subscribe(function (trn) {
+            localStorage.removeItem('regis_lat');
+            localStorage.removeItem('regis_lng');
             localStorage.setItem('store', JSON.stringify(trn));
-            //alert(JSON.stringify(trn));
+            _this.event.publish('store:changed', trn);
+            var member = {
+                id: null,
+                mobile_number: trn.mobile_number,
+                latitude: trn.latitude,
+                longitude: trn.longitude,
+                firstname: trn.firstname,
+                lastname: trn.lastname
+            };
+            localStorage.setItem('member', JSON.stringify(member));
+            console.log(member);
             _this.router.navigateByUrl('/cart');
         }, function (err) {
             alert("Network error!");
@@ -167,7 +184,8 @@ var RegisterPage = /** @class */ (function () {
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
         { type: _shared_register_store_service__WEBPACK_IMPORTED_MODULE_2__["RegisterStoreService"] },
         { type: _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_4__["Geolocation"] },
-        { type: _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_5__["ToastService"] }
+        { type: _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_5__["ToastService"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["Events"] }
     ]; };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('mapElement', { static: false }),
@@ -182,7 +200,8 @@ var RegisterPage = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
             _shared_register_store_service__WEBPACK_IMPORTED_MODULE_2__["RegisterStoreService"],
             _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_4__["Geolocation"],
-            _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_5__["ToastService"]])
+            _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_5__["ToastService"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["Events"]])
     ], RegisterPage);
     return RegisterPage;
 }());

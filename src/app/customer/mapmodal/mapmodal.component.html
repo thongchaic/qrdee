@@ -1,9 +1,11 @@
 <ion-header translucent>
   <ion-toolbar>
-    <ion-title>เลือกสถานที่</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="dismissModal()">ปิด</ion-button>
-    </ion-buttons>
+
+    <ion-title>ระบุตำแหน่ง</ion-title>
+    <ion-button fill="clear" color="danger" slot="end" (click)="dismissModal();">
+      <ion-icon name="ios-arrow-back"></ion-icon>Back
+    </ion-button>
+
   </ion-toolbar>
 </ion-header>
 <ion-content fullscreen>
@@ -11,5 +13,5 @@
 </ion-content>
 
 <ion-footer>
-  <ion-button expand="full" (click)="accept()">ยืนยัน</ion-button>
+  <ion-button expand="full"  shape="round" color="primary"   (click)="accept();">ค้นหาร้าน</ion-button>
 </ion-footer>

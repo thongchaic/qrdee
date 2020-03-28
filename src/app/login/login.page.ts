@@ -38,7 +38,7 @@ export class LoginPage  {
 
   async loginForm() {
     const loading = await this._loading.create();
-    await loading.present(); 
+    await loading.present();
 
     await this.loginService.logintore(this.promptpay,this.password).subscribe(trn => {
 

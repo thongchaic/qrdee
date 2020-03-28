@@ -15,8 +15,9 @@ export class MapmodalComponent implements OnInit {
   @ViewChild('map',{static:false}) mapElement: ElementRef;
   map: any;
 
-  latitude:number = 14.8718084;
-  longitude:number = 103.4962797;
+  latitude:any = 14.8718084;
+  longitude:any = 103.4962797;
+  member:any;
 
 
   constructor(

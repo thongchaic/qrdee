@@ -14,7 +14,35 @@ export class UserService {
 
   }
 
-  placeOrder(member_id, member_cart, latitude, longitude){
+  placeOrder(mem, member_cart, notes, latitude, longitude){
+
+    console.log(mem);
+    // console.log(member_cart);
+    // console.log(notes);
+    // console.log(latitude);
+    // console.log(longitude);
+
+    let items = [];
+    member_cart.forEach(e => {
+      e.products.forEach(p => {
+        items.push({
+          store_id:e.id,
+          product_id:p.id,
+          price:p.price,
+          qty:1
+        });
+      });
+    });
+
+    const body = {
+      member:mem,
+      latitude:latitude,
+      longitude:longitude,
+      notes:notes,
+      items:items
+    }
+
+    return this.http.post<any>(`https://qrdee.co/api/v2/orders`,body);
 
   }
 

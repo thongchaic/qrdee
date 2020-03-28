@@ -11,6 +11,7 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
 
 import { ModalController } from '@ionic/angular';
 import { CartmodalComponent } from './cartmodal/cartmodal.component';
+import { CustomerService } from './shared/customer.service';
 
 declare var google;
 
@@ -35,7 +36,6 @@ export class CustomerPage implements AfterViewInit{
 
   @ViewChild('mapElement',{static:false}) mapElement: ElementRef;
   map: any;
-
 
   constructor(
     private geolocation: Geolocation,
@@ -185,7 +185,24 @@ export class CustomerPage implements AfterViewInit{
     this.latitude = localStorage.getItem('member_lat');
     this.longitude = localStorage.getItem('member_lng');
 
-    console.log(this.notes);
+
+    console.log(this.member);
+
+    this.userservice.placeOrder(this.member, this.member_cart, this.notes, this.latitude, this.longitude).subscribe((data:any)=>{
+        console.log("res =====> ");
+        console.log(data);
+
+
+        localStorage.setItem('member',JSON.stringify( data.member ));
+        localStorage.setItem('member_cart',JSON.stringify( [] ));
+
+        this.member_cart = [];
+        this.total_price = 0;
+
+        this.toastService.showToast('ส่งคำสั่งซื้อเรียบร้อยแล้ว', 'top');
+        this.changeTab(0);
+
+    });
 
   }
 
@@ -241,6 +258,7 @@ export class CustomerPage implements AfterViewInit{
 
       });
     return await modal.present();
+
   }
 
   changeTab(t){

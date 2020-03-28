@@ -93,26 +93,36 @@
     </ion-item>
   </ion-list>
 
-<ion-label position="floating">โปรดระบุจุดรับสินค้า</ion-label>
-<div #mapElement style="height:250px;" ></div>
-<br>
-<ion-list lines="none">
+  <ion-label position="floating">โปรดระบุจุดรับสินค้า</ion-label>
+  <div #mapElement style="height:250px;" ></div>
+  <br>
 
-  <ion-item>
-    <ion-label position="stacked">รายละเอียดเพิ่มเติมสำหรับผู้ส่งของ</ion-label>
-    <ion-textarea [(ngModel)]="notes" style="background-color:#ded9d9;" rows="4" placeholder="ตัวอย่าง. หน้าอาคาร 3 สาขาวิทยาการคอมพิวเตอร์ มหาวิทยาลัยราชภัฏสุรินทร์"></ion-textarea>
-  </ion-item>
 
-  <ion-item>
-    <ion-button size="default" slot="end" (click)="placeOrder();" color="tertiary">
-      ส่งคำสั่งซื้อ
-    </ion-button>
-  </ion-item>
-</ion-list>
+  <ion-list lines="none">
 
+    <ion-item>
+      <ion-label position="stacked">ชื่อผู้รับ</ion-label>
+      <ion-input type="text" [(ngModel)]="member.firstname" style="background-color:#ded9d9;"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">เบอร์โทรศัพท์</ion-label>
+      <ion-input type="text" [(ngModel)]="member.mobile_number" style="background-color:#ded9d9;"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">รายละเอียดเพิ่มเติมสำหรับผู้ส่งของ</ion-label>
+      <ion-textarea [(ngModel)]="notes" style="background-color:#ded9d9;" rows="4" placeholder="ตัวอย่าง. หน้าอาคาร 3 สาขาวิทยาการคอมพิวเตอร์ มหาวิทยาลัยราชภัฏสุรินทร์"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-button size="default" slot="end" (click)="placeOrder();" color="tertiary">
+        ส่งคำสั่งซื้อ
+      </ion-button>
+    </ion-item>
+  </ion-list>
 
 </ion-content>
-
 
 <ion-footer style="background:#FFFFFF;">
   <ion-toolbar>
@@ -129,5 +139,4 @@
               </ion-tab-bar>
             </ion-tabs>
    </ion-toolbar>
-
 </ion-footer>

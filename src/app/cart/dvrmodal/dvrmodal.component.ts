@@ -70,8 +70,6 @@ export class DvrmodalComponent {
             //alert(JSON.stringify(data));
           });
 
-
-
         }else{
 
         }
@@ -86,8 +84,20 @@ export class DvrmodalComponent {
         this.mylongitude = resp.coords.longitude;
     });
 
-    this.latitude = this.order.member.latitude;
-    this.longitude = this.order.member.longitude;
+    try{
+      if(this.order.length > 0){
+        this.latitude = this.order[0].latitude;
+        this.longitude = this.order[0].longitude;
+      }else{
+        this.latitude = this.order.member.latitude;
+        this.longitude = this.order.member.longitude;
+      }
+    }catch(e){
+      this.latitude = this.order.member.latitude;
+      this.longitude = this.order.member.longitude;
+    }
+
+
 
     this.loadMap();
 

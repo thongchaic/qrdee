@@ -22,12 +22,11 @@
     <ion-card-content >
       <ion-item-group >
         <ion-item lines="none">
-          <!-- <ion-img [src]="imageData || '/assets/noimg.png'" *ngIf="imageData" ></ion-img> -->
           <ion-img [src]="thumbnail || '/assets/noimg.png'"></ion-img>
         </ion-item>
         <ion-grid>
           <ion-row justify-content-center>
-            <ion-button size="small" color="primary" (click)="getPicture(1)">ถ่ายรูปสินค้า</ion-button>
+            <ion-button size="small" color="primary" (click)="getPicture()">ถ่ายรูปสินค้า</ion-button>
             <ion-button size="small" color="secondary" (click)="selectPictures();">เลือกจากอัลบั้ม</ion-button>
           </ion-row>
         </ion-grid>

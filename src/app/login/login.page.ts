@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { LoginStoreService } from './shared/login-store.service';
 import { Router  } from '@angular/router';
-import { NavController, LoadingController, ToastController } from '@ionic/angular';
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { NavController, LoadingController } from '@ionic/angular';
+import { HttpClient } from '@angular/common/http';
 import { ModalController,Events } from '@ionic/angular';
 import { ToastService } from '../shared/services/toast.service';
-// import { Facebook, FacebookLoginResponse } from '@ionic-native/facebook/ngx';
-import { IonicStorageModule } from '@ionic/storage';
 import { Storage } from '@ionic/storage';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -17,8 +16,8 @@ export class LoginPage  {
 
    token:string ='';
    login:any = {};
-   promptpay:string ='';
-   password:string ='';
+   promptpay:string ='0843928454';
+   password:string ='cs';
    // is_disabled:boolean = false;
 
    usertype:string ='';
@@ -31,16 +30,20 @@ export class LoginPage  {
   	private modalController: ModalController,
     private event : Events,
     private toastService: ToastService,
-    private storage: Storage
-  	) {
+    private storage: Storage,
+    private _loading: LoadingController
+  ) {
 
   }
 
-  loginForm() {
-    this.loginService.logintore(this.promptpay,this.password).subscribe(trn => {
+  async loginForm() {
+    const loading = await this._loading.create();
+    await loading.present(); 
+
+    await this.loginService.logintore(this.promptpay,this.password).subscribe(trn => {
 
       //alert(JSON.stringify(trn));
-      console.log(trn);
+      // console.log(trn);
       localStorage.setItem('store', JSON.stringify(trn));
       const member = {
         id:null,
@@ -51,9 +54,11 @@ export class LoginPage  {
         lastname:trn.lastname
       }
       localStorage.setItem('member', JSON.stringify(member));
-      console.log(member);
+      // console.log(member);
       this.router.navigateByUrl('/cart');
       this.event.publish('store:changed',trn);
+
+      loading.dismiss();
 
       // console.log(trn);
       // this.email = trn.data;
@@ -76,22 +81,20 @@ export class LoginPage  {
       //         this.router.navigateByUrl('/customer');
       //  }
 
-     });
+    });
 
   }
 
+  goRegister_store(){
+  this.router.navigateByUrl('/register');
+  }
 
+  goRegister_logistic(){
+  this.router.navigateByUrl('/register-logistic');
+  }
 
-goRegister_store(){
- this.router.navigateByUrl('/register');
-}
-
-goRegister_logistic(){
- this.router.navigateByUrl('/register-logistic');
-}
-
-goRegister_customer(){
- this.router.navigateByUrl('/register-customer');
-}
+  goRegister_customer(){
+  this.router.navigateByUrl('/register-customer');
+  }
 
 }

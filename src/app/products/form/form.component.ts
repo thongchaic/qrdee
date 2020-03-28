@@ -138,6 +138,23 @@ selectPictures() {
    })
  }
 
+ getPicture() {
+    this.camera.getPicture({
+      quality: 70,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }).then((image) => {
+      this.thumbnail = 'data:image/jpeg;base64,' + image;
+      this.productForm.get('thumbnail').patchValue(this.thumbnail);
+      // console.log(base64Image);
+      // this.preview = base64Image;
+      // this.form.get('photo').patchValue(base64Image);
+    }, (err) => {
+      console.log(err);
+    })
+  }
+
 
 submit() {
 
@@ -156,7 +173,7 @@ submit() {
    console.log(this.productForm.value);
    this.productService.updateProduct(this.productForm.value, this.route.snapshot.params['id']).subscribe(res => {
      //alert(JSON.stringify(res));
-     //this.toastService.showToast('แก้ไขสินค้าเรียบร้อยแล้ว', 'top');
+     this.toastService.showToast('แก้ไขสินค้าเรียบร้อยแล้ว', 'top');
      this.router.navigateByUrl('/products');
    }, err => {
      this.router.navigateByUrl('/products');

@@ -11,40 +11,49 @@
   <ion-label position="floating">ตำแหน่งร้าน</ion-label>
   <div #map id="map" style="height:250px;"></div>
 
-  <ion-list>
+  <ion-list [formGroup]="form">
     <ion-item>
         <b>แก้ไขข้อมูลร้านค้า</b>
     </ion-item>
+    <ion-item-group >
+      <ion-item lines="none">
+        <ion-img [src]="store_pic || '/assets/noimg.png'"></ion-img>
+      </ion-item>
+      <ion-grid>
+        <ion-row justify-content-center>
+          <ion-button size="small" color="primary" (click)="getPicture(1)">ถ่ายรูปร้านค้า</ion-button>
+          <ion-button size="small" color="secondary" (click)="selectPictures();">เลือกจากอัลบั้ม</ion-button>
+        </ion-row>
+      </ion-grid>
+    </ion-item-group>
      <ion-item>
-         <ion-avatar slot="start">
-           <ion-img [src]="store.store_pic || 'assets/camera.png'" ></ion-img>
-         </ion-avatar>
-         <ion-input slot="end" color="primary" type="text" [(ngModel)]="store.store_name" ></ion-input>
+        <b slot="start">ชื่อร้าน</b>
+        <ion-input slot="end" color="primary" type="text" formControlName="store_name" ></ion-input>
      </ion-item>
      <ion-item>
          <b slot="start">พร้อมเพย์</b>
-         <ion-input slot="end"  color="primary" type="text" [(ngModel)]="store.promptpay" ></ion-input>
+         <ion-input slot="end"  color="primary" type="text" formControlName="promptpay" ></ion-input>
      </ion-item>
      <ion-item>
          <b slot="start">โทรศัพท์</b>
-         <ion-input slot="end" color="primary" type="text" [(ngModel)]="store.mobile_number" ></ion-input>
+         <ion-input slot="end" color="primary" type="text" formControlName="mobile_number" ></ion-input>
      </ion-item>
      <ion-item>
          <b slot="start">ค่าขนส่ง</b>
-         <ion-input slot="end" color="primary" type="number" [(ngModel)]="store.delivery_price" ></ion-input>
+         <ion-input slot="end" color="primary" type="number" formControlName="delivery_price" ></ion-input>
      </ion-item>
      <ion-item>
          <b slot="start">ชื่อ</b>
-         <ion-input slot="end" color="primary" type="text" [(ngModel)]="store.firstname" ></ion-input>
+         <ion-input slot="end" color="primary" type="text" formControlName="firstname" ></ion-input>
      </ion-item>
      <ion-item>
          <b slot="start">นามสกุล</b>
-         <ion-input slot="end" color="primary" type="text" [(ngModel)]="store.lastname" ></ion-input>
+         <ion-input slot="end" color="primary" type="text" formControlName="lastname" ></ion-input>
      </ion-item>
 
      <ion-item>
        <ion-label color="primary" position="stacked">ประเภทร้านค้า</ion-label>
-       <ion-select [(ngModel)]="store.store_type_id">
+       <ion-select formControlName="store_type_id">
          <ion-select-option
            *ngFor="let type of store_types"
            [value]="type.id"

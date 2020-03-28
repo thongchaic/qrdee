@@ -58,7 +58,7 @@ monthlyLabel:any = [];
 
 
   ionViewWillEnter(){
-      this.Ststs.getStats().subscribe(res => {
+      this.Ststs.getStats(JSON.parse(localStorage.getItem('store')).id).subscribe(res => {
         console.log(res);
         this.stat_data = res.data;
         this.daily = res.data.daily.total;
@@ -76,7 +76,7 @@ monthlyLabel:any = [];
   }
 
   createBarChartD() {
-    this.Ststs.getStats().subscribe(res => {
+    this.Ststs.getStats(JSON.parse(localStorage.getItem('store')).id).subscribe(res => {
         this.hourlyData = res.data.hourly.data;
         this.hourlyLabel = res.data.hourly.label;
         console.log('data รายได้วันนี้ hourly',this.hourlyData);
@@ -108,7 +108,7 @@ monthlyLabel:any = [];
 
 
 createBarChartM() {
- this.Ststs.getStats().subscribe(res => {
+ this.Ststs.getStats(JSON.parse(localStorage.getItem('store')).id).subscribe(res => {
         this.dailyData = res.data.daily.data;
         this.dailyLabel = res.data.daily.label;
         console.log('data รายได้เดือนนี้ daily',this.dailyData);
@@ -140,7 +140,7 @@ createBarChartM() {
 
 
 createBarChartY() {
- this.Ststs.getStats().subscribe(res => {
+ this.Ststs.getStats(JSON.parse(localStorage.getItem('store')).id).subscribe(res => {
         this.monthlyData = res.data.monthly.data;
         this.monthlyLabel = res.data.monthly.label;
         console.log('data รายได้ปีนี้ monthly',this.monthlyData);

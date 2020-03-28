@@ -19,9 +19,9 @@ constructor(
 
 
 get(id) {
-    return this.http.get<any>(`${this.baseUrl}/${id}`);
+    return this.http.get<any>(`https://qrdee.co/api/v2/stats/${id}`);
   }
-getStats() {
-    return this.http.get<any>(`${this.baseUrl}`);
+getStats(id) {
+    return this.http.get<any>(`https://qrdee.co/api/v2/sell_stats/${id}`);
   }
 }

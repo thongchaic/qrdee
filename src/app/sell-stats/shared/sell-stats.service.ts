@@ -18,11 +18,11 @@ export class SellStatsService {
   orders() {
    	 // console.log(`${this.baseUrl}/sell_statss`);
     // return this.http.get<any>(`${this.baseUrl}/sell_statss`);
-        return this.http.get<any>(`${this.baseUrl}/sell_statss`);
+        return this.http.get<any>(`https://qrdee.co/api/v2/sell_stats`);
   }
 
    orderss() {
-        return this.http.get<any>(`${this.baseUrl}/sell_statss_order`);
+        return this.http.get<any>(`https://qrdee.co/api/v2/sell_statss_order`);
   }
   
 }

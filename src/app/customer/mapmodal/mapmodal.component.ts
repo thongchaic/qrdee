@@ -33,7 +33,7 @@ export class MapmodalComponent implements OnInit {
   }
 
   dismissModal() {
-    this._modalCtrl.dismiss();
+    this._modalCtrl.dismiss({ latitude: localStorage.getItem('store_lat'), longitude: localStorage.getItem('store_lng') });
   }
 
   accept() {

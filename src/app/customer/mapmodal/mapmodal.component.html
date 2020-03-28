@@ -1,3 +1,15 @@
-<p>
-  mapmodal works!
-</p>
+<ion-header translucent>
+  <ion-toolbar>
+    <ion-title>เลือกสถานที่</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()">ปิด</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <div #map id="map" style="height: 100%;"></div>
+</ion-content>
+
+<ion-footer>
+  <ion-button expand="full" (click)="accept()">ยืนยัน</ion-button>
+</ion-footer>

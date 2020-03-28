@@ -64,16 +64,12 @@
      </ion-item>
  </ion-list>
 
- <p *ngIf="error">{{ error }}</p>
-
   <ion-card style="background:#FFFFF0;">
     <ion-card-content *ngIf="store">
-
-
-        <ion-button type="submit" shape="round" expand="full" color="primary" (click)="submit()">
-           <ion-icon name="create"></ion-icon>
-           &nbsp;ปรับปรุงข้อมูล
-        </ion-button>
+      <ion-button type="submit" shape="round" expand="full" color="primary" (click)="submit()">
+          <ion-icon name="create"></ion-icon>
+          &nbsp;ปรับปรุงข้อมูล
+      </ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>

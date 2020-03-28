@@ -3,15 +3,15 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { UserService } from './shared/user.service';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { ToastService } from '../shared/services/toast.service';
-import { LoadingService } from '../shared/services/loading.service';
 import { ActivatedRoute, Router,NavigationExtras  } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { NavController } from '@ionic/angular';
+import { NavController, LoadingController } from '@ionic/angular';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 
 import { ModalController } from '@ionic/angular';
 import { CartmodalComponent } from './cartmodal/cartmodal.component';
 import { CustomerService } from './shared/customer.service';
+import { MapmodalComponent } from './mapmodal/mapmodal.component';
 
 declare var google;
 
@@ -47,7 +47,7 @@ export class CustomerPage implements AfterViewInit{
     private builder: FormBuilder,
     private navCtrl: NavController,
     private modalController: ModalController,
-    private loading: LoadingService,
+    private _loading: LoadingController,
     private callNumber: CallNumber
 	){
 
@@ -83,16 +83,19 @@ export class CustomerPage implements AfterViewInit{
   }
 
 
-  loadStores(){
-      //this.loading.showLoading();
-      this.offset = this.stores.length;
-      this.userservice.getStores(this.offset, this.latitude, this.longitude).subscribe((data:any)=>{
+  async loadStores(){
+      const loading = await this._loading.create();
+      await loading.present();
+
+      this.offset = await this.stores.length;
+      await this.userservice.getStores(this.offset, this.latitude, this.longitude).subscribe((data:any)=>{
         //this.loading.dismissLoading();
 
         data.forEach(e => {
           this.stores.push(e)
         });
         console.log(this.stores);
+        loading.dismiss();
 
       });
   }
@@ -267,12 +270,27 @@ export class CustomerPage implements AfterViewInit{
       this.tab1 = false;
       this.tab2 = true;
       this.stores = [];
-      this.loadStores();
+      this.loadMapModal();
     }else{
       this.tab1 = true;
       this.tab2 = false;
       this.processPayment();
     }
+  }
+
+  async loadMapModal() {
+    const modal = await this.modalController.create({
+      component: MapmodalComponent
+    });
+
+    await modal.present();
+
+    const { data } = await modal.onWillDismiss();
+
+    this.latitude = await data.latitude;
+    this.longitude = await data.longitude;
+
+    await(this.loadStores());
   }
 
 

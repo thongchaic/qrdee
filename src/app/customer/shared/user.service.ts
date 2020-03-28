@@ -14,6 +14,9 @@ export class UserService {
 
   }
 
+  placeOrder(member_id, member_cart, latitude, longitude){
+
+  }
 
   searchStores(q,offset,latitude,longitude){
     console.log(`https://qrdee.co/api/v2/stores?q=${q}&offset=${offset}&latitude=${latitude}&longitude=${longitude}`);

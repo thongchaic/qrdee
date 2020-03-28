@@ -7,7 +7,12 @@ import { LoadingService } from '../shared/services/loading.service';
 import { ActivatedRoute, Router,NavigationExtras  } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
-// declare var google;
+import { CallNumber } from '@ionic-native/call-number/ngx';
+
+import { ModalController } from '@ionic/angular';
+import { CartmodalComponent } from './cartmodal/cartmodal.component';
+
+declare var google;
 
 @Component({
   selector: 'app-customer',
@@ -16,13 +21,21 @@ import { NavController } from '@ionic/angular';
 })
 export class CustomerPage implements AfterViewInit{
 
-  tab:number = 0;
+  tab1 = false;
+  tab2 = true;
   latitude: any;
   longitude: any;
   member:any;
   stores:any[] = [];
   offset:number = 0;
   q = '';
+  member_cart:any[] = [];
+  total_price = 0;
+  notes:string = '';
+
+  @ViewChild('mapElement',{static:false}) mapElement: ElementRef;
+  map: any;
+
 
   constructor(
     private geolocation: Geolocation,
@@ -33,24 +46,28 @@ export class CustomerPage implements AfterViewInit{
     private http: HttpClient,
     private builder: FormBuilder,
     private navCtrl: NavController,
-    private loading: LoadingService
+    private modalController: ModalController,
+    private loading: LoadingService,
+    private callNumber: CallNumber
 	){
+
     this.member = JSON.parse(localStorage.getItem('member'));
     this.latitude = this.member.latitude;
     this.longitude = this.member.longitude;
+
     console.log("list component called!!!");
     console.log(this.member);
 
+    this.loadStores();
   }
 
   ionViewWillEnter() {
 
   }
   ngAfterViewInit(): void {
-    this.getCurrentPos();
+    //this.getCurrentPos();
+
   }
-
-
 
   getCurrentPos(){
 
@@ -64,6 +81,7 @@ export class CustomerPage implements AfterViewInit{
     });
 
   }
+
 
   loadStores(){
       //this.loading.showLoading();
@@ -108,21 +126,134 @@ export class CustomerPage implements AfterViewInit{
       this.searchStores(this.q);
     }
   }
+  calcTotalPrice(){
+    this.total_price = 0;
+    this.member_cart.forEach(e => {
+        this.total_price += e.delivery_price;
+        e.products.forEach(p => {
+          this.total_price += p.price;
+        });
+    });
 
-  viewStore(store){
-    console.log(store);
   }
 
+  processPayment(){
+    this.tab1 = true;
+    this.tab2 = false;
 
+    this.member_cart = JSON.parse(localStorage.getItem('member_cart'));
+    console.log(this.member_cart);
+    this.calcTotalPrice();
+
+    if(this.mapElement){
+      console.log("Element active");
+      this.loadMap();
+    }else{
+      console.log("Element not active");
+    }
+  }
+
+  loadMap() {
+
+
+    localStorage.setItem("member_lat",this.latitude);
+    localStorage.setItem("member_lng",this.longitude);
+
+    let latLng = new google.maps.LatLng(this.latitude, this.longitude);
+    this.map = new google.maps.Map(this.mapElement.nativeElement, {
+      zoom: 12,
+      center: latLng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    });
+    let marker = new google.maps.Marker({
+      map: this.map,
+      draggable: true,
+      animation: google.maps.Animation.DROP,
+      position: latLng
+    });
+    marker.addListener('dragend', function() {
+      localStorage.setItem("member_lat",marker.getPosition().lat());
+      localStorage.setItem("member_lng",marker.getPosition().lng());
+      this.map.setCenter(marker.getPosition());
+    });
+
+  }
+
+  placeOrder(){
+
+    this.member_cart = JSON.parse(localStorage.getItem('member_cart'));
+    this.latitude = localStorage.getItem('member_lat');
+    this.longitude = localStorage.getItem('member_lng');
+
+    console.log(this.notes);
+
+  }
+
+  removeItem(store_id, product_id){
+    let i = 0;
+    this.member_cart.forEach(e => {
+      if(e.id == store_id){
+        let j = 0;
+        e.products.forEach(p => {
+            if(p.id == product_id){
+              e.products.splice(j,1);
+              console.log(store_id+" => "+e.products.length);
+              if(e.products.length <= 0){
+                this.member_cart.splice(i,1);
+              }
+            }
+            j++;
+        });
+      }
+      i++;
+    });
+    this.calcTotalPrice();
+    localStorage.setItem('member_cart',JSON.stringify(this.member_cart));
+  }
+
+  callStore(mobile_number){
+    this.callNumber.callNumber(`${mobile_number}`, true)
+      .then(res => {  })
+      .catch(err => { alert(JSON.stringify(err)); });
+  }
+
+  viewStore(store){
+    //console.log(store);
+    this.cartModal(store);
+  }
+
+  async cartModal(store) {
+
+    const modal = await this.modalController.create({
+      component: CartmodalComponent,
+      componentProps: {
+        'store': store
+      }
+    });
+    modal.onDidDismiss()
+      .then(status => {
+        console.log("dismis => ");
+        console.log(status);
+
+        if(status.data == 3){
+          this.processPayment();
+        }
+
+      });
+    return await modal.present();
+  }
 
   changeTab(t){
-    this.tab = t;
 
-    if(this.tab == 0){
+    if(t == 0){
+      this.tab1 = false;
+      this.tab2 = true;
       this.stores = [];
       this.loadStores();
     }else{
-
+      this.tab1 = true;
+      this.tab2 = false;
+      this.processPayment();
     }
   }
 

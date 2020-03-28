@@ -7,35 +7,32 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="stores && tab == 0" style="background:#FFFFFF;">
+<ion-content [hidden]="tab1" style="background:#FFFFFF;">
   <ion-searchbar placeholder="ค้นหาร้าน" color="primary" (ionChange)="searchStores($event.target.value)">
   </ion-searchbar>
 
-  <ion-list >
+  <ion-list *ngIf="stores">
       <ion-list-header >
-        <ion-label>รายการสินค้า</ion-label>
+        <ion-label>ร้านค้าไกล้เคียง</ion-label>
       </ion-list-header>
 
       <ion-item  *ngFor="let store of stores">
-        <ion-avatar slot="start">
-          <img *ngIf="store.store_pic" [src]="'https://qrdee.co/app/'+store.store_pic">
-          <img *ngIf="!store.store_pic" src="/assets/noimg.png">
-        </ion-avatar>
-        <ion-text>
-          <small *ngIf="store.store_name"><b>{{store.store_name}}</b></small><br>
-          <small *ngIf="store.store_type">{{store.store_type.store_type_th}}</small>
-        </ion-text>
-        <ion-text slot="end">
-          <small *ngIf="store.delivery_price">ระยะ {{store.distance | number }} km</small><br>
-          <small *ngIf="store.delivery_price">ค่าส่ง {{store.delivery_price}} ฿</small>
-        </ion-text>
-        <ion-button fill="clear" color="primary" slot="end" (click)="viewStore(store);">
-          <ion-icon slot="icon-only" name="md-eye"></ion-icon>
-        </ion-button>
-      </ion-item>
-
-
-
+          <ion-avatar slot="start">
+            <img *ngIf="store.store_pic" [src]="'https://qrdee.co/app/'+store.store_pic">
+            <img *ngIf="!store.store_pic" src="/assets/noimg.png">
+          </ion-avatar>
+          <ion-text>
+            <small *ngIf="store.store_name"><b>{{store.store_name}}</b></small><br>
+            <small *ngIf="store.store_type">{{store.store_type.store_type_th}}</small>
+          </ion-text>
+          <ion-text slot="end">
+            <small *ngIf="store.delivery_price">ระยะ {{store.distance | number }} km</small><br>
+            <small *ngIf="store.delivery_price">ค่าส่ง {{store.delivery_price}} ฿</small>
+          </ion-text>
+          <ion-button fill="clear" color="primary" slot="end" (click)="viewStore(store);">
+            <ion-icon slot="icon-only" name="md-eye"></ion-icon>
+          </ion-button>
+        </ion-item>
   </ion-list>
 
   <!-- <ion-infinite-scroll threshold="50%" (ionInfinite)="infinitStores($event.target)">
@@ -44,9 +41,78 @@
    </ion-infinite-scroll> -->
 
 </ion-content>
-<ion-content *ngIf="tab == 1">
-  t1
+<ion-content [hidden]="tab2">
+
+  <ion-list  *ngFor="let cart of member_cart">
+
+      <!-- <ion-list-header >
+        <ion-label>ตะกร้าสินค้า</ion-label>
+      </ion-list-header> -->
+      <ion-item >
+        <ion-avatar slot="start">
+          <img *ngIf="cart.store_pic" [src]="'https://qrdee.co/app/'+store.store_pic">
+          <img *ngIf="!cart.store_pic" src="/assets/noimg.png">
+        </ion-avatar>
+        <ion-text>
+          <small *ngIf="cart.store_name"><b>ร้าน {{cart.store_name}}</b></small><br>
+        </ion-text>
+        <ion-text slot="end">
+          <small *ngIf="cart.delivery_price">ค่าส่ง {{cart.delivery_price}} ฿</small>
+        </ion-text>
+        <ion-button fill="clear" color="primary" slot="end" (click)="callStore(cart.mobile_number);">
+          <ion-icon slot="icon-only" name="ios-call"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-item *ngFor="let prod of cart.products">
+        <ion-avatar slot="start">
+          <img *ngIf="prod.thumbnail" [src]="'https://qrdee.co/app/'+prod.thumbnail">
+          <img *ngIf="!prod.thumbnail" src="/assets/noimg.png">
+        </ion-avatar>
+        <ion-text>
+          <small *ngIf="prod.product_th"><b>{{prod.product_th}}</b></small><br>
+        </ion-text>
+        <ion-text slot="end">
+          <small *ngIf="prod.price">{{prod.price}} ฿</small>
+        </ion-text>
+        <ion-button fill="clear" color="danger" slot="end" (click)="removeItem(cart.id, prod.id);">
+          <ion-icon slot="icon-only" name="md-remove-circle"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+  </ion-list>
+
+  <ion-list lines="none">
+    <ion-item>
+      <ion-text slot="start">
+        <b *ngIf="total_price">รวม {{total_price}} ฿</b>
+      </ion-text>
+      <ion-text slot="end">
+        <small>**ชำระเงินปลายทางผ่าน QRCode</small>
+      </ion-text>
+    </ion-item>
+  </ion-list>
+
+<ion-label position="floating">โปรดระบุจุดรับสินค้า</ion-label>
+<div #mapElement style="height:250px;" ></div>
+<br>
+<ion-list lines="none">
+
+  <ion-item>
+    <ion-label position="stacked">รายละเอียดเพิ่มเติมสำหรับผู้ส่งของ</ion-label>
+    <ion-textarea [(ngModel)]="notes" style="background-color:#ded9d9;" rows="4" placeholder="ตัวอย่าง. หน้าอาคาร 3 สาขาวิทยาการคอมพิวเตอร์ มหาวิทยาลัยราชภัฏสุรินทร์"></ion-textarea>
+  </ion-item>
+
+  <ion-item>
+    <ion-button size="default" slot="end" (click)="placeOrder();" color="tertiary">
+      ส่งคำสั่งซื้อ
+    </ion-button>
+  </ion-item>
+</ion-list>
+
+
 </ion-content>
+
 
 <ion-footer style="background:#FFFFFF;">
   <ion-toolbar>
@@ -54,7 +120,7 @@
               <ion-tab-bar slot="bottom">
                 <ion-tab-button color="primary" (click)="changeTab(0)" >
                     <ion-icon name="md-locate"></ion-icon>
-                    <ion-label>ร้านค้าไกล้ๆนี้</ion-label>
+                    <ion-label>ร้านค้าไกล้ๆ</ion-label>
                 </ion-tab-button>
                 <ion-tab-button color="primary" (click)="changeTab(1)" >
                     <ion-icon name="md-cart"></ion-icon>

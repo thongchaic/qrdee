@@ -1,3 +1,63 @@
-<p>
-  cartmodal works!
-</p>
+<ion-header padding="true">
+  <ion-toolbar  *ngIf="store">
+
+    <ion-avatar slot="start">
+      <img *ngIf="store.store_pic" [src]="'https://qrdee.co/app/'+store.store_pic">
+      <img *ngIf="!store.store_pic" src="/assets/noimg.png">
+    </ion-avatar>
+
+    <ion-title  >
+      {{ store.store_name }}
+      <!-- <img  object-fit: cover src="/assets/noimg.png" > -->
+    </ion-title>
+
+
+    <ion-button fill="clear" color="danger" slot="end" (click)="forceDissmiss(0);">
+      <ion-icon name="ios-arrow-back"></ion-icon>Back
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+
+
+  <ion-list *ngIf="products">
+      <ion-item >
+
+        <ion-text slot="start">
+          <small>เลือกไว้แล้ว {{pick_count}} ชิ้น</small>
+        </ion-text>
+        <ion-button fill="clear" color="primary" slot="end" (click)="startPayment();">
+          <ion-icon slot="icon-only" name="ios-cash"></ion-icon> ชำระเงิน
+        </ion-button>
+      </ion-item>
+
+      <ion-item  *ngFor="let product of products">
+        <ion-avatar slot="start">
+          <img *ngIf="store.store_pic" [src]="'https://qrdee.co/app/'+store.store_pic">
+          <img *ngIf="!store.store_pic" src="/assets/noimg.png">
+        </ion-avatar>
+        <ion-text>
+          <small *ngIf="product.product_th"><b>{{product.product_th}}</b></small><br>
+        </ion-text>
+        <ion-text slot="end">
+          <small *ngIf="product.price">ราคา {{product.price | number }} บาท</small><br>
+        </ion-text>
+        <ion-button fill="clear" color="secondary" slot="end" (click)="selectItem(product);">
+          <ion-icon slot="icon-only" name="ios-cart"></ion-icon>
+        </ion-button>
+      </ion-item>
+
+      <ion-item >
+        <ion-text>
+          <small *ngIf="store.delivery_price">**ร้านนี้ค่าส่ง {{store.delivery_price}} บาท</small><br>
+        </ion-text>
+      </ion-item>
+
+  </ion-list>
+
+
+
+</ion-content>

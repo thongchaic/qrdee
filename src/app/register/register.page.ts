@@ -90,6 +90,7 @@ export class RegisterPage{
           localStorage.setItem('store', JSON.stringify(trn));
           this.event.publish('store:changed',trn);
           const member = {
+            id:null,
             mobile_number:trn.mobile_number,
             latitude:trn.latitude,
             longitude:trn.longitude,

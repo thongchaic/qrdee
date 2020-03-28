@@ -1,3 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>สินค้าของฉัน</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
 <ion-content>
   <!-- <ion-searchbar placeholder="ชื่อ/รหัสสินค้า" color="primary" animated debounce="500" (ionChange)="search($event.target.value)">
   </ion-searchbar> -->
@@ -9,13 +19,9 @@
   <ion-item-sliding *ngFor="let product of products">
       <ion-item>
 
-
         <ion-avatar slot="start">
           <img *ngIf="product.thumbnail" [src]="'https://qrdee.co/app/'+product.thumbnail">
           <img *ngIf="!product.thumbnail" src="/assets/noimg.png">
-          <!-- <a routerLink="/products/{{ product.id }}">
-
-          </a> -->
         </ion-avatar>
 
         <ion-label>
@@ -25,15 +31,9 @@
           <h5><ion-text color="dark">{{ product.price }}฿</ion-text></h5>
         </ion-label>
 
-        <!-- <ion-button fill="clear" color="primary" slot="end" (click)="addToCart(product);">
-          <ion-icon slot="icon-only" name="basket"></ion-icon>
-        </ion-button> -->
         <ion-button fill="clear"  slot="end" color="secondary" routerLink="/products/{{ product.id }}/edit">
            <ion-icon name="create"></ion-icon>
          </ion-button>
-         <!-- <ion-button fill="clear" size="large" color="danger" (click)="deleteProduct(product.id);">
-           <ion-icon name="close"></ion-icon>
-         </ion-button> -->
 
       </ion-item>
 

@@ -41,7 +41,24 @@ export class AppComponent {
     this.event.subscribe('store:changed',trn=>{
        this.store = trn;
     });
-    
+
+    try{
+      JSON.parse(localStorage.getItem('member'));
+    }catch(e){
+      const member = {
+        id:null,
+        mobile_number:null,
+        latitude:14.8718084,
+        longitude:103.4962797,
+        firstname:null,
+        lastname:null
+      }
+      localStorage.setItem('member', JSON.stringify(member));
+    }
+
+
+
+
     try{
       this.store = JSON.parse(localStorage.getItem('store'));
     }catch(e){
@@ -49,8 +66,11 @@ export class AppComponent {
       this.router.navigateByUrl('/login');
     }
 
-    //alert(JSON.stringify(this.store));
-
+    try{
+      JSON.parse(localStorage.getItem('member_cart'));
+    }catch(e){
+      localStorage.setItem('member_cart',JSON.stringify([]));
+    }
 
     this.initializeApp();
   }
@@ -65,6 +85,7 @@ export class AppComponent {
 
    logout(){
      localStorage.removeItem('store');
+     localStorage.setItem('member_cart',JSON.stringify([]));
      this.router.navigateByUrl('/login');
    }
    product(){

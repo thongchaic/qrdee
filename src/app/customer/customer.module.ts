@@ -7,12 +7,18 @@ import { SharedModule } from '../shared/shared.module';
 import { CustomerPage } from './customer.page';
 import { UserService } from './shared/user.service';
 import { FormsService } from '../products/shared/forms.service';
+import { CartmodalComponent } from './cartmodal/cartmodal.component';
+import { CallNumber } from '@ionic-native/call-number/ngx';
 
 
 const routes: Routes = [
   {
     path: '',
     component: CustomerPage
+  },
+   {
+    path: 'cartmodal',
+    component: CartmodalComponent
   }
   // ,
   //  {
@@ -31,8 +37,9 @@ const routes: Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [
-    CustomerPage
+    CustomerPage,
+    CartmodalComponent
   ],
-   providers: [UserService,FormsService],
+   providers: [UserService,FormsService,CallNumber],
 })
 export class CustomerPageModule {}

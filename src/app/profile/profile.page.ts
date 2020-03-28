@@ -95,7 +95,10 @@ export class ProfilePage implements OnInit{
 
         loading.dismiss();
         this.toastService.showToast(`ปรับปรุงข้อมูลเรียบร้อยแล้ว`, 'top');
-      }, (err) => { loading.dismiss })
+      }, (err) => { 
+        this.toastService.showToast(err, 'top');
+        loading.dismiss() 
+      })
     // this.store.latitude = localStorage.getItem('store_lat');
     // this.store.longitude = localStorage.getItem('store_lng');
     // localStorage.setItem('store', JSON.stringify(this.store));

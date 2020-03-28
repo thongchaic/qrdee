@@ -25,6 +25,7 @@ export class ProfilePage implements OnInit{
   store:any;
   store_types:any;
   store_pic = '';
+  error = '';
 
   constructor(
   	private profileservice: ProfileService,
@@ -97,6 +98,7 @@ export class ProfilePage implements OnInit{
         this.toastService.showToast(`ปรับปรุงข้อมูลเรียบร้อยแล้ว`, 'top');
       }, (err) => { 
         this.toastService.showToast(err, 'top');
+        this.error = JSON.stringify(err);
         loading.dismiss() 
       })
     // this.store.latitude = localStorage.getItem('store_lat');

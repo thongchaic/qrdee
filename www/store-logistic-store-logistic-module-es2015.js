@@ -224,103 +224,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
 
 
 
 let TransactionService = class TransactionService {
     constructor(http) {
         this.http = http;
-        this.baseUrl = `${_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].api_url}`;
-    }
-    get(id) {
-        return this.http.get(`${this.baseUrl}/${id}`);
     }
     ////////////////// v2 ///////////////////
-    transactionToQR(products, price, store_id) {
+    genQR(promptpay, price) {
+        return this.http.get(`https://qrdee.co/api/v2/qr?promptpay=${promptpay}&price=${price}`);
+    }
+    insertTransaction(products, prompt_payload, price, store_id) {
         const body = {
             price: price,
+            prompt_payload: prompt_payload,
             products: products
         };
         return this.http.post(`https://qrdee.co/api/v2/trnqr/${store_id}`, body);
     }
     getOrders(store_id) {
         return this.http.get(`https://qrdee.co/api/v2/orders/${store_id}`);
-    }
-    ////////////////// v1 ///////////////////
-    // latitude,longitude
-    orderProduct() {
-        console.log(`https://qrdee.co/api/v1/order`);
-        return this.http.get(`https://qrdee.co/api/v1/order`);
-    }
-    orderProducts() {
-        console.log(`https://qrdee.co/api/v1/orders`);
-        return this.http.get(`https://qrdee.co/api/v1/orders`);
-    }
-    getUser() {
-        return this.http.get(`https://qrdee.co/api/v1/users`);
-        // console.log('https://qrdee.co/api/v1/users');
-    }
-    getCodeRandoms() {
-        return this.http.get(`https://qrdee.co/api/v1/code_randomss`);
-        // console.log('https://qrdee.co/api/v1/users');      store_id
-    }
-    newTransaction(products, total_price, latitude, longitude, firstname, lastname, mobile_number, latitude_store, longitude_store, store_id, promptpay, verified) {
-        const body = {
-            total_price: total_price,
-            products: products,
-            latitude: latitude,
-            longitude: longitude,
-            firstname: firstname,
-            lastname: lastname,
-            mobile_number: mobile_number,
-            latitude_store: latitude_store,
-            longitude_store: longitude_store,
-            store_id: store_id,
-            promptpay: promptpay,
-            verified: verified,
-        };
-        console.log(body);
-        return this.http.post(`${this.baseUrl}/new_transaction`, body);
-    }
-    newTransactionStore(products, total_price, verified) {
-        const bodystore = {
-            total_price: total_price,
-            products: products,
-            verified: verified,
-        };
-        console.log(bodystore);
-        return this.http.post(`https://qrdee.co/api/v1/new_transactionstore`, bodystore);
-    }
-    getverifiedcart(id) {
-        return this.http.get(`https://qrdee.co/api/v1/verified_transactionstore/${id}`);
-    }
-    verifiedcart(verified) {
-        const bodystoreverified = {
-            verified: verified,
-        };
-        console.log('verified', bodystoreverified);
-        return this.http.post(`https://qrdee.co/api/v1/verified_transactionstores`, bodystoreverified);
-    }
-    newTransactionOrder(firstname, lastname, mobile_number, store_id, code_randoms) {
-        const bodystorder = {
-            firstname: firstname,
-            lastname: lastname,
-            mobile_number: mobile_number,
-            store_id: store_id,
-            code_randoms: code_randoms,
-        };
-        console.log(bodystorder);
-        return this.http.post(`https://qrdee.co/api/v1/transaction_order_input`, bodystorder);
-    }
-    verifyTransaction(transaction) {
-        // console.log(transaction);
-        return this.http.post(`${this.baseUrl}/verify_transaction`, transaction);
-    }
-    verifyTransactions(transaction) {
-        // console.log(transaction);
-        return this.http.post(`${this.baseUrl}/verify_transactions`, transaction);
     }
 };
 TransactionService.ctorParameters = () => [

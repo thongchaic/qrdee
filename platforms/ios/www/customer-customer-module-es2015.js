@@ -1,5 +1,16 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["customer-customer-module"],{
 
+/***/ "./node_modules/raw-loader/index.js!./src/app/customer/cartmodal/cartmodal.component.html":
+/*!***************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/customer/cartmodal/cartmodal.component.html ***!
+  \***************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ion-header padding=\"true\">\n  <ion-toolbar  *ngIf=\"store\">\n\n    <ion-avatar slot=\"start\">\n      <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\">\n      <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n    </ion-avatar>\n\n    <ion-title  >\n      {{ store.store_name }}\n      <!-- <img  object-fit: cover src=\"/assets/noimg.png\" > -->\n    </ion-title>\n\n\n    <ion-button fill=\"clear\" color=\"danger\" slot=\"end\" (click)=\"forceDissmiss(0);\">\n      <ion-icon name=\"ios-arrow-back\"></ion-icon>Back\n    </ion-button>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n\n\n\n  <ion-list *ngIf=\"products\">\n      <ion-item >\n\n        <ion-text slot=\"start\">\n          <small>เลือกไว้แล้ว {{pick_count}} ชิ้น</small>\n        </ion-text>\n        <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"startPayment();\">\n          <ion-icon slot=\"icon-only\" name=\"ios-cash\"></ion-icon> ชำระเงิน\n        </ion-button>\n      </ion-item>\n\n      <ion-item  *ngFor=\"let product of products\">\n        <ion-avatar slot=\"start\">\n          <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\">\n          <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n        </ion-avatar>\n        <ion-text>\n          <small *ngIf=\"product.product_th\"><b>{{product.product_th}}</b></small><br>\n        </ion-text>\n        <ion-text slot=\"end\">\n          <small *ngIf=\"product.price\">ราคา {{product.price | number }} บาท</small><br>\n        </ion-text>\n        <ion-button fill=\"clear\" color=\"secondary\" slot=\"end\" (click)=\"selectItem(product);\">\n          <ion-icon slot=\"icon-only\" name=\"ios-cart\"></ion-icon>\n        </ion-button>\n      </ion-item>\n\n      <ion-item >\n        <ion-text>\n          <small *ngIf=\"store.delivery_price\">**ร้านนี้ค่าส่ง {{store.delivery_price}} บาท</small><br>\n        </ion-text>\n      </ion-item>\n\n  </ion-list>\n\n\n\n</ion-content>\n"
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/index.js!./src/app/customer/customer.page.html":
 /*!***********************************************************************!*\
   !*** ./node_modules/raw-loader!./src/app/customer/customer.page.html ***!
@@ -7,7 +18,127 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>    \n    <ion-title>เลือกร้านค้า</ion-title>\n    <ion-buttons slot=\"end\">\n      <!-- <ion-back-button></ion-back-button> -->\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n<ion-content class=\"bg\"> \n\n  <!-- <ion-button class=\"bk\" expand=\"full\" color=\"success\"  (click)=\"hide()\" >\n    <ion-icon name=\"arrow-dropright\"></ion-icon>\n    &nbsp;เลือกร้านค้า</ion-button>\n    <p> ตำแหน่ง</p>\n      {{ latitude}}   *ngIf=\"hideMe\"\n      {{ longitude}} -->\n  <ion-grid >\n      <div #mapElement>   </div>\n      <ion-row>\n        <ion-col size=\"12\"  >\n          <div class=\"btn2\" *ngFor=\"let store_distances of store_distance;\">\n              <ion-item (click)=\"store_product(store_distances.id)\">\n                 <img slot=\"start\" [src]=\"url+store_distances.store_pic || '/assets/noimg.png'\" \n                  class=\"img_store\" >\n                  <p style=\"font-weight: bold; font-size: 13px;\">\n                  {{store_distances.store_name}}<br> <ion-icon ios=\"ios-pin\" md=\"md-pin\"></ion-icon>ระยะทาง{{store_distances.distance}} กม.\n                </p>\n              </ion-item> \n            </div> <br><br><br><br><br><br> <br> \n        </ion-col> \n      </ion-row>\n  </ion-grid> \n\n\n\n\n  <!-- <ion-grid >\n    <div #mapElement ></div>\n    <ion-row>\n      <ion-col size=\"12\">\n        <div class=\"btn2\" expand=\"block\"  *ngFor=\"let store_distances of store_distance;\">\n            <ion-item (click)=\"store_product(store_distances.id)\">\n               <img slot=\"start\" [src]=\"url+store_distances.store_pic || '/assets/noimg.png'\" \n                class=\"img_store\" >\n                <p style=\"font-weight: bold; font-size: 13px;\">\n                {{store_distances.store_name}}<br> <ion-icon ios=\"ios-pin\" md=\"md-pin\"></ion-icon>ระยะทาง{{store_distances.distance}} กม.\n              </p>\n            </ion-item> \n           </div> <br><br><br><br><br><br> <br> \n      </ion-col> \n    </ion-row>\n</ion-grid>  -->\n\n\n\n<!-- </ion-card> -->\n</ion-content>\n"
+module.exports = "<ion-header style=\"background:#FFFFFF;\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>ซื้อสินค้า</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [hidden]=\"tab1\" style=\"background:#FFFFFF;\">\n  <ion-searchbar placeholder=\"ค้นหาร้าน\" color=\"primary\" (ionChange)=\"searchStores($event.target.value)\">\n  </ion-searchbar>\n\n  <ion-list *ngIf=\"stores\">\n      <ion-list-header >\n        <ion-label>ร้านค้าไกล้เคียง</ion-label>\n      </ion-list-header>\n\n      <ion-item  *ngFor=\"let store of stores\">\n          <ion-avatar slot=\"start\">\n            <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\">\n            <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n          </ion-avatar>\n          <ion-text>\n            <small *ngIf=\"store.store_name\"><b>{{store.store_name}}</b></small><br>\n            <small *ngIf=\"store.store_type\">{{store.store_type.store_type_th}}</small>\n          </ion-text>\n          <ion-text slot=\"end\">\n            <small *ngIf=\"store.delivery_price\">ระยะ {{store.distance | number }} km</small><br>\n            <small *ngIf=\"store.delivery_price\">ค่าส่ง {{store.delivery_price}} ฿</small>\n          </ion-text>\n          <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"viewStore(store);\">\n            <ion-icon slot=\"icon-only\" name=\"md-eye\"></ion-icon>\n          </ion-button>\n        </ion-item>\n  </ion-list>\n\n  <!-- <ion-infinite-scroll threshold=\"50%\" (ionInfinite)=\"infinitStores($event.target)\">\n     <ion-infinite-scroll-content>\n     </ion-infinite-scroll-content>\n   </ion-infinite-scroll> -->\n\n</ion-content>\n<ion-content [hidden]=\"tab2\">\n\n  <ion-list  *ngFor=\"let cart of member_cart\">\n\n      <!-- <ion-list-header >\n        <ion-label>ตะกร้าสินค้า</ion-label>\n      </ion-list-header> -->\n      <ion-item >\n        <ion-avatar slot=\"start\">\n          <img *ngIf=\"cart.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\">\n          <img *ngIf=\"!cart.store_pic\" src=\"/assets/noimg.png\">\n        </ion-avatar>\n        <ion-text>\n          <small *ngIf=\"cart.store_name\"><b>ร้าน {{cart.store_name}}</b></small><br>\n        </ion-text>\n        <ion-text slot=\"end\">\n          <small *ngIf=\"cart.delivery_price\">ค่าส่ง {{cart.delivery_price}} ฿</small>\n        </ion-text>\n        <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"callStore(cart.mobile_number);\">\n          <ion-icon slot=\"icon-only\" name=\"ios-call\"></ion-icon>\n        </ion-button>\n      </ion-item>\n\n      <ion-item *ngFor=\"let prod of cart.products\">\n        <ion-avatar slot=\"start\">\n          <img *ngIf=\"prod.thumbnail\" [src]=\"'https://qrdee.co/app/'+prod.thumbnail\">\n          <img *ngIf=\"!prod.thumbnail\" src=\"/assets/noimg.png\">\n        </ion-avatar>\n        <ion-text>\n          <small *ngIf=\"prod.product_th\"><b>{{prod.product_th}}</b></small><br>\n        </ion-text>\n        <ion-text slot=\"end\">\n          <small *ngIf=\"prod.price\">{{prod.price}} ฿</small>\n        </ion-text>\n        <ion-button fill=\"clear\" color=\"danger\" slot=\"end\" (click)=\"removeItem(cart.id, prod.id);\">\n          <ion-icon slot=\"icon-only\" name=\"md-remove-circle\"></ion-icon>\n        </ion-button>\n      </ion-item>\n\n  </ion-list>\n\n  <ion-list lines=\"none\">\n    <ion-item>\n      <ion-text slot=\"start\">\n        <b *ngIf=\"total_price\">รวม {{total_price}} ฿</b>\n      </ion-text>\n      <ion-text slot=\"end\">\n        <small>**ชำระเงินปลายทางผ่าน QRCode</small>\n      </ion-text>\n    </ion-item>\n  </ion-list>\n\n  <ion-label position=\"floating\">โปรดระบุจุดรับสินค้า</ion-label>\n  <div #mapElement style=\"height:250px;\" ></div>\n  <br>\n\n\n  <ion-list lines=\"none\">\n\n    <ion-item>\n      <ion-label position=\"stacked\">ชื่อผู้รับ</ion-label>\n      <ion-input type=\"text\" [(ngModel)]=\"member.firstname\" style=\"background-color:#ded9d9;\"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position=\"stacked\">เบอร์โทรศัพท์</ion-label>\n      <ion-input type=\"text\" [(ngModel)]=\"member.mobile_number\" style=\"background-color:#ded9d9;\"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position=\"stacked\">รายละเอียดเพิ่มเติมสำหรับผู้ส่งของ</ion-label>\n      <ion-textarea [(ngModel)]=\"notes\" style=\"background-color:#ded9d9;\" rows=\"4\" placeholder=\"ตัวอย่าง. หน้าอาคาร 3 สาขาวิทยาการคอมพิวเตอร์ มหาวิทยาลัยราชภัฏสุรินทร์\"></ion-textarea>\n    </ion-item>\n\n    <ion-item>\n      <ion-button size=\"default\" slot=\"end\" (click)=\"placeOrder();\" color=\"tertiary\">\n        ส่งคำสั่งซื้อ\n      </ion-button>\n    </ion-item>\n  </ion-list>\n\n</ion-content>\n\n<ion-footer style=\"background:#FFFFFF;\">\n  <ion-toolbar>\n          <ion-tabs>\n              <ion-tab-bar slot=\"bottom\">\n                <ion-tab-button color=\"primary\" (click)=\"changeTab(0)\" >\n                    <ion-icon name=\"md-locate\"></ion-icon>\n                    <ion-label>ร้านค้าไกล้ๆ</ion-label>\n                </ion-tab-button>\n                <ion-tab-button color=\"primary\" (click)=\"changeTab(1)\" >\n                    <ion-icon name=\"md-cart\"></ion-icon>\n                    <ion-label>รายการซื้อ</ion-label>\n                </ion-tab-button>\n              </ion-tab-bar>\n            </ion-tabs>\n   </ion-toolbar>\n</ion-footer>\n"
+
+/***/ }),
+
+/***/ "./src/app/customer/cartmodal/cartmodal.component.scss":
+/*!*************************************************************!*\
+  !*** ./src/app/customer/cartmodal/cartmodal.component.scss ***!
+  \*************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2N1c3RvbWVyL2NhcnRtb2RhbC9jYXJ0bW9kYWwuY29tcG9uZW50LnNjc3MifQ== */"
+
+/***/ }),
+
+/***/ "./src/app/customer/cartmodal/cartmodal.component.ts":
+/*!***********************************************************!*\
+  !*** ./src/app/customer/cartmodal/cartmodal.component.ts ***!
+  \***********************************************************/
+/*! exports provided: CartmodalComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CartmodalComponent", function() { return CartmodalComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _products_shared_product_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../products/shared/product.service */ "./src/app/products/shared/product.service.ts");
+/* harmony import */ var _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../shared/services/toast.service */ "./src/app/shared/services/toast.service.ts");
+
+
+
+
+
+let CartmodalComponent = class CartmodalComponent {
+    constructor(productService, toastService, modalController) {
+        this.productService = productService;
+        this.toastService = toastService;
+        this.modalController = modalController;
+        this.products = [];
+        this.member_cart = [];
+        this.pick_count = 0;
+        console.log(this.store);
+        this.member_cart = JSON.parse(localStorage.getItem('member_cart'));
+        this.calcPickCount();
+    }
+    ngOnInit() {
+        //console.log(this.store);
+    }
+    ngAfterViewInit() {
+        this.loadProducts();
+    }
+    selectItem(product) {
+        let store = null;
+        this.member_cart.forEach(e => {
+            if (e.id == this.store.id) {
+                store = e;
+            }
+        });
+        if (store) {
+            store.products.push(product);
+        }
+        else {
+            store = this.store;
+            store.products = [product];
+            this.member_cart.push(this.store);
+        }
+        console.log(this.member_cart);
+        localStorage.setItem('member_cart', JSON.stringify(this.member_cart));
+        this.toastService.showToast('เก็บสินค้าลงตะกร้าแล้ว', 'top');
+        this.calcPickCount();
+    }
+    calcPickCount() {
+        this.pick_count = 0;
+        this.member_cart.forEach(e => {
+            this.pick_count += e.products.length;
+        });
+    }
+    loadProducts() {
+        //https://qrdee.co/api/v2/products/294
+        this.productService.getProducts(this.store.id).subscribe((data) => {
+            console.log(data);
+            this.products = data;
+            //console.log(this.member_cart);
+        });
+    }
+    startPayment() {
+        // process &
+        this.closeModal(3);
+    }
+    forceDissmiss(val) {
+        this.closeModal(val);
+    }
+    closeModal(status) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            yield this.modalController.dismiss(status);
+        });
+    }
+};
+CartmodalComponent.ctorParameters = () => [
+    { type: _products_shared_product_service__WEBPACK_IMPORTED_MODULE_3__["ProductService"] },
+    { type: _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_4__["ToastService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] }
+];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
+], CartmodalComponent.prototype, "store", void 0);
+CartmodalComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-cartmodal',
+        template: __webpack_require__(/*! raw-loader!./cartmodal.component.html */ "./node_modules/raw-loader/index.js!./src/app/customer/cartmodal/cartmodal.component.html"),
+        styles: [__webpack_require__(/*! ./cartmodal.component.scss */ "./src/app/customer/cartmodal/cartmodal.component.scss")]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_products_shared_product_service__WEBPACK_IMPORTED_MODULE_3__["ProductService"],
+        _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_4__["ToastService"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"]])
+], CartmodalComponent);
+
+
 
 /***/ }),
 
@@ -31,6 +162,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _customer_page__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./customer.page */ "./src/app/customer/customer.page.ts");
 /* harmony import */ var _shared_user_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./shared/user.service */ "./src/app/customer/shared/user.service.ts");
 /* harmony import */ var _products_shared_forms_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../products/shared/forms.service */ "./src/app/products/shared/forms.service.ts");
+/* harmony import */ var _cartmodal_cartmodal_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./cartmodal/cartmodal.component */ "./src/app/customer/cartmodal/cartmodal.component.ts");
+/* harmony import */ var _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/call-number/ngx */ "./node_modules/@ionic-native/call-number/ngx/index.js");
+
+
 
 
 
@@ -47,10 +182,15 @@ const routes = [
         component: _customer_page__WEBPACK_IMPORTED_MODULE_7__["CustomerPage"]
     },
     {
-        path: ':id',
-        component: _customer_page__WEBPACK_IMPORTED_MODULE_7__["CustomerPage"],
-        data: { title: 'แก้ไขข้อมูล', formType: 'update' }
-    },
+        path: 'cartmodal',
+        component: _cartmodal_cartmodal_component__WEBPACK_IMPORTED_MODULE_10__["CartmodalComponent"]
+    }
+    // ,
+    //  {
+    //   path: ':id',
+    //       component: CustomerPage,
+    //       data: { title: 'แก้ไขข้อมูล', formType: 'update' }
+    // },
 ];
 let CustomerPageModule = class CustomerPageModule {
 };
@@ -63,8 +203,11 @@ CustomerPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _shared_shared_module__WEBPACK_IMPORTED_MODULE_6__["SharedModule"],
             _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes)
         ],
-        declarations: [_customer_page__WEBPACK_IMPORTED_MODULE_7__["CustomerPage"]],
-        providers: [_shared_user_service__WEBPACK_IMPORTED_MODULE_8__["UserService"], _products_shared_forms_service__WEBPACK_IMPORTED_MODULE_9__["FormsService"]],
+        declarations: [
+            _customer_page__WEBPACK_IMPORTED_MODULE_7__["CustomerPage"],
+            _cartmodal_cartmodal_component__WEBPACK_IMPORTED_MODULE_10__["CartmodalComponent"]
+        ],
+        providers: [_shared_user_service__WEBPACK_IMPORTED_MODULE_8__["UserService"], _products_shared_forms_service__WEBPACK_IMPORTED_MODULE_9__["FormsService"], _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_11__["CallNumber"]],
     })
 ], CustomerPageModule);
 
@@ -99,23 +242,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./shared/user.service */ "./src/app/customer/shared/user.service.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 /* harmony import */ var _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/services/toast.service */ "./src/app/shared/services/toast.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _shared_services_loading_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../shared/services/loading.service */ "./src/app/shared/services/loading.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/call-number/ngx */ "./node_modules/@ionic-native/call-number/ngx/index.js");
+/* harmony import */ var _cartmodal_cartmodal_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./cartmodal/cartmodal.component */ "./src/app/customer/cartmodal/cartmodal.component.ts");
 
 
 
 
 
-// import { Http, Headers, RequestOptions } from '@angular/http';
+
+
+
 
 
 
 
 
 let CustomerPage = class CustomerPage {
-    constructor(geolocation, userservice, toastService, route, router, http, builder, loadingController, navCtrl) {
+    constructor(geolocation, userservice, toastService, route, router, http, builder, navCtrl, modalController, loading, callNumber) {
         this.geolocation = geolocation;
         this.userservice = userservice;
         this.toastService = toastService;
@@ -123,78 +270,218 @@ let CustomerPage = class CustomerPage {
         this.router = router;
         this.http = http;
         this.builder = builder;
-        this.loadingController = loadingController;
         this.navCtrl = navCtrl;
-        this.formType = 'update';
-        this.title = '';
-        this.url = src_environments_environment__WEBPACK_IMPORTED_MODULE_9__["environment"].url;
-        this.hideMe = false;
+        this.modalController = modalController;
+        this.loading = loading;
+        this.callNumber = callNumber;
+        this.tab1 = false;
+        this.tab2 = true;
+        this.stores = [];
+        this.offset = 0;
+        this.q = '';
+        this.member_cart = [];
+        this.total_price = 0;
+        this.notes = '';
+        this.member = JSON.parse(localStorage.getItem('member'));
+        this.latitude = this.member.latitude;
+        this.longitude = this.member.longitude;
+        console.log("list component called!!!");
+        console.log(this.member);
+        this.loadStores();
+    }
+    ionViewWillEnter() {
     }
     ngAfterViewInit() {
+        //this.getCurrentPos();
+    }
+    getCurrentPos() {
         this.geolocation.getCurrentPosition().then((resp) => {
-            // console.log(resp);
             this.latitude = resp.coords.latitude;
             this.longitude = resp.coords.longitude;
-            const map = new google.maps.Map(this.mapNativeElement.nativeElement, {
-                center: { lat: resp.coords.latitude, lng: resp.coords.longitude },
-                zoom: 6,
-            });
-            var icon = { url: 'https://cdn0.iconfinder.com/data/icons/maps-and-navigation-3-1/52/150-512.png',
-                scaledSize: new google.maps.Size(50, 50),
-            };
-            var marker = new google.maps.Marker({
-                position: { lat: resp.coords.latitude, lng: resp.coords.longitude },
-                map: map,
-                icon: icon
-            });
-            const infoWindow = new google.maps.InfoWindow;
-            const pos = { lat: this.latitude, lng: this.longitude };
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('ตำแหน่งของคุณ.');
-            infoWindow.open(map);
-            map.setCenter(pos);
-            // this.loadStoreDistance();
-            this.userservice.getStoreDistance(this.latitude, this.longitude).subscribe((data) => {
-                this.store_distance = data.data;
-                console.log('รายชื่อร้านค้า', this.store_distance);
-                console.log('ตำแหน่งลูกค้า', this.latitude, this.longitude);
-            });
-            //    console.log(this.latitude,this.longitude);
+            this.loadStores();
         }).catch((error) => {
-            console.log('เกิดข้อผิดพลาดในการรับตำแหน่ง', error);
+            alert("รับตำแหน่งปัจจุบันไม่ได้ ใช้ตำแหน่งล่าสุด");
+            this.loadStores();
         });
     }
-    hide() {
-        // this.hideMe = true;
-        this.hideMe = !this.hideMe;
+    loadStores() {
+        //this.loading.showLoading();
+        this.offset = this.stores.length;
+        this.userservice.getStores(this.offset, this.latitude, this.longitude).subscribe((data) => {
+            //this.loading.dismissLoading();
+            data.forEach(e => {
+                this.stores.push(e);
+            });
+            console.log(this.stores);
+        });
     }
-    // store_id = 0 ;
-    store_product(id) {
-        let navigationExtras = {
-            queryParams: {
-                special: JSON.stringify(id)
+    searchStores(q) {
+        if (q == "") {
+            this.loadStores();
+            this.q = q;
+        }
+        if (this.q == q) {
+        }
+        else {
+            this.stores = [];
+        }
+        this.q = q;
+        this.offset = this.stores.length;
+        this.userservice.searchStores(q, this.offset, this.latitude, this.longitude).subscribe((data) => {
+            console.log(data);
+            this.stores = data;
+        });
+    }
+    infinitStores(e) {
+        console.log("Infinit => " + this.q);
+        if (this.q == "") {
+            console.log("Load Stores....");
+            this.loadStores();
+        }
+        else {
+            this.searchStores(this.q);
+        }
+    }
+    calcTotalPrice() {
+        this.total_price = 0;
+        this.member_cart.forEach(e => {
+            this.total_price += e.delivery_price;
+            e.products.forEach(p => {
+                this.total_price += p.price;
+            });
+        });
+    }
+    processPayment() {
+        this.tab1 = true;
+        this.tab2 = false;
+        this.member_cart = JSON.parse(localStorage.getItem('member_cart'));
+        console.log(this.member_cart);
+        this.calcTotalPrice();
+        if (this.mapElement) {
+            console.log("Element active");
+            this.loadMap();
+        }
+        else {
+            console.log("Element not active");
+        }
+    }
+    loadMap() {
+        localStorage.setItem("member_lat", this.latitude);
+        localStorage.setItem("member_lng", this.longitude);
+        let latLng = new google.maps.LatLng(this.latitude, this.longitude);
+        this.map = new google.maps.Map(this.mapElement.nativeElement, {
+            zoom: 12,
+            center: latLng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+        let marker = new google.maps.Marker({
+            map: this.map,
+            draggable: true,
+            animation: google.maps.Animation.DROP,
+            position: latLng
+        });
+        marker.addListener('dragend', function () {
+            localStorage.setItem("member_lat", marker.getPosition().lat());
+            localStorage.setItem("member_lng", marker.getPosition().lng());
+            this.map.setCenter(marker.getPosition());
+        });
+    }
+    placeOrder() {
+        this.member_cart = JSON.parse(localStorage.getItem('member_cart'));
+        this.latitude = localStorage.getItem('member_lat');
+        this.longitude = localStorage.getItem('member_lng');
+        console.log(this.member);
+        this.userservice.placeOrder(this.member, this.member_cart, this.notes, this.latitude, this.longitude).subscribe((data) => {
+            console.log("res =====> ");
+            console.log(data);
+            localStorage.setItem('member', JSON.stringify(data.member));
+            localStorage.setItem('member_cart', JSON.stringify([]));
+            this.member_cart = [];
+            this.total_price = 0;
+            this.toastService.showToast('ส่งคำสั่งซื้อเรียบร้อยแล้ว', 'top');
+            this.changeTab(0);
+        });
+    }
+    removeItem(store_id, product_id) {
+        let i = 0;
+        this.member_cart.forEach(e => {
+            if (e.id == store_id) {
+                let j = 0;
+                e.products.forEach(p => {
+                    if (p.id == product_id) {
+                        e.products.splice(j, 1);
+                        console.log(store_id + " => " + e.products.length);
+                        if (e.products.length <= 0) {
+                            this.member_cart.splice(i, 1);
+                        }
+                    }
+                    j++;
+                });
             }
-        };
-        this.router.navigate(['products'], navigationExtras);
-        // console.log(id);
-        console.log(navigationExtras);
+            i++;
+        });
+        this.calcTotalPrice();
+        localStorage.setItem('member_cart', JSON.stringify(this.member_cart));
+    }
+    callStore(mobile_number) {
+        this.callNumber.callNumber(`${mobile_number}`, true)
+            .then(res => { })
+            .catch(err => { alert(JSON.stringify(err)); });
+    }
+    viewStore(store) {
+        //console.log(store);
+        this.cartModal(store);
+    }
+    cartModal(store) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const modal = yield this.modalController.create({
+                component: _cartmodal_cartmodal_component__WEBPACK_IMPORTED_MODULE_11__["CartmodalComponent"],
+                componentProps: {
+                    'store': store
+                }
+            });
+            modal.onDidDismiss()
+                .then(status => {
+                console.log("dismis => ");
+                console.log(status);
+                if (status.data == 3) {
+                    this.processPayment();
+                }
+            });
+            return yield modal.present();
+        });
+    }
+    changeTab(t) {
+        if (t == 0) {
+            this.tab1 = false;
+            this.tab2 = true;
+            this.stores = [];
+            this.loadStores();
+        }
+        else {
+            this.tab1 = true;
+            this.tab2 = false;
+            this.processPayment();
+        }
     }
 };
 CustomerPage.ctorParameters = () => [
     { type: _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_2__["Geolocation"] },
     { type: _shared_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"] },
     { type: _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_5__["ToastService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__["ActivatedRoute"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"] },
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"] },
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormBuilder"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["LoadingController"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["NavController"] }
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormBuilder"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__["NavController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__["ModalController"] },
+    { type: _shared_services_loading_service__WEBPACK_IMPORTED_MODULE_6__["LoadingService"] },
+    { type: _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_10__["CallNumber"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('mapElement', { static: false }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
-], CustomerPage.prototype, "mapNativeElement", void 0);
+], CustomerPage.prototype, "mapElement", void 0);
 CustomerPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-customer',
@@ -204,12 +491,14 @@ CustomerPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_2__["Geolocation"],
         _shared_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"],
         _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_5__["ToastService"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_6__["ActivatedRoute"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"],
         _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"],
-        _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormBuilder"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["LoadingController"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["NavController"]])
+        _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormBuilder"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_9__["NavController"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_9__["ModalController"],
+        _shared_services_loading_service__WEBPACK_IMPORTED_MODULE_6__["LoadingService"],
+        _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_10__["CallNumber"]])
 ], CustomerPage);
 
 
@@ -229,34 +518,46 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
 
 
 
 let UserService = class UserService {
     constructor(http) {
         this.http = http;
-        this.baseUrl = `${_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].api_url}/user`;
     }
-    get(id) {
-        return this.http.get(`${this.baseUrl}/${id}`);
+    placeOrder(mem, member_cart, notes, latitude, longitude) {
+        console.log(mem);
+        // console.log(member_cart);
+        // console.log(notes);
+        // console.log(latitude);
+        // console.log(longitude);
+        let items = [];
+        member_cart.forEach(e => {
+            e.products.forEach(p => {
+                items.push({
+                    store_id: e.id,
+                    product_id: p.id,
+                    price: p.price,
+                    qty: 1
+                });
+            });
+        });
+        const body = {
+            member: mem,
+            latitude: latitude,
+            longitude: longitude,
+            notes: notes,
+            items: items
+        };
+        return this.http.post(`https://qrdee.co/api/v2/orders`, body);
     }
-    getUser() {
-        return this.http.get(`${this.baseUrl}`);
+    searchStores(q, offset, latitude, longitude) {
+        console.log(`https://qrdee.co/api/v2/stores?q=${q}&offset=${offset}&latitude=${latitude}&longitude=${longitude}`);
+        return this.http.get(`https://qrdee.co/api/v2/stores?q=${q}&offset=${offset}&latitude=${latitude}&longitude=${longitude}`);
     }
-    getStoreDistance(latitude, longitude) {
-        console.log(`https://qrdee.co/api/v1/dis?latitude=${latitude}&longitude=${longitude}`);
-        return this.http.get(`https://qrdee.co/api/v1/dis?latitude=${latitude}&longitude=${longitude}`);
-    }
-    updateUser(data, id) {
-        return this.http.post(`https://qrdee.co/api/v1/update_user/${id}`, this.createFormData(data));
-    }
-    createFormData(data) {
-        const fd = new FormData();
-        fd.append('latitude', data.latitude);
-        fd.append('longitude', data.longitude);
-        return fd;
+    getStores(offset, latitude, longitude) {
+        console.log(`https://qrdee.co/api/v2/stores?offset=${offset}&latitude=${latitude}&longitude=${longitude}`);
+        return this.http.get(`https://qrdee.co/api/v2/stores?offset=${offset}&latitude=${latitude}&longitude=${longitude}`);
     }
 };
 UserService.ctorParameters = () => [
@@ -273,386 +574,47 @@ UserService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
-/***/ "./src/app/shared/interceptors/httpclient.interceptor.ts":
-/*!***************************************************************!*\
-  !*** ./src/app/shared/interceptors/httpclient.interceptor.ts ***!
-  \***************************************************************/
-/*! exports provided: HttpClientInterceptor */
+/***/ "./src/app/shared/services/loading.service.ts":
+/*!****************************************************!*\
+  !*** ./src/app/shared/services/loading.service.ts ***!
+  \****************************************************/
+/*! exports provided: LoadingService */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HttpClientInterceptor", function() { return HttpClientInterceptor; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _ionic_storage__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/storage */ "./node_modules/@ionic/storage/fesm2015/ionic-storage.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
-
-
-
-
-
-let HttpClientInterceptor = class HttpClientInterceptor {
-    constructor(storage) {
-        this.storage = storage;
-        this.access_token = '';
-        localStorage.getItem('access_token');
-        console.log(localStorage.getItem('access_token'));
-    }
-    intercept(request, next) {
-        // const token: string = 'Bearer YkVNRDBITDc2TTBFMDFzZldiT2xMa09DQ1BYYUQxMjFjZzVWR3poZ3JWTlVyR2lkNERqbnR6blRXdFFHaVp5SlR6blFVdFZjaTRqTDQ1UnhyMHRjeEs1VnVrdzM3cDFLSUw1bWZtd1J0d1ZPODV5V0hlb3FvZWQxSWJSaGowZEg=';
-        const token = 'Bearer ' + localStorage.getItem('access_token');
-        if (token) {
-            request = request.clone({
-                setHeaders: {
-                    'Authorization': token
-                }
-            });
-        }
-        return next.handle(request).pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["map"])((event) => {
-            if (event instanceof _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpResponse"]) {
-            }
-            return event;
-        }));
-    }
-};
-HttpClientInterceptor.ctorParameters = () => [
-    { type: _ionic_storage__WEBPACK_IMPORTED_MODULE_2__["Storage"] }
-];
-HttpClientInterceptor = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_storage__WEBPACK_IMPORTED_MODULE_2__["Storage"]])
-], HttpClientInterceptor);
-
-
-
-/***/ }),
-
-/***/ "./src/app/shared/services/alert.service.ts":
-/*!**************************************************!*\
-  !*** ./src/app/shared/services/alert.service.ts ***!
-  \**************************************************/
-/*! exports provided: AlertService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AlertService", function() { return AlertService; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadingService", function() { return LoadingService; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 
 
 
-let AlertService = class AlertService {
-    constructor(alertController) {
-        this.alertController = alertController;
+let LoadingService = class LoadingService {
+    constructor(loadingCtrl) {
+        this.loadingCtrl = loadingCtrl;
     }
-    showAlert(options) {
+    showLoading(message = "รอสักครู่") {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            const alert = yield this.alertController.create({
-                header: options.header,
-                subHeader: options.sub_header,
-                message: options.message,
-                buttons: options.buttons
+            this.loading = yield this.loadingCtrl.create({
+                message: message
             });
-            yield alert.present();
+            yield this.loading.present();
         });
     }
+    dismissLoading() {
+        this.loading.dismiss();
+    }
 };
-AlertService.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] }
+LoadingService.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] }
 ];
-AlertService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+LoadingService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
         providedIn: 'root'
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]])
-], AlertService);
-
-
-
-/***/ }),
-
-/***/ "./src/app/shared/services/qr.service.ts":
-/*!***********************************************!*\
-  !*** ./src/app/shared/services/qr.service.ts ***!
-  \***********************************************/
-/*! exports provided: QrService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "QrService", function() { return QrService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
-
-
-
-let QrService = class QrService {
-    constructor(http) {
-        this.http = http;
-        this.baseUrl = `${_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].api_url}/promptpayQRs`;
-    }
-    generatePromptPayQRs(transaction) {
-        return this.http.post(this.baseUrl, transaction);
-    }
-};
-QrService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
-];
-QrService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
-], QrService);
-
-
-
-/***/ }),
-
-/***/ "./src/app/shared/services/toast.service.ts":
-/*!**************************************************!*\
-  !*** ./src/app/shared/services/toast.service.ts ***!
-  \**************************************************/
-/*! exports provided: ToastService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ToastService", function() { return ToastService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-
-
-
-let ToastService = class ToastService {
-    constructor(toastController) {
-        this.toastController = toastController;
-    }
-    showToast(message, position) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            const toast = yield this.toastController.create({
-                message: message,
-                position: position,
-                duration: 1000,
-                color: 'dark'
-            });
-            toast.present();
-        });
-    }
-    showToasts(message, position) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            const toast = yield this.toastController.create({
-                message: message,
-                position: position,
-                duration: 1000,
-                color: '#FFFFFF'
-            });
-            toast.present();
-        });
-    }
-};
-ToastService.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"] }
-];
-ToastService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"]])
-], ToastService);
-
-
-
-/***/ }),
-
-/***/ "./src/app/shared/services/transaction.service.ts":
-/*!********************************************************!*\
-  !*** ./src/app/shared/services/transaction.service.ts ***!
-  \********************************************************/
-/*! exports provided: TransactionService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TransactionService", function() { return TransactionService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
-
-
-
-let TransactionService = class TransactionService {
-    constructor(http) {
-        this.http = http;
-        this.baseUrl = `${_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].api_url}`;
-    }
-    get(id) {
-        return this.http.get(`${this.baseUrl}/${id}`);
-    }
-    ////////////////// v2 ///////////////////
-    transactionToQR(products, price, store_id) {
-        const body = {
-            price: price,
-            products: products
-        };
-        return this.http.post(`https://qrdee.co/api/v2/trnqr/${store_id}`, body);
-    }
-    getOrders(store_id) {
-        return this.http.get(`https://qrdee.co/api/v2/orders/${store_id}`);
-    }
-    ////////////////// v1 ///////////////////
-    // latitude,longitude
-    orderProduct() {
-        console.log(`https://qrdee.co/api/v1/order`);
-        return this.http.get(`https://qrdee.co/api/v1/order`);
-    }
-    orderProducts() {
-        console.log(`https://qrdee.co/api/v1/orders`);
-        return this.http.get(`https://qrdee.co/api/v1/orders`);
-    }
-    getUser() {
-        return this.http.get(`https://qrdee.co/api/v1/users`);
-        // console.log('https://qrdee.co/api/v1/users');
-    }
-    getCodeRandoms() {
-        return this.http.get(`https://qrdee.co/api/v1/code_randomss`);
-        // console.log('https://qrdee.co/api/v1/users');      store_id
-    }
-    newTransaction(products, total_price, latitude, longitude, firstname, lastname, mobile_number, latitude_store, longitude_store, store_id, promptpay, verified) {
-        const body = {
-            total_price: total_price,
-            products: products,
-            latitude: latitude,
-            longitude: longitude,
-            firstname: firstname,
-            lastname: lastname,
-            mobile_number: mobile_number,
-            latitude_store: latitude_store,
-            longitude_store: longitude_store,
-            store_id: store_id,
-            promptpay: promptpay,
-            verified: verified,
-        };
-        console.log(body);
-        return this.http.post(`${this.baseUrl}/new_transaction`, body);
-    }
-    newTransactionStore(products, total_price, verified) {
-        const bodystore = {
-            total_price: total_price,
-            products: products,
-            verified: verified,
-        };
-        console.log(bodystore);
-        return this.http.post(`https://qrdee.co/api/v1/new_transactionstore`, bodystore);
-    }
-    getverifiedcart(id) {
-        return this.http.get(`https://qrdee.co/api/v1/verified_transactionstore/${id}`);
-    }
-    verifiedcart(verified) {
-        const bodystoreverified = {
-            verified: verified,
-        };
-        console.log('verified', bodystoreverified);
-        return this.http.post(`https://qrdee.co/api/v1/verified_transactionstores`, bodystoreverified);
-    }
-    newTransactionOrder(firstname, lastname, mobile_number, store_id, code_randoms) {
-        const bodystorder = {
-            firstname: firstname,
-            lastname: lastname,
-            mobile_number: mobile_number,
-            store_id: store_id,
-            code_randoms: code_randoms,
-        };
-        console.log(bodystorder);
-        return this.http.post(`https://qrdee.co/api/v1/transaction_order_input`, bodystorder);
-    }
-    verifyTransaction(transaction) {
-        // console.log(transaction);
-        return this.http.post(`${this.baseUrl}/verify_transaction`, transaction);
-    }
-    verifyTransactions(transaction) {
-        // console.log(transaction);
-        return this.http.post(`${this.baseUrl}/verify_transactions`, transaction);
-    }
-};
-TransactionService.ctorParameters = () => [
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
-];
-TransactionService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
-], TransactionService);
-
-
-
-/***/ }),
-
-/***/ "./src/app/shared/shared.module.ts":
-/*!*****************************************!*\
-  !*** ./src/app/shared/shared.module.ts ***!
-  \*****************************************/
-/*! exports provided: SharedModule */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SharedModule", function() { return SharedModule; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _interceptors_httpclient_interceptor__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./interceptors/httpclient.interceptor */ "./src/app/shared/interceptors/httpclient.interceptor.ts");
-/* harmony import */ var _services_toast_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./services/toast.service */ "./src/app/shared/services/toast.service.ts");
-/* harmony import */ var _services_transaction_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./services/transaction.service */ "./src/app/shared/services/transaction.service.ts");
-/* harmony import */ var _services_alert_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./services/alert.service */ "./src/app/shared/services/alert.service.ts");
-/* harmony import */ var _services_qr_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./services/qr.service */ "./src/app/shared/services/qr.service.ts");
-
-
-
-
-
-// import { QRCodeModule } from 'angularx-qrcode';
-
-
-
-
-
-let SharedModule = class SharedModule {
-};
-SharedModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        declarations: [],
-        imports: [
-            _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
-            _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"],
-            // QRCodeModule,
-            _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClientModule"]
-        ],
-        providers: [
-            _services_toast_service__WEBPACK_IMPORTED_MODULE_6__["ToastService"],
-            _services_transaction_service__WEBPACK_IMPORTED_MODULE_7__["TransactionService"],
-            _services_alert_service__WEBPACK_IMPORTED_MODULE_8__["AlertService"],
-            _services_qr_service__WEBPACK_IMPORTED_MODULE_9__["QrService"],
-            { provide: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HTTP_INTERCEPTORS"], useClass: _interceptors_httpclient_interceptor__WEBPACK_IMPORTED_MODULE_5__["HttpClientInterceptor"], multi: true }
-        ],
-        exports: [
-            _angular_forms__WEBPACK_IMPORTED_MODULE_3__["ReactiveFormsModule"]
-        ]
-    })
-], SharedModule);
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]])
+], LoadingService);
 
 
 

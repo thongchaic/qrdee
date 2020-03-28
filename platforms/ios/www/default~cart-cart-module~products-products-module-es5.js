@@ -78,6 +78,12 @@ var CartService = /** @class */ (function () {
         //alert(`https://qrdee.co/api/v2/products/${store_id}`);
         return this.http.get("https://qrdee.co/api/v2/products/" + store_id);
     };
+    CartService.prototype.completeOrder = function (store_id, member_id) {
+        var body = {
+            member_id: member_id
+        };
+        return this.http.put("https://qrdee.co/api/v2/orders/" + store_id, body);
+    };
     CartService.prototype.getStoreMaps = function (store_id) {
         return this.http.get("https://qrdee.co/api/v1/transaction_store_maps/" + store_id);
     };
@@ -153,118 +159,6 @@ var CartService = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"]])
     ], CartService);
     return CartService;
-}());
-
-
-
-/***/ }),
-
-/***/ "./src/app/products/shared/product.service.ts":
-/*!****************************************************!*\
-  !*** ./src/app/products/shared/product.service.ts ***!
-  \****************************************************/
-/*! exports provided: ProductService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ProductService", function() { return ProductService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
-
-
-
-var ProductService = /** @class */ (function () {
-    function ProductService(http) {
-        this.http = http;
-        this.baseUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].api_url + "/products";
-    }
-    ProductService.prototype.getAll = function () {
-        return this.http.get("" + this.baseUrl);
-    };
-    ProductService.prototype.get = function (id) {
-        return this.http.get(this.baseUrl + "/" + id);
-    };
-    ProductService.prototype.getUser = function () {
-        return this.http.get("https://qrdee.co/api/v1/users");
-    };
-    ProductService.prototype.getAllproduct = function (id) {
-        // console.log('https://qrdee.co/api/v1/transaction_code/${code_randoms}');
-        return this.http.get("https://qrdee.co/api/v1/allproduct/" + id);
-    };
-    ProductService.prototype.createProduct = function (data) {
-        return this.http.post("" + this.baseUrl, this.createFormData(data));
-    };
-    ProductService.prototype.updateProduct = function (data, id) {
-        return this.http.post(this.baseUrl + "/update_product/" + id, this.createFormData(data));
-    };
-    ProductService.prototype.deleteProduct = function (id) {
-        return this.http.delete(this.baseUrl + "/" + id);
-    };
-    ProductService.prototype.getByProductCode = function (product_code) {
-        return this.http.get(this.baseUrl + "?t=product_code&code=" + product_code);
-    };
-    ProductService.prototype.getProductCategory = function () {
-        return this.http.get("https://qrdee.co/api/v1/ref?type=produtc_types");
-    };
-    ProductService.prototype.search = function (term, page) {
-        console.log(term);
-        //return this.http.get<any>(`${this.baseUrl}?t=search&query=${term == '' || term == 'null' ? true : term}&page=${page}`);
-        return this.http.get(this.baseUrl + "?t=search&query=" + term + "&page=" + page);
-    };
-    ProductService.prototype.searchs = function (id, term, page) {
-        // console.log(id);
-        console.log(term);
-        // return this.http.get<any>(`https://qrdee.co/api/v1/search_products?f=search&query=${term == '' || term == 'null' ? true : term}&page=${page}`);
-        // return this.http.get<any>(`https://qrdee.co/api/v1/search_products/${id}?query=${term}&page=${page}`);
-        return this.http.get("https://qrdee.co/api/v1/search_products/" + id + "/?=search&query=" + term + "&page=" + page);
-        // https://qrdee.co/api/v1/search_products/25/?=search&query=สมุด&page=1
-        // https://qrdee.co/api/v1/search_products/25?&query=รองเท้าแก้ว
-    };
-    ProductService.prototype.getProductStore_id = function (id) {
-        // console.log(`https://qrdee.co/api/v1/store_id/${id}`); 
-        return this.http.get("https://qrdee.co/api/v1/store_id/" + id);
-    };
-    ProductService.prototype.getStoredistances = function (latitude, longitude) {
-        console.log("http://qrdee.co/api/v1/diss?latitude=" + latitude + "&longitude=" + longitude);
-        return this.http.get("http://qrdee.co/api/v1/diss?latitude=" + latitude + "&longitude=" + longitude);
-    };
-    ProductService.prototype.getAllS = function (id) {
-        return this.http.get("https://qrdee.co/api/v1/product_store/" + id);
-    };
-    // searchEntries(term, page) {
-    //   // let queryString = isNaN(term) ? `t=search_code&query=${term == '' ? true : term}&page=${page}` ? `?t=search&query=${term == '' ? true : term}&page=${page}`: 
-    //   // console.log(isNaN(term));
-    //   return this.http.get<any>(`${this.baseUrl}?t=search&query=${term == '' || term == 'null' ? true : term}&page=${page}`);
-    // }
-    ProductService.prototype.createFormData = function (data) {
-        var fd = new FormData();
-        // if(data.image) fd.append('thumbnail', data.image);
-        // if(data.thumbnail) fd.append('thumbnail', data.thumbnail);
-        if (data.imageData)
-            fd.append('thumbnail', data.imageData);
-        fd.append('code_product', data.code_product);
-        fd.append('product_type_id', data.product_type_id);
-        fd.append('product_th', data.product_th);
-        fd.append('details_th', data.details_th);
-        fd.append('price', data.price);
-        fd.append('cost', data.cost);
-        fd.append('instock', data.instock);
-        return fd;
-    };
-    ProductService.ctorParameters = function () { return [
-        { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
-    ]; };
-    ProductService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-            providedIn: 'root'
-        }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
-    ], ProductService);
-    return ProductService;
 }());
 
 

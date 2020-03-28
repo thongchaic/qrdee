@@ -18,7 +18,7 @@ module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>    \n    <ion-title>ข้อมูลร้าน</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"app-background\">\n  <ion-card style=\"background:#FFFFFF;\">\n    <ion-card-content *ngIf=\"store\">\n       <ion-list>\n        <ion-item> \n          <ion-avatar slot=\"start\">\n            <ion-img [src]=\"url+store.store_pic || 'assets/noimg.png'\" ></ion-img> \n          <!-- <img src=\"https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y\"> -->\n          </ion-avatar>\n            <h2 slot=\"end\"> ร้าน {{store.store_name}} </h2>\n        </ion-item>\n        <ion-item>\n          <b slot=\"start\">พร้อมเพย์</b><h2 slot=\"end\"> {{store.promptpay}} </h2>\n        </ion-item> \n        <ion-item>\n          <b slot=\"start\">ชื่อ</b><h2 slot=\"end\" >  {{store.firstname}}</h2>\n        </ion-item> \n        <ion-item>\n          <b slot=\"start\">นามสกุล</b><h2 slot=\"end\">{{store.lastname}}</h2>\n        </ion-item> \n        <ion-item>\n          <b slot=\"start\">เบอร์โทร:</b><h2 slot=\"end\" >{{store.mobile_number}}</h2>\n        </ion-item> \n        <ion-item>\n          <b slot=\"start\">ประเภทร้านค้า</b><h2 slot=\"end\" >{{store.store_type.store_type_th}}</h2>\n        </ion-item>\n        \n      </ion-list><br>\n        <ion-button type=\"submit\" expand=\"full\" color=\"success\" routerDirection=\"forward\" routerLink=\"/profile/{{ store.id }}\">\n           <ion-icon name=\"create\"></ion-icon>\n           &nbsp;ปรับปรุงข้อมูล\n        </ion-button>\n    </ion-card-content>\n  </ion-card>  \n</ion-content>  "
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>จัดการร้านค้า</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-label position=\"floating\">ตำแหน่งร้าน</ion-label>\n  <div #map id=\"map\" style=\"height:250px;\"></div>\n\n  <ion-list>\n    <ion-item>\n        <b>แก้ไขข้อมูลร้านค้า</b>\n    </ion-item>\n     <ion-item>\n         <ion-avatar slot=\"start\">\n           <ion-img [src]=\"store.store_pic || 'assets/camera.png'\" ></ion-img>\n         </ion-avatar>\n         <ion-input slot=\"end\" color=\"primary\" type=\"text\" [(ngModel)]=\"store.store_name\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">พร้อมเพย์</b>\n         <ion-input slot=\"end\"  color=\"primary\" type=\"text\" [(ngModel)]=\"store.promptpay\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">โทรศัพท์</b>\n         <ion-input slot=\"end\" color=\"primary\" type=\"text\" [(ngModel)]=\"store.mobile_number\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">ค่าขนส่ง</b>\n         <ion-input slot=\"end\" color=\"primary\" type=\"number\" [(ngModel)]=\"store.delivery_price\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">ชื่อ</b>\n         <ion-input slot=\"end\" color=\"primary\" type=\"text\" [(ngModel)]=\"store.firstname\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">นามสกุล</b>\n         <ion-input slot=\"end\" color=\"primary\" type=\"text\" [(ngModel)]=\"store.lastname\" ></ion-input>\n     </ion-item>\n\n     <ion-item>\n       <ion-label color=\"primary\" position=\"stacked\">ประเภทร้านค้า</ion-label>\n       <ion-select [(ngModel)]=\"store.store_type_id\">\n         <ion-select-option\n           *ngFor=\"let type of store_types\"\n           [value]=\"type.id\"\n           [selected]=\"type.id === store.store_type_id\">\n           {{ type.store_type_th }}\n         </ion-select-option>\n       </ion-select>\n     </ion-item>\n </ion-list>\n\n\n  <ion-card style=\"background:#FFFFF0;\">\n    <ion-card-content *ngIf=\"store\">\n\n\n        <ion-button type=\"submit\" shape=\"round\" expand=\"full\" color=\"primary\" (click)=\"submit()\">\n           <ion-icon name=\"create\"></ion-icon>\n           &nbsp;ปรับปรุงข้อมูล\n        </ion-button>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n"
 
 /***/ }),
 
@@ -302,7 +302,7 @@ ProfilePageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".app-background {\n  --background: url('/assets/bg1.jpg') 0 0/100% 100% no-repeat; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy90aG9uZ2NoYWkvUHJvamVjdHMvcXJkZWUvc3JjL2FwcC9wcm9maWxlL3Byb2ZpbGUucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsNERBQWEsRUFBQSIsImZpbGUiOiJzcmMvYXBwL3Byb2ZpbGUvcHJvZmlsZS5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYXBwLWJhY2tncm91bmR7XHJcblx0IC0tYmFja2dyb3VuZDogdXJsKCcvYXNzZXRzL2JnMS5qcGcnKSAwIDAvMTAwJSAxMDAlIG5vLXJlcGVhdDtcclxufSJdfQ== */"
+module.exports = ".app-background {\n  --background: url('/assets/bg1.jpg') 0 0/100% 100% no-repeat; }\n\nion-input {\n  text-align: right;\n  font-size: 16px; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy90aG9uZ2NoYWkvUHJvamVjdHMvcXJkZWUvc3JjL2FwcC9wcm9maWxlL3Byb2ZpbGUucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0UsNERBQWEsRUFBQTs7QUFFZjtFQUNDLGlCQUFpQjtFQUFDLGVBQWMsRUFBQSIsImZpbGUiOiJzcmMvYXBwL3Byb2ZpbGUvcHJvZmlsZS5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYXBwLWJhY2tncm91bmR7XHJcblx0IC0tYmFja2dyb3VuZDogdXJsKCcvYXNzZXRzL2JnMS5qcGcnKSAwIDAvMTAwJSAxMDAlIG5vLXJlcGVhdDtcclxufVxyXG5pb24taW5wdXQge1xyXG5cdHRleHQtYWxpZ246IHJpZ2h0O2ZvbnQtc2l6ZToxNnB4O1xyXG5cdC8vLS1pb24tYmFja2dyb3VuZC1jb2xvcjogYmx1ZTtcclxufVxyXG4iXX0= */"
 
 /***/ }),
 
@@ -320,8 +320,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _shared_profile_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shared/profile.service */ "./src/app/profile/shared/profile.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/geolocation/ngx */ "./node_modules/@ionic-native/geolocation/ngx/index.js");
+/* harmony import */ var _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/services/toast.service */ "./src/app/shared/services/toast.service.ts");
 
 
 
@@ -329,28 +329,87 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ProfilePage = class ProfilePage {
-    constructor(profileservice, route, http) {
+    constructor(profileservice, geolocation, toastService, route) {
         this.profileservice = profileservice;
+        this.geolocation = geolocation;
+        this.toastService = toastService;
         this.route = route;
-        this.http = http;
-        this.url = src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].url;
+        this.latitude = 14.8718084;
+        this.longitude = 103.4962797;
+        this.store = JSON.parse(localStorage.getItem('store'));
+        localStorage.setItem("store_lat", this.store.latitude);
+        localStorage.setItem("store_lng", this.store.longitude);
+        //alert(JSON.stringify(this.store));
     }
     ionViewWillEnter() {
-        this.loadProfile();
+        //this.loadProfile();
+        this.loadStoreTypes();
     }
-    loadProfile() {
-        // this.http.get<any>(`http://qrdee.co/api/v1/store`).subscribe(console.log);
-        this.profileservice.getProfiles().subscribe(res => {
-            this.store = res.data;
-            console.log(this.store);
+    ngAfterViewInit() {
+        // this.geolocation.getCurrentPosition().then((resp) => {
+        //     this.store.latitude = resp.coords.latitude;
+        //     this.store.longitude = resp.coords.longitude;
+        //     this.loadMap();
+        // });
+        this.loadMap();
+    }
+    submit() {
+        this.store.latitude = localStorage.getItem('store_lat');
+        this.store.longitude = localStorage.getItem('store_lng');
+        localStorage.setItem('store', JSON.stringify(this.store));
+        console.log(this.store);
+        this.profileservice.updateProfile(this.store, this.store.id).subscribe((data) => {
+            console.log(data);
+            const member = {
+                mobile_number: this.store.mobile_number,
+                latitude: this.store.latitude,
+                longitude: this.store.longitude,
+                firstname: this.store.firstname,
+                lastname: this.store.lastname
+            };
+            localStorage.setItem('member', JSON.stringify(member));
+            console.log(member);
+            localStorage.removeItem('store_lat');
+            localStorage.removeItem('store_lng');
+            this.toastService.showToast(`ปรับปรุงข้อมูลเรียบร้อยแล้ว`, 'top');
+        });
+    }
+    loadStoreTypes() {
+        this.profileservice.getStoreTypes().subscribe((data) => {
+            this.store_types = data;
+            console.log(this.store_types);
+        });
+    }
+    loadMap() {
+        let latLng = new google.maps.LatLng(this.store.latitude, this.store.longitude);
+        this.map = new google.maps.Map(this.mapElement.nativeElement, {
+            zoom: 15,
+            center: latLng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+        let marker = new google.maps.Marker({
+            map: this.map,
+            draggable: true,
+            animation: google.maps.Animation.DROP,
+            position: latLng
+        });
+        marker.addListener('dragend', function () {
+            localStorage.setItem("store_lat", marker.getPosition().lat());
+            localStorage.setItem("store_lng", marker.getPosition().lng());
+            this.map.setCenter(marker.getPosition());
         });
     }
 };
 ProfilePage.ctorParameters = () => [
     { type: _shared_profile_service__WEBPACK_IMPORTED_MODULE_2__["ProfileService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"] }
+    { type: _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_4__["Geolocation"] },
+    { type: _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_5__["ToastService"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] }
 ];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('map', { static: false }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+], ProfilePage.prototype, "mapElement", void 0);
 ProfilePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-profile',
@@ -358,8 +417,9 @@ ProfilePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         styles: [__webpack_require__(/*! ./profile.page.scss */ "./src/app/profile/profile.page.scss")]
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_shared_profile_service__WEBPACK_IMPORTED_MODULE_2__["ProfileService"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
-        _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"]])
+        _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_4__["Geolocation"],
+        _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_5__["ToastService"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]])
 ], ProfilePage);
 
 
@@ -400,15 +460,16 @@ let ProfileService = class ProfileService {
         return this.http.get(`https://qrdee.co/api/v1/stores`);
         // console.log('https://qrdee.co/api/v1/stores');
     }
+    updateProfile(data, store_id) {
+        // console.log(data);
+        // console.log(store_id);
+        return this.http.put(`https://qrdee.co/api/v2/stores/${store_id}`, data);
+    }
     get(id) {
         return this.http.get(`${this.baseUrl}/${id}`);
     }
     getStoreTypes() {
-        return this.http.get(`https://qrdee.co/api/v1/ref?type=store_types`);
-    }
-    updateProfile(data, id) {
-        console.log(data);
-        return this.http.post(`https://qrdee.co/api/v1/update_store/${id}`, this.createFormData(data));
+        return this.http.get(`https://qrdee.co/api/v2/refs?t=store_types`);
     }
     createFormData(data) {
         const fd = new FormData();
@@ -653,103 +714,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
-
 
 
 
 let TransactionService = class TransactionService {
     constructor(http) {
         this.http = http;
-        this.baseUrl = `${_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].api_url}`;
-    }
-    get(id) {
-        return this.http.get(`${this.baseUrl}/${id}`);
     }
     ////////////////// v2 ///////////////////
-    transactionToQR(products, price, store_id) {
+    genQR(promptpay, price) {
+        return this.http.get(`https://qrdee.co/api/v2/qr?promptpay=${promptpay}&price=${price}`);
+    }
+    insertTransaction(products, prompt_payload, price, store_id) {
         const body = {
             price: price,
+            prompt_payload: prompt_payload,
             products: products
         };
         return this.http.post(`https://qrdee.co/api/v2/trnqr/${store_id}`, body);
     }
     getOrders(store_id) {
         return this.http.get(`https://qrdee.co/api/v2/orders/${store_id}`);
-    }
-    ////////////////// v1 ///////////////////
-    // latitude,longitude
-    orderProduct() {
-        console.log(`https://qrdee.co/api/v1/order`);
-        return this.http.get(`https://qrdee.co/api/v1/order`);
-    }
-    orderProducts() {
-        console.log(`https://qrdee.co/api/v1/orders`);
-        return this.http.get(`https://qrdee.co/api/v1/orders`);
-    }
-    getUser() {
-        return this.http.get(`https://qrdee.co/api/v1/users`);
-        // console.log('https://qrdee.co/api/v1/users');
-    }
-    getCodeRandoms() {
-        return this.http.get(`https://qrdee.co/api/v1/code_randomss`);
-        // console.log('https://qrdee.co/api/v1/users');      store_id
-    }
-    newTransaction(products, total_price, latitude, longitude, firstname, lastname, mobile_number, latitude_store, longitude_store, store_id, promptpay, verified) {
-        const body = {
-            total_price: total_price,
-            products: products,
-            latitude: latitude,
-            longitude: longitude,
-            firstname: firstname,
-            lastname: lastname,
-            mobile_number: mobile_number,
-            latitude_store: latitude_store,
-            longitude_store: longitude_store,
-            store_id: store_id,
-            promptpay: promptpay,
-            verified: verified,
-        };
-        console.log(body);
-        return this.http.post(`${this.baseUrl}/new_transaction`, body);
-    }
-    newTransactionStore(products, total_price, verified) {
-        const bodystore = {
-            total_price: total_price,
-            products: products,
-            verified: verified,
-        };
-        console.log(bodystore);
-        return this.http.post(`https://qrdee.co/api/v1/new_transactionstore`, bodystore);
-    }
-    getverifiedcart(id) {
-        return this.http.get(`https://qrdee.co/api/v1/verified_transactionstore/${id}`);
-    }
-    verifiedcart(verified) {
-        const bodystoreverified = {
-            verified: verified,
-        };
-        console.log('verified', bodystoreverified);
-        return this.http.post(`https://qrdee.co/api/v1/verified_transactionstores`, bodystoreverified);
-    }
-    newTransactionOrder(firstname, lastname, mobile_number, store_id, code_randoms) {
-        const bodystorder = {
-            firstname: firstname,
-            lastname: lastname,
-            mobile_number: mobile_number,
-            store_id: store_id,
-            code_randoms: code_randoms,
-        };
-        console.log(bodystorder);
-        return this.http.post(`https://qrdee.co/api/v1/transaction_order_input`, bodystorder);
-    }
-    verifyTransaction(transaction) {
-        // console.log(transaction);
-        return this.http.post(`${this.baseUrl}/verify_transaction`, transaction);
-    }
-    verifyTransactions(transaction) {
-        // console.log(transaction);
-        return this.http.post(`${this.baseUrl}/verify_transactions`, transaction);
     }
 };
 TransactionService.ctorParameters = () => [

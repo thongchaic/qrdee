@@ -68,7 +68,7 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <allow-navigation href="http://192.168.6.104:8100" sessionid="d1bd71ae" />
-    <allow-navigation href="http://localhost:8100" sessionid="510095f2" />
+    <allow-navigation href="http://localhost:8100" sessionid="0c05999a" />
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
     <icon height="57" src="resources/ios/icon/icon.png" width="57" />

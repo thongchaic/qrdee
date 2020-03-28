@@ -10,13 +10,14 @@
 var map = {
 	"./cart/cart.module": [
 		"./src/app/cart/cart.module.ts",
-		"default~cart-cart-module~customer-customer-module~logistic-logistic-module~products-products-module~~1c1c48b1",
+		"default~cart-cart-module~customer-customer-module~products-products-module",
 		"default~cart-cart-module~products-products-module",
+		"common",
 		"cart-cart-module"
 	],
 	"./customer/customer.module": [
 		"./src/app/customer/customer.module.ts",
-		"default~cart-cart-module~customer-customer-module~logistic-logistic-module~products-products-module~~1c1c48b1",
+		"default~cart-cart-module~customer-customer-module~products-products-module",
 		"common",
 		"customer-customer-module"
 	],
@@ -26,7 +27,6 @@ var map = {
 	],
 	"./logistic/logistic.module": [
 		"./src/app/logistic/logistic.module.ts",
-		"default~cart-cart-module~customer-customer-module~logistic-logistic-module~products-products-module~~1c1c48b1",
 		"logistic-logistic-module"
 	],
 	"./logout/logout.module": [
@@ -35,14 +35,13 @@ var map = {
 	],
 	"./products/products.module": [
 		"./src/app/products/products.module.ts",
-		"default~cart-cart-module~customer-customer-module~logistic-logistic-module~products-products-module~~1c1c48b1",
+		"default~cart-cart-module~customer-customer-module~products-products-module",
 		"default~cart-cart-module~products-products-module",
 		"common",
 		"products-products-module"
 	],
 	"./profile/profile.module": [
 		"./src/app/profile/profile.module.ts",
-		"default~cart-cart-module~customer-customer-module~logistic-logistic-module~products-products-module~~1c1c48b1",
 		"profile-profile-module"
 	],
 	"./register-customer/register-customer.module": [
@@ -59,17 +58,14 @@ var map = {
 	],
 	"./sell-stats/sell-stats.module": [
 		"./src/app/sell-stats/sell-stats.module.ts",
-		"default~cart-cart-module~customer-customer-module~logistic-logistic-module~products-products-module~~1c1c48b1",
 		"sell-stats-sell-stats-module"
 	],
 	"./stats/stats.module": [
 		"./src/app/stats/stats.module.ts",
-		"default~cart-cart-module~customer-customer-module~logistic-logistic-module~products-products-module~~1c1c48b1",
 		"stats-stats-module"
 	],
 	"./store-logistic/store-logistic.module": [
 		"./src/app/store-logistic/store-logistic.module.ts",
-		"default~cart-cart-module~customer-customer-module~logistic-logistic-module~products-products-module~~1c1c48b1",
 		"store-logistic-store-logistic-module"
 	],
 	"./store-orders/store-orders.module": [
@@ -523,7 +519,7 @@ module.exports = webpackAsyncContext;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\n  <ion-split-pane>\n    <ion-menu>\n      <ion-header>\n        <ion-toolbar>\n          <ion-title>เมนู</ion-title>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content>\n\n        <ion-list>\n          <ion-menu-toggle auto-hide=\"false\" >\n            <ion-item *ngIf=\"store.store_type_id == 5\" (click)=\"home()\">\n              <ion-label>\n                   หน้าแรก\n              </ion-label>\n            </ion-item>\n            <ion-item *ngIf=\"store.store_type_id == 5\" (click)=\"product()\">\n              <ion-label>\n                   สินค้า\n              </ion-label>\n            </ion-item>\n             <ion-item *ngIf=\"store.store_type_id == 5\" (click)=\"postproduct()\">\n              <ion-label >\n                   นำเข้าสินค้า\n              </ion-label>\n            </ion-item>\n            <!-- <ion-item *ngIf=\"usertype == 3\" (click)=\"postproductimg()\">\n              <ion-label >\n                   สั่งสินค้า\n              </ion-label>\n            </ion-item> -->\n            <ion-item *ngIf=\"store.store_type_id == 5\" (click)=\"profile()\">\n              <ion-label >\n                   ข้อมูลร้าน\n              </ion-label>\n            </ion-item>\n            <ion-item *ngIf=\"store.store_type_id == 4\" (click)=\"logistic()\">\n              <ion-label >\n                   ขนส่งสินค้า\n              </ion-label>\n            </ion-item >\n            <ion-item  (click)=\"customer()\">\n              <ion-label>\n                   สั่งซื้อสินค้า\n              </ion-label>\n            </ion-item>\n             <ion-item  *ngIf=\"store.store_type_id == 5\" (click)=\"stats()\">\n              <ion-label>\n                   สถิติ\n              </ion-label>\n            </ion-item>\n            <ion-item *ngIf=\"store.store_type_id == 5\" (click)=\"sell()\">\n              <ion-label >\n                   สรุปการขาย\n              </ion-label>\n            </ion-item>\n           <!-- <ion-item *ngIf=\"usertype == 1\" (click)=\"delivery()\">\n              <ion-label >\n                   เรียกคนส่งของ\n              </ion-label>\n            </ion-item> -->\n            <ion-item *ngIf=\"usertype == 1\" (click)=\"order()\">\n              <ion-label >\n                   ออเดอร์สินค้า\n              </ion-label>\n            </ion-item>\n            <ion-item (click)=\"logout()\">\n              <ion-label >\n                   ออกจากระบบ\n              </ion-label>\n            </ion-item>\n          </ion-menu-toggle>\n        </ion-list>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet main></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n\n<!-- <ion-app>\n  <ion-split-pane>\n    <ion-menu>\n      <ion-header>\n        <ion-toolbar>\n          <ion-title>Menu</ion-title>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content>\n        <ion-list>\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appPages\">\n            <ion-item [routerDirection]=\"'root'\" [routerLink]=\"[p.url]\">\n              <ion-icon slot=\"start\" [name]=\"p.icon\"></ion-icon>\n              <ion-label>\n                {{p.title}}\n              </ion-label>\n            </ion-item>\n          </ion-menu-toggle>\n        </ion-list>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet main></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n -->\n"
+module.exports = "<ion-app>\n  <ion-split-pane>\n    <ion-menu>\n      <ion-header>\n        <ion-toolbar>\n          <ion-title>เมนู</ion-title>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content *ngIf=\"store\">\n\n        <ion-list>\n          <ion-menu-toggle auto-hide=\"false\" >\n            <ion-item *ngIf=\"store\" (click)=\"home()\">\n              <ion-label>\n                   หน้าแรก\n              </ion-label>\n            </ion-item>\n            <ion-item *ngIf=\"store\" (click)=\"product()\">\n              <ion-label>\n                   สินค้าของฉัน\n              </ion-label>\n            </ion-item>\n             <!-- <ion-item *ngIf=\"store.store_type_id == 5\" (click)=\"postproduct()\">\n              <ion-label >\n                   นำเข้าสินค้า\n              </ion-label>\n            </ion-item> -->\n            <!-- <ion-item *ngIf=\"usertype == 3\" (click)=\"postproductimg()\">\n              <ion-label >\n                   สั่งสินค้า\n              </ion-label>\n            </ion-item> -->\n          <ion-item  *ngIf=\"store\" (click)=\"stats()\">\n             <ion-label>\n               สรุปยอดขาย\n             </ion-label>\n           </ion-item>\n            <ion-item *ngIf=\"store\" (click)=\"profile()\">\n              <ion-label >\n                จัดการร้านค้า\n              </ion-label>\n            </ion-item>\n\n            <!-- <ion-item *ngIf=\"store\" (click)=\"logistic()\">\n              <ion-label >\n                   ขนส่งสินค้า\n              </ion-label>\n            </ion-item > -->\n\n\n            <!-- <ion-item *ngIf=\"store.store_type_id == 5\" (click)=\"sell()\">\n              <ion-label >\n                   สรุปการขาย\n              </ion-label>\n            </ion-item> -->\n           <!-- <ion-item *ngIf=\"usertype == 1\" (click)=\"delivery()\">\n              <ion-label >\n                   เรียกคนส่งของ\n              </ion-label>\n            </ion-item> -->\n            <!-- <ion-item *ngIf=\"usertype == 1\" (click)=\"order()\">\n              <ion-label >\n                   ออเดอร์สินค้า\n              </ion-label>\n            </ion-item> -->\n\n            <ion-item  (click)=\"customer()\">\n              <ion-label>\n                   สั่งซื้อสินค้า\n              </ion-label>\n            </ion-item>\n\n            <ion-item (click)=\"logout()\">\n              <ion-label >\n                   ออกจากระบบ\n              </ion-label>\n            </ion-item>\n          </ion-menu-toggle>\n        </ion-list>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet main></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n\n<!-- <ion-app>\n  <ion-split-pane>\n    <ion-menu>\n      <ion-header>\n        <ion-toolbar>\n          <ion-title>Menu</ion-title>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content>\n        <ion-list>\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appPages\">\n            <ion-item [routerDirection]=\"'root'\" [routerLink]=\"[p.url]\">\n              <ion-icon slot=\"start\" [name]=\"p.icon\"></ion-icon>\n              <ion-label>\n                {{p.title}}\n              </ion-label>\n            </ion-item>\n          </ion-menu-toggle>\n        </ion-list>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet main></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n -->\n"
 
 /***/ }),
 
@@ -617,6 +613,21 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var AppComponent = /** @class */ (function () {
+    // appPages = [
+    //   { title: 'หน้าแรก', url: '/cart', icon: 'home' },
+    //   { title: 'สินค้า', url: '/products', icon: 'cube' },
+    //   { title: 'นำเข้าสินค้า', url: '/products/create', icon: 'arrow-round-up' },
+    //   { title: 'เพิ่มรูป', url: '/products/froms', icon: 'arrow-round-up' },
+    //   { title: 'ข้อมูลร้าน', url: '/profile', icon: 'albums' },
+    //   { title: 'ออเดอร์สินค้า', url: '/store-orders', icon: 'cart' },
+    //   { title: 'เรียกคนส่งของ', url: '/store-logistic', icon: 'pin' },
+    //   { title: 'ขนส่งสินค้า', url: '/logistic', icon: 'pin' },
+    //   { title: 'สรุปการขาย', url: '/sell-stats', icon: 'albums' },
+    //   { title: 'เลือกร้านค้า', url: '/customer', icon: 'albums' },
+    //   { title: 'สถิติ', url: '/stats', icon: 'cart' },
+    //   { title: 'ล็อคอิน', url: '/login', icon: 'pin' },
+    //   { title: 'ออกจากระบบ', url: '/logout', icon: 'pin' },
+    // ];
     function AppComponent(platform, splashScreen, statusBar, event, router) {
         var _this = this;
         this.platform = platform;
@@ -624,26 +635,36 @@ var AppComponent = /** @class */ (function () {
         this.statusBar = statusBar;
         this.event = event;
         this.router = router;
-        this.appPages = [
-            { title: 'หน้าแรก', url: '/cart', icon: 'home' },
-            { title: 'สินค้า', url: '/products', icon: 'cube' },
-            { title: 'นำเข้าสินค้า', url: '/products/create', icon: 'arrow-round-up' },
-            { title: 'เพิ่มรูป', url: '/products/froms', icon: 'arrow-round-up' },
-            { title: 'ข้อมูลร้าน', url: '/profile', icon: 'albums' },
-            { title: 'ออเดอร์สินค้า', url: '/store-orders', icon: 'cart' },
-            { title: 'เรียกคนส่งของ', url: '/store-logistic', icon: 'pin' },
-            { title: 'ขนส่งสินค้า', url: '/logistic', icon: 'pin' },
-            { title: 'สรุปการขาย', url: '/sell-stats', icon: 'albums' },
-            { title: 'เลือกร้านค้า', url: '/customer', icon: 'albums' },
-            { title: 'สถิติ', url: '/stats', icon: 'cart' },
-            { title: 'ล็อคอิน', url: '/login', icon: 'pin' },
-            { title: 'ออกจากระบบ', url: '/logout', icon: 'pin' },
-        ];
-        this.event.subscribe('store:changed', function (type) {
-            _this.store = type;
+        this.event.subscribe('store:changed', function (trn) {
+            _this.store = trn;
         });
-        this.store = JSON.parse(localStorage.getItem('store'));
-        //alert(JSON.stringify(this.store));
+        try {
+            JSON.parse(localStorage.getItem('member'));
+        }
+        catch (e) {
+            var member = {
+                id: null,
+                mobile_number: null,
+                latitude: 14.8718084,
+                longitude: 103.4962797,
+                firstname: null,
+                lastname: null
+            };
+            localStorage.setItem('member', JSON.stringify(member));
+        }
+        try {
+            this.store = JSON.parse(localStorage.getItem('store'));
+        }
+        catch (e) {
+            localStorage.removeItem('store');
+            this.router.navigateByUrl('/login');
+        }
+        try {
+            JSON.parse(localStorage.getItem('member_cart'));
+        }
+        catch (e) {
+            localStorage.setItem('member_cart', JSON.stringify([]));
+        }
         this.initializeApp();
     }
     AppComponent.prototype.login = function () {
@@ -653,7 +674,9 @@ var AppComponent = /** @class */ (function () {
         this.router.navigate(['cart']);
     };
     AppComponent.prototype.logout = function () {
-        this.router.navigate(['logout']);
+        localStorage.removeItem('store');
+        localStorage.setItem('member_cart', JSON.stringify([]));
+        this.router.navigateByUrl('/login');
     };
     AppComponent.prototype.product = function () {
         this.router.navigate(['products']);
@@ -760,6 +783,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // import { ImagePicker } from '@ionic-native/image-picker/ngx';
 
+//ionic cordova run ios -lc -d --target="0D1FA3B0-AB5E-4F76-AB49-1E2D63774E7B"
 var AppModule = /** @class */ (function () {
     function AppModule() {
     }

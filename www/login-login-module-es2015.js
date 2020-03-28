@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>เข้าสู่ระบบ</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content  class=\"app-background\">\n  <div class=\"\" >\n  <div class=\"ion-text-center\" >\n    <img src=\"assets/images/mapapi.png\" class=\"img_logistic\">\n  </div>\n<form (ngSubmit)=\"loginForm()\">\n    <ion-grid>\n      <ion-row color=\"primary\" justify-content-center>\n        <!-- <ion-col align-self-center size-md=\"6\" size-lg=\"5\" size-xs=\"12\"> -->\n          <div padding>\n            <ion-item>\n              <ion-input  [ngModelOptions]=\"{standalone: true}\" [(ngModel)]=\"mobile\"\n               type=\"text\" placeholder=\"เบอร์โทรศัพท์/พร้อมเพย์\" ></ion-input>\n            </ion-item>\n            <ion-item>\n              <ion-input  [ngModelOptions]=\"{standalone: true}\" [(ngModel)]=\"password\"\n               type=\"password\" placeholder=\"รหัสผ่าน\"></ion-input>\n            </ion-item>\n            <ion-button type=\"submit\" expand=\"full\"color=\"success\"><b>เข้าสู่ระบบ</b></ion-button>\n          </div>\n      </ion-row>\n\n    </ion-grid>\n  </form>\n\n   <p text-center>ยังไม่มีบัญชี ลงทะเบียน</p>\n  <ion-grid>\n   <ion-row>\n    <ion-col size=\"4\">\n     <ion-button class=\"btn2\" expand=\"block\" (click)=\"goRegister_store()\">\n       <div class=\"ion-text-center\"  >\n          <ion-icon name=\"home\"></ion-icon><br/>\n          <b>ร้านค้า</b>\n        </div>\n      </ion-button>\n    </ion-col>\n    <ion-col size=\"4\">\n      <ion-button class=\"btn2\" expand=\"block\" (click)=\"goRegister_logistic()\">\n       <div class=\"ion-text-center\">\n         <ion-icon name=\"pin\"></ion-icon><br/>\n          <b>ผู้ส่งสินค้า</b>\n        </div>\n      </ion-button>\n    </ion-col>\n      <ion-col size=\"4\">\n          <ion-button class=\"btn2\" expand=\"block\" (click)=\"goRegister_customer()\">\n       <div class=\"ion-text-center\">\n         <ion-icon name=\"cart\"></ion-icon><br/>\n          <b>ซื้อสินค้า</b>\n        </div>\n      </ion-button>\n    </ion-col>\n  </ion-row>\n</ion-grid>\n</div>\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>เข้าสู่ระบบ</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content  class=\"app-background\">\n  <div class=\"\" >\n  <div class=\"ion-text-center\" >\n    <img src=\"assets/images/mapapi.png\" class=\"img_logistic\">\n  </div>\n<form (ngSubmit)=\"loginForm()\">\n    <ion-grid>\n      <ion-row color=\"primary\" justify-content-center>\n        <!-- <ion-col align-self-center size-md=\"6\" size-lg=\"5\" size-xs=\"12\"> -->\n          <div padding>\n            <ion-item>\n              <ion-input  [ngModelOptions]=\"{standalone: true}\" [(ngModel)]=\"promptpay\"\n               type=\"text\" placeholder=\"เบอร์โทรศัพท์\" ></ion-input>\n            </ion-item>\n            <ion-item>\n              <ion-input  [ngModelOptions]=\"{standalone: true}\" [(ngModel)]=\"password\"\n               type=\"password\" placeholder=\"รหัสผ่าน\"></ion-input>\n            </ion-item>\n            <ion-button type=\"submit\" expand=\"full\"color=\"primary\" shape=\"round\"><b>เข้าสู่ระบบ</b></ion-button>\n          </div>\n      </ion-row>\n\n    </ion-grid>\n  </form>\n\n   <p text-center>ยังไม่มีบัญชี ลงทะเบียน</p>\n  <ion-grid>\n   <ion-row>\n    <ion-col size=\"4\">\n     <ion-button class=\"btn2\" expand=\"block\" (click)=\"goRegister_store()\">\n       <div class=\"ion-text-center\"  >\n          <ion-icon name=\"home\"></ion-icon><br/>\n          <b>ร้านค้า</b>\n        </div>\n      </ion-button>\n    </ion-col>\n    <ion-col size=\"4\">\n      <ion-button class=\"btn2\" expand=\"block\" (click)=\"goRegister_logistic()\">\n       <div class=\"ion-text-center\">\n         <ion-icon name=\"pin\"></ion-icon><br/>\n          <b>ผู้ส่งสินค้า</b>\n        </div>\n      </ion-button>\n    </ion-col>\n      <ion-col size=\"4\">\n          <ion-button class=\"btn2\" expand=\"block\" (click)=\"goRegister_customer()\">\n       <div class=\"ion-text-center\">\n         <ion-icon name=\"cart\"></ion-icon><br/>\n          <b>ซื้อสินค้า</b>\n        </div>\n      </ion-button>\n    </ion-col>\n  </ion-row>\n</ion-grid>\n</div>\n</ion-content>\n"
 
 /***/ }),
 
@@ -109,31 +109,48 @@ let LoginPage = class LoginPage {
         this.storage = storage;
         this.token = '';
         this.login = {};
-        this.email = '';
+        this.promptpay = '';
         this.password = '';
         // is_disabled:boolean = false;
         this.usertype = '';
     }
     loginForm() {
-        this.loginService.logintore(this.email, this.password).subscribe(trn => {
+        this.loginService.logintore(this.promptpay, this.password).subscribe(trn => {
+            //alert(JSON.stringify(trn));
             console.log(trn);
-            this.email = trn.data;
-            this.token = trn.access_token;
-            // console.log("test",this.token);
-            // console.log('access_token ' + this.token);
-            localStorage.setItem('access_token', this.token);
-            localStorage.setItem('usertype', trn.usertype);
-            // console.log('usertype' + trn.usertype);
-            if (trn.usertype == 1) {
-                this.router.navigateByUrl('/cart');
-            }
-            if (trn.usertype == 2) {
-                this.router.navigateByUrl('/logistic');
-            }
-            if (trn.usertype == 3) {
-                this.router.navigateByUrl('/customer');
-            }
-            this.event.publish('user:changed', trn.usertype);
+            localStorage.setItem('store', JSON.stringify(trn));
+            const member = {
+                id: null,
+                mobile_number: trn.mobile_number,
+                latitude: trn.latitude,
+                longitude: trn.longitude,
+                firstname: trn.firstname,
+                lastname: trn.lastname
+            };
+            localStorage.setItem('member', JSON.stringify(member));
+            console.log(member);
+            this.router.navigateByUrl('/cart');
+            this.event.publish('store:changed', trn);
+            // console.log(trn);
+            // this.email = trn.data;
+            // this.token = trn.access_token;
+            //
+            // // console.log("test",this.token);
+            // // console.log('access_token ' + this.token);
+            // localStorage.setItem('access_token', this.token);
+            // localStorage.setItem('usertype', trn.usertype);
+            // // console.log('usertype' + trn.usertype);
+            //
+            // if(trn.usertype == 1){
+            //         this.router.navigateByUrl('/cart');
+            //  }
+            //
+            //  if(trn.usertype == 2){
+            //         this.router.navigateByUrl('/logistic');
+            //  }
+            //  if(trn.usertype == 3){
+            //         this.router.navigateByUrl('/customer');
+            //  }
         });
     }
     goRegister_store() {
@@ -199,13 +216,12 @@ let LoginStoreService = class LoginStoreService {
         this.http = http;
         this.baseUrl = `${_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].api_url}`;
     }
-    logintore(email, password) {
+    logintore(promptpay, password) {
         const body = {
-            email: email,
-            password: password,
+            promptpay: promptpay,
+            password: password
         };
-        console.log(body);
-        return this.http.post(`https://qrdee.co/api/v1/login`, body);
+        return this.http.post(`https://qrdee.co/api/v2/login`, body);
     }
 };
 LoginStoreService.ctorParameters = () => [

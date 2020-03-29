@@ -44,17 +44,6 @@ export class LoginPage  {
 
       //alert(JSON.stringify(trn));
       // console.log(trn);
-      localStorage.setItem('store', JSON.stringify(trn));
-      const member = {
-        id:null,
-        mobile_number:trn.mobile_number,
-        latitude:trn.latitude,
-        longitude:trn.longitude,
-        firstname:trn.firstname,
-        lastname:trn.lastname
-      }
-      localStorage.setItem('member', JSON.stringify(member));
-      // console.log(member);
       this.router.navigateByUrl('/cart');
       this.event.publish('store:changed',trn);
 
@@ -86,7 +75,7 @@ export class LoginPage  {
   }
 
   goRegister_store(){
-  this.router.navigateByUrl('/register');
+    this.router.navigateByUrl('/register');
   }
 
   goRegister_logistic(){
@@ -94,7 +83,7 @@ export class LoginPage  {
   }
 
   goRegister_customer(){
-  this.router.navigateByUrl('/register-customer');
+  this.router.navigateByUrl('/customer');
   }
 
 }

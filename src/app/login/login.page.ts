@@ -44,7 +44,7 @@ export class LoginPage  {
       loading.dismiss();
       //alert(JSON.stringify(trn));
       // console.log(trn);
-      this.router.navigateByUrl('/cart');
+      //this.router.navigateByUrl('/cart');
       this.event.publish('store:changed',trn);
       this.router.navigateByUrl('/cart');
 

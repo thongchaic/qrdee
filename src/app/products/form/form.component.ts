@@ -29,7 +29,7 @@ productForm: FormGroup = this.builder.group({
    cost: [0, Validators.required],
    thumbnail: null
 });
-thumbnail:any;
+thumbnail:any = null;
 
 formType = 'CREATE' || 'EDIT';
 imageSrc = '';

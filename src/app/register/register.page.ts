@@ -88,10 +88,9 @@ export class RegisterPage{
 
       this.registerService.registerstore(this.password,this.promptpay,this.store_name,this.latitude,this.longitude,5).subscribe(trn => {
           loading.dismiss();
-          localStorage.removeItem('regis_lat');
-          localStorage.removeItem('regis_lng');
+
           localStorage.setItem('store', JSON.stringify(trn));
-          this.event.publish('store:changed',trn);
+
           const member = {
             id:null,
             mobile_number:trn.mobile_number,
@@ -103,7 +102,9 @@ export class RegisterPage{
 
           localStorage.setItem('member', JSON.stringify(member));
           console.log(member);
-
+          localStorage.removeItem('regis_lat');
+          localStorage.removeItem('regis_lng');
+          this.event.publish('store:changed',trn);
           this.router.navigateByUrl('/cart');
 
       }, err=>{

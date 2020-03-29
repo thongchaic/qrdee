@@ -45,7 +45,15 @@ export class AppComponent implements OnInit {
 
     this.event.subscribe('store:changed',trn=>{
        this.store = trn;
+
+       this.reInitAll();
+
     });
+
+    this.reInitAll();
+
+  }
+  reInitAll(){
 
     try{
       JSON.parse(localStorage.getItem('member'));
@@ -61,9 +69,6 @@ export class AppComponent implements OnInit {
       localStorage.setItem('member', JSON.stringify(member));
     }
 
-
-
-
     try{
       this.store = JSON.parse(localStorage.getItem('store'));
     }catch(e){
@@ -78,6 +83,7 @@ export class AppComponent implements OnInit {
     }
 
     this.initializeApp();
+
   }
 
   ngOnInit() {
@@ -87,7 +93,7 @@ export class AppComponent implements OnInit {
   ionViewWillEnter() {
     console.log('main luanch..')
   }
-  
+
 
    login(){
      this.router.navigate(['login']);

@@ -290,7 +290,7 @@ export class CustomerPage implements AfterViewInit{
       this.tab1 = false;
       this.tab2 = true;
       this.stores = [];
-      this.loadStores();
+      this.loadMapModal();
     }else{
       this.tab1 = true;
       this.tab2 = false;

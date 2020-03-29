@@ -16,12 +16,13 @@
       <ion-card-content>
       <ion-item-group>
         <ion-item lines="none">
-          <ion-img [src]="imageSrc || '/assets/noimg.png'"></ion-img>
+          <ion-img *ngIf="store_pic" [src]="store_pic"></ion-img>
+          <ion-img *ngIf="!store_pic" src="/assets/noimg.png"></ion-img>
         </ion-item>
         <ion-grid>
           <ion-row justify-content-center>
-            <ion-button size="small" color="primary" (click)="takePhoto()">ถ่ายรูปสินค้า</ion-button>
-            <ion-button size="small" color="secondary" (click)="selectPhoto()">เลือกจากอัลบั้ม</ion-button>
+            <ion-button size="small" color="primary" (click)="getPicture()">ถ่ายรูปสินค้า</ion-button>
+            <ion-button size="small" color="secondary" (click)="selectPictures()">เลือกจากอัลบั้ม</ion-button>
           </ion-row>
         </ion-grid>
       </ion-item-group>

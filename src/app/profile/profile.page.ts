@@ -5,7 +5,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ToastService } from '../shared/services/toast.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, Events } from '@ionic/angular';
 
 declare var google;
 
@@ -33,6 +33,7 @@ export class ProfilePage implements OnInit{
     private route: ActivatedRoute,
     private camera: Camera,
     private _formBuilder: FormBuilder,
+    private event : Events,
     private _loading: LoadingController
   ){
 
@@ -41,9 +42,15 @@ export class ProfilePage implements OnInit{
   }
 
   ngOnInit() {
+
+
     this.store = JSON.parse(localStorage.getItem('store'));
     console.log(this.store);
     this.store_pic = this.store.store_pic;
+
+    if(this.store_pic){
+      this.store_pic = 'https://qrdee.co/app/'+this.store_pic;
+    }
 
     localStorage.setItem("store_lat",this.store.latitude);
     localStorage.setItem("store_lng",this.store.longitude);
@@ -51,12 +58,16 @@ export class ProfilePage implements OnInit{
 
     this.loadStoreTypes();
     this.buildForm();
-
-
-    this.latitude.patchValue( this.store.latitude );
-    this.longitude.patchValue( this.store.longitude );
+    // this.latitude.patchValue( this.store.latitude );
+    // this.longitude.patchValue( this.store.longitude );
 
   }
+  ionViewDidEnter() {
+
+
+
+  }
+
 
   // ionViewWillEnter() {
 	   //this.loadProfile();
@@ -79,7 +90,7 @@ export class ProfilePage implements OnInit{
     this.latitude.patchValue( localStorage.getItem('store_lat') );
     this.longitude.patchValue( localStorage.getItem('store_lng') );
 
-    console.log(this.form.value);
+    //console.log(this.form.value);
 
 
     const loading = await this._loading.create();
@@ -88,35 +99,33 @@ export class ProfilePage implements OnInit{
     await this.profileservice.updateProfile(this.form.value, this.store.id)
       .subscribe((data: any) => {
 
+        console.log("Profile Resp0nse===>");
+
         console.log(data);
+        //
+        // localStorage.setItem('store', JSON.stringify({
+        //   id: data.id,
+        //   store_name: data.store_name,
+        //   promptpay: data.promptpay,
+        //   access_token: data.access_token,
+        //   mobile_number: data.mobile_number,
+        //   delivery_price: data.delivery_price,
+        //   firstname: data.firstname,
+        //   lastname: data.lastname,
+        //   store_type_id: data.store_type_id,
+        //   latitude: data.latitude,
+        //   longitude: data.longitude,
+        //   store_pic: data.store_pic
+        // }));
 
-        localStorage.setItem('store', JSON.stringify({
-          id: data.id,
-          store_name: data.store_name,
-          promptpay: data.promptpay,
-          access_token: data.access_token,
-          mobile_number: data.mobile_number,
-          delivery_price: data.delivery_price,
-          firstname: data.firstname,
-          lastname: data.lastname,
-          store_type_id: data.store_type_id,
-          latitude: data.latitude,
-          longitude: data.longitude,
-          store_pic: data.store_pic
-        }));
+        this.event.publish('store:changed',data);
 
-        localStorage.setItem('member', JSON.stringify({
-          id: null,
-          mobile_number: data.mobile_number,
-          latitude: data.latitude,
-          longitude: data.longitude,
-          firstname: data.firstname,
-          lastname: data.lastname
-        }));
+
 
         loading.dismiss();
         this.toastService.showToast(`ปรับปรุงข้อมูลเรียบร้อยแล้ว`, 'top');
       }, (err) => {
+        console.log(err);
         this.toastService.showToast(JSON.stringify(err), 'top');
         loading.dismiss()
       })
@@ -185,6 +194,8 @@ export class ProfilePage implements OnInit{
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }).then((image) => {
+
+      console.log("store_pic selected..... =>");
       this.store_pic = 'data:image/jpeg;base64,' + image;
       this.form.get('store_pic').patchValue(this.store_pic);
       // console.log(base64Image);

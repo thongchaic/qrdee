@@ -110,7 +110,7 @@ this.productService.getProductTypes().subscribe((data:any) => this.product_types
        thumbnail:null
      });
      if(data.thumbnail){
-       this.thumbnail = "https://qrdee.co/app/"+data.thumbnail;
+       this.thumbnail = 'https://qrdee.co/app/'+data.thumbnail;
      }
    }, err=>{
 
@@ -122,39 +122,34 @@ this.productService.getProductTypes().subscribe((data:any) => this.product_types
 
 selectPictures() {
    this.camera.getPicture({
-     quality: 70,
+     quality: 40,
      destinationType: this.camera.DestinationType.DATA_URL,
      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
      encodingType: this.camera.EncodingType.JPEG,
      mediaType: this.camera.MediaType.PICTURE
-   }).then((image) => {
-     this.thumbnail = 'data:image/jpeg;base64,' + image;
+   }).then((imageData) => {
+     console.log("Image Selected => ");
+     this.thumbnail = 'data:image/jpeg;base64,' + imageData;
      this.productForm.get('thumbnail').patchValue(this.thumbnail);
-     // console.log(base64Image);
-     // this.preview = base64Image;
-     // this.form.get('photo').patchValue(base64Image);
    }, (err) => {
+     console.log("Image Error=>");
      console.log(err);
    })
  }
 
  getPicture() {
     this.camera.getPicture({
-      quality: 70,
+      quality: 40,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }).then((image) => {
       this.thumbnail = 'data:image/jpeg;base64,' + image;
       this.productForm.get('thumbnail').patchValue(this.thumbnail);
-      // console.log(base64Image);
-      // this.preview = base64Image;
-      // this.form.get('photo').patchValue(base64Image);
     }, (err) => {
       console.log(err);
     })
   }
-
 
   async submit() {
 
@@ -172,23 +167,22 @@ selectPictures() {
        loading.dismiss();
        this.toastService.showToast('เพิ่มสินค้าไม่สำเร็จ โปรดลองอีกครั้ง', 'top');
        this.router.navigateByUrl('/products');
-       //this.productForm.controls['details_th'].setValue(JSON.stringify(err));
-       //alert(JSON.stringify(err));
      });
 
    } else {
-     console.log(this.productForm.value);
+     //console.log(this.productForm.value);
+     console.log("UPDATE =>"+this.route.snapshot.params['id']);
      this.productService.updateProduct(this.productForm.value, this.route.snapshot.params['id']).subscribe(res => {
        //alert(JSON.stringify(res));
+       console.log("UPDATE RES=>");
+       console.log(res);
        loading.dismiss();
        this.toastService.showToast('แก้ไขสินค้าเรียบร้อยแล้ว', 'top');
        this.router.navigateByUrl('/products');
      }, err => {
        loading.dismiss();
-       this.toastService.showToast('ปรับปรุงข้อมูลไม่สำเร็จ โปรดลองอีกครั้ง', 'top');
-       this.router.navigateByUrl('/products');
-       //alert(JSON.stringify(err));
-       //this.productForm.get('details_th').patchValue(JSON.stringify(err));
+       console.log("ERROR update product=>");
+       console.log(err);
      });
    }
   }

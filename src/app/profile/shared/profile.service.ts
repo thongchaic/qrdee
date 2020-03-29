@@ -16,7 +16,8 @@ constructor(
     private http: HttpClient
 ) { }
 
-getProfile() {
+  getProfile() {
+    console.log(`${this.baseUrl}`);
     return this.http.get<any>(`${this.baseUrl}`);
   }
 

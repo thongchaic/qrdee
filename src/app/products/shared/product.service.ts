@@ -44,6 +44,7 @@ export class ProductService {
   }
 
   updateProduct(data, id) {
+    console.log(`https://qrdee.co/api/v2/products/${id}`)
     return this.http.put<any>(`https://qrdee.co/api/v2/products/${id}`, data );
   }
 

@@ -38,11 +38,7 @@ export class MapmodalComponent implements OnInit {
   async getLocation(){
     this.member = JSON.parse(localStorage.getItem('member'));
 
-    try{
-      this.latitude = this.member.latitude;
-      this.longitude = this.member.longitude;
-      this.loadMap();
-    }catch(e){
+    if(this.member.latitude == null || this.member.longitude == null){
 
       const _loading = await this._loading.create();
       await _loading.present();
@@ -51,18 +47,25 @@ export class MapmodalComponent implements OnInit {
          _loading.dismiss();
          this.latitude = resp.coords.latitude;
          this.longitude = resp.coords.longitude;
+
+         this.member.longitude = this.longitude;
+         this.member.latitude = this.latitude;
+         localStorage.setItem('member', JSON.stringify(this.member));
          this.loadMap();
 
       }).catch((error) => {
         _loading.dismiss();
-        this.latitude = this.member.latitude;
-        this.longitude = this.member.longitude;
         this.loadMap();
       });
 
+    }else{
+      this.latitude = this.member.latitude;
+      this.longitude = this.member.longitude;
+      this.loadMap();
     }
 
   }
+
 
   dismissModal() {
 
@@ -71,6 +74,10 @@ export class MapmodalComponent implements OnInit {
 
     console.log("Dismiss => "+this.latitude+" / "+this.longitude);
 
+    this.member.longitude = this.longitude;
+    this.member.latitude = this.latitude;
+    localStorage.setItem('member', JSON.stringify(this.member));
+
     this._modalCtrl.dismiss({ latitude: this.latitude, longitude: this.longitude });
   }
 
@@ -78,6 +85,10 @@ export class MapmodalComponent implements OnInit {
 
     this.latitude = localStorage.getItem('select_lat');
     this.longitude = localStorage.getItem('select_lng');
+
+    this.member.longitude = this.longitude;
+    this.member.latitude = this.latitude;
+    localStorage.setItem('member', JSON.stringify(this.member));
 
     console.log("Accept => "+this.latitude+" / "+this.longitude);
 

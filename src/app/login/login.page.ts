@@ -41,20 +41,10 @@ export class LoginPage  {
     await loading.present();
 
     await this.loginService.logintore(this.promptpay,this.password).subscribe(trn => {
-
-      //alert(JSON.stringify(trn));
       loading.dismiss();
-      console.log(trn);
-      localStorage.setItem('store', JSON.stringify(trn));
-      const member = {
-        id:null,
-        mobile_number:trn.mobile_number,
-        latitude:trn.latitude,
-        longitude:trn.longitude,
-        firstname:trn.firstname,
-        lastname:trn.lastname
-      }
-      localStorage.setItem('member', JSON.stringify(member));
+      //alert(JSON.stringify(trn));
+      // console.log(trn);
+      this.router.navigateByUrl('/cart');
       this.event.publish('store:changed',trn);
       this.router.navigateByUrl('/cart');
 
@@ -73,8 +63,27 @@ export class LoginPage  {
   }
 
   goRegister_customer(){
+    console.log("Register customer");
+    let member = JSON.parse(localStorage.getItem('member'));
+    if(!member){
+      console.log("member not set....");
+      const member = {
+        id:null,
+        mobile_number:null,
+        latitude:null,
+        longitude:null,
+        firstname:null,
+        lastname:null
+      }
+      localStorage.setItem('member', JSON.stringify(member));
+      console.log(member);
+      this.router.navigateByUrl('/customer');
+    }else{
+      console.log("member already set....");
+      this.router.navigateByUrl('/customer');
+    }
 
-    //this.router.navigateByUrl('/register-customer');
+
   }
 
 }

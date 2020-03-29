@@ -26,6 +26,8 @@ export class CustomerPage implements AfterViewInit{
   tab2 = true;
   latitude: any;
   longitude: any;
+  firstname:any;
+  mobile_number:any;
   member:any;
   stores:any[] = [];
   offset:number = 0;
@@ -51,14 +53,21 @@ export class CustomerPage implements AfterViewInit{
     private callNumber: CallNumber
 	){
 
+    localStorage.setItem('member_cart',JSON.stringify(this.member_cart));
     this.member = JSON.parse(localStorage.getItem('member'));
     this.latitude = this.member.latitude;
     this.longitude = this.member.longitude;
 
+    this.mobile_number = this.member.mobile_number;
+    this.firstname = this.member.firstname;
+
     console.log("list component called!!!");
     console.log(this.member);
-
     this.loadStores();
+
+  }
+  ionViewDidEnter() {
+
   }
 
   ionViewWillEnter() {
@@ -84,6 +93,12 @@ export class CustomerPage implements AfterViewInit{
 
 
   async loadStores(){
+
+      if(this.latitude == null || this.longitude == null){
+        this.loadMapModal();
+        return;
+      }
+
       const loading = await this._loading.create();
       await loading.present();
 
@@ -189,6 +204,9 @@ export class CustomerPage implements AfterViewInit{
     this.member_cart = JSON.parse(localStorage.getItem('member_cart'));
     this.latitude = localStorage.getItem('member_lat');
     this.longitude = localStorage.getItem('member_lng');
+    this.member = JSON.parse(localStorage.getItem('member'));
+    this.member.mobile_number = this.mobile_number;
+    this.member.firstname = this.firstname;
 
 
     console.log(this.member);
@@ -272,7 +290,7 @@ export class CustomerPage implements AfterViewInit{
       this.tab1 = false;
       this.tab2 = true;
       this.stores = [];
-      this.loadMapModal();
+      this.loadStores();
     }else{
       this.tab1 = true;
       this.tab2 = false;
@@ -289,6 +307,7 @@ export class CustomerPage implements AfterViewInit{
 
     const { data } = await modal.onWillDismiss();
 
+    console.log(data);
     this.latitude = await data.latitude;
     this.longitude = await data.longitude;
 

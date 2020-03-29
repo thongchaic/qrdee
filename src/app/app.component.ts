@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Platform,Events } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router  } from '@angular/router';
+import { LoginStoreService } from './login/shared/login-store.service';
 
 
 @Component({
@@ -10,9 +11,10 @@ import { Router  } from '@angular/router';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
   store:any;
+  currentStore: any;
 
   // appPages = [
   //   { title: 'หน้าแรก', url: '/cart', icon: 'home' },
@@ -36,7 +38,10 @@ export class AppComponent {
     private statusBar: StatusBar,
     private event : Events,
     private router: Router,
+    private _loginService: LoginStoreService
   ) {
+
+    // this.currentStore = this._loginService.currentStoreValue;
 
     this.event.subscribe('store:changed',trn=>{
        this.store = trn;
@@ -75,6 +80,15 @@ export class AppComponent {
     this.initializeApp();
   }
 
+  ngOnInit() {
+    this._loginService.currentStore.subscribe(store => this.currentStore = store)
+  }
+
+  ionViewWillEnter() {
+    console.log('main luanch..')
+  }
+  
+
    login(){
      this.router.navigate(['login']);
   }
@@ -84,9 +98,7 @@ export class AppComponent {
    }
 
    logout(){
-     localStorage.removeItem('store');
-     localStorage.setItem('member_cart',JSON.stringify([]));
-     this.router.navigateByUrl('/login');
+     this._loginService.logout();
    }
    product(){
        this.router.navigate(['products']);

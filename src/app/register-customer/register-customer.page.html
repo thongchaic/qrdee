@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
-    </ion-buttons>    
+    </ion-buttons>
     <ion-title>ซื้อสินค้า</ion-title>
     <ion-buttons slot="end">
       <ion-back-button></ion-back-button>
@@ -14,7 +14,7 @@
 
  <ion-content class="app-background">
   <ion-card style="background:#FFFFFF;">
-    <ion-card-content>  
+    <ion-card-content>
        <ion-list>
       <ion-item>
         <ion-label position="floating" ></ion-label>
@@ -38,11 +38,10 @@
       </ion-item>
       <ion-item>
         <ion-label position="floating" ></ion-label>
-        <ion-input type="password"  [(ngModel)]="repass" placeholder="รหัสผ่านยืนยัน"></ion-input>
+        <ion-input type="password"  [(ngModel)]="repassword" placeholder="รหัสผ่านยืนยัน"></ion-input>
       </ion-item>
      <ion-button type="submit" expand="full" color="success" (click)="Register_customer()">ลงทะเบียน</ion-button>
  </ion-list>
 </ion-card-content>
 </ion-card>
 </ion-content>
-

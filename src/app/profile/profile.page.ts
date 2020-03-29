@@ -36,15 +36,26 @@ export class ProfilePage implements OnInit{
     private _loading: LoadingController
   ){
 
-    this.store = JSON.parse(localStorage.getItem('store'));
-    localStorage.setItem("store_lat",this.store.latitude);
-    localStorage.setItem("store_lng",this.store.longitude);
+
     //alert(JSON.stringify(this.store));
   }
 
   ngOnInit() {
+    this.store = JSON.parse(localStorage.getItem('store'));
+    console.log(this.store);
+    this.store_pic = this.store.store_pic;
+
+    localStorage.setItem("store_lat",this.store.latitude);
+    localStorage.setItem("store_lng",this.store.longitude);
+
+
     this.loadStoreTypes();
     this.buildForm();
+
+
+    this.latitude.patchValue( this.store.latitude );
+    this.longitude.patchValue( this.store.longitude );
+
   }
 
   // ionViewWillEnter() {
@@ -64,11 +75,21 @@ export class ProfilePage implements OnInit{
   }
 
   async submit(){
+
+    this.latitude.patchValue( localStorage.getItem('store_lat') );
+    this.longitude.patchValue( localStorage.getItem('store_lng') );
+
+    console.log(this.form.value);
+
+
     const loading = await this._loading.create();
     await loading.present();
 
     await this.profileservice.updateProfile(this.form.value, this.store.id)
       .subscribe((data: any) => {
+
+        console.log(data);
+
         localStorage.setItem('store', JSON.stringify({
           id: data.id,
           store_name: data.store_name,
@@ -95,9 +116,9 @@ export class ProfilePage implements OnInit{
 
         loading.dismiss();
         this.toastService.showToast(`ปรับปรุงข้อมูลเรียบร้อยแล้ว`, 'top');
-      }, (err) => { 
+      }, (err) => {
         this.toastService.showToast(JSON.stringify(err), 'top');
-        loading.dismiss() 
+        loading.dismiss()
       })
     // this.store.latitude = localStorage.getItem('store_lat');
     // this.store.longitude = localStorage.getItem('store_lng');
@@ -145,11 +166,11 @@ export class ProfilePage implements OnInit{
     });
     marker.addListener('dragend', function() {
 
-      this.latitude.patchValue(marker.getPosition().lat());
-      this.longitude.patchValue(marker.getPosition().lng());
+      //this.form.get('latitude').patchValue( marker.getPosition().lat() );
+      // this.longitude.patchValue(marker.getPosition().lng());
 
-      // localStorage.setItem("store_lat",marker.getPosition().lat());
-      // localStorage.setItem("store_lng",marker.getPosition().lng());
+      localStorage.setItem("store_lat",marker.getPosition().lat());
+      localStorage.setItem("store_lng",marker.getPosition().lng());
 
       this.map.setCenter(marker.getPosition());
     });
@@ -173,7 +194,7 @@ export class ProfilePage implements OnInit{
       console.log(err);
     })
   }
- 
+
   getPicture() {
      this.camera.getPicture({
        quality: 50,
@@ -191,13 +212,6 @@ export class ProfilePage implements OnInit{
      })
    }
 
-
-   // loadProfile() {
-   //  this.profileservice.getProfiles().subscribe(res => {
-   //      this.store = res.data;
-   //      console.log(this.store);
-   //      });
-   // }
 
   buildForm() {
     this.form = this._formBuilder.group({

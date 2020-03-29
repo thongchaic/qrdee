@@ -97,6 +97,8 @@ export class CustomerPage implements AfterViewInit{
         console.log(this.stores);
         loading.dismiss();
 
+      }, err=>{
+        loading.dismiss();
       });
   }
   searchStores(q){

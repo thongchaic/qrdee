@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 import { AlertController } from '@ionic/angular';
 import { ActivatedRoute, Router,NavigationExtras  } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-list',
@@ -35,6 +36,7 @@ export class ListComponent {
     private alertController: AlertController,
     private router: Router,
     private route: ActivatedRoute,
+    private _loading: LoadingController
   ) {
 
      this.store = JSON.parse(localStorage.getItem('store'));
@@ -54,14 +56,21 @@ export class ListComponent {
      this.loadProducts();
    }
 
-   loadProducts() {
+   async loadProducts() {
       if(!this.store){
         return;
       }
+      const loading = await this._loading.create();
+      await loading.present();
+
       //alert(JSON.stringify(this.store));
       this.productService.getProducts(this.store.id).subscribe( (data:any) => {
         //alert(JSON.stringify(data));
+        console.log(data);
+        loading.dismiss();
         this.products = data;
+      }, err=>{
+        loading.dismiss();
       });
 
 

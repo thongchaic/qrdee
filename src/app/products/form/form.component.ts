@@ -22,12 +22,12 @@ export class FormComponent{
 store:any;
 
 productForm: FormGroup = this.builder.group({
- product_type_id: [1, Validators.required],
- product_th: ['', Validators.required],
- details_th: ['', Validators.required],
- price: [0, Validators.required],
- cost: [0, Validators.required],
- thumbnail: null
+   product_type_id: [1, Validators.required],
+   product_th: ['', Validators.required],
+   details_th: ['', Validators.required],
+   price: [0, Validators.required],
+   cost: [0, Validators.required],
+   thumbnail: null
 });
 thumbnail:any;
 
@@ -49,7 +49,7 @@ constructor(
  @Inject(File)  private file: File,
  @Inject(WebView)  private webView: WebView,
  private toastService: ToastService,
- private loadingController: LoadingController,
+ private _loading: LoadingController,
  private navCtrl: NavController
 ){
   this.store = JSON.parse(localStorage.getItem('store'));
@@ -156,32 +156,42 @@ selectPictures() {
   }
 
 
-submit() {
+  async submit() {
 
- // console.log(this.productForm.value)
- if(this.formType === 'CREATE') {
-   this.productService.createProduct(this.productForm.value, this.store.id).subscribe(res => {
-     this.toastService.showToast('เพิ่มสินค้าเรียบร้อยแล้ว', 'top');
-     this.router.navigateByUrl('/products');
-   }, err => {
-     this.router.navigateByUrl('/products');
-     //this.productForm.controls['details_th'].setValue(JSON.stringify(err));
-     //alert(JSON.stringify(err));
-   });
+    const loading = await this._loading.create();
+    await loading.present();
 
- } else {
-   console.log(this.productForm.value);
-   this.productService.updateProduct(this.productForm.value, this.route.snapshot.params['id']).subscribe(res => {
-     //alert(JSON.stringify(res));
-     this.toastService.showToast('แก้ไขสินค้าเรียบร้อยแล้ว', 'top');
-     this.router.navigateByUrl('/products');
-   }, err => {
-     this.router.navigateByUrl('/products');
-     //alert(JSON.stringify(err));
-     //this.productForm.get('details_th').patchValue(JSON.stringify(err));
-   });
- }
-}
+
+   if(this.formType === 'CREATE') {
+     this.productService.createProduct(this.productForm.value, this.store.id).subscribe(res => {
+       console.log(res);
+       loading.dismiss();
+       this.toastService.showToast('เพิ่มสินค้าเรียบร้อยแล้ว', 'top');
+       this.router.navigateByUrl('/products');
+     }, err => {
+       loading.dismiss();
+       this.toastService.showToast('เพิ่มสินค้าไม่สำเร็จ โปรดลองอีกครั้ง', 'top');
+       this.router.navigateByUrl('/products');
+       //this.productForm.controls['details_th'].setValue(JSON.stringify(err));
+       //alert(JSON.stringify(err));
+     });
+
+   } else {
+     console.log(this.productForm.value);
+     this.productService.updateProduct(this.productForm.value, this.route.snapshot.params['id']).subscribe(res => {
+       //alert(JSON.stringify(res));
+       loading.dismiss();
+       this.toastService.showToast('แก้ไขสินค้าเรียบร้อยแล้ว', 'top');
+       this.router.navigateByUrl('/products');
+     }, err => {
+       loading.dismiss();
+       this.toastService.showToast('ปรับปรุงข้อมูลไม่สำเร็จ โปรดลองอีกครั้ง', 'top');
+       this.router.navigateByUrl('/products');
+       //alert(JSON.stringify(err));
+       //this.productForm.get('details_th').patchValue(JSON.stringify(err));
+     });
+   }
+  }
 
 letScan() {
   const barcodeScannerOptions: BarcodeScannerOptions = {

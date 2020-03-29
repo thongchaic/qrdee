@@ -3,7 +3,6 @@ import { ModalController, LoadingController } from '@ionic/angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { FormControl } from '@angular/forms';
 
-declare var google;
 
 @Component({
   selector: 'app-mapmodal',
@@ -11,6 +10,7 @@ declare var google;
   styleUrls: ['./mapmodal.component.scss'],
 })
 export class MapmodalComponent implements OnInit {
+
 
   @ViewChild('map',{static:false}) mapElement: ElementRef;
   map: any;
@@ -20,15 +20,12 @@ export class MapmodalComponent implements OnInit {
   member:any;
 
 
-  constructor(
-    private _modalCtrl: ModalController,
+  constructor(  private _modalCtrl: ModalController,
     private _geolocation: Geolocation,
-    private _loading: LoadingController) { }
+    private _loading: LoadingController
+  ) { }
 
-  ngOnInit() {
-
-
-  }
+  ngOnInit() {}
 
   ngAfterViewInit(): void {
     //this.getCurrentPos();
@@ -36,9 +33,9 @@ export class MapmodalComponent implements OnInit {
   }
 
   async getLocation(){
-    this.member = JSON.parse(localStorage.getItem('member'));
 
     try{
+      this.member = JSON.parse(localStorage.getItem('member'));
       this.latitude = this.member.latitude;
       this.longitude = this.member.longitude;
       this.loadMap();
@@ -55,8 +52,6 @@ export class MapmodalComponent implements OnInit {
 
       }).catch((error) => {
         _loading.dismiss();
-        this.latitude = this.member.latitude;
-        this.longitude = this.member.longitude;
         this.loadMap();
       });
 
@@ -64,53 +59,45 @@ export class MapmodalComponent implements OnInit {
 
   }
 
-  dismissModal() {
+ accept() {
 
     this.latitude = localStorage.getItem('select_lat');
     this.longitude = localStorage.getItem('select_lng');
-
-    console.log("Dismiss => "+this.latitude+" / "+this.longitude);
-
-    this._modalCtrl.dismiss({ latitude: this.latitude, longitude: this.longitude });
-  }
-
-  accept() {
-
-    this.latitude = localStorage.getItem('select_lat');
-    this.longitude = localStorage.getItem('select_lng');
-
     console.log("Accept => "+this.latitude+" / "+this.longitude);
-
     this._modalCtrl.dismiss({ latitude: this.latitude, longitude: this.longitude });
+
   }
 
-   loadMap() {
+  loadMap() {
 
-    localStorage.setItem("select_lat", this.latitude )
-    localStorage.setItem("select_lng", this.longitude );
+   localStorage.setItem("select_lat", this.latitude )
+   localStorage.setItem("select_lng", this.longitude );
 
-    let latLng = new google.maps.LatLng(this.latitude, this.longitude);
+   let latLng = new google.maps.LatLng(this.latitude, this.longitude);
 
-    this.map = new google.maps.Map(this.mapElement.nativeElement, {
-      zoom: 15,
-      center: latLng,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
-    });
+   this.map = new google.maps.Map(this.mapElement.nativeElement, {
+     zoom: 15,
+     center: latLng,
+     mapTypeId: google.maps.MapTypeId.ROADMAP
+   });
 
-    let marker = new google.maps.Marker({
-      map: this.map,
-      draggable: true,
-      animation: google.maps.Animation.DROP,
-      position: latLng
-    });
+   let marker = new google.maps.Marker({
+     map: this.map,
+     draggable: true,
+     animation: google.maps.Animation.DROP,
+     position: latLng
+   });
 
-    marker.addListener('dragend', function() {
+   marker.addListener('dragend', function() {
 
-      localStorage.setItem("select_lat",marker.getPosition().lat());
-      localStorage.setItem("select_lng",marker.getPosition().lng());
+     localStorage.setItem("select_lat",marker.getPosition().lat());
+     localStorage.setItem("select_lng",marker.getPosition().lng());
 
-      this.map.setCenter(marker.getPosition());
-    });
-  }
+     this.map.setCenter(marker.getPosition());
+   });
+ }
+
+
+
 
 }

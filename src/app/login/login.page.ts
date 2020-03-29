@@ -43,7 +43,8 @@ export class LoginPage  {
     await this.loginService.logintore(this.promptpay,this.password).subscribe(trn => {
 
       //alert(JSON.stringify(trn));
-      // console.log(trn);
+      loading.dismiss();
+      console.log(trn);
       localStorage.setItem('store', JSON.stringify(trn));
       const member = {
         id:null,
@@ -54,47 +55,26 @@ export class LoginPage  {
         lastname:trn.lastname
       }
       localStorage.setItem('member', JSON.stringify(member));
-      // console.log(member);
-      this.router.navigateByUrl('/cart');
       this.event.publish('store:changed',trn);
+      this.router.navigateByUrl('/cart');
 
+    }, err=>{
       loading.dismiss();
-
-      // console.log(trn);
-      // this.email = trn.data;
-      // this.token = trn.access_token;
-      //
-      // // console.log("test",this.token);
-      // // console.log('access_token ' + this.token);
-      // localStorage.setItem('access_token', this.token);
-      // localStorage.setItem('usertype', trn.usertype);
-      // // console.log('usertype' + trn.usertype);
-      //
-      // if(trn.usertype == 1){
-      //         this.router.navigateByUrl('/cart');
-      //  }
-      //
-      //  if(trn.usertype == 2){
-      //         this.router.navigateByUrl('/logistic');
-      //  }
-      //  if(trn.usertype == 3){
-      //         this.router.navigateByUrl('/customer');
-      //  }
-
     });
 
   }
 
   goRegister_store(){
-  this.router.navigateByUrl('/register');
+    this.router.navigateByUrl('/register');
   }
 
   goRegister_logistic(){
-  this.router.navigateByUrl('/register-logistic');
+    this.router.navigateByUrl('/register-logistic');
   }
 
   goRegister_customer(){
-  this.router.navigateByUrl('/register-customer');
+
+    //this.router.navigateByUrl('/register-customer');
   }
 
 }

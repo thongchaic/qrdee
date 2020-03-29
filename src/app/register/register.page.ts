@@ -26,11 +26,12 @@ export class RegisterPage{
   map: any;
   constructor(
    // public navCtrl: NavController,
-   private router: Router,
-   public registerService: RegisterStoreService,
-   private geolocation: Geolocation,
-   private toastService: ToastService,
-   private event : Events,
+     private router: Router,
+     public registerService: RegisterStoreService,
+     private geolocation: Geolocation,
+     private toastService: ToastService,
+     private event : Events,
+    private _loading: LoadingController
    ) { }
 
   ngAfterViewInit(): void {
@@ -66,7 +67,7 @@ export class RegisterPage{
 
   }
 
-  registStore(){
+  async registStore(){
 
       if( (this.password != this.repassword) || this.password.trim() == ""){
         alert("รหัสผ่านไม่ตรงกัน/โปรดระบุรหัสผ่าน");
@@ -79,12 +80,14 @@ export class RegisterPage{
         return;
       }
       //alert("Register");
+      const loading = await this._loading.create();
+      await loading.present();
 
       this.latitude = localStorage.getItem('regis_lat');
       this.longitude = localStorage.getItem('regis_lng');
 
       this.registerService.registerstore(this.password,this.promptpay,this.store_name,this.latitude,this.longitude,5).subscribe(trn => {
-
+          loading.dismiss();
           localStorage.removeItem('regis_lat');
           localStorage.removeItem('regis_lng');
           localStorage.setItem('store', JSON.stringify(trn));
@@ -104,7 +107,8 @@ export class RegisterPage{
           this.router.navigateByUrl('/cart');
 
       }, err=>{
-        alert("Network error!");
+        loading.dismiss();
+        alert("สมัครไม่สำเร็จ โปรดลองอีกครั้ง");
       });
   }
 }

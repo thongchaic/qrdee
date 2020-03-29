@@ -36,7 +36,7 @@
 
       <ion-item  *ngFor="let product of products">
         <ion-avatar slot="start">
-          <img *ngIf="store.store_pic" [src]="'https://qrdee.co/app/'+store.store_pic">
+          <img *ngIf="store.store_pic" [src]="'https://qrdee.co/app/'+product.thumbnail">
           <img *ngIf="!store.store_pic" src="/assets/noimg.png">
         </ion-avatar>
         <ion-text>

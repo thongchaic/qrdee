@@ -2,135 +2,45 @@
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
-    </ion-buttons>    
-    <ion-title>สถิติ</ion-title>
-    <ion-buttons slot="end">
-      <ion-back-button></ion-back-button>
     </ion-buttons>
+    <ion-title>สรุปยอดขาย</ion-title>
+    <!-- <ion-buttons slot="end">
+      <ion-back-button></ion-back-button>
+    </ion-buttons> -->
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="app-background">
+<ion-content>
 
-  <ion-list-header style="background:#FFFFFF;"> 
-   <h5>รายได้รวมวันนี้  <b>{{stat_data.daily_income}}&nbsp;บาท</b></h5> <br/>
-  </ion-list-header>
-   <ion-list-header style="background:#FFFFFF;"> 
-        QR สำเร็จ &nbsp;<ion-badge>{{stat_data.daily_trn_ok}}</ion-badge>&nbsp;ครั้ง
-         &nbsp;ยกเลิก&nbsp;<ion-badge>{{stat_data.daily_trn_cancel}}</ion-badge>&nbsp;ครั้ง
-  </ion-list-header>
- 
 <!-- วัน -->
-  <ion-card class="welcome-card" style="background:#FFFFFF;">
+  <ion-card style="background:#FFFFFF;">
     <ion-card-header>
-      <h6>วันนี้&nbsp;{{hourly}}&nbsp;บาท</h6>
+      <h5>รายวันนี้  <b *ngIf="stat_data"> {{stat_data.hourly.total}} </b> บาท</h5>
     </ion-card-header>
-    <!-- <ion-card-content> -->
-      <canvas #barChartD></canvas>
-    <!-- </ion-card-content> -->
-     <p>&nbsp;ณ​ วันที่ &nbsp;{{stat_data.date}}&nbsp;{{stat_data.month}}&nbsp;{{stat_data.year}}</p>
+    <canvas #barChartD></canvas>
+    <p *ngIf="stat_data">ณ​ วันที่ {{stat_data.date}} {{stat_data.month}} {{stat_data.year}}</p>
   </ion-card>
 
 
 <!-- เดือน -->
- <ion-card class="welcome-card" style="background:#FFFFFF;">
+ <ion-card style="background:#FFFFFF;">
     <ion-card-header>
-    <h6> เดือนนี้ &nbsp;{{daily}}&nbsp;บาท</h6>
+    <h6 *ngIf="stat_data"> เดือนนี้ {{stat_data.daily.total}} บาท</h6>
     </ion-card-header>
-    <!-- <ion-card-content> -->
-      <canvas #barChartM></canvas>
-    <!-- </ion-card-content> -->
-      <p>&nbsp;เดือน &nbsp;{{stat_data.month}} &nbsp;{{stat_data.year}}</p>
+    <canvas #barChartM></canvas>
+    <p *ngIf="stat_data">ณ เดือน {{stat_data.month}} {{stat_data.year}}</p>
   </ion-card>
 
 
 <!-- ปี -->
 
-   <ion-card class="welcome-card" style="background:#FFFFFF;">
+   <ion-card style="background:#FFFFFF;">
     <ion-card-header>
-    <h6>ปีนี้ &nbsp;{{monthly}}&nbsp;บาท</h6>
+    <h6 *ngIf="stat_data">ปีนี้ {{stat_data.monthly.total}} บาท</h6>
     </ion-card-header>
-    <!-- <ion-card-content> -->
       <canvas #barChartY></canvas>
-    <!-- </ion-card-content> -->
-      <p>&nbsp;ปี &nbsp;{{stat_data.year}}</p>
+      <p *ngIf="stat_data">ณ ปี {{stat_data.year}}</p>
   </ion-card>
 <br/>
+
 </ion-content>
-
-
-
-
-
-
-
-
-
-<!-- <ion-content>
-  <ion-card>
-    <ion-item > 
-      <button>
-        <ion-icon name="cash"></ion-icon>
-        รายได้รวมวันนี้  
-      </button>
-      <span item-right>&nbsp;{{stat_data.daily_income}}&nbsp;บาท</span>
-    </ion-item>
-
-    <ion-item>
-      <button color="twitter" item-left ion-button icon-left clear>
-        <ion-icon name="bookmarks"></ion-icon>
-         QR สำเร็จ &nbsp;<ion-badge>{{stat_data.daily_trn_ok}}</ion-badge>&nbsp;ครั้ง
-         &nbsp;&nbsp;ยกเลิก&nbsp;<ion-badge>{{stat_data.daily_trn_cancel}}</ion-badge>&nbsp;ครั้ง
-      </button>
-    </ion-item>
-</ion-card>
-<ion-card>
-  <ion-card-subtitle>
-    &nbsp;วันนี้&nbsp;{{hourly}}&nbsp;บาท
-  </ion-card-subtitle>
-  <ion-card-content>
-    <canvas baseChart
-      [datasets]="hourlyChartData"
-      [labels]="hourlyChartLabels"
-      [options]="barChartOptions"
-      [legend]="barChartLegend"
-      [chartType]="barChartType"> 
-    </canvas>
-    <p>ณ​ วันที่ &nbsp;{{stat_data.date}}&nbsp;{{stat_data.month}}&nbsp;{{stat_data.year}}</p>
-  </ion-card-content>
-</ion-card>
-
-<ion-card>
-  <ion-card-subtitle>
-    &nbsp;เดือนนี้ &nbsp;{{daily}}&nbsp;บาท
-  </ion-card-subtitle>
-  <ion-card-content>
-    <canvas baseChart
-      [datasets]="dailyChartData"
-      [labels]="dailyChartLabels"
-      [options]="barChartOptions"
-      [legend]="barChartLegend"
-      [chartType]="barChartType"> 
-    </canvas>
- <p>เดือน &nbsp;{{stat_data.month}} &nbsp;{{stat_data.year}}</p>
-  </ion-card-content>
-</ion-card>
-
-<ion-card>
-  <ion-card-subtitle>
-    &nbsp;ปีนี้ &nbsp;{{monthly}}&nbsp;บาท
-  </ion-card-subtitle>
-  <ion-card-content>
-    <canvas
-     baseChart
-      [datasets]="monthlyChartData"
-      [labels]="monthlyChartLabels"
-      [options]="barChartOptions"
-      [legend]="barChartLegend"
-      [chartType]="barChartType"> 
-    </canvas>
-     <p>ปี &nbsp;{{stat_data.year}}</p>
-  </ion-card-content>
-</ion-card>
-
-</ion-content> -->

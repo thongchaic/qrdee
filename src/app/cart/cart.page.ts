@@ -16,6 +16,7 @@ import { BarcodeScanner, BarcodeScanResult, BarcodeScannerOptions } from '@ionic
 // import { CallNumber } from '@ionic-native/call-number';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 //import { CallNumber } from '@ionic-native/call-number';
+import { LoadingController } from '@ionic/angular';
 
 
 declare var google;
@@ -84,6 +85,7 @@ export class CartPage {
     private geolocation: Geolocation,
     private barcodeScanner: BarcodeScanner,
     private builder: FormBuilder,
+    private _loading: LoadingController,
     private callNumber: CallNumber
   ) {
 
@@ -113,10 +115,13 @@ export class CartPage {
   }
 
   ionViewWillEnter() {
-     this.getOrders();
-     this.getProducts();
+     // this.getOrders();
+     // this.getProducts();
   }
-
+  ionViewDidEnter() {
+    this.getOrders();
+    this.getProducts();
+  }
   ngAfterViewInit(): void {
 
     // this.geolocation.getCurrentPosition().then((resp) => {
@@ -167,15 +172,27 @@ changeTab(tab){
   }
 }
 
-getOrders(){
+async getOrders(){
+  const loading = await this._loading.create();
+  await loading.present();
+
   this.cartService.getOrders(this.store.id).subscribe((data:any)=>{
     this.orders = data;
+    loading.dismiss();
+  }, err=>{
+    loading.dismiss();
   });
 }
 
-getProducts(){
+async getProducts(){
+  const loading = await this._loading.create();
+  await loading.present();
+
   this.cartService.getProducts(this.store.id).subscribe((data:any)=>{
     this.products = data;
+    loading.dismiss();
+  }, err=>{
+    loading.dismiss();
   });
 }
 

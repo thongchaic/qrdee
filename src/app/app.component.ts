@@ -45,7 +45,7 @@ export class AppComponent implements OnInit {
 
     this.event.subscribe('store:changed',trn=>{
        this.store = trn;
-
+       this.currentStore = trn;
        this.reInitAll();
 
     });

@@ -91,20 +91,22 @@ export class RegisterPage{
 
           localStorage.setItem('store', JSON.stringify(trn));
 
-          const member = {
-            id:null,
-            mobile_number:trn.mobile_number,
-            latitude:trn.latitude,
-            longitude:trn.longitude,
-            firstname:trn.firstname,
-            lastname:trn.lastname
-          }
+          // const member = {
+          //   id:null,
+          //   mobile_number:trn.mobile_number,
+          //   latitude:trn.latitude,
+          //   longitude:trn.longitude,
+          //   firstname:trn.firstname,
+          //   lastname:trn.lastname
+          // }
 
-          localStorage.setItem('member', JSON.stringify(member));
-          console.log(member);
-          localStorage.removeItem('regis_lat');
-          localStorage.removeItem('regis_lng');
+          // localStorage.setItem('member', JSON.stringify(member));
+          // console.log(member);
+          // localStorage.removeItem('regis_lat');
+          // localStorage.removeItem('regis_lng');
+
           this.event.publish('store:changed',trn);
+
           this.router.navigateByUrl('/cart');
 
       }, err=>{

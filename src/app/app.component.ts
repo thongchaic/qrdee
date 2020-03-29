@@ -13,8 +13,8 @@ import { LoginStoreService } from './login/shared/login-store.service';
 })
 export class AppComponent implements OnInit {
 
-  store:any;
-  currentStore: any;
+  store:any = null;
+  member:any = null;
 
   // appPages = [
   //   { title: 'หน้าแรก', url: '/cart', icon: 'home' },
@@ -45,49 +45,55 @@ export class AppComponent implements OnInit {
 
     this.event.subscribe('store:changed',trn=>{
        this.store = trn;
-       this.currentStore = trn;
-       this.reInitAll();
-
+       //this.currentStore = trn;
+       this.reInit(trn);
     });
 
-    this.reInitAll();
+    this.initializeApp();
 
   }
-  reInitAll(){
+  reInit(store){
 
-    try{
-      JSON.parse(localStorage.getItem('member'));
-    }catch(e){
-      const member = {
-        id:null,
-        mobile_number:null,
-        latitude:14.8718084,
-        longitude:103.4962797,
-        firstname:null,
-        lastname:null
-      }
-      localStorage.setItem('member', JSON.stringify(member));
-    }
-
-    try{
       this.store = JSON.parse(localStorage.getItem('store'));
-    }catch(e){
-      localStorage.removeItem('store');
-      this.router.navigateByUrl('/login');
-    }
 
-    try{
-      JSON.parse(localStorage.getItem('member_cart'));
-    }catch(e){
-      localStorage.setItem('member_cart',JSON.stringify([]));
-    }
+      if(!this.store){
+        this.store = store;
+        localStorage.setItem('store', JSON.stringify(store));
+      }
+
+      console.log(this.store);
+      this.member = JSON.parse(localStorage.getItem('member'));
+      console.log(this.member);
+
+      if(!this.member){
+          const member = {
+            id:null,
+            mobile_number:this.store.mobile_number,
+            latitude:this.store.latitude,
+            longitude:this.store.longitude,
+            firstname:this.store.firstname,
+            lastname:this.store.lastname
+          }
+          localStorage.setItem('member', JSON.stringify(member));
+      }else{
+          this.member.mobile_number = this.store.mobile_number;
+          this.member.latitude = this.store.latitude;
+          this.member.longitude = this.store.longitude;
+          this.member.firstname = this.store.firstname;
+          this.member.lastname = this.store.lastname;
+          localStorage.setItem('member', JSON.stringify(this.member));
+      }
 
     this.initializeApp();
 
   }
 
   ngOnInit() {
-    this._loginService.currentStore.subscribe(store => this.currentStore = store)
+    // this._loginService.currentStore.subscribe(store => {
+    //   console.log("INIT===>");
+    //   console.log(store);
+    //   this.currentStore = store
+    // });
   }
 
   ionViewWillEnter() {
@@ -104,7 +110,10 @@ export class AppComponent implements OnInit {
    }
 
    logout(){
-     this._loginService.logout();
+     this.store = null;
+     localStorage.removeItem('store');
+     this.router.navigateByUrl('/login');
+     //this._loginService.logout();
    }
    product(){
        this.router.navigate(['products']);

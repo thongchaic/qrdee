@@ -119,6 +119,7 @@ export class CartPage {
      // this.getProducts();
   }
   ionViewDidEnter() {
+    this.store = JSON.parse(localStorage.getItem('store'));
     this.getOrders();
     this.getProducts();
   }

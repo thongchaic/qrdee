@@ -50,6 +50,7 @@ export class LoginPage  {
 
     }, err=>{
       loading.dismiss();
+      alert("เบอร์โทร์ หรือรหัสผ่านไม่ถูกต้อง")
     });
 
   }

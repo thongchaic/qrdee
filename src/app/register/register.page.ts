@@ -37,16 +37,33 @@ export class RegisterPage{
   ngAfterViewInit(): void {
     this.latitude = 14.8718084;
     this.longitude = 103.4962797;
-    this.geolocation.getCurrentPosition().then((resp) => {
+    this.loadGPS();
+  }
+
+  ionViewDidEnter() {
+
+  }
+
+   async loadGPS(){
+     const loading = await this._loading.create();
+     await loading.present();
+     this.geolocation.getCurrentPosition().then((resp) => {
+       loading.dismiss();
         this.latitude = resp.coords.latitude;
         this.longitude = resp.coords.longitude;
         this.loadMap();
+    }, err=>{
+      loading.dismiss();
     });
-    this.loadMap();
-  }
 
-  loadMap() {
 
+   }
+   loadMap() {
+
+
+
+    localStorage.setItem("regis_lat", this.latitude);
+    localStorage.setItem("regis_lng", this.longitude);
     let latLng = new google.maps.LatLng(this.latitude, this.longitude);
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
       zoom: 15,
@@ -89,22 +106,6 @@ export class RegisterPage{
       this.registerService.registerstore(this.password,this.promptpay,this.store_name,this.latitude,this.longitude,5).subscribe(trn => {
           loading.dismiss();
 
-          localStorage.setItem('store', JSON.stringify(trn));
-
-          // const member = {
-          //   id:null,
-          //   mobile_number:trn.mobile_number,
-          //   latitude:trn.latitude,
-          //   longitude:trn.longitude,
-          //   firstname:trn.firstname,
-          //   lastname:trn.lastname
-          // }
-
-          // localStorage.setItem('member', JSON.stringify(member));
-          // console.log(member);
-          // localStorage.removeItem('regis_lat');
-          // localStorage.removeItem('regis_lng');
-
           this.event.publish('store:changed',trn);
 
           this.router.navigateByUrl('/cart');
@@ -112,6 +113,7 @@ export class RegisterPage{
       }, err=>{
         loading.dismiss();
         alert("สมัครไม่สำเร็จ โปรดลองอีกครั้ง");
+        this.router.navigateByUrl('/login');
       });
   }
 }

@@ -21,11 +21,11 @@ export class RegisterLogisticPage  {
 
   constructor(
    private router: Router,
-   public registerService: RegisterLogisticService, 
+   public registerService: RegisterLogisticService,
     private toastService: ToastService,
   	) { }
 
-  
+
 
 	RegisterLlogistic(){
         this.registerService.registerlogistic(this.password,this.firstname,this.lastname,this.mobile_number,this.email,this.car_number).subscribe(trn => {

@@ -34,30 +34,30 @@ export class LoginStoreService {
       .pipe(map(user => {
 
         console.log('login..');
-        localStorage.setItem('store', JSON.stringify(user));
-
-        let member = JSON.parse(localStorage.getItem('member'));
-        if(member){
-          const mem = {
-            id:member.id,
-            mobile_number:user.mobile_number,
-            latitude:user.latitude,
-            longitude:user.longitude,
-            firstname:user.firstname,
-            lastname:user.lastname
-          }
-          localStorage.setItem('member', JSON.stringify(mem));
-        }else{
-          const mem = {
-            id:null,
-            mobile_number:user.mobile_number,
-            latitude:user.latitude,
-            longitude:user.longitude,
-            firstname:user.firstname,
-            lastname:user.lastname
-          }
-          localStorage.setItem('member', JSON.stringify(mem));
-        }
+        //localStorage.setItem('store', JSON.stringify(user));
+        //
+        // let member = JSON.parse(localStorage.getItem('member'));
+        // if(member){
+        //   const mem = {
+        //     id:member.id,
+        //     mobile_number:user.mobile_number,
+        //     latitude:user.latitude,
+        //     longitude:user.longitude,
+        //     firstname:user.firstname,
+        //     lastname:user.lastname
+        //   }
+        //   localStorage.setItem('member', JSON.stringify(mem));
+        // }else{
+        //   const mem = {
+        //     id:null,
+        //     mobile_number:user.mobile_number,
+        //     latitude:user.latitude,
+        //     longitude:user.longitude,
+        //     firstname:user.firstname,
+        //     lastname:user.lastname
+        //   }
+        //   localStorage.setItem('member', JSON.stringify(mem));
+        // }
         // console.log(member);
         this.currentStoreSubject.next(user);
         return user;

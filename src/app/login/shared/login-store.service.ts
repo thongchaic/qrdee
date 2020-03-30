@@ -65,10 +65,10 @@ export class LoginStoreService {
   }
 
   logout() {
-    localStorage.removeItem('store');
-    localStorage.setItem('member_cart',JSON.stringify([]));
-    this.currentStoreSubject.next(null);
-    this._router.navigateByUrl('/login');
+    // localStorage.removeItem('store');
+    // localStorage.setItem('member_cart',JSON.stringify([]));
+    // this.currentStoreSubject.next(null);
+    // this._router.navigateByUrl('/login');
   }
 
 }

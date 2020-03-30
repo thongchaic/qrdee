@@ -44,8 +44,10 @@ export class DvrmodalComponent {
     this.store = JSON.parse(localStorage.getItem('store'));
 
 
+
   }
   openQR(price){
+    console.log(this.order);
     this.transactionService.genQR(this.store.promptpay, price).subscribe((data:any)=>{
       this.payload = data;
       this.QRModal(data.price, data.promptpay, data.prompt_payload);
@@ -118,7 +120,8 @@ export class DvrmodalComponent {
       position: latLng
     });
     marker.addListener('click', function() {
-      alert("clicked");
+      //alert("clicked");
+      window.open(`geo://${this.latitude},${this.longitude}`,`_system`);
     });
 
     // let mymarker = new google.maps.Marker({

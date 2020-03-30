@@ -875,7 +875,7 @@ module.exports = "<!-- <ion-row >\n <ion-col size=\"12\" *ngIf=\"usertype == 3\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>{{tab_titles[tab]}}</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content *ngIf=\"tab == 0\">\n\n  <ion-list>\n\n    <ion-list-header >\n      <ion-label>รายการคำสั่งซื้อ (ค่าส่ง {{store.delivery_price}} บาท)</ion-label>\n    </ion-list-header>\n\n\n    <ion-item-sliding *ngFor=\"let order of orders\">\n\n      <ion-item>\n\n        <ion-label>\n          <h5>\n            <ion-text color=\"dark\">{{order.member.firstname}} {{order.member.lastname }} </ion-text>\n            <ion-badge color=\"danger\"> {{ order.price+store.delivery_price }} </ion-badge> <ion-text color=\"dark\"> บาท </ion-text>\n          </h5>\n        </ion-label>\n        <ion-button fill=\"clear\" color=\"danger\" slot=\"end\" (click)=\"deleteOrder(order.member.id);\">\n          <ion-icon name=\"ios-trash\"></ion-icon>\n        </ion-button>\n        <ion-button fill=\"clear\" size=\"small\" color=\"primary\" slot=\"end\" (click)=\"makeClall(order.member.mobile_number);\">\n          <ion-icon name=\"ios-call\"></ion-icon>\n        </ion-button>\n        <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"delivery(order);\">\n          <ion-icon name=\"md-bicycle\"></ion-icon>\n        </ion-button>\n\n      </ion-item>\n\n      <ion-item *ngFor=\"let item of order.orders\" lines=\"none\">\n        <ion-avatar slot=\"start\">\n            <img *ngIf=\"item.product.thumbnail\" [src]=\"'https://qrdee.co/app/'+item.product.thumbnail\">\n            <img *ngIf=\"!item.product.thumbnail\" src=\"/assets/noimg.png\">\n        </ion-avatar>\n        <ion-label>\n          <h5><ion-text color=\"dark\">{{item.product.product_th}} : {{item.product.price}} บาท x {{ item.qty }} ชิ้น</ion-text></h5>\n        </ion-label>\n      </ion-item>\n\n    </ion-item-sliding>\n\n\n  </ion-list>\n</ion-content>\n\n<ion-content *ngIf=\"tab == 1\">\n  <!-- <ion-searchbar placeholder=\"ชื่อ/รหัสสินค้า\" color=\"primary\" animated debounce=\"500\" (ionChange)=\"search($event.target.value)\">\n  </ion-searchbar> -->\n  <ion-item-divider style=\"background:#f2f2f2;\">\n    <div slot=\"start\">\n      <h3>จำนวนเงิน</h3>\n    </div>\n    <div slot=\"end\">\n      <ion-input style=\"text-align: right;font-size: 20px\" type=\"number\" [(ngModel)]=\"price\" (keyup)=\"onKeyUp($event)\" clearInput></ion-input>\n    </div>\n  </ion-item-divider>\n\n  <app-list\n    [cart]=\"cart\"\n    (removeFromCartChange)=\"removeFromCart($event)\"\n    (addItemChange)=\"addItem($event)\">\n  </app-list>\n\n  <ion-list>\n\n    <ion-list-header >\n      <ion-label>รายการสินค้า</ion-label>\n    </ion-list-header>\n\n    <ion-item-sliding *ngFor=\"let product of products\">\n      <ion-item>\n        <ion-avatar slot=\"start\">\n          <img *ngIf=\"product.thumbnail\" [src]=\"'https://qrdee.co/app/'+product.thumbnail\">\n          <img *ngIf=\"!product.thumbnail\" src=\"/assets/noimg.png\">\n        </ion-avatar>\n        <ion-label>\n          <h5><ion-text color=\"dark\">{{ product.product_th }} </ion-text> <ion-badge color=\"danger\"> {{ product.price }} </ion-badge> <ion-text color=\"dark\">  บาท </ion-text> </h5>\n        </ion-label>\n\n        <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"addToCart(product);\">\n          <ion-icon slot=\"icon-only\" name=\"basket\"></ion-icon>\n        </ion-button>\n\n      </ion-item>\n    </ion-item-sliding>\n    <ion-item-sliding>\n      <ion-item>\n        <ion-button  slot=\"end\" (click)=\"newTransaction();\" color=\"primary\">\n          <ion-icon  name=\"md-qr-scanner\"></ion-icon>\n          สร้าง QR\n        </ion-button>\n\n\n      </ion-item>\n      <!-- <ion-item-options side=\"end\">\n        <ion-item-option onClick=\"unread(item)\">Unread</ion-item-option>\n      </ion-item-options> -->\n\n    </ion-item-sliding>\n\n  </ion-list>\n\n\n\n</ion-content>\n\n<ion-footer style=\"background:#FFFFFF;\">\n  <!-- <ion-row>\n   <ion-col size=\"6\">\n      <ion-button expand=\"block\" (click)=\"changeTab(0)\" color=\"danger\">\n        <ion-icon name=\"add\"></ion-icon>\n        คำสั่งซื้อสินค้า\n      </ion-button>\n    </ion-col>\n    <ion-col size=\"6\">\n       <ion-button expand=\"block\" (click)=\"changeTab(1)\" color=\"primary\">\n         <ion-icon  name=\"add\"></ion-icon>\n         รับชำระเงินด้วย QR\n       </ion-button>\n     </ion-col>\n  </ion-row> -->\n\n  <ion-toolbar>\n          <ion-tabs>\n              <ion-tab-bar slot=\"bottom\">\n                <ion-tab-button color=\"primary\" (click)=\"changeTab(0)\" >\n                    <ion-icon name=\"ios-cart\"></ion-icon>\n                    <ion-label>คำสั่งซื้อสินค้า</ion-label>\n                </ion-tab-button>\n                <ion-tab-button color=\"primary\" (click)=\"changeTab(1)\" >\n                    <ion-icon name=\"ios-cash\"></ion-icon>\n                    <ion-label>รับชำระเงินด้วย QR</ion-label>\n                </ion-tab-button>\n              </ion-tab-bar>\n\n            </ion-tabs>\n   </ion-toolbar>\n\n</ion-footer>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>{{tab_titles[tab]}}</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content *ngIf=\"tab == 0\">\n\n  <ion-list>\n\n    <ion-list-header >\n      <ion-label>รายการคำสั่งซื้อ (ค่าส่ง {{store.delivery_price}} บาท)</ion-label>\n    </ion-list-header>\n\n\n    <ion-item-sliding *ngFor=\"let order of orders\">\n\n      <ion-item>\n\n        <ion-label>\n          <h5>\n            <ion-text color=\"dark\">{{order.member.firstname}} </ion-text>\n            <ion-badge color=\"danger\"> {{ order.price+store.delivery_price }} </ion-badge> <ion-text color=\"dark\"> บาท </ion-text>\n          </h5>\n        </ion-label>\n        <ion-button fill=\"clear\" color=\"danger\" slot=\"end\" (click)=\"deleteOrder(order.member.id);\">\n          <ion-icon name=\"ios-trash\"></ion-icon>\n        </ion-button>\n        <ion-button fill=\"clear\" size=\"small\" color=\"primary\" slot=\"end\" (click)=\"makeClall(order.member.mobile_number);\">\n          <ion-icon name=\"ios-call\"></ion-icon>\n        </ion-button>\n        <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"delivery(order);\">\n          <ion-icon name=\"md-bicycle\"></ion-icon>\n        </ion-button>\n\n      </ion-item>\n\n      <ion-item *ngFor=\"let item of order.orders\" lines=\"none\">\n        <ion-avatar slot=\"start\">\n            <img *ngIf=\"item.product.thumbnail\" [src]=\"'https://qrdee.co/app/'+item.product.thumbnail\">\n            <img *ngIf=\"!item.product.thumbnail\" src=\"/assets/noimg.png\">\n        </ion-avatar>\n        <ion-label>\n          <h5><ion-text color=\"dark\">{{item.product.product_th}} : {{item.product.price}} บาท x {{ item.qty }} ชิ้น</ion-text></h5>\n        </ion-label>\n      </ion-item>\n\n    </ion-item-sliding>\n\n\n  </ion-list>\n</ion-content>\n\n<ion-content *ngIf=\"tab == 1\">\n  <!-- <ion-searchbar placeholder=\"ชื่อ/รหัสสินค้า\" color=\"primary\" animated debounce=\"500\" (ionChange)=\"search($event.target.value)\">\n  </ion-searchbar> -->\n  <ion-item-divider style=\"background:#f2f2f2;\">\n    <div slot=\"start\">\n      <h3>จำนวนเงิน</h3>\n    </div>\n    <div slot=\"end\">\n      <ion-input style=\"text-align: right;font-size: 20px\" type=\"number\" [(ngModel)]=\"price\" (keyup)=\"onKeyUp($event)\" clearInput></ion-input>\n    </div>\n  </ion-item-divider>\n\n  <app-list\n    [cart]=\"cart\"\n    (removeFromCartChange)=\"removeFromCart($event)\"\n    (addItemChange)=\"addItem($event)\">\n  </app-list>\n\n  <ion-list>\n\n    <ion-list-header >\n      <ion-label>รายการสินค้า</ion-label>\n    </ion-list-header>\n\n    <ion-item-sliding *ngFor=\"let product of products\">\n      <ion-item>\n        <ion-avatar slot=\"start\">\n          <img *ngIf=\"product.thumbnail\" [src]=\"'https://qrdee.co/app/'+product.thumbnail\">\n          <img *ngIf=\"!product.thumbnail\" src=\"/assets/noimg.png\">\n        </ion-avatar>\n        <ion-label>\n          <h5><ion-text color=\"dark\">{{ product.product_th }} </ion-text> <ion-badge color=\"danger\"> {{ product.price }} </ion-badge> <ion-text color=\"dark\">  บาท </ion-text> </h5>\n        </ion-label>\n\n        <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"addToCart(product);\">\n          <ion-icon slot=\"icon-only\" name=\"basket\"></ion-icon>\n        </ion-button>\n\n      </ion-item>\n    </ion-item-sliding>\n    <ion-item-sliding>\n      <ion-item>\n        <ion-button  slot=\"end\" (click)=\"newTransaction();\" color=\"primary\">\n          <ion-icon  name=\"md-qr-scanner\"></ion-icon>\n          สร้าง QR\n        </ion-button>\n\n\n      </ion-item>\n      <!-- <ion-item-options side=\"end\">\n        <ion-item-option onClick=\"unread(item)\">Unread</ion-item-option>\n      </ion-item-options> -->\n\n    </ion-item-sliding>\n\n  </ion-list>\n\n\n\n</ion-content>\n\n<ion-footer style=\"background:#FFFFFF;\">\n  <!-- <ion-row>\n   <ion-col size=\"6\">\n      <ion-button expand=\"block\" (click)=\"changeTab(0)\" color=\"danger\">\n        <ion-icon name=\"add\"></ion-icon>\n        คำสั่งซื้อสินค้า\n      </ion-button>\n    </ion-col>\n    <ion-col size=\"6\">\n       <ion-button expand=\"block\" (click)=\"changeTab(1)\" color=\"primary\">\n         <ion-icon  name=\"add\"></ion-icon>\n         รับชำระเงินด้วย QR\n       </ion-button>\n     </ion-col>\n  </ion-row> -->\n\n  <ion-toolbar>\n          <ion-tabs>\n              <ion-tab-bar slot=\"bottom\">\n                <ion-tab-button color=\"primary\" (click)=\"changeTab(0)\" >\n                    <ion-icon name=\"ios-cart\"></ion-icon>\n                    <ion-label>คำสั่งซื้อสินค้า</ion-label>\n                </ion-tab-button>\n                <ion-tab-button color=\"primary\" (click)=\"changeTab(1)\" >\n                    <ion-icon name=\"ios-cash\"></ion-icon>\n                    <ion-label>รับชำระเงินด้วย QR</ion-label>\n                </ion-tab-button>\n              </ion-tab-bar>\n\n            </ion-tabs>\n   </ion-toolbar>\n\n</ion-footer>\n"
 
 /***/ }),
 
@@ -1122,9 +1122,11 @@ __webpack_require__.r(__webpack_exports__);
 
 // import { CallNumber } from '@ionic-native/call-number';
 
+//import { CallNumber } from '@ionic-native/call-number';
+
 
 let CartPage = class CartPage {
-    constructor(cartService, transactionService, productService, toastService, alertService, qrService, modalController, http, router, route, geolocation, barcodeScanner, builder, callNumber) {
+    constructor(cartService, transactionService, productService, toastService, alertService, qrService, modalController, http, router, route, geolocation, barcodeScanner, builder, _loading, callNumber) {
         // this.productService.getAll().subscribe(resp => {
         //   this.product_all = resp.products.data;
         //   alert(this.product_all);
@@ -1143,6 +1145,7 @@ let CartPage = class CartPage {
         this.geolocation = geolocation;
         this.barcodeScanner = barcodeScanner;
         this.builder = builder;
+        this._loading = _loading;
         this.callNumber = callNumber;
         this.scanChange = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"];
         this.product_code = '';
@@ -1176,6 +1179,11 @@ let CartPage = class CartPage {
         // });
     }
     ionViewWillEnter() {
+        // this.getOrders();
+        // this.getProducts();
+    }
+    ionViewDidEnter() {
+        this.store = JSON.parse(localStorage.getItem('store'));
         this.getOrders();
         this.getProducts();
     }
@@ -1228,13 +1236,27 @@ let CartPage = class CartPage {
         }
     }
     getOrders() {
-        this.cartService.getOrders(this.store.id).subscribe((data) => {
-            this.orders = data;
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const loading = yield this._loading.create();
+            yield loading.present();
+            this.cartService.getOrders(this.store.id).subscribe((data) => {
+                this.orders = data;
+                loading.dismiss();
+            }, err => {
+                loading.dismiss();
+            });
         });
     }
     getProducts() {
-        this.cartService.getProducts(this.store.id).subscribe((data) => {
-            this.products = data;
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const loading = yield this._loading.create();
+            yield loading.present();
+            this.cartService.getProducts(this.store.id).subscribe((data) => {
+                this.products = data;
+                loading.dismiss();
+            }, err => {
+                loading.dismiss();
+            });
         });
     }
     addToCart(product) {
@@ -1470,6 +1492,7 @@ CartPage.ctorParameters = () => [
     { type: _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_13__["Geolocation"] },
     { type: _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_14__["BarcodeScanner"] },
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_16__["FormBuilder"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["LoadingController"] },
     { type: _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_15__["CallNumber"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1499,6 +1522,7 @@ CartPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_13__["Geolocation"],
         _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_14__["BarcodeScanner"],
         _angular_forms__WEBPACK_IMPORTED_MODULE_16__["FormBuilder"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["LoadingController"],
         _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_15__["CallNumber"]])
 ], CartPage);
 

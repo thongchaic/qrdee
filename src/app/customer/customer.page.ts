@@ -24,12 +24,14 @@ export class CustomerPage implements AfterViewInit{
 
   tab1 = false;
   tab2 = true;
+  tab3 = true;
   latitude: any;
   longitude: any;
   firstname:any;
   mobile_number:any;
   member:any;
   stores:any[] = [];
+  carts:any[] = [];
   offset:number = 0;
   q = '';
   member_cart:any[] = [];
@@ -87,6 +89,30 @@ export class CustomerPage implements AfterViewInit{
     }).catch((error) => {
       alert("รับตำแหน่งปัจจุบันไม่ได้ ใช้ตำแหน่งล่าสุด");
       this.loadStores();
+    });
+
+  }
+
+  async loadMyOrder(){
+
+    console.log(this.member);
+
+    if(!this.member.id){
+      return;
+    }
+
+    const loading = await this._loading.create();
+    await loading.present();
+
+    await this.userservice.myOrder(this.member.id).subscribe((data:any)=>{
+      loading.dismiss();
+
+      console.log(data);
+      this.carts = data;
+
+    }, err=>{
+      loading.dismiss();
+      console.log(err);
     });
 
   }
@@ -160,6 +186,7 @@ export class CustomerPage implements AfterViewInit{
   processPayment(){
     this.tab1 = true;
     this.tab2 = false;
+    this.tab3 = true;
 
     this.member_cart = JSON.parse(localStorage.getItem('member_cart'));
     console.log(this.member_cart);
@@ -204,26 +231,30 @@ export class CustomerPage implements AfterViewInit{
     this.member_cart = JSON.parse(localStorage.getItem('member_cart'));
     this.latitude = localStorage.getItem('member_lat');
     this.longitude = localStorage.getItem('member_lng');
-    this.member = JSON.parse(localStorage.getItem('member'));
+
+    //this.member = JSON.parse(localStorage.getItem('member'));
+
     this.member.mobile_number = this.mobile_number;
     this.member.firstname = this.firstname;
 
 
     console.log(this.member);
+    localStorage.setItem('member',JSON.stringify( this.member ));
 
     this.userservice.placeOrder(this.member, this.member_cart, this.notes, this.latitude, this.longitude).subscribe((data:any)=>{
         console.log("res =====> ");
         console.log(data);
 
 
-        localStorage.setItem('member',JSON.stringify( data.member ));
+        this.member = data.member;
+        localStorage.setItem('member',JSON.stringify( this.member ));
         localStorage.setItem('member_cart',JSON.stringify( [] ));
 
         this.member_cart = [];
         this.total_price = 0;
 
         this.toastService.showToast('ส่งคำสั่งซื้อเรียบร้อยแล้ว', 'top');
-        this.changeTab(0);
+        this.changeTab(2);
 
     });
 
@@ -289,12 +320,19 @@ export class CustomerPage implements AfterViewInit{
     if(t == 0){
       this.tab1 = false;
       this.tab2 = true;
+      this.tab3 = true;
       this.stores = [];
       this.loadMapModal();
-    }else{
+    }else if (t == 1){
       this.tab1 = true;
       this.tab2 = false;
+      this.tab3 = true;
       this.processPayment();
+    }else{
+      this.tab1 = true;
+      this.tab2 = true;
+      this.tab3 = false;
+      this.loadMyOrder();
     }
   }
 

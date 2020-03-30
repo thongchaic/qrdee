@@ -16,8 +16,8 @@ export class LoginPage  {
 
    token:string ='';
    login:any = {};
-   promptpay:string ='0843928454';
-   password:string ='cs';
+   promptpay:string ='';
+   password:string ='';
    // is_disabled:boolean = false;
 
    usertype:string ='';
@@ -34,6 +34,19 @@ export class LoginPage  {
     private _loading: LoadingController
   ) {
 
+    let store = JSON.parse(localStorage.getItem('store'));
+    if(store){
+      console.log("already store =>");
+      console.log(store);
+      this.event.publish('store:changed',store);
+      this.router.navigateByUrl('/cart');
+    }
+
+
+  }
+
+  ionViewDidEnter() {
+    
   }
 
   async loginForm() {
@@ -45,6 +58,7 @@ export class LoginPage  {
       //alert(JSON.stringify(trn));
       // console.log(trn);
       //this.router.navigateByUrl('/cart');
+
       this.event.publish('store:changed',trn);
       this.router.navigateByUrl('/cart');
 

@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n    </ion-buttons>\n    <ion-title>เปิดร้านออนไลน์</ion-title>\n    <ion-buttons>\n      <ion-back-button defaultHref=\"login\"></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n <ion-content>\n  <ion-card style=\"background:#FFFFFF;\">\n    <ion-card-content>\n      <ion-label position=\"floating\">ตำแหน่งร้าน</ion-label>\n      <div #mapElement style=\"height:250px;\" ></div>\n      <ion-list>\n        <ion-item>\n          <ion-label position=\"floating\"></ion-label>\n          <ion-input type=\"text\" [(ngModel)]=\"store_name\" placeholder=\"ชื่อร้าน\"></ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label position=\"floating\"></ion-label>\n          <ion-input type=\"text\" [(ngModel)]=\"promptpay\" placeholder=\"เบอร์โทรศัพท์\"></ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label position=\"floating\"></ion-label>\n          <ion-input type=\"password\"  [(ngModel)]=\"password\" placeholder=\"รหัสผ่าน\"></ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label position=\"floating\" ></ion-label>\n          <ion-input type=\"password\"  [(ngModel)]=\"repassword\" placeholder=\"ยืนยันรหัสผ่าน\"></ion-input>\n        </ion-item>\n\n        <ion-button type=\"submit\" expand=\"full\" color=\"success\" (click)=\"registStore()\">ลงทะเบียน</ion-button>\n      </ion-list>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n    </ion-buttons>\n    <ion-title>เปิดร้านออนไลน์</ion-title>\n    <ion-buttons>\n      <ion-back-button defaultHref=\"login\"></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n <ion-content>\n\n   <div #mapElement style=\"height:250px;\" ></div>\n\n  <ion-card style=\"background:#FFFFFF;\">\n    <ion-card-content>\n      <ion-label position=\"floating\">ตำแหน่งร้าน</ion-label>\n\n      <ion-list>\n        <ion-item>\n          <ion-label position=\"floating\"></ion-label>\n          <ion-input type=\"text\" [(ngModel)]=\"store_name\" placeholder=\"ชื่อร้าน\"></ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label position=\"floating\"></ion-label>\n          <ion-input type=\"text\" [(ngModel)]=\"promptpay\" placeholder=\"เบอร์โทรศัพท์\"></ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label position=\"floating\"></ion-label>\n          <ion-input type=\"password\"  [(ngModel)]=\"password\" placeholder=\"รหัสผ่าน\"></ion-input>\n        </ion-item>\n\n        <ion-item>\n          <ion-label position=\"floating\" ></ion-label>\n          <ion-input type=\"password\"  [(ngModel)]=\"repassword\" placeholder=\"ยืนยันรหัสผ่าน\"></ion-input>\n        </ion-item>\n\n        <ion-button type=\"submit\" shape=\"round\" expand=\"full\" color=\"primary\" (click)=\"registStore()\">ลงทะเบียน</ion-button>\n      </ion-list>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n"
 
 /***/ }),
 
@@ -69,7 +69,7 @@ var RegisterPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "ion-content {\n  --background: url('/assets/bg1.jpg') 0 0/100% 100% no-repeat; }\n\n.mapElements {\n  width: 100%;\n  height: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy90aG9uZ2NoYWkvUHJvamVjdHMvcXJkZWUvc3JjL2FwcC9yZWdpc3Rlci9yZWdpc3Rlci5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSw0REFBYSxFQUFBOztBQUVmO0VBQ0MsV0FBVTtFQUNWLFlBQVksRUFBQSIsImZpbGUiOiJzcmMvYXBwL3JlZ2lzdGVyL3JlZ2lzdGVyLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbImlvbi1jb250ZW50e1xyXG5cdCAtLWJhY2tncm91bmQ6IHVybCgnL2Fzc2V0cy9iZzEuanBnJykgMCAwLzEwMCUgMTAwJSBuby1yZXBlYXQ7XHJcbn1cclxuLm1hcEVsZW1lbnRze1xyXG5cdHdpZHRoOjEwMCU7XHJcblx0aGVpZ2h0OiAxMDAlO1xyXG59XHJcbiJdfQ== */"
+module.exports = ".mapElements {\n  width: 100%;\n  height: 100%; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy90aG9uZ2NoYWkvUHJvamVjdHMvcXJkZWUvc3JjL2FwcC9yZWdpc3Rlci9yZWdpc3Rlci5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBR0E7RUFDQyxXQUFVO0VBQ1YsWUFBWSxFQUFBIiwiZmlsZSI6InNyYy9hcHAvcmVnaXN0ZXIvcmVnaXN0ZXIucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLy8gaW9uLWNvbnRlbnR7XHJcbi8vIFx0IC0tYmFja2dyb3VuZDogdXJsKCcvYXNzZXRzL2JnMS5qcGcnKSAwIDAvMTAwJSAxMDAlIG5vLXJlcGVhdDtcclxuLy8gfVxyXG4ubWFwRWxlbWVudHN7XHJcblx0d2lkdGg6MTAwJTtcclxuXHRoZWlnaHQ6IDEwMCU7XHJcbn1cclxuIl19 */"
 
 /***/ }),
 
@@ -85,11 +85,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RegisterPage", function() { return RegisterPage; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _shared_register_store_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shared/register-store.service */ "./src/app/register/shared/register-store.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/geolocation/ngx */ "./node_modules/@ionic-native/geolocation/ngx/index.js");
-/* harmony import */ var _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/services/toast.service */ "./src/app/shared/services/toast.service.ts");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _shared_register_store_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./shared/register-store.service */ "./src/app/register/shared/register-store.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/geolocation/ngx */ "./node_modules/@ionic-native/geolocation/ngx/index.js");
+/* harmony import */ var _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../shared/services/toast.service */ "./src/app/shared/services/toast.service.ts");
+
 
 
 
@@ -100,12 +101,13 @@ __webpack_require__.r(__webpack_exports__);
 var RegisterPage = /** @class */ (function () {
     function RegisterPage(
     // public navCtrl: NavController,
-    router, registerService, geolocation, toastService, event) {
+    router, registerService, geolocation, toastService, event, _loading) {
         this.router = router;
         this.registerService = registerService;
         this.geolocation = geolocation;
         this.toastService = toastService;
         this.event = event;
+        this._loading = _loading;
         this.password = '';
         this.repassword = '';
         this.promptpay = '';
@@ -114,17 +116,45 @@ var RegisterPage = /** @class */ (function () {
         this.longitude = '';
     }
     RegisterPage.prototype.ngAfterViewInit = function () {
-        var _this = this;
         this.latitude = 14.8718084;
         this.longitude = 103.4962797;
-        this.geolocation.getCurrentPosition().then(function (resp) {
-            _this.latitude = resp.coords.latitude;
-            _this.longitude = resp.coords.longitude;
-            _this.loadMap();
+        this.loadGPS();
+    };
+    RegisterPage.prototype.ionViewDidEnter = function () {
+    };
+    RegisterPage.prototype.loadGPS = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var loading;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        console.log("Loading GPS....");
+                        return [4 /*yield*/, this._loading.create()];
+                    case 1:
+                        loading = _a.sent();
+                        return [4 /*yield*/, loading.present()];
+                    case 2:
+                        _a.sent();
+                        this.geolocation.getCurrentPosition().then(function (resp) {
+                            console.log(resp);
+                            loading.dismiss();
+                            _this.latitude = resp.coords.latitude;
+                            _this.longitude = resp.coords.longitude;
+                            _this.loadMap();
+                        }, function (err) {
+                            console.log("GPS error dismiss....");
+                            loading.dismiss();
+                            _this.loadMap();
+                        });
+                        return [2 /*return*/];
+                }
+            });
         });
-        this.loadMap();
     };
     RegisterPage.prototype.loadMap = function () {
+        localStorage.setItem("regis_lat", this.latitude);
+        localStorage.setItem("regis_lng", this.longitude);
         var latLng = new google.maps.LatLng(this.latitude, this.longitude);
         this.map = new google.maps.Map(this.mapElement.nativeElement, {
             zoom: 15,
@@ -144,48 +174,53 @@ var RegisterPage = /** @class */ (function () {
         });
     };
     RegisterPage.prototype.registStore = function () {
-        var _this = this;
-        if ((this.password != this.repassword) || this.password.trim() == "") {
-            alert("รหัสผ่านไม่ตรงกัน/โปรดระบุรหัสผ่าน");
-            return;
-        }
-        else if (this.promptpay == "") {
-            alert("กรุณาระบุ promptpay");
-            return;
-        }
-        else if (this.store_name == "") {
-            alert("กรุณาระบุ ชื่อร้าน");
-            return;
-        }
-        //alert("Register");
-        this.latitude = localStorage.getItem('regis_lat');
-        this.longitude = localStorage.getItem('regis_lng');
-        this.registerService.registerstore(this.password, this.promptpay, this.store_name, this.latitude, this.longitude, 5).subscribe(function (trn) {
-            localStorage.removeItem('regis_lat');
-            localStorage.removeItem('regis_lng');
-            localStorage.setItem('store', JSON.stringify(trn));
-            _this.event.publish('store:changed', trn);
-            var member = {
-                id: null,
-                mobile_number: trn.mobile_number,
-                latitude: trn.latitude,
-                longitude: trn.longitude,
-                firstname: trn.firstname,
-                lastname: trn.lastname
-            };
-            localStorage.setItem('member', JSON.stringify(member));
-            console.log(member);
-            _this.router.navigateByUrl('/cart');
-        }, function (err) {
-            alert("Network error!");
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var loading;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if ((this.password != this.repassword) || this.password.trim() == "") {
+                            alert("รหัสผ่านไม่ตรงกัน/โปรดระบุรหัสผ่าน");
+                            return [2 /*return*/];
+                        }
+                        else if (this.promptpay == "") {
+                            alert("กรุณาระบุ promptpay");
+                            return [2 /*return*/];
+                        }
+                        else if (this.store_name == "") {
+                            alert("กรุณาระบุ ชื่อร้าน");
+                            return [2 /*return*/];
+                        }
+                        return [4 /*yield*/, this._loading.create()];
+                    case 1:
+                        loading = _a.sent();
+                        return [4 /*yield*/, loading.present()];
+                    case 2:
+                        _a.sent();
+                        this.latitude = localStorage.getItem('regis_lat');
+                        this.longitude = localStorage.getItem('regis_lng');
+                        this.registerService.registerstore(this.password, this.promptpay, this.store_name, this.latitude, this.longitude, 5).subscribe(function (trn) {
+                            loading.dismiss();
+                            _this.event.publish('store:changed', trn);
+                            _this.router.navigateByUrl('/cart');
+                        }, function (err) {
+                            loading.dismiss();
+                            alert("สมัครไม่สำเร็จ โปรดลองอีกครั้ง");
+                            _this.router.navigateByUrl('/login');
+                        });
+                        return [2 /*return*/];
+                }
+            });
         });
     };
     RegisterPage.ctorParameters = function () { return [
-        { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
-        { type: _shared_register_store_service__WEBPACK_IMPORTED_MODULE_2__["RegisterStoreService"] },
-        { type: _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_4__["Geolocation"] },
-        { type: _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_5__["ToastService"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["Events"] }
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+        { type: _shared_register_store_service__WEBPACK_IMPORTED_MODULE_3__["RegisterStoreService"] },
+        { type: _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_5__["Geolocation"] },
+        { type: _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_6__["ToastService"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Events"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] }
     ]; };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('mapElement', { static: false }),
@@ -197,11 +232,12 @@ var RegisterPage = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./register.page.html */ "./node_modules/raw-loader/index.js!./src/app/register/register.page.html"),
             styles: [__webpack_require__(/*! ./register.page.scss */ "./src/app/register/register.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
-            _shared_register_store_service__WEBPACK_IMPORTED_MODULE_2__["RegisterStoreService"],
-            _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_4__["Geolocation"],
-            _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_5__["ToastService"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["Events"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
+            _shared_register_store_service__WEBPACK_IMPORTED_MODULE_3__["RegisterStoreService"],
+            _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_5__["Geolocation"],
+            _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_6__["ToastService"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Events"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]])
     ], RegisterPage);
     return RegisterPage;
 }());

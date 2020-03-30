@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>    \n    <ion-title>แก้ไขข้อมูล</ion-title>\n     <ion-buttons slot=\"end\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"app-background\">\n  <form [formGroup]=\"profileForm\">\n    <ion-card style=\"background:#FFFFFF;\">\n      <ion-card-content>\n      <ion-item-group>\n        <ion-item lines=\"none\">\n          <ion-img [src]=\"imageSrc || '/assets/noimg.png'\"></ion-img>\n        </ion-item>\n        <ion-grid>\n          <ion-row justify-content-center>\n            <ion-button size=\"small\" color=\"primary\" (click)=\"takePhoto()\">ถ่ายรูปสินค้า</ion-button>\n            <ion-button size=\"small\" color=\"secondary\" (click)=\"selectPhoto()\">เลือกจากอัลบั้ม</ion-button>\n          </ion-row>\n        </ion-grid>        \n      </ion-item-group>\n        <ion-item>\n          <b slot=\"start\"> ร้าน</b>\n          <ion-input  type=\"text\" formControlName=\"store_name\"></ion-input>\n        </ion-item> \n        <ion-item>\n          <b slot=\"start\">พร้อมเพย์</b>\n          <ion-input  type=\"text\" formControlName=\"promptpay\"></ion-input>\n        </ion-item> \n         <ion-item>\n          <b slot=\"start\">ชื่อ</b>\n          <ion-input  type=\"text\" formControlName=\"firstname\"></ion-input>\n        </ion-item> \n        <ion-item>\n          <b slot=\"start\"> นามสกุล</b>\n          <ion-input  type=\"text\" formControlName=\"lastname\"></ion-input>\n        </ion-item>\n        <ion-item>\n          <b slot=\"start\">เบอร์โทร</b>\n          <ion-input  type=\"text\" formControlName=\"mobile_number\"></ion-input>\n        </ion-item>\n        <ion-item>\n          <ion-label position=\"floating\"><b slot=\"start\">ประเภทร้าน</b></ion-label>\n          <ion-select formControlName=\"store_type_id\">\n            <ion-select-option \n              *ngFor=\"let store_type of store_types\" \n              [value]=\"store_type.id\" \n              [selected]=\"store_type.id === profileForm.get('store_type_id').value\">\n              {{ store_type.store_type_th }}\n            </ion-select-option>\n          </ion-select>\n        </ion-item>\n      </ion-card-content>\n      <ion-button type=\"submit\" expand=\"full\" color=\"success\" (click)=\"submit()\">\n       <ion-icon name=\"logo-buffer\"></ion-icon>\n      &nbsp;บันทึก</ion-button>\n    </ion-card>  \n  </form>\n</ion-content>"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>แก้ไขข้อมูล</ion-title>\n     <ion-buttons slot=\"end\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"app-background\">\n  <form [formGroup]=\"profileForm\">\n    <ion-card style=\"background:#FFFFFF;\">\n      <ion-card-content>\n      <ion-item-group>\n        <ion-item lines=\"none\">\n          <ion-img *ngIf=\"store_pic\" [src]=\"store_pic\"></ion-img>\n          <ion-img *ngIf=\"!store_pic\" src=\"/assets/noimg.png\"></ion-img>\n        </ion-item>\n        <ion-grid>\n          <ion-row justify-content-center>\n            <ion-button size=\"small\" color=\"primary\" (click)=\"getPicture()\">ถ่ายรูปสินค้า</ion-button>\n            <ion-button size=\"small\" color=\"secondary\" (click)=\"selectPictures()\">เลือกจากอัลบั้ม</ion-button>\n          </ion-row>\n        </ion-grid>\n      </ion-item-group>\n        <ion-item>\n          <b slot=\"start\"> ร้าน</b>\n          <ion-input  type=\"text\" formControlName=\"store_name\"></ion-input>\n        </ion-item>\n        <ion-item>\n          <b slot=\"start\">พร้อมเพย์</b>\n          <ion-input  type=\"text\" formControlName=\"promptpay\"></ion-input>\n        </ion-item>\n         <ion-item>\n          <b slot=\"start\">ชื่อ</b>\n          <ion-input  type=\"text\" formControlName=\"firstname\"></ion-input>\n        </ion-item>\n        <ion-item>\n          <b slot=\"start\"> นามสกุล</b>\n          <ion-input  type=\"text\" formControlName=\"lastname\"></ion-input>\n        </ion-item>\n        <ion-item>\n          <b slot=\"start\">เบอร์โทร</b>\n          <ion-input  type=\"text\" formControlName=\"mobile_number\"></ion-input>\n        </ion-item>\n        <ion-item>\n          <ion-label position=\"floating\"><b slot=\"start\">ประเภทร้าน</b></ion-label>\n          <ion-select formControlName=\"store_type_id\">\n            <ion-select-option\n              *ngFor=\"let store_type of store_types\"\n              [value]=\"store_type.id\"\n              [selected]=\"store_type.id === profileForm.get('store_type_id').value\">\n              {{ store_type.store_type_th }}\n            </ion-select-option>\n          </ion-select>\n        </ion-item>\n      </ion-card-content>\n      <ion-button type=\"submit\" expand=\"full\" color=\"success\" (click)=\"submit()\">\n       <ion-icon name=\"logo-buffer\"></ion-icon>\n      &nbsp;บันทึก</ion-button>\n    </ion-card>\n  </form>\n</ion-content>\n"
 
 /***/ }),
 
@@ -18,7 +18,7 @@ module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>จัดการร้านค้า</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-label position=\"floating\">ตำแหน่งร้าน</ion-label>\n  <div #map id=\"map\" style=\"height:250px;\"></div>\n\n  <ion-list>\n    <ion-item>\n        <b>แก้ไขข้อมูลร้านค้า</b>\n    </ion-item>\n     <ion-item>\n         <ion-avatar slot=\"start\">\n           <ion-img [src]=\"store.store_pic || 'assets/camera.png'\" ></ion-img>\n         </ion-avatar>\n         <ion-input slot=\"end\" color=\"primary\" type=\"text\" [(ngModel)]=\"store.store_name\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">พร้อมเพย์</b>\n         <ion-input slot=\"end\"  color=\"primary\" type=\"text\" [(ngModel)]=\"store.promptpay\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">โทรศัพท์</b>\n         <ion-input slot=\"end\" color=\"primary\" type=\"text\" [(ngModel)]=\"store.mobile_number\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">ค่าขนส่ง</b>\n         <ion-input slot=\"end\" color=\"primary\" type=\"number\" [(ngModel)]=\"store.delivery_price\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">ชื่อ</b>\n         <ion-input slot=\"end\" color=\"primary\" type=\"text\" [(ngModel)]=\"store.firstname\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">นามสกุล</b>\n         <ion-input slot=\"end\" color=\"primary\" type=\"text\" [(ngModel)]=\"store.lastname\" ></ion-input>\n     </ion-item>\n\n     <ion-item>\n       <ion-label color=\"primary\" position=\"stacked\">ประเภทร้านค้า</ion-label>\n       <ion-select [(ngModel)]=\"store.store_type_id\">\n         <ion-select-option\n           *ngFor=\"let type of store_types\"\n           [value]=\"type.id\"\n           [selected]=\"type.id === store.store_type_id\">\n           {{ type.store_type_th }}\n         </ion-select-option>\n       </ion-select>\n     </ion-item>\n </ion-list>\n\n\n  <ion-card style=\"background:#FFFFF0;\">\n    <ion-card-content *ngIf=\"store\">\n\n\n        <ion-button type=\"submit\" shape=\"round\" expand=\"full\" color=\"primary\" (click)=\"submit()\">\n           <ion-icon name=\"create\"></ion-icon>\n           &nbsp;ปรับปรุงข้อมูล\n        </ion-button>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>จัดการร้านค้า</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-label position=\"floating\">ตำแหน่งร้าน</ion-label>\n  <div #map id=\"map\" style=\"height:250px;\"></div>\n\n  <ion-list [formGroup]=\"form\">\n    <ion-item>\n        <b>แก้ไขข้อมูลร้านค้า</b>\n    </ion-item>\n    <ion-item-group >\n      <ion-item lines=\"none\">\n        <ion-img *ngIf=\"store_pic\" [src]=\"store_pic\"></ion-img>\n        <ion-img  *ngIf=\"!store_pic\" src=\"/assets/noimg.png\"></ion-img>\n      </ion-item>\n      <ion-grid>\n        <ion-row justify-content-center>\n          <ion-button size=\"small\" color=\"primary\" (click)=\"getPicture()\">ถ่ายรูปร้านค้า</ion-button>\n          <ion-button size=\"small\" color=\"secondary\" (click)=\"selectPictures();\">เลือกจากอัลบั้ม</ion-button>\n        </ion-row>\n      </ion-grid>\n    </ion-item-group>\n     <ion-item>\n        <b slot=\"start\">ชื่อร้าน</b>\n        <ion-input slot=\"end\" color=\"primary\" type=\"text\" formControlName=\"store_name\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">พร้อมเพย์</b>\n         <ion-input slot=\"end\"  color=\"primary\" type=\"text\" formControlName=\"promptpay\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">โทรศัพท์</b>\n         <ion-input slot=\"end\" color=\"primary\" type=\"text\" formControlName=\"mobile_number\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">ค่าขนส่ง</b>\n         <ion-input slot=\"end\" color=\"primary\" type=\"number\" formControlName=\"delivery_price\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">ชื่อ</b>\n         <ion-input slot=\"end\" color=\"primary\" type=\"text\" formControlName=\"firstname\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">นามสกุล</b>\n         <ion-input slot=\"end\" color=\"primary\" type=\"text\" formControlName=\"lastname\" ></ion-input>\n     </ion-item>\n\n     <ion-item>\n       <ion-label color=\"primary\" position=\"stacked\">ประเภทร้านค้า</ion-label>\n       <ion-select formControlName=\"store_type_id\">\n         <ion-select-option\n           *ngFor=\"let type of store_types\"\n           [value]=\"type.id\"\n           [selected]=\"type.id === store.store_type_id\">\n           {{ type.store_type_th }}\n         </ion-select-option>\n       </ion-select>\n     </ion-item>\n </ion-list>\n\n  <ion-card style=\"background:#FFFFF0;\">\n    <ion-card-content *ngIf=\"store\">\n      <ion-button type=\"submit\" shape=\"round\" expand=\"full\" color=\"primary\" (click)=\"submit()\">\n          <ion-icon name=\"create\"></ion-icon>\n          &nbsp;ปรับปรุงข้อมูล\n      </ion-button>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n"
 
 /***/ }),
 
@@ -47,15 +47,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _shared_profile_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/profile.service */ "./src/app/profile/shared/profile.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var src_environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/environments/environment */ "./src/environments/environment.ts");
-/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../shared/services/toast.service */ "./src/app/shared/services/toast.service.ts");
-/* harmony import */ var _shared_services_alert_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../shared/services/alert.service */ "./src/app/shared/services/alert.service.ts");
-/* harmony import */ var _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/camera/ngx */ "./node_modules/@ionic-native/camera/ngx/index.js");
-/* harmony import */ var _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/file/ngx */ "./node_modules/@ionic-native/file/ngx/index.js");
-/* harmony import */ var _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/ionic-webview/ngx */ "./node_modules/@ionic-native/ionic-webview/ngx/index.js");
-
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../shared/services/toast.service */ "./src/app/shared/services/toast.service.ts");
+/* harmony import */ var _shared_services_alert_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../shared/services/alert.service */ "./src/app/shared/services/alert.service.ts");
+/* harmony import */ var _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/camera/ngx */ "./node_modules/@ionic-native/camera/ngx/index.js");
+/* harmony import */ var _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/file/ngx */ "./node_modules/@ionic-native/file/ngx/index.js");
+/* harmony import */ var _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/ionic-webview/ngx */ "./node_modules/@ionic-native/ionic-webview/ngx/index.js");
 
 
 
@@ -69,9 +67,7 @@ __webpack_require__.r(__webpack_exports__);
 
 // import { ImagePicker } from '@ionic-native/image-picker/ngx';
 let FormComponent = class FormComponent {
-    constructor(profileService, route, router, http, builder, toastService, alertService, camera, 
-    // private imagePicker: ImagePicker,
-    file, webView) {
+    constructor(profileService, route, router, http, builder, toastService, alertService, camera, file, webView) {
         this.profileService = profileService;
         this.route = route;
         this.router = router;
@@ -82,82 +78,93 @@ let FormComponent = class FormComponent {
         this.camera = camera;
         this.file = file;
         this.webView = webView;
-        this.imageSrc = '';
+        this.store_pic = null;
         this.profileForm = this.builder.group({
-            username: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
-            promptpay: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
-            mobile_number: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
-            firstname: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
-            lastname: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
-            store_name: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
-            store_type_id: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_6__["Validators"].required],
-            image: null
+            username: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            promptpay: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            mobile_number: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            firstname: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            lastname: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            store_name: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            store_type_id: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_5__["Validators"].required],
+            store_pic: null
         });
         this.formType = 'EDIT';
         this.title = '';
     }
     ionViewWillEnter() {
         this.profileService.getStoreTypes().subscribe((data) => this.store_types = data.data);
-        if (this.route.snapshot.data.formType === 'EDIT') {
-            this.title = 'แก้ไขข้อมูล';
-            this.formType = 'EDIT';
-            this.profileService.getProfile().subscribe(data => {
-                this.profileForm.setValue({
-                    username: data.data.username,
-                    promptpay: data.data.promptpay,
-                    mobile_number: data.data.mobile_number,
-                    firstname: data.data.firstname,
-                    lastname: data.data.lastname,
-                    store_name: data.data.store_name,
-                    store_type_id: data.data.store_type_id,
-                    image: null
-                });
-                this.imageSrc = src_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].url + data.data.store_pic;
-                // console.log(this.imageSrc);
-            });
-        }
+        // if(this.route.snapshot.data.formType === 'EDIT') {
+        //
+        //   this.title = 'แก้ไขข้อมูล';
+        //   this.formType = 'EDIT';
+        //   this.profileService.getProfile().subscribe(data => {
+        //     console.log(data);
+        //   this.profileForm.setValue({
+        //       username: data.data.username,
+        //       promptpay: data.data.promptpay,
+        //       mobile_number: data.data.mobile_number,
+        //       firstname: data.data.firstname,
+        //       lastname: data.data.lastname,
+        //       store_name: data.data.store_name,
+        //       store_type_id: data.data.store_type_id,
+        //       store_pic: null
+        //   });
+        //
+        //   if(data.data.store_pic){
+        //     this.store_pic = 'https://qrdee.co/app/'+data.data.store_pic;
+        //   }
+        //
+        //   });
+        // }
     }
-    takePhoto() {
+    selectPictures() {
         this.camera.getPicture({
-            quality: 100,
-            destinationType: this.camera.DestinationType.FILE_URI,
-            sourceType: this.camera.PictureSourceType.CAMERA,
-            encodingType: this.camera.EncodingType.JPEG,
-            cameraDirection: this.camera.Direction.FRONT,
-            mediaType: this.camera.MediaType.PICTURE
-        }).then(imageData => {
-            this.imageSrc = this.webView.convertFileSrc(imageData);
-            this.loadPhoto(imageData);
-        }, err => {
-            console.log(err);
-        });
-    }
-    selectPhoto() {
-        this.camera.getPicture({
-            destinationType: this.camera.DestinationType.FILE_URI,
+            quality: 40,
+            destinationType: this.camera.DestinationType.DATA_URL,
             sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-        }).then(imageData => {
-            this.imageSrc = this.webView.convertFileSrc(imageData);
-            this.loadPhoto(imageData);
-        }, err => {
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE
+        }).then((imageData) => {
+            console.log("Image Selected => ");
+            this.store_pic = 'data:image/jpeg;base64,' + imageData;
+            this.profileForm.get('store_pic').patchValue(this.store_pic);
+        }, (err) => {
+            console.log("Image Error=>");
             console.log(err);
         });
     }
-    loadPhoto(imageFileUri) {
-        this.file.resolveLocalFilesystemUrl(imageFileUri).then(entry => {
-            entry['file'](file => {
-                this.readFile(file);
-            });
+    getPicture() {
+        this.camera.getPicture({
+            quality: 40,
+            destinationType: this.camera.DestinationType.DATA_URL,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE
+        }).then((imageData) => {
+            this.store_pic = 'data:image/jpeg;base64,' + imageData;
+            this.profileForm.get('store_pic').patchValue(this.store_pic);
+        }, (err) => {
+            console.log(err);
         });
     }
-    readFile(file) {
-        const reader = new FileReader();
-        reader.onloadend = () => {
-            const imgBlob = new Blob([reader.result], { type: file.type });
-            this.profileForm.controls['image'].setValue(imgBlob);
-        };
-        reader.readAsArrayBuffer(file);
-    }
+    // private loadPhoto(imageFileUri: any) {
+    //   this.file.resolveLocalFilesystemUrl(imageFileUri).then(entry => {
+    //     entry['file'](file => {
+    //       this.readFile(file);
+    //     })
+    //   })
+    // }
+    //
+    // private readFile(file: any) {
+    //   const reader = new FileReader();
+    //
+    //   reader.onloadend = () => {
+    //     const imgBlob = new Blob([reader.result], { type: file.type });
+    //     this.profileForm.controls['image'].setValue(imgBlob);
+    //   }
+    //
+    //   reader.readAsArrayBuffer(file);
+    // }
     submit() {
         console.log(this.profileForm.value);
         this.alertService.showAlert({
@@ -188,13 +195,13 @@ FormComponent.ctorParameters = () => [
     { type: _shared_profile_service__WEBPACK_IMPORTED_MODULE_2__["ProfileService"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"] },
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormBuilder"] },
-    { type: _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_7__["ToastService"] },
-    { type: _shared_services_alert_service__WEBPACK_IMPORTED_MODULE_8__["AlertService"] },
-    { type: _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_9__["Camera"], decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"], args: [_ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_9__["Camera"],] }] },
-    { type: _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_10__["File"], decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"], args: [_ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_10__["File"],] }] },
-    { type: _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_11__["WebView"], decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"], args: [_ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_11__["WebView"],] }] }
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"] },
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"] },
+    { type: _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_6__["ToastService"] },
+    { type: _shared_services_alert_service__WEBPACK_IMPORTED_MODULE_7__["AlertService"] },
+    { type: _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_8__["Camera"], decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"], args: [_ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_8__["Camera"],] }] },
+    { type: _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_9__["File"], decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"], args: [_ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_9__["File"],] }] },
+    { type: _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_10__["WebView"], decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"], args: [_ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_10__["WebView"],] }] }
 ];
 FormComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -202,19 +209,19 @@ FormComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./form.component.html */ "./node_modules/raw-loader/index.js!./src/app/profile/form/form.component.html"),
         styles: [__webpack_require__(/*! ./form.component.scss */ "./src/app/profile/form/form.component.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](7, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_9__["Camera"])),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](8, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_10__["File"])),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](9, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_11__["WebView"])),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](7, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_8__["Camera"])),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](8, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_9__["File"])),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__param"](9, Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Inject"])(_ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_10__["WebView"])),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_shared_profile_service__WEBPACK_IMPORTED_MODULE_2__["ProfileService"],
         _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
         _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
-        _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"],
-        _angular_forms__WEBPACK_IMPORTED_MODULE_6__["FormBuilder"],
-        _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_7__["ToastService"],
-        _shared_services_alert_service__WEBPACK_IMPORTED_MODULE_8__["AlertService"],
-        _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_9__["Camera"],
-        _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_10__["File"],
-        _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_11__["WebView"]])
+        _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"],
+        _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormBuilder"],
+        _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_6__["ToastService"],
+        _shared_services_alert_service__WEBPACK_IMPORTED_MODULE_7__["AlertService"],
+        _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_8__["Camera"],
+        _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_9__["File"],
+        _ionic_native_ionic_webview_ngx__WEBPACK_IMPORTED_MODULE_10__["WebView"]])
 ], FormComponent);
 
 
@@ -322,6 +329,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/geolocation/ngx */ "./node_modules/@ionic-native/geolocation/ngx/index.js");
 /* harmony import */ var _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/services/toast.service */ "./src/app/shared/services/toast.service.ts");
+/* harmony import */ var _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/camera/ngx */ "./node_modules/@ionic-native/camera/ngx/index.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+
+
+
 
 
 
@@ -329,22 +342,38 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ProfilePage = class ProfilePage {
-    constructor(profileservice, geolocation, toastService, route) {
+    constructor(profileservice, geolocation, toastService, route, camera, _formBuilder, event, _loading) {
         this.profileservice = profileservice;
         this.geolocation = geolocation;
         this.toastService = toastService;
         this.route = route;
-        this.latitude = 14.8718084;
-        this.longitude = 103.4962797;
-        this.store = JSON.parse(localStorage.getItem('store'));
-        localStorage.setItem("store_lat", this.store.latitude);
-        localStorage.setItem("store_lng", this.store.longitude);
+        this.camera = camera;
+        this._formBuilder = _formBuilder;
+        this.event = event;
+        this._loading = _loading;
+        this.store_pic = '';
         //alert(JSON.stringify(this.store));
     }
-    ionViewWillEnter() {
-        //this.loadProfile();
+    ngOnInit() {
+        this.store = JSON.parse(localStorage.getItem('store'));
+        console.log(this.store);
+        this.store_pic = this.store.store_pic;
+        if (this.store_pic) {
+            this.store_pic = 'https://qrdee.co/app/' + this.store_pic;
+        }
+        localStorage.setItem("store_lat", this.store.latitude);
+        localStorage.setItem("store_lng", this.store.longitude);
         this.loadStoreTypes();
+        this.buildForm();
+        // this.latitude.patchValue( this.store.latitude );
+        // this.longitude.patchValue( this.store.longitude );
     }
+    ionViewDidEnter() {
+    }
+    // ionViewWillEnter() {
+    //this.loadProfile();
+    //  this.loadStoreTypes();
+    // }
     ngAfterViewInit() {
         // this.geolocation.getCurrentPosition().then((resp) => {
         //     this.store.latitude = resp.coords.latitude;
@@ -354,34 +383,67 @@ let ProfilePage = class ProfilePage {
         this.loadMap();
     }
     submit() {
-        this.store.latitude = localStorage.getItem('store_lat');
-        this.store.longitude = localStorage.getItem('store_lng');
-        localStorage.setItem('store', JSON.stringify(this.store));
-        console.log(this.store);
-        this.profileservice.updateProfile(this.store, this.store.id).subscribe((data) => {
-            console.log(data);
-            const member = {
-                mobile_number: this.store.mobile_number,
-                latitude: this.store.latitude,
-                longitude: this.store.longitude,
-                firstname: this.store.firstname,
-                lastname: this.store.lastname
-            };
-            localStorage.setItem('member', JSON.stringify(member));
-            console.log(member);
-            localStorage.removeItem('store_lat');
-            localStorage.removeItem('store_lng');
-            this.toastService.showToast(`ปรับปรุงข้อมูลเรียบร้อยแล้ว`, 'top');
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            this.latitude.patchValue(localStorage.getItem('store_lat'));
+            this.longitude.patchValue(localStorage.getItem('store_lng'));
+            //console.log(this.form.value);
+            const loading = yield this._loading.create();
+            yield loading.present();
+            yield this.profileservice.updateProfile(this.form.value, this.store.id)
+                .subscribe((data) => {
+                console.log("Profile Resp0nse===>");
+                console.log(data);
+                //
+                // localStorage.setItem('store', JSON.stringify({
+                //   id: data.id,
+                //   store_name: data.store_name,
+                //   promptpay: data.promptpay,
+                //   access_token: data.access_token,
+                //   mobile_number: data.mobile_number,
+                //   delivery_price: data.delivery_price,
+                //   firstname: data.firstname,
+                //   lastname: data.lastname,
+                //   store_type_id: data.store_type_id,
+                //   latitude: data.latitude,
+                //   longitude: data.longitude,
+                //   store_pic: data.store_pic
+                // }));
+                this.event.publish('store:changed', data);
+                loading.dismiss();
+                this.toastService.showToast(`ปรับปรุงข้อมูลเรียบร้อยแล้ว`, 'top');
+            }, (err) => {
+                console.log(err);
+                this.toastService.showToast(JSON.stringify(err), 'top');
+                loading.dismiss();
+            });
+            // this.store.latitude = localStorage.getItem('store_lat');
+            // this.store.longitude = localStorage.getItem('store_lng');
+            // localStorage.setItem('store', JSON.stringify(this.store));
+            // console.log(this.store);
+            // this.profileservice.updateProfile(this.store,this.store.id).subscribe((data:any)=>{
+            //   console.log(data);
+            //   const member = {
+            //     mobile_number:this.store.mobile_number,
+            //     latitude:this.store.latitude,
+            //     longitude:this.store.longitude,
+            //     firstname:this.store.firstname,
+            //     lastname:this.store.lastname
+            //   }
+            //   localStorage.setItem('member', JSON.stringify(member));
+            //   console.log(member);
+            //   localStorage.removeItem('store_lat');
+            //   localStorage.removeItem('store_lng');
+            //   this.toastService.showToast(`ปรับปรุงข้อมูลเรียบร้อยแล้ว`, 'top');
+            // });
         });
     }
     loadStoreTypes() {
         this.profileservice.getStoreTypes().subscribe((data) => {
             this.store_types = data;
-            console.log(this.store_types);
         });
     }
     loadMap() {
-        let latLng = new google.maps.LatLng(this.store.latitude, this.store.longitude);
+        let latLng = new google.maps.LatLng(this.latitude.value, this.longitude.value);
         this.map = new google.maps.Map(this.mapElement.nativeElement, {
             zoom: 15,
             center: latLng,
@@ -394,17 +456,73 @@ let ProfilePage = class ProfilePage {
             position: latLng
         });
         marker.addListener('dragend', function () {
+            //this.form.get('latitude').patchValue( marker.getPosition().lat() );
+            // this.longitude.patchValue(marker.getPosition().lng());
             localStorage.setItem("store_lat", marker.getPosition().lat());
             localStorage.setItem("store_lng", marker.getPosition().lng());
             this.map.setCenter(marker.getPosition());
         });
     }
+    selectPictures() {
+        this.camera.getPicture({
+            quality: 50,
+            destinationType: this.camera.DestinationType.DATA_URL,
+            sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE
+        }).then((image) => {
+            console.log("store_pic selected..... =>");
+            this.store_pic = 'data:image/jpeg;base64,' + image;
+            this.form.get('store_pic').patchValue(this.store_pic);
+            // console.log(base64Image);
+            // this.preview = base64Image;
+            // this.form.get('photo').patchValue(base64Image);
+        }, (err) => {
+            console.log(err);
+        });
+    }
+    getPicture() {
+        this.camera.getPicture({
+            quality: 50,
+            destinationType: this.camera.DestinationType.DATA_URL,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE
+        }).then((image) => {
+            this.store_pic = 'data:image/jpeg;base64,' + image;
+            this.form.get('store_pic').patchValue(this.store_pic);
+            // console.log(base64Image);
+            // this.preview = base64Image;
+            // this.form.get('photo').patchValue(base64Image);
+        }, (err) => {
+            console.log(err);
+        });
+    }
+    buildForm() {
+        this.form = this._formBuilder.group({
+            store_name: this.store.store_name,
+            promptpay: this.store.promptpay,
+            mobile_number: this.store.mobile_number,
+            delivery_price: this.store.delivery_price,
+            firstname: this.store.firstname,
+            lastname: this.store.lastname,
+            store_type_id: this.store.store_type_id,
+            latitude: this.store.latitude,
+            longitude: this.store.longitude,
+            store_pic: null
+        });
+    }
+    get latitude() { return this.form.get('latitude'); }
+    get longitude() { return this.form.get('longitude'); }
 };
 ProfilePage.ctorParameters = () => [
     { type: _shared_profile_service__WEBPACK_IMPORTED_MODULE_2__["ProfileService"] },
     { type: _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_4__["Geolocation"] },
     { type: _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_5__["ToastService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
+    { type: _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_6__["Camera"] },
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormBuilder"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["Events"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["LoadingController"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('map', { static: false }),
@@ -419,7 +537,11 @@ ProfilePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_shared_profile_service__WEBPACK_IMPORTED_MODULE_2__["ProfileService"],
         _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_4__["Geolocation"],
         _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_5__["ToastService"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]])
+        _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
+        _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_6__["Camera"],
+        _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormBuilder"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["Events"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["LoadingController"]])
 ], ProfilePage);
 
 
@@ -450,6 +572,7 @@ let ProfileService = class ProfileService {
         this.baseUrl = `${_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].api_url}/store`;
     }
     getProfile() {
+        console.log(`${this.baseUrl}`);
         return this.http.get(`${this.baseUrl}`);
     }
     getStoreDistance(latitude, longitude) {

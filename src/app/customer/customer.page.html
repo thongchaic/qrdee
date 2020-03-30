@@ -124,6 +124,29 @@
 
 </ion-content>
 
+<ion-content [hidden]="tab3">
+  <ion-list *ngIf="carts">
+      <ion-list-header >
+        <ion-label>ร้านค้าไกล้เคียง</ion-label>
+      </ion-list-header>
+
+      <ion-item  *ngFor="let cart of carts">
+          <ion-avatar slot="start">
+            <img *ngIf="cart.product.thumbnail" [src]="'https://qrdee.co/app/'+cart.product.thumbnail">
+            <img *ngIf="!cart.product.thumbnail" src="/assets/noimg.png">
+          </ion-avatar>
+          <ion-text>
+            <small *ngIf="cart.product.product_th"><b>{{cart.product.product_th}}</b></small><br>
+            <small *ngIf="cart.created_at">เมื่อ {{cart.created_at | date }}</small>
+          </ion-text>
+          <ion-text slot="end">
+            <small *ngIf="cart.store.store_name">จาก {{cart.store.store_name}}</small><br>
+            <small *ngIf="cart.product.price">ราคา {{cart.product.price}} ฿</small>
+          </ion-text>
+        </ion-item>
+  </ion-list>
+</ion-content>
+
 <ion-footer style="background:#FFFFFF;">
   <ion-toolbar>
     <ion-tabs>
@@ -134,6 +157,10 @@
           </ion-tab-button>
           <ion-tab-button color="primary" (click)="changeTab(1)" >
               <ion-icon name="md-cart"></ion-icon>
+              <ion-label>คำสั่งซื้อ</ion-label>
+          </ion-tab-button>
+          <ion-tab-button color="primary" (click)="changeTab(2)" >
+              <ion-icon name="md-list-box"></ion-icon>
               <ion-label>รายการซื้อ</ion-label>
           </ion-tab-button>
         </ion-tab-bar>

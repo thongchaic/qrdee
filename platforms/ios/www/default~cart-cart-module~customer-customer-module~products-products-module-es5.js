@@ -48,6 +48,7 @@ var ProductService = /** @class */ (function () {
         return this.http.post("https://qrdee.co/api/v2/products/" + store_id, data);
     };
     ProductService.prototype.updateProduct = function (data, id) {
+        console.log("https://qrdee.co/api/v2/products/" + id);
         return this.http.put("https://qrdee.co/api/v2/products/" + id, data);
     };
     ProductService.prototype.deleteProduct = function (product_id) {

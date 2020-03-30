@@ -78,6 +78,34 @@
             }
           ]
         }
+      },
+      "*-Info.plist": {
+        "parents": {
+          "NSLocationWhenInUseUsageDescription": [
+            {
+              "xml": "<string>ใช้ตำแหน่งของท่านสำหรับค้นหาร้านบริเวณไกล้เคียง</string>",
+              "count": 1,
+              "mode": "merge",
+              "id": "config.xml"
+            }
+          ],
+          "NSLocationAlwaysUsageDescription": [
+            {
+              "xml": "<string>ใช้ตำแหน่งของท่านสำหรับค้นหาร้านบริเวณไกล้เคียง</string>",
+              "count": 1,
+              "mode": "merge",
+              "id": "config.xml"
+            }
+          ],
+          "NSCameraUsageDescription": [
+            {
+              "xml": "<string>ขออนุญาตใช้กล้องถ่ายภาพร้านค้าและสินค้า</string>",
+              "count": 1,
+              "mode": "merge",
+              "id": "config.xml"
+            }
+          ]
+        }
       }
     }
   },

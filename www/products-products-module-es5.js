@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<ion-header>\n  <ion-toolbar>\n    <!-- <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n -->\n    <ion-title>แก้ไขข้อมูล</ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-back-button  color=\"danger\"  defaultHref=\"products\"></ion-back-button>\n    </ion-buttons>\n\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [formGroup]=\"productForm\" >\n  <ion-card style=\"background:#FFFFFF;\">\n    <ion-card-header>\n      <h3>{{ title }}</h3>\n    </ion-card-header>\n\n    <ion-card-content >\n      <ion-item-group >\n        <ion-item lines=\"none\">\n          <!-- <ion-img [src]=\"imageData || '/assets/noimg.png'\" *ngIf=\"imageData\" ></ion-img> -->\n          <ion-img [src]=\"thumbnail || '/assets/noimg.png'\"></ion-img>\n        </ion-item>\n        <ion-grid>\n          <ion-row justify-content-center>\n            <ion-button size=\"small\" color=\"primary\" (click)=\"getPicture(1)\">ถ่ายรูปสินค้า</ion-button>\n            <ion-button size=\"small\" color=\"secondary\" (click)=\"selectPictures();\">เลือกจากอัลบั้ม</ion-button>\n          </ion-row>\n        </ion-grid>\n      </ion-item-group>\n\n      <ion-item>\n        <ion-label color=\"primary\" position=\"stacked\">ชื่อสินค้า</ion-label>\n        <ion-input type=\"text\"  formControlName=\"product_th\"></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label color=\"primary\" position=\"stacked\">รายละเอียดสินค้า</ion-label>\n        <ion-textarea  formControlName=\"details_th\"></ion-textarea>\n      </ion-item>\n\n      <ion-item>\n        <ion-label color=\"primary\" position=\"stacked\">หมวดหมู่สินค้า</ion-label>\n        <ion-select formControlName=\"product_type_id\">\n          <ion-select-option\n            *ngFor=\"let cat of product_types\"\n            [value]=\"cat.id\"\n            [selected]=\"cat.id == productForm.get('product_type_id').value\">\n            {{ cat.cat_th }}\n          </ion-select-option>\n        </ion-select>\n      </ion-item>\n\n      <ion-grid>\n        <ion-row>\n          <ion-col>\n            <ion-item>\n              <ion-label color=\"danger\" position=\"stacked\">ราคา</ion-label>\n              <ion-input type=\"number\" formControlName=\"price\"></ion-input>\n            </ion-item>\n          </ion-col>\n          <ion-col>\n            <ion-item>\n              <ion-label color=\"danger\" position=\"stacked\">ต้นทุน</ion-label>\n              <ion-input type=\"number\" formControlName=\"cost\"></ion-input>\n            </ion-item>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n\n      <!-- <ion-item>\n        <ion-label position=\"floating\">สต๊อค</ion-label>\n        <ion-input type=\"number\" formControlName=\"instock\"></ion-input>\n      </ion-item> -->\n\n    </ion-card-content>\n    <ion-button type=\"submit\" shape=\"round\" expand=\"full\" color=\"primary\" (click)=\"submit()\">\n     <ion-icon name=\"logo-buffer\"></ion-icon>\n    &nbsp;บันทึก</ion-button>\n  </ion-card>\n</ion-content>\n\n\n\n\n<!-- <ion-header>\n  <ion-toolbar>\n    <ion-title>\n      Ionic 4 Camera\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"ion-padding\">\n    <ion-grid>\n      <ion-row class=\"center\">\n        <ion-col size-sm-6>\n          <ion-button size=\"small\" (click)=\"getPicture(1)\">Show Camera</ion-button>\n        </ion-col>\n        <ion-col size-sm-6>\n          <ion-button size=\"small\" (click)=\"getPicture(0)\">Show Album</ion-button>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n\n    <ion-item lines=\"none\">\n      <ion-label>Return image file URI</ion-label>\n      <ion-toggle energized [(ngModel)]=\"useURI\"></ion-toggle>\n    </ion-item>\n\n    <ion-card>\n      <ion-card-content>\n        <img [src]=\"imageData\" *ngIf=\"imageData\"/>\n      </ion-card-content>\n      <ion-card-header>\n        <ion-card-title>\n          <div *ngIf=\"useURI\">\n            Using URI\n          </div>\n          <div *ngIf=\"!useURI\">\n            Using Base64\n          </div>\n          <p *ngIf=\"useURI\">\n            Your URI is {{ imageData }}\n          </p>\n          <p *ngIf=\"!useURI\">\n            Your Base64 image has {{ (imageData + '').length }} bytes\n          </p>\n        </ion-card-title>\n      </ion-card-header>\n    </ion-card>\n  </div>\n</ion-content> -->\n"
+module.exports = "\n<ion-header>\n  <ion-toolbar>\n    <!-- <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n -->\n    <ion-title>แก้ไขข้อมูล</ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-back-button  color=\"danger\"  defaultHref=\"products\"></ion-back-button>\n    </ion-buttons>\n\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [formGroup]=\"productForm\" >\n  <ion-card style=\"background:#FFFFFF;\">\n    <ion-card-header>\n      <h3>{{ title }}</h3>\n    </ion-card-header>\n\n    <ion-card-content >\n      <ion-item-group >\n        <ion-item lines=\"none\">\n          <ion-img *ngIf=\"thumbnail\" [src]=\"thumbnail\"></ion-img>\n          <ion-img *ngIf=\"!thumbnail\" src=\"/assets/noimg.png\"></ion-img>\n        </ion-item>\n        <ion-grid>\n          <ion-row justify-content-center>\n            <ion-button size=\"small\" color=\"primary\" (click)=\"getPicture()\">ถ่ายรูปสินค้า</ion-button>\n            <ion-button size=\"small\" color=\"secondary\" (click)=\"selectPictures();\">เลือกจากอัลบั้ม</ion-button>\n          </ion-row>\n        </ion-grid>\n      </ion-item-group>\n\n      <ion-item>\n        <ion-label color=\"primary\" position=\"stacked\">ชื่อสินค้า</ion-label>\n        <ion-input type=\"text\"  formControlName=\"product_th\"></ion-input>\n      </ion-item>\n\n      <ion-item>\n        <ion-label color=\"primary\" position=\"stacked\">รายละเอียดสินค้า</ion-label>\n        <ion-textarea  formControlName=\"details_th\"></ion-textarea>\n      </ion-item>\n\n      <ion-item>\n        <ion-label color=\"primary\" position=\"stacked\">หมวดหมู่สินค้า</ion-label>\n        <ion-select formControlName=\"product_type_id\">\n          <ion-select-option\n            *ngFor=\"let cat of product_types\"\n            [value]=\"cat.id\"\n            [selected]=\"cat.id == productForm.get('product_type_id').value\">\n            {{ cat.cat_th }}\n          </ion-select-option>\n        </ion-select>\n      </ion-item>\n\n      <ion-grid>\n        <ion-row>\n          <ion-col>\n            <ion-item>\n              <ion-label color=\"danger\" position=\"stacked\">ราคา</ion-label>\n              <ion-input type=\"number\" formControlName=\"price\"></ion-input>\n            </ion-item>\n          </ion-col>\n          <ion-col>\n            <ion-item>\n              <ion-label color=\"danger\" position=\"stacked\">ต้นทุน</ion-label>\n              <ion-input type=\"number\" formControlName=\"cost\"></ion-input>\n            </ion-item>\n          </ion-col>\n        </ion-row>\n      </ion-grid>\n\n      <!-- <ion-item>\n        <ion-label position=\"floating\">สต๊อค</ion-label>\n        <ion-input type=\"number\" formControlName=\"instock\"></ion-input>\n      </ion-item> -->\n\n    </ion-card-content>\n    <ion-button type=\"submit\" shape=\"round\" expand=\"full\" color=\"primary\" (click)=\"submit()\">\n     <ion-icon name=\"logo-buffer\"></ion-icon>\n    &nbsp;บันทึก</ion-button>\n  </ion-card>\n</ion-content>\n\n\n\n\n<!-- <ion-header>\n  <ion-toolbar>\n    <ion-title>\n      Ionic 4 Camera\n    </ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <div class=\"ion-padding\">\n    <ion-grid>\n      <ion-row class=\"center\">\n        <ion-col size-sm-6>\n          <ion-button size=\"small\" (click)=\"getPicture(1)\">Show Camera</ion-button>\n        </ion-col>\n        <ion-col size-sm-6>\n          <ion-button size=\"small\" (click)=\"getPicture(0)\">Show Album</ion-button>\n        </ion-col>\n      </ion-row>\n    </ion-grid>\n\n    <ion-item lines=\"none\">\n      <ion-label>Return image file URI</ion-label>\n      <ion-toggle energized [(ngModel)]=\"useURI\"></ion-toggle>\n    </ion-item>\n\n    <ion-card>\n      <ion-card-content>\n        <img [src]=\"imageData\" *ngIf=\"imageData\"/>\n      </ion-card-content>\n      <ion-card-header>\n        <ion-card-title>\n          <div *ngIf=\"useURI\">\n            Using URI\n          </div>\n          <div *ngIf=\"!useURI\">\n            Using Base64\n          </div>\n          <p *ngIf=\"useURI\">\n            Your URI is {{ imageData }}\n          </p>\n          <p *ngIf=\"!useURI\">\n            Your Base64 image has {{ (imageData + '').length }} bytes\n          </p>\n        </ion-card-title>\n      </ion-card-header>\n    </ion-card>\n  </div>\n</ion-content> -->\n"
 
 /***/ }),
 
@@ -110,7 +110,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var FormComponent = /** @class */ (function () {
-    function FormComponent(route, router, productService, barcodeScanner, builder, camera, file, webView, toastService, loadingController, navCtrl) {
+    function FormComponent(route, router, productService, barcodeScanner, builder, camera, file, webView, toastService, _loading, navCtrl) {
         this.route = route;
         this.router = router;
         this.productService = productService;
@@ -120,7 +120,7 @@ var FormComponent = /** @class */ (function () {
         this.file = file;
         this.webView = webView;
         this.toastService = toastService;
-        this.loadingController = loadingController;
+        this._loading = _loading;
         this.navCtrl = navCtrl;
         // getPicture
         this.useURI = true;
@@ -132,6 +132,7 @@ var FormComponent = /** @class */ (function () {
             cost: [0, _angular_forms__WEBPACK_IMPORTED_MODULE_4__["Validators"].required],
             thumbnail: null
         });
+        this.thumbnail = null;
         this.formType = 'CREATE' || false;
         this.imageSrc = '';
         this.scan = false;
@@ -187,7 +188,7 @@ var FormComponent = /** @class */ (function () {
                     thumbnail: null
                 });
                 if (data.thumbnail) {
-                    _this.thumbnail = "https://qrdee.co/app/" + data.thumbnail;
+                    _this.thumbnail = 'https://qrdee.co/app/' + data.thumbnail;
                 }
             }, function (err) {
             });
@@ -196,46 +197,78 @@ var FormComponent = /** @class */ (function () {
     FormComponent.prototype.selectPictures = function () {
         var _this = this;
         this.camera.getPicture({
-            quality: 70,
+            quality: 40,
             destinationType: this.camera.DestinationType.DATA_URL,
             sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+            encodingType: this.camera.EncodingType.JPEG,
+            mediaType: this.camera.MediaType.PICTURE
+        }).then(function (imageData) {
+            console.log("Image Selected => ");
+            _this.thumbnail = 'data:image/jpeg;base64,' + imageData;
+            _this.productForm.get('thumbnail').patchValue(_this.thumbnail);
+        }, function (err) {
+            console.log("Image Error=>");
+            console.log(err);
+        });
+    };
+    FormComponent.prototype.getPicture = function () {
+        var _this = this;
+        this.camera.getPicture({
+            quality: 40,
+            destinationType: this.camera.DestinationType.DATA_URL,
             encodingType: this.camera.EncodingType.JPEG,
             mediaType: this.camera.MediaType.PICTURE
         }).then(function (image) {
             _this.thumbnail = 'data:image/jpeg;base64,' + image;
             _this.productForm.get('thumbnail').patchValue(_this.thumbnail);
-            // console.log(base64Image);
-            // this.preview = base64Image;
-            // this.form.get('photo').patchValue(base64Image);
         }, function (err) {
             console.log(err);
         });
     };
     FormComponent.prototype.submit = function () {
-        var _this = this;
-        // console.log(this.productForm.value)
-        if (this.formType === 'CREATE') {
-            this.productService.createProduct(this.productForm.value, this.store.id).subscribe(function (res) {
-                _this.toastService.showToast('เพิ่มสินค้าเรียบร้อยแล้ว', 'top');
-                _this.router.navigateByUrl('/products');
-            }, function (err) {
-                _this.router.navigateByUrl('/products');
-                //this.productForm.controls['details_th'].setValue(JSON.stringify(err));
-                //alert(JSON.stringify(err));
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var loading;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this._loading.create()];
+                    case 1:
+                        loading = _a.sent();
+                        return [4 /*yield*/, loading.present()];
+                    case 2:
+                        _a.sent();
+                        if (this.formType === 'CREATE') {
+                            this.productService.createProduct(this.productForm.value, this.store.id).subscribe(function (res) {
+                                console.log(res);
+                                loading.dismiss();
+                                _this.toastService.showToast('เพิ่มสินค้าเรียบร้อยแล้ว', 'top');
+                                _this.router.navigateByUrl('/products');
+                            }, function (err) {
+                                loading.dismiss();
+                                _this.toastService.showToast('เพิ่มสินค้าไม่สำเร็จ โปรดลองอีกครั้ง', 'top');
+                                _this.router.navigateByUrl('/products');
+                            });
+                        }
+                        else {
+                            //console.log(this.productForm.value);
+                            console.log("UPDATE =>" + this.route.snapshot.params['id']);
+                            this.productService.updateProduct(this.productForm.value, this.route.snapshot.params['id']).subscribe(function (res) {
+                                //alert(JSON.stringify(res));
+                                console.log("UPDATE RES=>");
+                                console.log(res);
+                                loading.dismiss();
+                                _this.toastService.showToast('แก้ไขสินค้าเรียบร้อยแล้ว', 'top');
+                                _this.router.navigateByUrl('/products');
+                            }, function (err) {
+                                loading.dismiss();
+                                console.log("ERROR update product=>");
+                                console.log(err);
+                            });
+                        }
+                        return [2 /*return*/];
+                }
             });
-        }
-        else {
-            console.log(this.productForm.value);
-            this.productService.updateProduct(this.productForm.value, this.route.snapshot.params['id']).subscribe(function (res) {
-                //alert(JSON.stringify(res));
-                //this.toastService.showToast('แก้ไขสินค้าเรียบร้อยแล้ว', 'top');
-                _this.router.navigateByUrl('/products');
-            }, function (err) {
-                _this.router.navigateByUrl('/products');
-                //alert(JSON.stringify(err));
-                //this.productForm.get('details_th').patchValue(JSON.stringify(err));
-            });
-        }
+        });
     };
     FormComponent.prototype.letScan = function () {
         var _this = this;
@@ -467,14 +500,16 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var ListComponent = /** @class */ (function () {
-    function ListComponent(productService, cartService, toastService, alertController, router, route) {
+    function ListComponent(productService, cartService, toastService, alertController, router, route, _loading) {
         this.productService = productService;
         this.cartService = cartService;
         this.toastService = toastService;
         this.alertController = alertController;
         this.router = router;
         this.route = route;
+        this._loading = _loading;
         this.url = src_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].url;
         this.page = 1;
         this.store_id = 0;
@@ -496,30 +531,34 @@ var ListComponent = /** @class */ (function () {
         this.loadProducts();
     };
     ListComponent.prototype.loadProducts = function () {
-        var _this = this;
-        if (!this.store) {
-            return;
-        }
-        //alert(JSON.stringify(this.store));
-        this.productService.getProducts(this.store.id).subscribe(function (data) {
-            //alert(JSON.stringify(data));
-            _this.products = data;
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var loading;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (!this.store) {
+                            return [2 /*return*/];
+                        }
+                        return [4 /*yield*/, this._loading.create()];
+                    case 1:
+                        loading = _a.sent();
+                        return [4 /*yield*/, loading.present()];
+                    case 2:
+                        _a.sent();
+                        //alert(JSON.stringify(this.store));
+                        this.productService.getProducts(this.store.id).subscribe(function (data) {
+                            //alert(JSON.stringify(data));
+                            console.log(data);
+                            loading.dismiss();
+                            _this.products = data;
+                        }, function (err) {
+                            loading.dismiss();
+                        });
+                        return [2 /*return*/];
+                }
+            });
         });
-        // if(this.store_id) {
-        //   this.productService.getAllS(this.store_id).subscribe(res => {
-        //   console.log(res);
-        //   this.products = res.products.data;
-        //   this.checkProducts(this.products);
-        //   this.page = 1;
-        //   });
-        // }else {
-        //   this.productService.getAll().subscribe(res => {
-        //   console.log(res);
-        //   this.products = res.products.data;
-        //   this.checkProducts(this.products);
-        //   this.page = 1;
-        //   });
-        // }
     };
     // user_customer(id) {
     //   let navigationExtras: NavigationExtras = {
@@ -659,7 +698,8 @@ var ListComponent = /** @class */ (function () {
         { type: _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_3__["ToastService"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["AlertController"] },
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"] },
-        { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"] }
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["LoadingController"] }
     ]; };
     ListComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -672,7 +712,8 @@ var ListComponent = /** @class */ (function () {
             _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_3__["ToastService"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["AlertController"],
             _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["LoadingController"]])
     ], ListComponent);
     return ListComponent;
 }());

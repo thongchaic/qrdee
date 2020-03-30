@@ -33773,7 +33773,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>    \n    <ion-title>สถิติ</ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"app-background\">\n\n  <ion-list-header style=\"background:#FFFFFF;\"> \n   <h5>รายได้รวมวันนี้  <b>{{stat_data.daily_income}}&nbsp;บาท</b></h5> <br/>\n  </ion-list-header>\n   <ion-list-header style=\"background:#FFFFFF;\"> \n        QR สำเร็จ &nbsp;<ion-badge>{{stat_data.daily_trn_ok}}</ion-badge>&nbsp;ครั้ง\n         &nbsp;ยกเลิก&nbsp;<ion-badge>{{stat_data.daily_trn_cancel}}</ion-badge>&nbsp;ครั้ง\n  </ion-list-header>\n \n<!-- วัน -->\n  <ion-card class=\"welcome-card\" style=\"background:#FFFFFF;\">\n    <ion-card-header>\n      <h6>วันนี้&nbsp;{{hourly}}&nbsp;บาท</h6>\n    </ion-card-header>\n    <!-- <ion-card-content> -->\n      <canvas #barChartD></canvas>\n    <!-- </ion-card-content> -->\n     <p>&nbsp;ณ​ วันที่ &nbsp;{{stat_data.date}}&nbsp;{{stat_data.month}}&nbsp;{{stat_data.year}}</p>\n  </ion-card>\n\n\n<!-- เดือน -->\n <ion-card class=\"welcome-card\" style=\"background:#FFFFFF;\">\n    <ion-card-header>\n    <h6> เดือนนี้ &nbsp;{{daily}}&nbsp;บาท</h6>\n    </ion-card-header>\n    <!-- <ion-card-content> -->\n      <canvas #barChartM></canvas>\n    <!-- </ion-card-content> -->\n      <p>&nbsp;เดือน &nbsp;{{stat_data.month}} &nbsp;{{stat_data.year}}</p>\n  </ion-card>\n\n\n<!-- ปี -->\n\n   <ion-card class=\"welcome-card\" style=\"background:#FFFFFF;\">\n    <ion-card-header>\n    <h6>ปีนี้ &nbsp;{{monthly}}&nbsp;บาท</h6>\n    </ion-card-header>\n    <!-- <ion-card-content> -->\n      <canvas #barChartY></canvas>\n    <!-- </ion-card-content> -->\n      <p>&nbsp;ปี &nbsp;{{stat_data.year}}</p>\n  </ion-card>\n<br/>\n</ion-content>\n\n\n\n\n\n\n\n\n\n<!-- <ion-content>\n  <ion-card>\n    <ion-item > \n      <button>\n        <ion-icon name=\"cash\"></ion-icon>\n        รายได้รวมวันนี้  \n      </button>\n      <span item-right>&nbsp;{{stat_data.daily_income}}&nbsp;บาท</span>\n    </ion-item>\n\n    <ion-item>\n      <button color=\"twitter\" item-left ion-button icon-left clear>\n        <ion-icon name=\"bookmarks\"></ion-icon>\n         QR สำเร็จ &nbsp;<ion-badge>{{stat_data.daily_trn_ok}}</ion-badge>&nbsp;ครั้ง\n         &nbsp;&nbsp;ยกเลิก&nbsp;<ion-badge>{{stat_data.daily_trn_cancel}}</ion-badge>&nbsp;ครั้ง\n      </button>\n    </ion-item>\n</ion-card>\n<ion-card>\n  <ion-card-subtitle>\n    &nbsp;วันนี้&nbsp;{{hourly}}&nbsp;บาท\n  </ion-card-subtitle>\n  <ion-card-content>\n    <canvas baseChart\n      [datasets]=\"hourlyChartData\"\n      [labels]=\"hourlyChartLabels\"\n      [options]=\"barChartOptions\"\n      [legend]=\"barChartLegend\"\n      [chartType]=\"barChartType\"> \n    </canvas>\n    <p>ณ​ วันที่ &nbsp;{{stat_data.date}}&nbsp;{{stat_data.month}}&nbsp;{{stat_data.year}}</p>\n  </ion-card-content>\n</ion-card>\n\n<ion-card>\n  <ion-card-subtitle>\n    &nbsp;เดือนนี้ &nbsp;{{daily}}&nbsp;บาท\n  </ion-card-subtitle>\n  <ion-card-content>\n    <canvas baseChart\n      [datasets]=\"dailyChartData\"\n      [labels]=\"dailyChartLabels\"\n      [options]=\"barChartOptions\"\n      [legend]=\"barChartLegend\"\n      [chartType]=\"barChartType\"> \n    </canvas>\n <p>เดือน &nbsp;{{stat_data.month}} &nbsp;{{stat_data.year}}</p>\n  </ion-card-content>\n</ion-card>\n\n<ion-card>\n  <ion-card-subtitle>\n    &nbsp;ปีนี้ &nbsp;{{monthly}}&nbsp;บาท\n  </ion-card-subtitle>\n  <ion-card-content>\n    <canvas\n     baseChart\n      [datasets]=\"monthlyChartData\"\n      [labels]=\"monthlyChartLabels\"\n      [options]=\"barChartOptions\"\n      [legend]=\"barChartLegend\"\n      [chartType]=\"barChartType\"> \n    </canvas>\n     <p>ปี &nbsp;{{stat_data.year}}</p>\n  </ion-card-content>\n</ion-card>\n\n</ion-content> -->"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>สรุปยอดขาย</ion-title>\n    <!-- <ion-buttons slot=\"end\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons> -->\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n<!-- วัน -->\n  <ion-card style=\"background:#FFFFFF;\">\n    <ion-card-header>\n      <h5>รายวันนี้  <b *ngIf=\"stat_data\"> {{stat_data.hourly.total}} </b> บาท</h5>\n    </ion-card-header>\n    <canvas #barChartD></canvas>\n    <p *ngIf=\"stat_data\">ณ​ วันที่ {{stat_data.date}} {{stat_data.month}} {{stat_data.year}}</p>\n  </ion-card>\n\n\n<!-- เดือน -->\n <ion-card style=\"background:#FFFFFF;\">\n    <ion-card-header>\n    <h6 *ngIf=\"stat_data\"> เดือนนี้ {{stat_data.daily.total}} บาท</h6>\n    </ion-card-header>\n    <canvas #barChartM></canvas>\n    <p *ngIf=\"stat_data\">ณ เดือน {{stat_data.month}} {{stat_data.year}}</p>\n  </ion-card>\n\n\n<!-- ปี -->\n\n   <ion-card style=\"background:#FFFFFF;\">\n    <ion-card-header>\n    <h6 *ngIf=\"stat_data\">ปีนี้ {{stat_data.monthly.total}} บาท</h6>\n    </ion-card-header>\n      <canvas #barChartY></canvas>\n      <p *ngIf=\"stat_data\">ณ ปี {{stat_data.year}}</p>\n  </ion-card>\n<br/>\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -34177,10 +34177,10 @@ var StatsService = /** @class */ (function () {
         this.baseUrl = _environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].api_url + "/stats";
     }
     StatsService.prototype.get = function (id) {
-        return this.http.get(this.baseUrl + "/" + id);
+        return this.http.get("https://qrdee.co/api/v2/stats/" + id);
     };
-    StatsService.prototype.getStats = function () {
-        return this.http.get("" + this.baseUrl);
+    StatsService.prototype.getStats = function (id) {
+        return this.http.get("https://qrdee.co/api/v2/sell_stats/" + id);
     };
     StatsService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
@@ -34282,150 +34282,143 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
 /* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! chart.js */ "./node_modules/chart.js/dist/Chart.js");
 /* harmony import */ var chart_js__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(chart_js__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+
 
 
 
 
 
 var StatsPage = /** @class */ (function () {
-    function StatsPage(http, Ststs) {
+    function StatsPage(http, _stats, _loading) {
         this.http = http;
-        this.Ststs = Ststs;
-        // monthly:number = 0;
-        this.stat_data = [];
-        this.daily = [];
-        this.hourly = [];
-        this.monthly = [];
-        this.dailys = [];
-        this.hourlys = [];
-        this.monthlys = [];
-        this.year = [];
-        this.hourlyData = [];
-        this.dailyData = [];
-        this.monthlyData = [];
-        this.hourlyLabel = [];
-        this.dailyLabel = [];
-        this.monthlyLabel = [];
+        this._stats = _stats;
+        this._loading = _loading;
     }
     StatsPage.prototype.ionViewDidEnter = function () {
-        this.createBarChartD();
-        this.createBarChartM();
-        this.createBarChartY();
+        //this.createBarChartD();
+        // this.createBarChartM();
+        // this.createBarChartY();
+        this.loadChartData();
     };
     StatsPage.prototype.ionViewWillEnter = function () {
-        var _this = this;
-        this.Ststs.getStats().subscribe(function (res) {
-            console.log(res);
-            _this.stat_data = res.data;
-            _this.daily = res.data.daily.total;
-            _this.hourly = res.data.hourly.total;
-            _this.monthly = res.data.monthly.total;
-            _this.year = res.data.year;
-            _this.dailys = res.data.daily;
-            _this.hourlys = res.data.hourly;
-            _this.monthlys = res.data.monthly;
-            // console.log('รายได้วันนี้ hourly',this.hourlys);
-            // console.log('รายได้เดือนนี้ daily' , this.dailys);
-            // console.log('รายได้ปีนี้ monthly' , this.monthlys);
-            // console.log('ปี year' , this.year);
-        });
+        // this._stats.getStats(JSON.parse(localStorage.getItem('store')).id).subscribe(res => {
+        //   console.log(res);
+        //   this.stat_data = res.data;
+        //   this.daily = res.data.daily.total;
+        //   this.hourly = res.data.hourly.total;
+        //   this.monthly = res.data.monthly.total;
+        //   this.year = res.data.year;
+        //   this.dailys = res.data.daily;
+        //   this.hourlys = res.data.hourly;
+        //   this.monthlys = res.data.monthly;
+        //   //this.createBarChartD();
+        //
+        // });
     };
-    StatsPage.prototype.createBarChartD = function () {
-        var _this = this;
-        this.Ststs.getStats().subscribe(function (res) {
-            _this.hourlyData = res.data.hourly.data;
-            _this.hourlyLabel = res.data.hourly.label;
-            console.log('data รายได้วันนี้ hourly', _this.hourlyData);
-            console.log('Label hourly', _this.hourlyLabel);
-            _this.myLineChartD = new chart_js__WEBPACK_IMPORTED_MODULE_4__["Chart"](_this.barChartD.nativeElement, {
-                type: 'line',
-                data: {
-                    labels: _this.hourlyLabel,
-                    datasets: [{
-                            label: 'รายได้',
-                            data: _this.hourlyData,
-                            backgroundColor: 'rgb(255,184,184)',
-                            borderColor: 'rgb(255,138,138)',
-                            borderWidth: 2
-                        }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                    }
+    StatsPage.prototype.loadChartData = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _loading;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this._loading.create()];
+                    case 1:
+                        _loading = _a.sent();
+                        return [4 /*yield*/, _loading.present()];
+                    case 2:
+                        _a.sent();
+                        this._stats.getStats(JSON.parse(localStorage.getItem('store')).id).subscribe(function (res) {
+                            console.log(res);
+                            _this.stat_data = res.data;
+                            _this.createBarChartD(res.data.hourly.data, res.data.hourly.label);
+                            _this.createBarChartM(res.data.daily.data, res.data.daily.label);
+                            _this.createBarChartY(res.data.monthly.data, res.data.monthly.label);
+                            _loading.dismiss();
+                        }, function (err) {
+                            _loading.dismiss();
+                        });
+                        return [2 /*return*/];
                 }
             });
         });
     };
-    StatsPage.prototype.createBarChartM = function () {
-        var _this = this;
-        this.Ststs.getStats().subscribe(function (res) {
-            _this.dailyData = res.data.daily.data;
-            _this.dailyLabel = res.data.daily.label;
-            console.log('data รายได้เดือนนี้ daily', _this.dailyData);
-            console.log('Label daily', _this.dailyLabel);
-            _this.myLineChartM = new chart_js__WEBPACK_IMPORTED_MODULE_4__["Chart"](_this.barChartM.nativeElement, {
-                type: 'line',
-                data: {
-                    labels: _this.dailyLabel,
-                    datasets: [{
-                            label: 'รายได้',
-                            data: _this.dailyData,
-                            backgroundColor: 'rgb(255,184,184)',
-                            borderColor: 'rgb(255,138,138)',
-                            borderWidth: 1
+    StatsPage.prototype.createBarChartD = function (data, label) {
+        this.myLineChartD = new chart_js__WEBPACK_IMPORTED_MODULE_4__["Chart"](this.barChartD.nativeElement, {
+            type: 'line',
+            data: {
+                labels: label,
+                datasets: [{
+                        label: 'รายได้/วัน',
+                        data: data,
+                        backgroundColor: 'rgb(255,184,184)',
+                        borderColor: 'rgb(255,138,138)',
+                        borderWidth: 2
+                    }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
                         }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                    }
                 }
-            });
+            }
         });
     };
-    StatsPage.prototype.createBarChartY = function () {
-        var _this = this;
-        this.Ststs.getStats().subscribe(function (res) {
-            _this.monthlyData = res.data.monthly.data;
-            _this.monthlyLabel = res.data.monthly.label;
-            console.log('data รายได้ปีนี้ monthly', _this.monthlyData);
-            console.log('Label monthly', _this.monthlyLabel);
-            _this.myLineChartY = new chart_js__WEBPACK_IMPORTED_MODULE_4__["Chart"](_this.barChartY.nativeElement, {
-                type: 'line',
-                data: {
-                    labels: _this.monthlyLabel,
-                    datasets: [{
-                            label: 'รายได้',
-                            data: _this.monthlyData,
-                            backgroundColor: 'rgb(255,184,184)',
-                            borderColor: 'rgb(255,138,138)',
-                            borderWidth: 1
+    StatsPage.prototype.createBarChartM = function (data, label) {
+        this.myLineChartM = new chart_js__WEBPACK_IMPORTED_MODULE_4__["Chart"](this.barChartM.nativeElement, {
+            type: 'line',
+            data: {
+                labels: label,
+                datasets: [{
+                        label: 'รายได้/เดือน',
+                        data: data,
+                        backgroundColor: 'rgb(255,184,184)',
+                        borderColor: 'rgb(255,138,138)',
+                        borderWidth: 1
+                    }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
                         }]
-                },
-                options: {
-                    scales: {
-                        yAxes: [{
-                                ticks: {
-                                    beginAtZero: true
-                                }
-                            }]
-                    }
                 }
-            });
+            }
+        });
+    };
+    StatsPage.prototype.createBarChartY = function (data, label) {
+        this.myLineChartY = new chart_js__WEBPACK_IMPORTED_MODULE_4__["Chart"](this.barChartY.nativeElement, {
+            type: 'line',
+            data: {
+                labels: label,
+                datasets: [{
+                        label: 'รายได้/ปี',
+                        data: data,
+                        backgroundColor: 'rgb(255,184,184)',
+                        borderColor: 'rgb(255,138,138)',
+                        borderWidth: 1
+                    }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                            ticks: {
+                                beginAtZero: true
+                            }
+                        }]
+                }
+            }
         });
     };
     StatsPage.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"] },
-        { type: _shared_stats_service__WEBPACK_IMPORTED_MODULE_2__["StatsService"] }
+        { type: _shared_stats_service__WEBPACK_IMPORTED_MODULE_2__["StatsService"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["LoadingController"] }
     ]; };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('barChartD', { static: false }),
@@ -34446,7 +34439,8 @@ var StatsPage = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./stats.page.scss */ "./src/app/stats/stats.page.scss")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_3__["HttpClient"],
-            _shared_stats_service__WEBPACK_IMPORTED_MODULE_2__["StatsService"]])
+            _shared_stats_service__WEBPACK_IMPORTED_MODULE_2__["StatsService"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["LoadingController"]])
     ], StatsPage);
     return StatsPage;
 }());

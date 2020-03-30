@@ -43,17 +43,20 @@ export class RegisterPage{
   ionViewDidEnter() {
 
   }
-
    async loadGPS(){
+     console.log("Loading GPS....");
      const loading = await this._loading.create();
      await loading.present();
      this.geolocation.getCurrentPosition().then((resp) => {
+       console.log(resp);
        loading.dismiss();
         this.latitude = resp.coords.latitude;
         this.longitude = resp.coords.longitude;
         this.loadMap();
     }, err=>{
+      console.log("GPS error dismiss....")
       loading.dismiss();
+      this.loadMap();
     });
 
 

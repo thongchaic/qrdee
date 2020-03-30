@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header padding=\"true\">\n  <ion-toolbar  *ngIf=\"store\">\n\n    <ion-avatar slot=\"start\">\n      <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\">\n      <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n    </ion-avatar>\n\n    <ion-title  >\n      {{ store.store_name }}\n      <!-- <img  object-fit: cover src=\"/assets/noimg.png\" > -->\n    </ion-title>\n\n\n    <ion-button fill=\"clear\" color=\"danger\" slot=\"end\" (click)=\"forceDissmiss(0);\">\n      <ion-icon name=\"ios-arrow-back\"></ion-icon>Back\n    </ion-button>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n\n\n\n  <ion-list *ngIf=\"products\">\n      <ion-item >\n\n        <ion-text slot=\"start\">\n          <small>เลือกไว้แล้ว {{pick_count}} ชิ้น</small>\n        </ion-text>\n        <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"startPayment();\">\n          <ion-icon slot=\"icon-only\" name=\"ios-cash\"></ion-icon> ชำระเงิน\n        </ion-button>\n      </ion-item>\n\n      <ion-item  *ngFor=\"let product of products\">\n        <ion-avatar slot=\"start\">\n          <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\">\n          <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n        </ion-avatar>\n        <ion-text>\n          <small *ngIf=\"product.product_th\"><b>{{product.product_th}}</b></small><br>\n        </ion-text>\n        <ion-text slot=\"end\">\n          <small *ngIf=\"product.price\">ราคา {{product.price | number }} บาท</small><br>\n        </ion-text>\n        <ion-button fill=\"clear\" color=\"secondary\" slot=\"end\" (click)=\"selectItem(product);\">\n          <ion-icon slot=\"icon-only\" name=\"ios-cart\"></ion-icon>\n        </ion-button>\n      </ion-item>\n\n      <ion-item >\n        <ion-text>\n          <small *ngIf=\"store.delivery_price\">**ร้านนี้ค่าส่ง {{store.delivery_price}} บาท</small><br>\n        </ion-text>\n      </ion-item>\n\n  </ion-list>\n\n\n\n</ion-content>\n"
+module.exports = "<ion-header padding=\"true\">\n  <ion-toolbar  *ngIf=\"store\">\n\n    <ion-avatar slot=\"start\">\n      <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\">\n      <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n    </ion-avatar>\n\n    <ion-title  >\n      {{ store.store_name }}\n      <!-- <img  object-fit: cover src=\"/assets/noimg.png\" > -->\n    </ion-title>\n\n\n    <ion-button fill=\"clear\" color=\"danger\" slot=\"end\" (click)=\"forceDissmiss(0);\">\n      <ion-icon name=\"ios-arrow-back\"></ion-icon>Back\n    </ion-button>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n\n\n\n  <ion-list *ngIf=\"products\">\n      <ion-item >\n\n        <ion-text slot=\"start\">\n          <small>เลือกไว้แล้ว {{pick_count}} ชิ้น</small>\n        </ion-text>\n        <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"startPayment();\">\n          <ion-icon slot=\"icon-only\" name=\"ios-cash\"></ion-icon> ชำระเงิน\n        </ion-button>\n      </ion-item>\n\n      <ion-item  *ngFor=\"let product of products\">\n        <ion-avatar slot=\"start\">\n          <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+product.thumbnail\">\n          <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n        </ion-avatar>\n        <ion-text>\n          <small *ngIf=\"product.product_th\"><b>{{product.product_th}}</b></small><br>\n        </ion-text>\n        <ion-text slot=\"end\">\n          <small *ngIf=\"product.price\">ราคา {{product.price | number }} บาท</small><br>\n        </ion-text>\n        <ion-button fill=\"clear\" color=\"secondary\" slot=\"end\" (click)=\"selectItem(product);\">\n          <ion-icon slot=\"icon-only\" name=\"ios-cart\"></ion-icon>\n        </ion-button>\n      </ion-item>\n\n      <ion-item >\n        <ion-text>\n          <small *ngIf=\"store.delivery_price\">**ร้านนี้ค่าส่ง {{store.delivery_price}} บาท</small><br>\n        </ion-text>\n      </ion-item>\n\n  </ion-list>\n\n\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -18,7 +18,18 @@ module.exports = "<ion-header padding=\"true\">\n  <ion-toolbar  *ngIf=\"store\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header style=\"background:#FFFFFF;\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>ซื้อสินค้า</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [hidden]=\"tab1\" style=\"background:#FFFFFF;\">\n  <ion-searchbar placeholder=\"ค้นหาร้าน\" color=\"primary\" (ionChange)=\"searchStores($event.target.value)\">\n  </ion-searchbar>\n\n  <ion-list *ngIf=\"stores\">\n      <ion-list-header >\n        <ion-label>ร้านค้าไกล้เคียง</ion-label>\n      </ion-list-header>\n\n      <ion-item  *ngFor=\"let store of stores\">\n          <ion-avatar slot=\"start\">\n            <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\">\n            <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n          </ion-avatar>\n          <ion-text>\n            <small *ngIf=\"store.store_name\"><b>{{store.store_name}}</b></small><br>\n            <small *ngIf=\"store.store_type\">{{store.store_type.store_type_th}}</small>\n          </ion-text>\n          <ion-text slot=\"end\">\n            <small *ngIf=\"store.delivery_price\">ระยะ {{store.distance | number }} km</small><br>\n            <small *ngIf=\"store.delivery_price\">ค่าส่ง {{store.delivery_price}} ฿</small>\n          </ion-text>\n          <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"viewStore(store);\">\n            <ion-icon slot=\"icon-only\" name=\"md-eye\"></ion-icon>\n          </ion-button>\n        </ion-item>\n  </ion-list>\n\n  <!-- <ion-infinite-scroll threshold=\"50%\" (ionInfinite)=\"infinitStores($event.target)\">\n     <ion-infinite-scroll-content>\n     </ion-infinite-scroll-content>\n   </ion-infinite-scroll> -->\n\n</ion-content>\n<ion-content [hidden]=\"tab2\">\n\n  <ion-list  *ngFor=\"let cart of member_cart\">\n\n      <!-- <ion-list-header >\n        <ion-label>ตะกร้าสินค้า</ion-label>\n      </ion-list-header> -->\n      <ion-item >\n        <ion-avatar slot=\"start\">\n          <img *ngIf=\"cart.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\">\n          <img *ngIf=\"!cart.store_pic\" src=\"/assets/noimg.png\">\n        </ion-avatar>\n        <ion-text>\n          <small *ngIf=\"cart.store_name\"><b>ร้าน {{cart.store_name}}</b></small><br>\n        </ion-text>\n        <ion-text slot=\"end\">\n          <small *ngIf=\"cart.delivery_price\">ค่าส่ง {{cart.delivery_price}} ฿</small>\n        </ion-text>\n        <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"callStore(cart.mobile_number);\">\n          <ion-icon slot=\"icon-only\" name=\"ios-call\"></ion-icon>\n        </ion-button>\n      </ion-item>\n\n      <ion-item *ngFor=\"let prod of cart.products\">\n        <ion-avatar slot=\"start\">\n          <img *ngIf=\"prod.thumbnail\" [src]=\"'https://qrdee.co/app/'+prod.thumbnail\">\n          <img *ngIf=\"!prod.thumbnail\" src=\"/assets/noimg.png\">\n        </ion-avatar>\n        <ion-text>\n          <small *ngIf=\"prod.product_th\"><b>{{prod.product_th}}</b></small><br>\n        </ion-text>\n        <ion-text slot=\"end\">\n          <small *ngIf=\"prod.price\">{{prod.price}} ฿</small>\n        </ion-text>\n        <ion-button fill=\"clear\" color=\"danger\" slot=\"end\" (click)=\"removeItem(cart.id, prod.id);\">\n          <ion-icon slot=\"icon-only\" name=\"md-remove-circle\"></ion-icon>\n        </ion-button>\n      </ion-item>\n\n  </ion-list>\n\n  <ion-list lines=\"none\">\n    <ion-item>\n      <ion-text slot=\"start\">\n        <b *ngIf=\"total_price\">รวม {{total_price}} ฿</b>\n      </ion-text>\n      <ion-text slot=\"end\">\n        <small>**ชำระเงินปลายทางผ่าน QRCode</small>\n      </ion-text>\n    </ion-item>\n  </ion-list>\n\n  <ion-label position=\"floating\">โปรดระบุจุดรับสินค้า</ion-label>\n  <div #mapElement style=\"height:250px;\" ></div>\n  <br>\n\n\n  <ion-list lines=\"none\">\n\n    <ion-item>\n      <ion-label position=\"stacked\">ชื่อผู้รับ</ion-label>\n      <ion-input type=\"text\" [(ngModel)]=\"member.firstname\" style=\"background-color:#ded9d9;\"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position=\"stacked\">เบอร์โทรศัพท์</ion-label>\n      <ion-input type=\"text\" [(ngModel)]=\"member.mobile_number\" style=\"background-color:#ded9d9;\"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position=\"stacked\">รายละเอียดเพิ่มเติมสำหรับผู้ส่งของ</ion-label>\n      <ion-textarea [(ngModel)]=\"notes\" style=\"background-color:#ded9d9;\" rows=\"4\" placeholder=\"ตัวอย่าง. หน้าอาคาร 3 สาขาวิทยาการคอมพิวเตอร์ มหาวิทยาลัยราชภัฏสุรินทร์\"></ion-textarea>\n    </ion-item>\n\n    <ion-item>\n      <ion-button size=\"default\" slot=\"end\" (click)=\"placeOrder();\" color=\"tertiary\">\n        ส่งคำสั่งซื้อ\n      </ion-button>\n    </ion-item>\n  </ion-list>\n\n</ion-content>\n\n<ion-footer style=\"background:#FFFFFF;\">\n  <ion-toolbar>\n          <ion-tabs>\n              <ion-tab-bar slot=\"bottom\">\n                <ion-tab-button color=\"primary\" (click)=\"changeTab(0)\" >\n                    <ion-icon name=\"md-locate\"></ion-icon>\n                    <ion-label>ร้านค้าไกล้ๆ</ion-label>\n                </ion-tab-button>\n                <ion-tab-button color=\"primary\" (click)=\"changeTab(1)\" >\n                    <ion-icon name=\"md-cart\"></ion-icon>\n                    <ion-label>รายการซื้อ</ion-label>\n                </ion-tab-button>\n              </ion-tab-bar>\n            </ion-tabs>\n   </ion-toolbar>\n</ion-footer>\n"
+module.exports = "<ion-header style=\"background:#FFFFFF;\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>ซื้อสินค้า</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [hidden]=\"tab1\" style=\"background:#FFFFFF;\">\n  <ion-searchbar placeholder=\"ค้นหาร้าน\" color=\"primary\" (ionChange)=\"searchStores($event.target.value)\">\n  </ion-searchbar>\n\n  <ion-list *ngIf=\"stores\">\n      <ion-list-header >\n        <ion-label>ร้านค้าไกล้เคียง</ion-label>\n      </ion-list-header>\n\n      <ion-item  *ngFor=\"let store of stores\">\n          <ion-avatar slot=\"start\">\n            <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\">\n            <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n          </ion-avatar>\n          <ion-text>\n            <small *ngIf=\"store.store_name\"><b>{{store.store_name}}</b></small><br>\n            <small *ngIf=\"store.store_type\">{{store.store_type.store_type_th}}</small>\n          </ion-text>\n          <ion-text slot=\"end\">\n            <small *ngIf=\"store.delivery_price\">ระยะ {{store.distance | number }} km</small><br>\n            <small *ngIf=\"store.delivery_price\">ค่าส่ง {{store.delivery_price}} ฿</small>\n          </ion-text>\n          <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"viewStore(store);\">\n            <ion-icon slot=\"icon-only\" name=\"md-eye\"></ion-icon>\n          </ion-button>\n        </ion-item>\n  </ion-list>\n\n  <!-- <ion-infinite-scroll threshold=\"50%\" (ionInfinite)=\"infinitStores($event.target)\">\n     <ion-infinite-scroll-content>\n     </ion-infinite-scroll-content>\n   </ion-infinite-scroll> -->\n\n</ion-content>\n<ion-content [hidden]=\"tab2\">\n\n  <ion-list  *ngFor=\"let cart of member_cart\">\n\n      <!-- <ion-list-header >\n        <ion-label>ตะกร้าสินค้า</ion-label>\n      </ion-list-header> -->\n      <ion-item >\n        <ion-avatar slot=\"start\">\n          <!-- <img *ngIf=\"cart.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\"> -->\n          <!-- <img *ngIf=\"!cart.store_pic\" src=\"/assets/noimg.png\"> -->\n        </ion-avatar>\n        <ion-text>\n          <small *ngIf=\"cart.store_name\"><b>ร้าน {{cart.store_name}}</b></small><br>\n        </ion-text>\n        <ion-text slot=\"end\">\n          <small *ngIf=\"cart.delivery_price\">ค่าส่ง {{cart.delivery_price}} ฿</small>\n        </ion-text>\n        <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"callStore(cart.mobile_number);\">\n          <ion-icon slot=\"icon-only\" name=\"ios-call\"></ion-icon>\n        </ion-button>\n      </ion-item>\n\n      <ion-item *ngFor=\"let prod of cart.products\">\n        <ion-avatar slot=\"start\">\n          <img *ngIf=\"prod.thumbnail\" [src]=\"'https://qrdee.co/app/'+prod.thumbnail\">\n          <img *ngIf=\"!prod.thumbnail\" src=\"/assets/noimg.png\">\n        </ion-avatar>\n        <ion-text>\n          <small *ngIf=\"prod.product_th\"><b>{{prod.product_th}}</b></small><br>\n        </ion-text>\n        <ion-text slot=\"end\">\n          <small *ngIf=\"prod.price\">{{prod.price}} ฿</small>\n        </ion-text>\n        <ion-button fill=\"clear\" color=\"danger\" slot=\"end\" (click)=\"removeItem(cart.id, prod.id);\">\n          <ion-icon slot=\"icon-only\" name=\"md-remove-circle\"></ion-icon>\n        </ion-button>\n      </ion-item>\n\n  </ion-list>\n\n  <ion-list lines=\"none\">\n    <ion-item>\n      <ion-text slot=\"start\">\n        <b *ngIf=\"total_price\">รวม {{total_price}} ฿</b>\n      </ion-text>\n      <ion-text slot=\"end\">\n        <small>**ชำระเงินปลายทางผ่าน QRCode</small>\n      </ion-text>\n    </ion-item>\n  </ion-list>\n\n  <ion-label position=\"floating\">โปรดระบุจุดรับสินค้า</ion-label>\n  <div #mapElement style=\"height:250px;\" ></div>\n  <br>\n\n\n  <ion-list lines=\"none\">\n\n    <ion-item>\n      <ion-label position=\"stacked\">ชื่อผู้รับ</ion-label>\n      <ion-input type=\"text\" [(ngModel)]=\"firstname\" style=\"background-color:#ded9d9;\"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position=\"stacked\">เบอร์โทรศัพท์</ion-label>\n      <ion-input type=\"text\" [(ngModel)]=\"mobile_number\" style=\"background-color:#ded9d9;\"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position=\"stacked\">รายละเอียดเพิ่มเติมสำหรับผู้ส่งของ</ion-label>\n      <ion-textarea [(ngModel)]=\"notes\" style=\"background-color:#ded9d9;\" rows=\"4\" placeholder=\"ตัวอย่าง. หน้าอาคาร 3 สาขาวิทยาการคอมพิวเตอร์ มหาวิทยาลัยราชภัฏสุรินทร์\"></ion-textarea>\n    </ion-item>\n\n    <ion-item>\n      <ion-button size=\"default\" slot=\"end\" (click)=\"placeOrder();\" color=\"tertiary\">\n        ส่งคำสั่งซื้อ\n      </ion-button>\n    </ion-item>\n  </ion-list>\n\n</ion-content>\n\n<ion-footer style=\"background:#FFFFFF;\">\n  <ion-toolbar>\n    <ion-tabs>\n        <ion-tab-bar slot=\"bottom\">\n          <ion-tab-button color=\"primary\" (click)=\"changeTab(0)\" >\n              <ion-icon name=\"md-locate\"></ion-icon>\n              <ion-label>ร้านค้าไกล้ๆ</ion-label>\n          </ion-tab-button>\n          <ion-tab-button color=\"primary\" (click)=\"changeTab(1)\" >\n              <ion-icon name=\"md-cart\"></ion-icon>\n              <ion-label>รายการซื้อ</ion-label>\n          </ion-tab-button>\n        </ion-tab-bar>\n      </ion-tabs>\n   </ion-toolbar>\n</ion-footer>\n"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/customer/mapmodal/mapmodal.component.html":
+/*!*************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/customer/mapmodal/mapmodal.component.html ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ion-header translucent>\n  <ion-toolbar>\n\n    <ion-title>ระบุตำแหน่ง</ion-title>\n    <ion-button fill=\"clear\" color=\"danger\" slot=\"end\" (click)=\"dismissModal();\">\n      <ion-icon name=\"ios-arrow-back\"></ion-icon>Back\n    </ion-button>\n\n  </ion-toolbar>\n</ion-header>\n<ion-content fullscreen>\n  <div #map id=\"map\" style=\"height: 100%;\"></div>\n</ion-content>\n\n<ion-footer>\n  <ion-button expand=\"full\"  shape=\"round\" color=\"primary\"   (click)=\"accept();\">ค้นหาร้าน</ion-button>\n</ion-footer>\n"
 
 /***/ }),
 
@@ -164,6 +175,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _products_shared_forms_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../products/shared/forms.service */ "./src/app/products/shared/forms.service.ts");
 /* harmony import */ var _cartmodal_cartmodal_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./cartmodal/cartmodal.component */ "./src/app/customer/cartmodal/cartmodal.component.ts");
 /* harmony import */ var _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/call-number/ngx */ "./node_modules/@ionic-native/call-number/ngx/index.js");
+/* harmony import */ var _mapmodal_mapmodal_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./mapmodal/mapmodal.component */ "./src/app/customer/mapmodal/mapmodal.component.ts");
+
 
 
 
@@ -205,8 +218,10 @@ CustomerPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         ],
         declarations: [
             _customer_page__WEBPACK_IMPORTED_MODULE_7__["CustomerPage"],
-            _cartmodal_cartmodal_component__WEBPACK_IMPORTED_MODULE_10__["CartmodalComponent"]
+            _cartmodal_cartmodal_component__WEBPACK_IMPORTED_MODULE_10__["CartmodalComponent"],
+            _mapmodal_mapmodal_component__WEBPACK_IMPORTED_MODULE_12__["MapmodalComponent"]
         ],
+        entryComponents: [_mapmodal_mapmodal_component__WEBPACK_IMPORTED_MODULE_12__["MapmodalComponent"]],
         providers: [_shared_user_service__WEBPACK_IMPORTED_MODULE_8__["UserService"], _products_shared_forms_service__WEBPACK_IMPORTED_MODULE_9__["FormsService"], _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_11__["CallNumber"]],
     })
 ], CustomerPageModule);
@@ -242,12 +257,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_user_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./shared/user.service */ "./src/app/customer/shared/user.service.ts");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
 /* harmony import */ var _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/services/toast.service */ "./src/app/shared/services/toast.service.ts");
-/* harmony import */ var _shared_services_loading_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../shared/services/loading.service */ "./src/app/shared/services/loading.service.ts");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/call-number/ngx */ "./node_modules/@ionic-native/call-number/ngx/index.js");
-/* harmony import */ var _cartmodal_cartmodal_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./cartmodal/cartmodal.component */ "./src/app/customer/cartmodal/cartmodal.component.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/call-number/ngx */ "./node_modules/@ionic-native/call-number/ngx/index.js");
+/* harmony import */ var _cartmodal_cartmodal_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./cartmodal/cartmodal.component */ "./src/app/customer/cartmodal/cartmodal.component.ts");
+/* harmony import */ var _mapmodal_mapmodal_component__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./mapmodal/mapmodal.component */ "./src/app/customer/mapmodal/mapmodal.component.ts");
 
 
 
@@ -262,7 +277,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let CustomerPage = class CustomerPage {
-    constructor(geolocation, userservice, toastService, route, router, http, builder, navCtrl, modalController, loading, callNumber) {
+    constructor(geolocation, userservice, toastService, route, router, http, builder, navCtrl, modalController, _loading, callNumber) {
         this.geolocation = geolocation;
         this.userservice = userservice;
         this.toastService = toastService;
@@ -272,7 +287,7 @@ let CustomerPage = class CustomerPage {
         this.builder = builder;
         this.navCtrl = navCtrl;
         this.modalController = modalController;
-        this.loading = loading;
+        this._loading = _loading;
         this.callNumber = callNumber;
         this.tab1 = false;
         this.tab2 = true;
@@ -282,12 +297,17 @@ let CustomerPage = class CustomerPage {
         this.member_cart = [];
         this.total_price = 0;
         this.notes = '';
+        localStorage.setItem('member_cart', JSON.stringify(this.member_cart));
         this.member = JSON.parse(localStorage.getItem('member'));
         this.latitude = this.member.latitude;
         this.longitude = this.member.longitude;
+        this.mobile_number = this.member.mobile_number;
+        this.firstname = this.member.firstname;
         console.log("list component called!!!");
         console.log(this.member);
         this.loadStores();
+    }
+    ionViewDidEnter() {
     }
     ionViewWillEnter() {
     }
@@ -305,14 +325,24 @@ let CustomerPage = class CustomerPage {
         });
     }
     loadStores() {
-        //this.loading.showLoading();
-        this.offset = this.stores.length;
-        this.userservice.getStores(this.offset, this.latitude, this.longitude).subscribe((data) => {
-            //this.loading.dismissLoading();
-            data.forEach(e => {
-                this.stores.push(e);
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            if (this.latitude == null || this.longitude == null) {
+                this.loadMapModal();
+                return;
+            }
+            const loading = yield this._loading.create();
+            yield loading.present();
+            this.offset = yield this.stores.length;
+            yield this.userservice.getStores(this.offset, this.latitude, this.longitude).subscribe((data) => {
+                //this.loading.dismissLoading();
+                data.forEach(e => {
+                    this.stores.push(e);
+                });
+                console.log(this.stores);
+                loading.dismiss();
+            }, err => {
+                loading.dismiss();
             });
-            console.log(this.stores);
         });
     }
     searchStores(q) {
@@ -390,11 +420,15 @@ let CustomerPage = class CustomerPage {
         this.member_cart = JSON.parse(localStorage.getItem('member_cart'));
         this.latitude = localStorage.getItem('member_lat');
         this.longitude = localStorage.getItem('member_lng');
+        //this.member = JSON.parse(localStorage.getItem('member'));
+        this.member.mobile_number = this.mobile_number;
+        this.member.firstname = this.firstname;
         console.log(this.member);
+        localStorage.setItem('member', JSON.stringify(this.member));
         this.userservice.placeOrder(this.member, this.member_cart, this.notes, this.latitude, this.longitude).subscribe((data) => {
             console.log("res =====> ");
             console.log(data);
-            localStorage.setItem('member', JSON.stringify(data.member));
+            //localStorage.setItem('member',JSON.stringify( data.member ));
             localStorage.setItem('member_cart', JSON.stringify([]));
             this.member_cart = [];
             this.total_price = 0;
@@ -435,7 +469,7 @@ let CustomerPage = class CustomerPage {
     cartModal(store) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             const modal = yield this.modalController.create({
-                component: _cartmodal_cartmodal_component__WEBPACK_IMPORTED_MODULE_11__["CartmodalComponent"],
+                component: _cartmodal_cartmodal_component__WEBPACK_IMPORTED_MODULE_10__["CartmodalComponent"],
                 componentProps: {
                     'store': store
                 }
@@ -456,7 +490,7 @@ let CustomerPage = class CustomerPage {
             this.tab1 = false;
             this.tab2 = true;
             this.stores = [];
-            this.loadStores();
+            this.loadMapModal();
         }
         else {
             this.tab1 = true;
@@ -464,19 +498,32 @@ let CustomerPage = class CustomerPage {
             this.processPayment();
         }
     }
+    loadMapModal() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const modal = yield this.modalController.create({
+                component: _mapmodal_mapmodal_component__WEBPACK_IMPORTED_MODULE_11__["MapmodalComponent"]
+            });
+            yield modal.present();
+            const { data } = yield modal.onWillDismiss();
+            console.log(data);
+            this.latitude = yield data.latitude;
+            this.longitude = yield data.longitude;
+            yield (this.loadStores());
+        });
+    }
 };
 CustomerPage.ctorParameters = () => [
     { type: _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_2__["Geolocation"] },
     { type: _shared_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"] },
     { type: _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_5__["ToastService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__["ActivatedRoute"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"] },
     { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"] },
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormBuilder"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__["NavController"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_9__["ModalController"] },
-    { type: _shared_services_loading_service__WEBPACK_IMPORTED_MODULE_6__["LoadingService"] },
-    { type: _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_10__["CallNumber"] }
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormBuilder"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["NavController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["ModalController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["LoadingController"] },
+    { type: _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_9__["CallNumber"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('mapElement', { static: false }),
@@ -491,15 +538,148 @@ CustomerPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_2__["Geolocation"],
         _shared_user_service__WEBPACK_IMPORTED_MODULE_3__["UserService"],
         _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_5__["ToastService"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_6__["ActivatedRoute"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"],
         _angular_common_http__WEBPACK_IMPORTED_MODULE_4__["HttpClient"],
-        _angular_forms__WEBPACK_IMPORTED_MODULE_8__["FormBuilder"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_9__["NavController"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_9__["ModalController"],
-        _shared_services_loading_service__WEBPACK_IMPORTED_MODULE_6__["LoadingService"],
-        _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_10__["CallNumber"]])
+        _angular_forms__WEBPACK_IMPORTED_MODULE_7__["FormBuilder"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["NavController"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["ModalController"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["LoadingController"],
+        _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_9__["CallNumber"]])
 ], CustomerPage);
+
+
+
+/***/ }),
+
+/***/ "./src/app/customer/mapmodal/mapmodal.component.scss":
+/*!***********************************************************!*\
+  !*** ./src/app/customer/mapmodal/mapmodal.component.scss ***!
+  \***********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2N1c3RvbWVyL21hcG1vZGFsL21hcG1vZGFsLmNvbXBvbmVudC5zY3NzIn0= */"
+
+/***/ }),
+
+/***/ "./src/app/customer/mapmodal/mapmodal.component.ts":
+/*!*********************************************************!*\
+  !*** ./src/app/customer/mapmodal/mapmodal.component.ts ***!
+  \*********************************************************/
+/*! exports provided: MapmodalComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MapmodalComponent", function() { return MapmodalComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/geolocation/ngx */ "./node_modules/@ionic-native/geolocation/ngx/index.js");
+
+
+
+
+let MapmodalComponent = class MapmodalComponent {
+    constructor(_modalCtrl, _geolocation, _loading) {
+        this._modalCtrl = _modalCtrl;
+        this._geolocation = _geolocation;
+        this._loading = _loading;
+        this.latitude = 14.8718084;
+        this.longitude = 103.4962797;
+    }
+    ngOnInit() {
+    }
+    ngAfterViewInit() {
+        //this.getCurrentPos();
+        this.getLocation();
+    }
+    getLocation() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            this.member = JSON.parse(localStorage.getItem('member'));
+            if (this.member.latitude == null || this.member.longitude == null) {
+                const _loading = yield this._loading.create();
+                yield _loading.present();
+                this._geolocation.getCurrentPosition().then((resp) => {
+                    _loading.dismiss();
+                    this.latitude = resp.coords.latitude;
+                    this.longitude = resp.coords.longitude;
+                    this.member.longitude = this.longitude;
+                    this.member.latitude = this.latitude;
+                    localStorage.setItem('member', JSON.stringify(this.member));
+                    this.loadMap();
+                }).catch((error) => {
+                    _loading.dismiss();
+                    this.loadMap();
+                });
+            }
+            else {
+                this.latitude = this.member.latitude;
+                this.longitude = this.member.longitude;
+                this.loadMap();
+            }
+        });
+    }
+    dismissModal() {
+        this.latitude = localStorage.getItem('select_lat');
+        this.longitude = localStorage.getItem('select_lng');
+        console.log("Dismiss => " + this.latitude + " / " + this.longitude);
+        this.member.longitude = this.longitude;
+        this.member.latitude = this.latitude;
+        localStorage.setItem('member', JSON.stringify(this.member));
+        this._modalCtrl.dismiss({ latitude: this.latitude, longitude: this.longitude });
+    }
+    accept() {
+        this.latitude = localStorage.getItem('select_lat');
+        this.longitude = localStorage.getItem('select_lng');
+        this.member.longitude = this.longitude;
+        this.member.latitude = this.latitude;
+        localStorage.setItem('member', JSON.stringify(this.member));
+        console.log("Accept => " + this.latitude + " / " + this.longitude);
+        this._modalCtrl.dismiss({ latitude: this.latitude, longitude: this.longitude });
+    }
+    loadMap() {
+        localStorage.setItem("select_lat", this.latitude);
+        localStorage.setItem("select_lng", this.longitude);
+        let latLng = new google.maps.LatLng(this.latitude, this.longitude);
+        this.map = new google.maps.Map(this.mapElement.nativeElement, {
+            zoom: 15,
+            center: latLng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        });
+        let marker = new google.maps.Marker({
+            map: this.map,
+            draggable: true,
+            animation: google.maps.Animation.DROP,
+            position: latLng
+        });
+        marker.addListener('dragend', function () {
+            localStorage.setItem("select_lat", marker.getPosition().lat());
+            localStorage.setItem("select_lng", marker.getPosition().lng());
+            this.map.setCenter(marker.getPosition());
+        });
+    }
+};
+MapmodalComponent.ctorParameters = () => [
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] },
+    { type: _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_3__["Geolocation"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] }
+];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('map', { static: false }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
+], MapmodalComponent.prototype, "mapElement", void 0);
+MapmodalComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-mapmodal',
+        template: __webpack_require__(/*! raw-loader!./mapmodal.component.html */ "./node_modules/raw-loader/index.js!./src/app/customer/mapmodal/mapmodal.component.html"),
+        styles: [__webpack_require__(/*! ./mapmodal.component.scss */ "./src/app/customer/mapmodal/mapmodal.component.scss")]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"],
+        _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_3__["Geolocation"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]])
+], MapmodalComponent);
 
 
 
@@ -569,52 +749,6 @@ UserService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
 ], UserService);
-
-
-
-/***/ }),
-
-/***/ "./src/app/shared/services/loading.service.ts":
-/*!****************************************************!*\
-  !*** ./src/app/shared/services/loading.service.ts ***!
-  \****************************************************/
-/*! exports provided: LoadingService */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoadingService", function() { return LoadingService; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-
-
-
-let LoadingService = class LoadingService {
-    constructor(loadingCtrl) {
-        this.loadingCtrl = loadingCtrl;
-    }
-    showLoading(message = "รอสักครู่") {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            this.loading = yield this.loadingCtrl.create({
-                message: message
-            });
-            yield this.loading.present();
-        });
-    }
-    dismissLoading() {
-        this.loading.dismiss();
-    }
-};
-LoadingService.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] }
-];
-LoadingService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
-        providedIn: 'root'
-    }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]])
-], LoadingService);
 
 
 

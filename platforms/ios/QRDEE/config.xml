@@ -59,7 +59,7 @@
     <name>QRDEE</name>
     <description>QRDEE e-market</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://localhost:8100" />
+    <content original-src="index.html" src="http://192.168.6.104:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -68,7 +68,16 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <allow-navigation href="http://192.168.6.104:8100" sessionid="d1bd71ae" />
-    <allow-navigation href="http://localhost:8100" sessionid="bf6d37d0" />
+    <allow-navigation href="http://192.168.1.5:8100" sessionid="8660315a" />
+    <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
+        <string>ใช้ตำแหน่งของท่านสำหรับค้นหาร้านบริเวณไกล้เคียง</string>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSLocationAlwaysUsageDescription">
+        <string>ใช้ตำแหน่งของท่านสำหรับค้นหาร้านบริเวณไกล้เคียง</string>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
+        <string>ขออนุญาตใช้กล้องถ่ายภาพร้านค้าและสินค้า</string>
+    </edit-config>
     <allow-intent href="itms:*" />
     <allow-intent href="itms-apps:*" />
     <icon height="57" src="resources/ios/icon/icon.png" width="57" />
@@ -116,6 +125,11 @@
     <splash height="2208" src="resources/ios/splash/Default-736h.png" width="1242" />
     <splash height="2436" src="resources/ios/splash/Default-2436h.png" width="1125" />
     <splash height="2732" src="resources/ios/splash/Default@2x~universal~anyany.png" width="2732" />
+    <icon height="216" src="resources/ios/icon/icon-108@2x.png" width="216" />
+    <splash height="2688" src="resources/ios/splash/Default-2688h~iphone.png" width="1242" />
+    <splash height="1242" src="resources/ios/splash/Default-Landscape-2688h~iphone.png" width="2688" />
+    <splash height="1792" src="resources/ios/splash/Default-1792h~iphone.png" width="828" />
+    <splash height="828" src="resources/ios/splash/Default-Landscape-1792h~iphone.png" width="1792" />
     <preference name="AllowInlineMediaPlayback" value="false" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="DisallowOverscroll" value="false" />

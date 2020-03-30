@@ -46,6 +46,7 @@ let ProductService = class ProductService {
         return this.http.post(`https://qrdee.co/api/v2/products/${store_id}`, data);
     }
     updateProduct(data, id) {
+        console.log(`https://qrdee.co/api/v2/products/${id}`);
         return this.http.put(`https://qrdee.co/api/v2/products/${id}`, data);
     }
     deleteProduct(product_id) {

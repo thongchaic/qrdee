@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>    \n    <ion-title>สรุปการขาย</ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"app-background\"> \n\t <ion-card *ngFor=\"let sellstats of sellstatss\" style=\"background:#FFFFFF;\">\n  <ion-item>\n    <ion-avatar slot=\"start\">\n      <img src=\"https://coffeeprincesurat.files.wordpress.com/2009/01/logo_final4.jpg?w=300&h=300\">\n    </ion-avatar>\n    <ion-label text-wrap>\n      <b>{{ sellstats.product_th}}</b><br>\n      ล่าสุด {{ sellstats.updated_at}}<br><br>\n      ขาย/บริการ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{ sellstats.amount}}</b> ชั้น/ครั้ง\n    </ion-label>\n  </ion-item>\n</ion-card>\n   <ion-infinite-scroll threshold=\"10%\" (ionInfinite)=\"loadData($event.target)\">\n      <ion-infinite-scroll-content\n        loadingSpinner=\"bubbles\">\n      </ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n\n  <!--  <ion-button (click)=\"toggleInfiniteScroll()\" expand=\"block\">\n    Toggle Infinite Scroll\n  </ion-button>\n  <ion-list></ion-list>\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"loadData($event)\">\n    <ion-infinite-scroll-content\n    loadingSpinner=\"bubbles\">\n  \n    </ion-infinite-scroll-content>\n  </ion-infinite-scroll> -->\n\n\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>สรุปการขาย</ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content> \n\t <ion-card *ngFor=\"let sellstats of sellstatss\" style=\"background:#FFFFFF;\">\n  <ion-item>\n    <ion-avatar slot=\"start\">\n      <img src=\"https://coffeeprincesurat.files.wordpress.com/2009/01/logo_final4.jpg?w=300&h=300\">\n    </ion-avatar>\n    <ion-label text-wrap>\n      <b>{{ sellstats.product_th}}</b><br>\n      ล่าสุด {{ sellstats.updated_at}}<br><br>\n      ขาย/บริการ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{ sellstats.amount}}</b> ชั้น/ครั้ง\n    </ion-label>\n  </ion-item>\n</ion-card>\n   <ion-infinite-scroll threshold=\"10%\" (ionInfinite)=\"loadData($event.target)\">\n      <ion-infinite-scroll-content\n        loadingSpinner=\"bubbles\">\n      </ion-infinite-scroll-content>\n    </ion-infinite-scroll>\n\n  <!--  <ion-button (click)=\"toggleInfiniteScroll()\" expand=\"block\">\n    Toggle Infinite Scroll\n  </ion-button>\n  <ion-list></ion-list>\n  <ion-infinite-scroll threshold=\"100px\" (ionInfinite)=\"loadData($event)\">\n    <ion-infinite-scroll-content\n    loadingSpinner=\"bubbles\">\n\n    </ion-infinite-scroll-content>\n  </ion-infinite-scroll> -->\n\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -201,10 +201,10 @@ var SellStatsService = /** @class */ (function () {
     SellStatsService.prototype.orders = function () {
         // console.log(`${this.baseUrl}/sell_statss`);
         // return this.http.get<any>(`${this.baseUrl}/sell_statss`);
-        return this.http.get(this.baseUrl + "/sell_statss");
+        return this.http.get("https://qrdee.co/api/v2/sell_stats");
     };
     SellStatsService.prototype.orderss = function () {
-        return this.http.get(this.baseUrl + "/sell_statss_order");
+        return this.http.get("https://qrdee.co/api/v2/sell_statss_order");
     };
     SellStatsService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }

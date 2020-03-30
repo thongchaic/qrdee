@@ -49,17 +49,21 @@ export class AppComponent implements OnInit {
        this.reInit(trn);
     });
 
+
+    let store = JSON.parse(localStorage.getItem('store'));
+    if(store){
+      this.reInit(store);
+    }
+
     this.initializeApp();
 
   }
   reInit(store){
 
+      console.log("Received broadcast ===>");
+      console.log(store);
       this.store = JSON.parse(localStorage.getItem('store'));
-
-      if(!this.store){
-        this.store = store;
-        localStorage.setItem('store', JSON.stringify(store));
-      }
+      localStorage.setItem('store', JSON.stringify(store));
 
       console.log(this.store);
       this.member = JSON.parse(localStorage.getItem('member'));
@@ -84,7 +88,7 @@ export class AppComponent implements OnInit {
           localStorage.setItem('member', JSON.stringify(this.member));
       }
 
-    this.initializeApp();
+    //this.initializeApp();
 
   }
 
@@ -92,16 +96,23 @@ export class AppComponent implements OnInit {
     // this._loginService.currentStore.subscribe(store => {
     //   console.log("INIT===>");
     //   console.log(store);
-    //   this.currentStore = store
+    //   this.store = store
     // });
+    // console.log("_______app.ngOnInit=>_");
+    // console.log(JSON.parse(localStorage.getItem('store')));
+    // if(localStorage.getItem('store')){
+    //   this.store = JSON.parse(localStorage.getItem('store'));
+    // }
   }
 
   ionViewWillEnter() {
-    console.log('main luanch..')
+    // console.log("_______app.ionViewWillEnter=>_");
+    // console.log(JSON.parse(localStorage.getItem('store')));
   }
 
 
-   login(){
+  login(){
+    console.log("____login))))");
      this.router.navigate(['login']);
   }
 
@@ -110,9 +121,9 @@ export class AppComponent implements OnInit {
    }
 
    logout(){
-     this.store = null;
-     localStorage.removeItem('store');
-     this.router.navigateByUrl('/login');
+     // this.store = null;
+     // localStorage.removeItem('store');
+     // this.router.navigateByUrl('/login');
      //this._loginService.logout();
    }
    product(){

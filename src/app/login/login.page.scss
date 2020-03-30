@@ -1,11 +1,11 @@
 .btn1 {
 	height: 100px;
-	--background: #33FFCC ; 
-	
+	--background: #33FFCC ;
+
 }
 .btn2 {
 	height: 50px;
-	--background: #E03A3A ; 
+	--background: #E03A3A ;
 
 }
 .img_logistic{
@@ -14,3 +14,8 @@
 .app-background{
 	 --background: url('/assets/bg1.jpg') 0 0/100% 100% no-repeat;
 }
+.center {
+   display: block;
+   margin: auto;
+   width: 40%;
+  }

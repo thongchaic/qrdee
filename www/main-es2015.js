@@ -513,7 +513,7 @@ module.exports = webpackAsyncContext;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\n  <ion-split-pane>\n    <ion-menu>\n      <ion-header>\n        <ion-toolbar>\n          <ion-title>เมนู</ion-title>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content *ngIf=\"store\">\n\n        <ion-list>\n          <ion-menu-toggle auto-hide=\"false\" >\n            <ion-item *ngIf=\"store\" (click)=\"home()\">\n              <ion-label>\n                   หน้าแรก\n              </ion-label>\n            </ion-item>\n            <ion-item *ngIf=\"store\" (click)=\"product()\">\n              <ion-label>\n                   สินค้าของฉัน\n              </ion-label>\n            </ion-item>\n             <!-- <ion-item *ngIf=\"store.store_type_id == 5\" (click)=\"postproduct()\">\n              <ion-label >\n                   นำเข้าสินค้า\n              </ion-label>\n            </ion-item> -->\n            <!-- <ion-item *ngIf=\"usertype == 3\" (click)=\"postproductimg()\">\n              <ion-label >\n                   สั่งสินค้า\n              </ion-label>\n            </ion-item> -->\n          <ion-item  *ngIf=\"store\" (click)=\"stats()\">\n             <ion-label>\n               สรุปยอดขาย\n             </ion-label>\n           </ion-item>\n            <ion-item *ngIf=\"store\" (click)=\"profile()\">\n              <ion-label >\n                จัดการร้านค้า\n              </ion-label>\n            </ion-item>\n\n            <!-- <ion-item *ngIf=\"store\" (click)=\"logistic()\">\n              <ion-label >\n                   ขนส่งสินค้า\n              </ion-label>\n            </ion-item > -->\n\n\n            <!-- <ion-item *ngIf=\"store.store_type_id == 5\" (click)=\"sell()\">\n              <ion-label >\n                   สรุปการขาย\n              </ion-label>\n            </ion-item> -->\n           <!-- <ion-item *ngIf=\"usertype == 1\" (click)=\"delivery()\">\n              <ion-label >\n                   เรียกคนส่งของ\n              </ion-label>\n            </ion-item> -->\n            <!-- <ion-item *ngIf=\"usertype == 1\" (click)=\"order()\">\n              <ion-label >\n                   ออเดอร์สินค้า\n              </ion-label>\n            </ion-item> -->\n\n            <ion-item  (click)=\"customer()\">\n              <ion-label>\n                   สั่งซื้อสินค้า\n              </ion-label>\n            </ion-item>\n\n            <ion-item (click)=\"logout()\">\n              <ion-label >\n                   ออกจากระบบ\n              </ion-label>\n            </ion-item>\n          </ion-menu-toggle>\n        </ion-list>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet main></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n\n<!-- <ion-app>\n  <ion-split-pane>\n    <ion-menu>\n      <ion-header>\n        <ion-toolbar>\n          <ion-title>Menu</ion-title>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content>\n        <ion-list>\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appPages\">\n            <ion-item [routerDirection]=\"'root'\" [routerLink]=\"[p.url]\">\n              <ion-icon slot=\"start\" [name]=\"p.icon\"></ion-icon>\n              <ion-label>\n                {{p.title}}\n              </ion-label>\n            </ion-item>\n          </ion-menu-toggle>\n        </ion-list>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet main></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n -->\n"
+module.exports = "<ion-app>\n  <ion-split-pane>\n    <ion-menu>\n      <ion-header>\n        <ion-toolbar>\n          <ion-title>เมนู</ion-title>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content>\n\n        <ion-list>\n          <ng-container *ngIf=\"store\">\n            <ion-menu-toggle auto-hide=\"false\" >\n              <ion-item (click)=\"home()\">\n                <ion-label>\n                    หน้าแรก\n                </ion-label>\n              </ion-item>\n              <ion-item (click)=\"product()\">\n                <ion-label>\n                    สินค้าของฉัน\n                </ion-label>\n              </ion-item>\n              <!-- <ion-item *ngIf=\"store.store_type_id == 5\" (click)=\"postproduct()\">\n                <ion-label >\n                    นำเข้าสินค้า\n                </ion-label>\n              </ion-item> -->\n              <!-- <ion-item *ngIf=\"usertype == 3\" (click)=\"postproductimg()\">\n                <ion-label >\n                    สั่งสินค้า\n                </ion-label>\n              </ion-item> -->\n            <ion-item  (click)=\"stats()\">\n              <ion-label>\n                สรุปยอดขาย\n              </ion-label>\n            </ion-item>\n              <ion-item (click)=\"profile()\">\n                <ion-label >\n                  จัดการร้านค้า\n                </ion-label>\n              </ion-item>\n\n              <!-- <ion-item (click)=\"logistic()\">\n                <ion-label >\n                    ขนส่งสินค้า\n                </ion-label>\n              </ion-item > -->\n\n\n              <!-- <ion-item *ngIf=\"store.store_type_id == 5\" (click)=\"sell()\">\n                <ion-label >\n                    สรุปการขาย\n                </ion-label>\n              </ion-item> -->\n            <!-- <ion-item *ngIf=\"usertype == 1\" (click)=\"delivery()\">\n                <ion-label >\n                    เรียกคนส่งของ\n                </ion-label>\n              </ion-item> -->\n              <!-- <ion-item *ngIf=\"usertype == 1\" (click)=\"order()\">\n                <ion-label >\n                    ออเดอร์สินค้า\n                </ion-label>\n              </ion-item> -->\n\n              <ion-item  (click)=\"customer()\">\n                <ion-label>\n                    สั่งซื้อสินค้า\n                </ion-label>\n              </ion-item>\n\n              <!-- <ion-item (click)=\"logout()\">\n                <ion-label >\n                    ออกจากระบบ\n                </ion-label>\n              </ion-item> -->\n            </ion-menu-toggle>\n          </ng-container>\n\n          <ng-container *ngIf=\"!store\">\n            <ion-menu-toggle auto-hide=\"false\" >\n              <ion-item  (click)=\"customer()\">\n                <ion-label>\n                    สั่งซื้อสินค้า\n                </ion-label>\n              </ion-item>\n\n              <ion-item (click)=\"login()\">\n                <ion-label >\n                  เข้าสู่ระบบ\n                </ion-label>\n              </ion-item>\n            </ion-menu-toggle>\n          </ng-container>\n        </ion-list>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet main></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n\n<!-- <ion-app>\n  <ion-split-pane>\n    <ion-menu>\n      <ion-header>\n        <ion-toolbar>\n          <ion-title>Menu</ion-title>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content>\n        <ion-list>\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appPages\">\n            <ion-item [routerDirection]=\"'root'\" [routerLink]=\"[p.url]\">\n              <ion-icon slot=\"start\" [name]=\"p.icon\"></ion-icon>\n              <ion-label>\n                {{p.title}}\n              </ion-label>\n            </ion-item>\n          </ion-menu-toggle>\n        </ion-list>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet main></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n -->\n"
 
 /***/ }),
 
@@ -597,6 +597,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/splash-screen/ngx */ "./node_modules/@ionic-native/splash-screen/ngx/index.js");
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _login_shared_login_store_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./login/shared/login-store.service */ "./src/app/login/shared/login-store.service.ts");
+
 
 
 
@@ -619,54 +621,80 @@ let AppComponent = class AppComponent {
     //   { title: 'ล็อคอิน', url: '/login', icon: 'pin' },
     //   { title: 'ออกจากระบบ', url: '/logout', icon: 'pin' },
     // ];
-    constructor(platform, splashScreen, statusBar, event, router) {
+    constructor(platform, splashScreen, statusBar, event, router, _loginService) {
+        // this.currentStore = this._loginService.currentStoreValue;
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
         this.event = event;
         this.router = router;
+        this._loginService = _loginService;
+        this.store = null;
+        this.member = null;
         this.event.subscribe('store:changed', trn => {
             this.store = trn;
+            //this.currentStore = trn;
+            this.reInit(trn);
         });
-        try {
-            JSON.parse(localStorage.getItem('member'));
-        }
-        catch (e) {
+        this.initializeApp();
+    }
+    reInit(store) {
+        console.log("Received broadcast ===>");
+        console.log(store);
+        this.store = JSON.parse(localStorage.getItem('store'));
+        localStorage.setItem('store', JSON.stringify(store));
+        console.log(this.store);
+        this.member = JSON.parse(localStorage.getItem('member'));
+        console.log(this.member);
+        if (!this.member) {
             const member = {
                 id: null,
-                mobile_number: null,
-                latitude: 14.8718084,
-                longitude: 103.4962797,
-                firstname: null,
-                lastname: null
+                mobile_number: this.store.mobile_number,
+                latitude: this.store.latitude,
+                longitude: this.store.longitude,
+                firstname: this.store.firstname,
+                lastname: this.store.lastname
             };
             localStorage.setItem('member', JSON.stringify(member));
         }
-        try {
-            this.store = JSON.parse(localStorage.getItem('store'));
-        }
-        catch (e) {
-            localStorage.removeItem('store');
-            this.router.navigateByUrl('/login');
-        }
-        try {
-            JSON.parse(localStorage.getItem('member_cart'));
-        }
-        catch (e) {
-            localStorage.setItem('member_cart', JSON.stringify([]));
+        else {
+            this.member.mobile_number = this.store.mobile_number;
+            this.member.latitude = this.store.latitude;
+            this.member.longitude = this.store.longitude;
+            this.member.firstname = this.store.firstname;
+            this.member.lastname = this.store.lastname;
+            localStorage.setItem('member', JSON.stringify(this.member));
         }
         this.initializeApp();
     }
+    ngOnInit() {
+        // this._loginService.currentStore.subscribe(store => {
+        //   console.log("INIT===>");
+        //   console.log(store);
+        //   this.store = store
+        // });
+        // console.log("_______app.ngOnInit=>_");
+        // console.log(JSON.parse(localStorage.getItem('store')));
+        // if(localStorage.getItem('store')){
+        //   this.store = JSON.parse(localStorage.getItem('store'));
+        // }
+    }
+    ionViewWillEnter() {
+        // console.log("_______app.ionViewWillEnter=>_");
+        // console.log(JSON.parse(localStorage.getItem('store')));
+    }
     login() {
+        console.log("____login))))");
         this.router.navigate(['login']);
     }
     home() {
         this.router.navigate(['cart']);
     }
     logout() {
-        localStorage.removeItem('store');
-        localStorage.setItem('member_cart', JSON.stringify([]));
-        this.router.navigateByUrl('/login');
+        // this.store = null;
+        // localStorage.removeItem('store');
+        // this.router.navigateByUrl('/login');
+        //this._loginService.logout();
     }
     product() {
         this.router.navigate(['products']);
@@ -711,7 +739,8 @@ AppComponent.ctorParameters = () => [
     { type: _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"] },
     { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Events"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] },
+    { type: _login_shared_login_store_service__WEBPACK_IMPORTED_MODULE_6__["LoginStoreService"] }
 ];
 AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -723,7 +752,8 @@ AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _ionic_native_splash_screen_ngx__WEBPACK_IMPORTED_MODULE_3__["SplashScreen"],
         _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Events"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"]])
+        _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"],
+        _login_shared_login_store_service__WEBPACK_IMPORTED_MODULE_6__["LoginStoreService"]])
 ], AppComponent);
 
 
@@ -798,6 +828,100 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"]]
     })
 ], AppModule);
+
+
+
+/***/ }),
+
+/***/ "./src/app/login/shared/login-store.service.ts":
+/*!*****************************************************!*\
+  !*** ./src/app/login/shared/login-store.service.ts ***!
+  \*****************************************************/
+/*! exports provided: LoginStoreService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginStoreService", function() { return LoginStoreService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+/* harmony import */ var _environments_environment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../environments/environment */ "./src/environments/environment.ts");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm2015/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm2015/operators/index.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
+
+
+
+
+
+
+let LoginStoreService = class LoginStoreService {
+    constructor(http, _router) {
+        this.http = http;
+        this._router = _router;
+        this.baseUrl = `${_environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].api_url}`;
+        this.currentStoreSubject = new rxjs__WEBPACK_IMPORTED_MODULE_4__["BehaviorSubject"](JSON.parse(localStorage.getItem('store')));
+        this.currentStore = this.currentStoreSubject.asObservable();
+    }
+    get currentStoreValue() {
+        return this.currentStoreSubject.value;
+    }
+    logintore(promptpay, password) {
+        const body = {
+            promptpay: promptpay,
+            password: password
+        };
+        return this.http.post(`https://qrdee.co/api/v2/login`, body)
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["map"])(user => {
+            console.log('login..');
+            //localStorage.setItem('store', JSON.stringify(user));
+            //
+            // let member = JSON.parse(localStorage.getItem('member'));
+            // if(member){
+            //   const mem = {
+            //     id:member.id,
+            //     mobile_number:user.mobile_number,
+            //     latitude:user.latitude,
+            //     longitude:user.longitude,
+            //     firstname:user.firstname,
+            //     lastname:user.lastname
+            //   }
+            //   localStorage.setItem('member', JSON.stringify(mem));
+            // }else{
+            //   const mem = {
+            //     id:null,
+            //     mobile_number:user.mobile_number,
+            //     latitude:user.latitude,
+            //     longitude:user.longitude,
+            //     firstname:user.firstname,
+            //     lastname:user.lastname
+            //   }
+            //   localStorage.setItem('member', JSON.stringify(mem));
+            // }
+            // console.log(member);
+            this.currentStoreSubject.next(user);
+            return user;
+        }));
+    }
+    logout() {
+        // localStorage.removeItem('store');
+        // localStorage.setItem('member_cart',JSON.stringify([]));
+        // this.currentStoreSubject.next(null);
+        // this._router.navigateByUrl('/login');
+    }
+};
+LoginStoreService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"] }
+];
+LoginStoreService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"], _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"]])
+], LoginStoreService);
 
 
 

@@ -4,26 +4,29 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content  class="app-background">
-  <div class="" >
-  <div class="ion-text-center" >
+<ion-content>
+  <!-- <div class="ion-text-center" >
     <img src="assets/images/mapapi.png" class="img_logistic">
-  </div>
+  </div> -->
+  <ion-img class="center" src="assets/images/qrdee.png"></ion-img>
+
+
 <form (ngSubmit)="loginForm()">
     <ion-grid>
-      <ion-row color="primary" justify-content-center>
+      <ion-row padding color="primary" size=6 justify-content-center>
         <!-- <ion-col align-self-center size-md="6" size-lg="5" size-xs="12"> -->
-          <div padding>
+        <ion-col>
             <ion-item>
-              <ion-input  [ngModelOptions]="{standalone: true}" [(ngModel)]="promptpay"
+              <ion-input [ngModelOptions]="{standalone: true}" [(ngModel)]="promptpay"
                type="text" placeholder="เบอร์โทรศัพท์" ></ion-input>
             </ion-item>
             <ion-item>
               <ion-input  [ngModelOptions]="{standalone: true}" [(ngModel)]="password"
                type="password" placeholder="รหัสผ่าน"></ion-input>
             </ion-item>
+            <br>
             <ion-button type="submit" expand="full"color="primary" shape="round"><b>เข้าสู่ระบบ</b></ion-button>
-          </div>
+          </ion-col>
       </ion-row>
 
     </ion-grid>
@@ -60,5 +63,4 @@
 
   </ion-row>
 </ion-grid>
-</div>
 </ion-content>

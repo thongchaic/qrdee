@@ -14,6 +14,14 @@ export class UserService {
 
   }
 
+
+  myOrder(mem_id){
+
+    console.log(`https://qrdee.co/api/v2/myorders/${mem_id}`);
+    return this.http.get<any>(`https://qrdee.co/api/v2/myorders/${mem_id}`);
+
+  }
+
   placeOrder(mem, member_cart, notes, latitude, longitude){
 
     console.log(mem);
@@ -41,6 +49,8 @@ export class UserService {
       notes:notes,
       items:items
     }
+
+    console.log(body);
 
     return this.http.post<any>(`https://qrdee.co/api/v2/orders`,body);
 

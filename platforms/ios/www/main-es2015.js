@@ -636,6 +636,10 @@ let AppComponent = class AppComponent {
             //this.currentStore = trn;
             this.reInit(trn);
         });
+        let store = JSON.parse(localStorage.getItem('store'));
+        if (store) {
+            this.reInit(store);
+        }
         this.initializeApp();
     }
     reInit(store) {
@@ -665,7 +669,7 @@ let AppComponent = class AppComponent {
             this.member.lastname = this.store.lastname;
             localStorage.setItem('member', JSON.stringify(this.member));
         }
-        this.initializeApp();
+        //this.initializeApp();
     }
     ngOnInit() {
         // this._loginService.currentStore.subscribe(store => {

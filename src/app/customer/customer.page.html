@@ -137,11 +137,10 @@
           </ion-avatar>
           <ion-text>
             <small *ngIf="cart.product.product_th"><b>{{cart.product.product_th}}</b></small><br>
-            <small *ngIf="cart.created_at">เมื่อ {{cart.created_at | date }}</small>
           </ion-text>
           <ion-text slot="end">
             <small *ngIf="cart.store.store_name">จาก {{cart.store.store_name}}</small><br>
-            <small *ngIf="cart.product.price">ราคา {{cart.product.price}} ฿</small>
+            <small *ngIf="cart.created_at">เมื่อ {{cart.created_at }}</small>
           </ion-text>
         </ion-item>
   </ion-list>

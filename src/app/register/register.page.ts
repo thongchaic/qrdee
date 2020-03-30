@@ -8,7 +8,6 @@ import { ModalController,Events } from '@ionic/angular';
 
 declare var google;
 
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.page.html',
@@ -22,8 +21,11 @@ export class RegisterPage{
   store_name :string='';
   latitude:any='';
   longitude:any='';
+
   @ViewChild('mapElement',{static:false}) mapElement: ElementRef;
   map: any;
+
+
   constructor(
    // public navCtrl: NavController,
      private router: Router,
@@ -62,8 +64,6 @@ export class RegisterPage{
 
    }
    loadMap() {
-
-
 
     localStorage.setItem("regis_lat", this.latitude);
     localStorage.setItem("regis_lng", this.longitude);
@@ -108,9 +108,8 @@ export class RegisterPage{
 
       this.registerService.registerstore(this.password,this.promptpay,this.store_name,this.latitude,this.longitude,5).subscribe(trn => {
           loading.dismiss();
-
+          localStorage.setItem('store', JSON.stringify(trn));
           this.event.publish('store:changed',trn);
-
           this.router.navigateByUrl('/cart');
 
       }, err=>{

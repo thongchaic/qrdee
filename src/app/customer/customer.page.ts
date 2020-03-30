@@ -142,6 +142,7 @@ export class CustomerPage implements AfterViewInit{
         loading.dismiss();
       });
   }
+
   searchStores(q){
 
     if(q==""){
@@ -163,6 +164,7 @@ export class CustomerPage implements AfterViewInit{
       this.stores = data;
     });
   }
+
   infinitStores(e){
     console.log("Infinit => "+this.q);
     if(this.q == ""){
@@ -172,6 +174,7 @@ export class CustomerPage implements AfterViewInit{
       this.searchStores(this.q);
     }
   }
+
   calcTotalPrice(){
     this.total_price = 0;
     this.member_cart.forEach(e => {
@@ -180,7 +183,6 @@ export class CustomerPage implements AfterViewInit{
           this.total_price += p.price;
         });
     });
-
   }
 
   processPayment(){
@@ -226,7 +228,7 @@ export class CustomerPage implements AfterViewInit{
 
   }
 
-  placeOrder(){
+  async placeOrder(){
 
     this.member_cart = JSON.parse(localStorage.getItem('member_cart'));
     this.latitude = localStorage.getItem('member_lat');
@@ -237,11 +239,16 @@ export class CustomerPage implements AfterViewInit{
     this.member.mobile_number = this.mobile_number;
     this.member.firstname = this.firstname;
 
-
     console.log(this.member);
     localStorage.setItem('member',JSON.stringify( this.member ));
 
-    this.userservice.placeOrder(this.member, this.member_cart, this.notes, this.latitude, this.longitude).subscribe((data:any)=>{
+    const loading = await this._loading.create();
+    await loading.present();
+
+
+    await this.userservice.placeOrder(this.member, this.member_cart, this.notes, this.latitude, this.longitude).subscribe((data:any)=>{
+
+        loading.dismiss();
         console.log("res =====> ");
         console.log(data);
 
@@ -256,6 +263,11 @@ export class CustomerPage implements AfterViewInit{
         this.toastService.showToast('ส่งคำสั่งซื้อเรียบร้อยแล้ว', 'top');
         this.changeTab(2);
 
+    },err=>{
+      this.toastService.showToast('คำสั่งซื้อผิดพลาด โปรดลองอีกครั้ง', 'top');
+      console.log(err);
+      loading.dismiss();
+      this.changeTab(0);
     });
 
   }

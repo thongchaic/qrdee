@@ -646,6 +646,10 @@ var AppComponent = /** @class */ (function () {
             //this.currentStore = trn;
             _this.reInit(trn);
         });
+        var store = JSON.parse(localStorage.getItem('store'));
+        if (store) {
+            this.reInit(store);
+        }
         this.initializeApp();
     }
     AppComponent.prototype.reInit = function (store) {
@@ -675,7 +679,7 @@ var AppComponent = /** @class */ (function () {
             this.member.lastname = this.store.lastname;
             localStorage.setItem('member', JSON.stringify(this.member));
         }
-        this.initializeApp();
+        //this.initializeApp();
     };
     AppComponent.prototype.ngOnInit = function () {
         // this._loginService.currentStore.subscribe(store => {

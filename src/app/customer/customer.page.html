@@ -16,6 +16,12 @@
         <ion-label>ร้านค้าไกล้เคียง</ion-label>
       </ion-list-header>
 
+      <ion-item *ngIf="stores && stores.length <=0 ">
+        <ion-text>
+            ไม่พบร้านบริเวณไกล้ ๆ นี้
+        </ion-text>
+      </ion-item>
+
       <ion-item  *ngFor="let store of stores">
           <ion-avatar slot="start">
             <img *ngIf="store.store_pic" [src]="'https://qrdee.co/app/'+store.store_pic">
@@ -127,7 +133,7 @@
 <ion-content [hidden]="tab3">
   <ion-list *ngIf="carts">
       <ion-list-header >
-        <ion-label>ร้านค้าไกล้เคียง</ion-label>
+        <ion-label>รายการซื้อสินค้า</ion-label>
       </ion-list-header>
 
       <ion-item  *ngFor="let cart of carts">
@@ -135,13 +141,13 @@
             <img *ngIf="cart.product.thumbnail" [src]="'https://qrdee.co/app/'+cart.product.thumbnail">
             <img *ngIf="!cart.product.thumbnail" src="/assets/noimg.png">
           </ion-avatar>
-          <ion-text>
-            <small *ngIf="cart.product.product_th"><b>{{cart.product.product_th}}</b></small><br>
-          </ion-text>
           <ion-text slot="end">
-            <small *ngIf="cart.store.store_name">จาก {{cart.store.store_name}}</small><br>
+            <small *ngIf="cart.product.product_th && cart.store.store_name">{{cart.product.product_th}} จาก {{cart.store.store_name}}</small><br>
             <small *ngIf="cart.created_at">เมื่อ {{cart.created_at }}</small>
           </ion-text>
+          <ion-button fill="clear" color="primary" slot="end" (click)="callStore(cart.store.mobile_number);">
+            <ion-icon slot="icon-only" name="ios-call"></ion-icon>
+          </ion-button>
         </ion-item>
   </ion-list>
 </ion-content>

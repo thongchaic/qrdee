@@ -179,6 +179,7 @@ let RegisterPage = class RegisterPage {
             this.longitude = localStorage.getItem('regis_lng');
             this.registerService.registerstore(this.password, this.promptpay, this.store_name, this.latitude, this.longitude, 5).subscribe(trn => {
                 loading.dismiss();
+                localStorage.setItem('store', JSON.stringify(trn));
                 this.event.publish('store:changed', trn);
                 this.router.navigateByUrl('/cart');
             }, err => {

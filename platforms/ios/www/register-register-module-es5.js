@@ -202,6 +202,7 @@ var RegisterPage = /** @class */ (function () {
                         this.longitude = localStorage.getItem('regis_lng');
                         this.registerService.registerstore(this.password, this.promptpay, this.store_name, this.latitude, this.longitude, 5).subscribe(function (trn) {
                             loading.dismiss();
+                            localStorage.setItem('store', JSON.stringify(trn));
                             _this.event.publish('store:changed', trn);
                             _this.router.navigateByUrl('/cart');
                         }, function (err) {

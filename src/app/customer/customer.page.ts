@@ -295,6 +295,8 @@ export class CustomerPage implements AfterViewInit{
   }
 
   callStore(mobile_number){
+
+    console.log("call= >"+mobile_number);
     this.callNumber.callNumber(`${mobile_number}`, true)
       .then(res => {  })
       .catch(err => { alert(JSON.stringify(err)); });

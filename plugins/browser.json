@@ -22,9 +22,6 @@
     "cordova-plugin-ionic-keyboard": {
       "PACKAGE_NAME": "io.ionic.qrdee-emarket"
     },
-    "cordova-plugin-ionic-webview": {
-      "PACKAGE_NAME": "io.ionic.qrdee-emarket"
-    },
     "cordova-plugin-splashscreen": {
       "PACKAGE_NAME": "io.ionic.qrdee-emarket"
     },

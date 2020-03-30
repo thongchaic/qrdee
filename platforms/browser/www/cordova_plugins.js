@@ -224,14 +224,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/cordova-plugin-ionic-webview/src/www/util.js",
-        "id": "cordova-plugin-ionic-webview.IonicWebView",
-        "pluginId": "cordova-plugin-ionic-webview",
-        "clobbers": [
-            "Ionic.WebView"
-        ]
-    },
-    {
         "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
         "id": "cordova-plugin-splashscreen.SplashScreen",
         "pluginId": "cordova-plugin-splashscreen",
@@ -298,7 +290,6 @@ module.exports.metadata =
     "cordova-plugin-file": "6.0.2",
     "cordova-plugin-geolocation": "4.0.2",
     "cordova-plugin-ionic-keyboard": "2.2.0",
-    "cordova-plugin-ionic-webview": "4.1.3",
     "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "2.4.2",
     "cordova-plugin-whitelist": "1.3.3",

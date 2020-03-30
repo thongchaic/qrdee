@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.qrdee-emarket" version="0.1.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.ionic.qrdee-emarket" version="0.1.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>QRDEE</name>
     <description>QRDEE e-market</description>
     <author email="qrdee@gmail.com" href="http://qrdee.co/surin">Ionic Framework Team</author>
@@ -113,7 +113,6 @@
     <plugin name="cordova-plugin-statusbar" spec="2.4.2" />
     <plugin name="cordova-plugin-device" spec="2.0.2" />
     <plugin name="cordova-plugin-splashscreen" spec="5.0.2" />
-    <plugin name="cordova-plugin-ionic-webview" spec="^4.0.0" />
     <plugin name="cordova-plugin-ionic-keyboard" spec="^2.0.5" />
     <allow-navigation href="http://192.168.6.104:8100" sessionid="d1bd71ae" />
     <allow-navigation href="http://192.168.1.5:8100" sessionid="8660315a" />

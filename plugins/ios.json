@@ -34,10 +34,10 @@
     "cordova-sqlite-storage": {
       "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
-    "phonegap-plugin-barcodescanner": {
+    "mx.ferreyra.callnumber": {
       "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     },
-    "mx.ferreyra.callnumber": {
+    "phonegap-plugin-barcodescanner": {
       "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
     }
   },

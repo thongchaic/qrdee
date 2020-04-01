@@ -6,7 +6,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { LoadingController, NavController } from '@ionic/angular';
 import { LogisticService } from '../shared/logistic.service';
 import { File } from '@ionic-native/file/ngx';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
+// import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 import { environment } from 'src/environments/environment';
 
@@ -46,7 +46,7 @@ imageSrc = '';
     private navCtrl: NavController,
      @Inject(Camera) private camera: Camera,
      @Inject(File) private file: File,
-     @Inject(WebView) private webView: WebView,
+     // @Inject(WebView) private webView: WebView,
     // private imagePicker: ImagePicker,
     ) { }
 
@@ -58,10 +58,10 @@ imageSrc = '';
         this.formType = 'EDIT';
         // console.log(this.route.snapshot.params['id']);
          // console.log(this.profileForm.value);
-         // this.http.get<any>(`http://qrdee.co/api/v1/profile`).subscribe(console.log); 
+         // this.http.get<any>(`http://qrdee.co/api/v1/profile`).subscribe(console.log);
         this.logisticService.getProfile().subscribe(data => {
         this.logisticForm.setValue({
-         
+
           firstname: data.data.firstname,
           lastname:data.data.lastname,
           // age: data.data.age,
@@ -85,42 +85,42 @@ imageSrc = '';
         this.router.navigateByUrl('/logistic/history');
       }, err => console.log(err));
     }
-    
+
   }
 
 
 takePhoto() {
-    this.camera.getPicture({
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      sourceType: this.camera.PictureSourceType.CAMERA,
-      encodingType: this.camera.EncodingType.JPEG,
-      cameraDirection: this.camera.Direction.FRONT,
-      mediaType: this.camera.MediaType.PICTURE
-    }).then(
-      imageData => {
-        this.imageSrc = this.webView.convertFileSrc(imageData);
-        this.loadPhoto(imageData);
-      },
-      err => {
-        console.log(err);
-      }
-    );
+    // this.camera.getPicture({
+    //   quality: 100,
+    //   destinationType: this.camera.DestinationType.FILE_URI,
+    //   sourceType: this.camera.PictureSourceType.CAMERA,
+    //   encodingType: this.camera.EncodingType.JPEG,
+    //   cameraDirection: this.camera.Direction.FRONT,
+    //   mediaType: this.camera.MediaType.PICTURE
+    // }).then(
+    //   imageData => {
+    //     this.imageSrc = this.webView.convertFileSrc(imageData);
+    //     this.loadPhoto(imageData);
+    //   },
+    //   err => {
+    //     console.log(err);
+    //   }
+    // );
   }
-  
+
  selectPhoto() {
-    this.camera.getPicture({
-      destinationType: this.camera.DestinationType.FILE_URI,
-      sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
-    }).then(
-      imageData => {
-        this.imageSrc = this.webView.convertFileSrc(imageData);
-        this.loadPhoto(imageData);
-      },
-      err => {
-        console.log(err);
-      }
-    );
+    // this.camera.getPicture({
+    //   destinationType: this.camera.DestinationType.FILE_URI,
+    //   sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+    // }).then(
+    //   imageData => {
+    //     this.imageSrc = this.webView.convertFileSrc(imageData);
+    //     this.loadPhoto(imageData);
+    //   },
+    //   err => {
+    //     console.log(err);
+    //   }
+    // );
   }
 
   private loadPhoto(imageFileUri: any) {

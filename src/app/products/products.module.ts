@@ -14,7 +14,7 @@ import { ShowComponent } from './show/show.component';
 import { ShowCustomerComponent } from './show-customer/show-customer.component';
 import { File } from '@ionic-native/file/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
+// import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FormsComponent }  from './forms/forms.component';
 import { FormsService } from './shared/forms.service';
 
@@ -79,8 +79,8 @@ const routes: Routes = [
     CartService,
     BarcodeScanner,
     File,
-    Camera,
-    WebView
+    Camera
+    // WebView
   ]
 })
 export class ProductsPageModule {}

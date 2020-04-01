@@ -6,6 +6,14 @@ import { ToastService } from '../shared/services/toast.service';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { LoadingController, Events } from '@ionic/angular';
+// import {
+//   GoogleMaps,
+//   GoogleMap,
+//   GoogleMapsEvent,
+//   ILatLng,
+//   Marker
+// } from '@ionic-native/google-maps';
+import { Platform } from '@ionic/angular';
 
 declare var google;
 
@@ -16,8 +24,6 @@ declare var google;
 })
 export class ProfilePage implements OnInit{
 
-  @ViewChild('map',{static:false}) mapElement: ElementRef;
-  map: any;
   // latitude = 14.8718084;
   // longitude = 103.4962797;
 
@@ -25,6 +31,11 @@ export class ProfilePage implements OnInit{
   store:any;
   store_types:any;
   store_pic = '';
+  // map: GoogleMap;
+  // marker: Marker;
+  @ViewChild('map',{static:false}) mapElement: ElementRef;
+  map: any;
+
 
   constructor(
   	private profileservice: ProfileService,
@@ -34,6 +45,7 @@ export class ProfilePage implements OnInit{
     private camera: Camera,
     private _formBuilder: FormBuilder,
     private event : Events,
+    private platform: Platform,
     private _loading: LoadingController
   ){
 
@@ -52,12 +64,12 @@ export class ProfilePage implements OnInit{
       this.store_pic = 'https://qrdee.co/app/'+this.store_pic;
     }
 
-    localStorage.setItem("store_lat",this.store.latitude);
-    localStorage.setItem("store_lng",this.store.longitude);
+    // localStorage.setItem("store_lat",this.store.latitude);
+    // localStorage.setItem("store_lng",this.store.longitude);
+    //
+     this.loadStoreTypes();
+     this.buildForm();
 
-
-    this.loadStoreTypes();
-    this.buildForm();
     // this.latitude.patchValue( this.store.latitude );
     // this.longitude.patchValue( this.store.longitude );
 
@@ -65,7 +77,7 @@ export class ProfilePage implements OnInit{
   ionViewDidEnter() {
 
 
-
+    this.loadMap();
   }
 
 
@@ -81,7 +93,7 @@ export class ProfilePage implements OnInit{
     //     this.store.longitude = resp.coords.longitude;
     //     this.loadMap();
     // });
-    this.loadMap();
+
 
   }
 
@@ -118,9 +130,8 @@ export class ProfilePage implements OnInit{
         //   store_pic: data.store_pic
         // }));
 
+
         this.event.publish('store:changed',data);
-
-
 
         loading.dismiss();
         this.toastService.showToast(`ปรับปรุงข้อมูลเรียบร้อยแล้ว`, 'top');
@@ -160,6 +171,52 @@ export class ProfilePage implements OnInit{
   }
 
   loadMap() {
+
+
+
+   //    this.map = GoogleMaps.create('map_canvas2', {
+   //     camera: {
+   //        target: {
+   //          lat: this.store.latitude,
+   //          lng: this.store.longitude
+   //        },
+   //        zoom: 12
+   //      },
+   //     gestures: {
+   //        scroll: true,
+   //        tilt: true,
+   //        rotate: true,
+   //        zoom: true
+   //    }
+   //   });
+   //
+   //
+   //
+   //
+   // this.marker = this.map.addMarkerSync({
+   //   position: {
+   //     lat: this.store.latitude,
+   //     lng: this.store.longitude
+   //   }
+   // });
+   // console.log(this.marker);
+   //
+   // this.map.on(GoogleMapsEvent.CAMERA_MOVE_END).subscribe((params: any[]) => {
+   //    const cameraPosition: any = params[0];
+   //    this.store.latitude = cameraPosition.target.lat;
+   //    this.store.longitude = cameraPosition.target.lng;
+   //
+   //    //this.marker.position = cameraPosition.target;
+   //    this.latitude.patchValue( this.store.latitude );
+   //    this.longitude.patchValue( this.store.longitude );
+   //
+   //    console.log(this.store.latitude+" / "+this.store.longitude);
+   //    this.marker.setPosition(cameraPosition.target);
+   //  });
+
+
+   localStorage.setItem("store_lat", this.latitude.value );
+   localStorage.setItem("store_lng", this.longitude.value);
 
     let latLng = new google.maps.LatLng(this.latitude.value, this.longitude.value);
     this.map = new google.maps.Map(this.mapElement.nativeElement, {

@@ -3,7 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
+  // { path: 'home', loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)},
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'logout', loadChildren: './logout/logout.module#LogoutPageModule' },
   { path: 'products', loadChildren: './products/products.module#ProductsPageModule' },
@@ -23,6 +23,7 @@ const routes: Routes = [
     loadChildren: () => import('./delivery/delivery.module').then( m => m.DeliveryPageModule)
   },
 ];
+
 
 @NgModule({
   imports: [

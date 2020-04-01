@@ -4,7 +4,7 @@ import { ProductService } from '../shared/product.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { BarcodeScanner, BarcodeScanResult, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 import { Camera,CameraOptions } from '@ionic-native/camera/ngx';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
+// import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { ToastService } from '../../shared/services/toast.service';
 import { LoadingController, NavController } from '@ionic/angular';
@@ -47,7 +47,7 @@ constructor(
  private builder: FormBuilder,
  @Inject(Camera)  private camera: Camera,
  @Inject(File)  private file: File,
- @Inject(WebView)  private webView: WebView,
+ // @Inject(WebView)  private webView: WebView,
  private toastService: ToastService,
  private _loading: LoadingController,
  private navCtrl: NavController

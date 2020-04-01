@@ -43,6 +43,7 @@ export class AppComponent implements OnInit {
 
     // this.currentStore = this._loginService.currentStoreValue;
 
+    console.log("=================START======================");
     this.event.subscribe('store:changed',trn=>{
        this.store = trn;
        //this.currentStore = trn;
@@ -68,6 +69,7 @@ export class AppComponent implements OnInit {
       console.log(this.store);
       this.member = JSON.parse(localStorage.getItem('member'));
       console.log(this.member);
+
 
       if(!this.member){
           const member = {
@@ -121,10 +123,10 @@ export class AppComponent implements OnInit {
    }
 
    logout(){
-     // this.store = null;
-     // localStorage.removeItem('store');
-     // this.router.navigateByUrl('/login');
-     //this._loginService.logout();
+     this.store = null;
+     localStorage.removeItem('store');
+     this.router.navigateByUrl('/login');
+     // this._loginService.logout();
    }
    product(){
        this.router.navigate(['products']);

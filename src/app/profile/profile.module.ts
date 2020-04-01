@@ -10,7 +10,7 @@ import { FormComponent } from './form/form.component';
 import { File } from '@ionic-native/file/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 // import { ImagePicker } from '@ionic-native/image-picker/ngx';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
+// import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 const routes: Routes = [
   {
@@ -36,9 +36,9 @@ const routes: Routes = [
   providers: [
   ProfileService,
   File,
-  Camera,
+  Camera
   // ImagePicker,
-  WebView
+  // WebView
   ],
 })
 export class ProfilePageModule {}

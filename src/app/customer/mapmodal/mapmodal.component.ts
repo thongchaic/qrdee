@@ -29,10 +29,16 @@ export class MapmodalComponent implements OnInit {
 
 
   }
+  ionViewDidEnter() {
+
+
+    this.getLocation();
+  }
+
 
   ngAfterViewInit(): void {
     //this.getCurrentPos();
-    this.getLocation();
+
   }
 
   async getLocation(){

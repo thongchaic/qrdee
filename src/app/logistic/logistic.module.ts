@@ -13,7 +13,7 @@ import { DeliveryComponent } from './delivery/delivery.component';
 import { DeliverysComponent } from './delivery/deliverys/deliverys.component';
 import { File } from '@ionic-native/file/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
+// import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 
 
@@ -42,7 +42,7 @@ const routes: Routes = [
         path:'delivery/codedelivery',
         component: DeliveryComponent,
         data: { title: 'ขนส่ง'}
-    }, 
+    },
     {
         path: 'delivery/deliverys',
         component: DeliverysComponent,
@@ -65,13 +65,13 @@ const routes: Routes = [
   FormComponent,
   ShowComponent,
   DeliveryComponent,
-  DeliverysComponent, 
+  DeliverysComponent,
   ],
    providers: [
    LogisticService,
    File,
    Camera,
-   WebView
+   // WebView
    ],
 })
 export class LogisticPageModule {}

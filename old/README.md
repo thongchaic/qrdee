@@ -1,2 +1,0 @@
-# qrdee
-qrdee.co 

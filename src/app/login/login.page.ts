@@ -46,7 +46,7 @@ export class LoginPage  {
   }
 
   ionViewDidEnter() {
-    
+
   }
 
   async loginForm() {
@@ -58,7 +58,7 @@ export class LoginPage  {
       //alert(JSON.stringify(trn));
       // console.log(trn);
       //this.router.navigateByUrl('/cart');
-
+      localStorage.setItem('store', JSON.stringify(trn));
       this.event.publish('store:changed',trn);
       this.router.navigateByUrl('/cart');
 
@@ -70,6 +70,7 @@ export class LoginPage  {
   }
 
   goRegister_store(){
+    console.log("Go register=====>");
     this.router.navigateByUrl('/register');
   }
 

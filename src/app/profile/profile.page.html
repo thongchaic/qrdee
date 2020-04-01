@@ -8,8 +8,9 @@
 </ion-header>
 
 <ion-content>
-  <ion-label position="floating">ตำแหน่งร้าน</ion-label>
-  <div #map id="map" style="height:250px;"></div>
+  <ion-label position="floating">จัดการตำแหน่งร้าน</ion-label>
+  <div id="map" #map style="height:250px;"></div>
+
 
   <ion-list [formGroup]="form">
     <ion-item>
@@ -17,8 +18,8 @@
     </ion-item>
     <ion-item-group >
       <ion-item lines="none">
-        <ion-img *ngIf="store_pic" [src]="store_pic"></ion-img>
-        <ion-img  *ngIf="!store_pic" src="/assets/noimg.png"></ion-img>
+        <ion-img class="center" style="width: 250px; height: 180px;"  *ngIf="store_pic" [src]="store_pic"></ion-img>
+        <!-- <ion-img  *ngIf="!store_pic" src="/assets/noimg.png"></ion-img> -->
       </ion-item>
       <ion-grid>
         <ion-row justify-content-center>

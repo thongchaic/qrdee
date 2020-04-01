@@ -38,7 +38,7 @@ export class CustomerPage implements AfterViewInit{
   total_price = 0;
   notes:string = '';
 
-  @ViewChild('mapElement',{static:false}) mapElement: ElementRef;
+  @ViewChild('map',{static:false}) mapElement: ElementRef;
   map: any;
 
   constructor(
@@ -69,7 +69,7 @@ export class CustomerPage implements AfterViewInit{
 
   }
   ionViewDidEnter() {
-
+    this.loadMap();
   }
 
   ionViewWillEnter() {
@@ -194,6 +194,8 @@ export class CustomerPage implements AfterViewInit{
     console.log(this.member_cart);
     this.calcTotalPrice();
 
+
+
     if(this.mapElement){
       console.log("Element active");
       this.loadMap();
@@ -225,7 +227,8 @@ export class CustomerPage implements AfterViewInit{
       localStorage.setItem("member_lng",marker.getPosition().lng());
       this.map.setCenter(marker.getPosition());
     });
-
+    google.maps.event.trigger(this.map, 'resize');
+    this.map.setZoom( this.map.getZoom() );
   }
 
   async placeOrder(){

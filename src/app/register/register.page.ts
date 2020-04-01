@@ -6,6 +6,17 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ToastService } from '../shared/services/toast.service';
 import { ModalController,Events } from '@ionic/angular';
 
+// import {
+//   GoogleMaps,
+//   GoogleMap,
+//   GoogleMapsEvent,
+//   ILatLng,
+//   Circle,
+//   Marker,
+//   Spherical
+// } from '@ionic-native/google-maps';
+import { Platform } from '@ionic/angular';
+
 declare var google;
 
 @Component({
@@ -21,8 +32,11 @@ export class RegisterPage{
   store_name :string='';
   latitude:any='';
   longitude:any='';
-
-  @ViewChild('mapElement',{static:false}) mapElement: ElementRef;
+  dummyMarker:any;
+  // map: GoogleMap;
+  // marker: Marker;
+  //
+  @ViewChild('map',{static:false}) mapElement: ElementRef;
   map: any;
 
 
@@ -33,17 +47,30 @@ export class RegisterPage{
      private geolocation: Geolocation,
      private toastService: ToastService,
      private event : Events,
+     private platform: Platform,
     private _loading: LoadingController
    ) { }
 
+   async ngOnInit() {
+     // Since ngOnInit() is executed before `deviceready` event,
+     // you have to wait the event.
+     this.latitude = 14.8718084;
+     this.longitude = 103.4962797;
+     await this.platform.ready();
+     //this.loadGPS();
+   }
+
   ngAfterViewInit(): void {
-    this.latitude = 14.8718084;
-    this.longitude = 103.4962797;
-    this.loadGPS();
+    // this.latitude = 14.8718084;
+    // this.longitude = 103.4962797;
+    // this.loadGPS();
   }
 
   ionViewDidEnter() {
-
+    this.latitude = 14.8718084;
+    this.longitude = 103.4962797;
+    this.loadGPS();
+    // this.dummyMarker = document.getElementById("centerMarkerImg");
   }
    async loadGPS(){
      console.log("Loading GPS....");
@@ -64,6 +91,53 @@ export class RegisterPage{
 
    }
    loadMap() {
+
+   //
+   //   if(!this.map){
+   //     this.map = GoogleMaps.create('map_canvas', {
+   //      camera: {
+   //         target: {
+   //           lat: this.latitude,
+   //           lng: this.longitude
+   //         },
+   //         zoom: 12
+   //       },
+   //      gestures: {
+   //         scroll: true,
+   //         tilt: true,
+   //         rotate: true,
+   //         zoom: true
+   //     }
+   //    });
+   //
+   //    console.log("create new map .....");
+   //
+   //  }else{
+   //    console.log("map already exists....");
+   //  }
+   //
+   //
+   //
+   // this.marker = this.map.addMarkerSync({
+   //   position: {
+   //     lat: this.latitude,
+   //     lng: this.longitude
+   //   }
+   // });
+   // console.log(this.marker);
+   //
+   // this.map.on(GoogleMapsEvent.CAMERA_MOVE_END).subscribe((params: any[]) => {
+   //    const cameraPosition: any = params[0];
+   //    this.latitude = cameraPosition.target.lat;
+   //    this.longitude = cameraPosition.target.lng;
+   //    this.marker.setPosition(cameraPosition.target);
+   //    //this.marker.position = cameraPosition.target;
+   //    console.log(this.latitude+" / "+this.longitude);
+   //  });
+
+    //
+    //
+
 
     localStorage.setItem("regis_lat", this.latitude);
     localStorage.setItem("regis_lng", this.longitude);
@@ -103,8 +177,13 @@ export class RegisterPage{
       const loading = await this._loading.create();
       await loading.present();
 
+
+
       this.latitude = localStorage.getItem('regis_lat');
       this.longitude = localStorage.getItem('regis_lng');
+
+      console.log("Register with =>> "+this.latitude+" / "+this.longitude);
+
 
       this.registerService.registerstore(this.password,this.promptpay,this.store_name,this.latitude,this.longitude,5).subscribe(trn => {
           loading.dismiss();

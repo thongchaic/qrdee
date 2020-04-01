@@ -8,7 +8,7 @@ import { ToastService } from '../../shared/services/toast.service';
 import { AlertService } from '../../shared/services/alert.service';
 import { Camera } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
-import { WebView } from '@ionic-native/ionic-webview/ngx';
+// import { WebView } from '@ionic-native/ionic-webview/ngx';
 // import { ImagePicker } from '@ionic-native/image-picker/ngx';
 @Component({
   selector: 'app-form',
@@ -46,8 +46,8 @@ constructor(
     private toastService: ToastService,
     private alertService: AlertService,
     @Inject(Camera)  private camera: Camera,
-    @Inject(File)  private file: File,
-    @Inject(WebView)  private webView: WebView
+    @Inject(File)  private file: File
+    // @Inject(WebView)  private webView: WebView
 
 ) {  }
 

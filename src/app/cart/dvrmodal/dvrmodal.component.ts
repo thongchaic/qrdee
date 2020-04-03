@@ -81,6 +81,13 @@ export class DvrmodalComponent {
   }
 
   ngAfterViewInit(): void {
+
+
+
+
+  }
+  ionViewDidEnter() {
+
     this.geolocation.getCurrentPosition().then((resp) => {
         this.mylatitude = resp.coords.latitude;
         this.mylongitude = resp.coords.longitude;
@@ -100,10 +107,7 @@ export class DvrmodalComponent {
     }
 
 
-
     this.loadMap();
-
-
   }
 
   loadMap() {

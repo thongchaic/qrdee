@@ -65,11 +65,12 @@ export class CustomerPage implements AfterViewInit{
 
     console.log("list component called!!!");
     console.log(this.member);
-    this.loadStores();
+
 
   }
   ionViewDidEnter() {
-    this.loadMap();
+    console.log("customer did enter....");
+
   }
 
   ionViewWillEnter() {
@@ -77,7 +78,8 @@ export class CustomerPage implements AfterViewInit{
   }
   ngAfterViewInit(): void {
     //this.getCurrentPos();
-
+    this.loadStores();
+    this.loadMap();
   }
 
   getCurrentPos(){
@@ -96,20 +98,15 @@ export class CustomerPage implements AfterViewInit{
   async loadMyOrder(){
 
     console.log(this.member);
-
     if(!this.member.id){
       return;
     }
-
     const loading = await this._loading.create();
     await loading.present();
-
     await this.userservice.myOrder(this.member.id).subscribe((data:any)=>{
       loading.dismiss();
-
       console.log(data);
       this.carts = data;
-
     }, err=>{
       loading.dismiss();
       console.log(err);
@@ -120,10 +117,13 @@ export class CustomerPage implements AfterViewInit{
 
   async loadStores(){
 
+
       if(this.latitude == null || this.longitude == null){
         this.loadMapModal();
         return;
       }
+
+
 
       const loading = await this._loading.create();
       await loading.present();
@@ -205,7 +205,6 @@ export class CustomerPage implements AfterViewInit{
   }
 
   loadMap() {
-
 
     localStorage.setItem("member_lat",this.latitude);
     localStorage.setItem("member_lng",this.longitude);

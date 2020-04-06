@@ -12,7 +12,7 @@ import { ModalController } from '@ionic/angular';
 import { CartmodalComponent } from './cartmodal/cartmodal.component';
 import { CustomerService } from './shared/customer.service';
 import { MapmodalComponent } from './mapmodal/mapmodal.component';
-
+import { Platform } from '@ionic/angular';
 declare var google;
 
 @Component({
@@ -22,9 +22,9 @@ declare var google;
 })
 export class CustomerPage implements AfterViewInit{
 
-  tab1 = false;
-  tab2 = true;
-  tab3 = true;
+  tab1 = true;
+  tab2 = false;
+  tab3 = false;
   latitude: any;
   longitude: any;
   firstname:any;
@@ -52,6 +52,7 @@ export class CustomerPage implements AfterViewInit{
     private navCtrl: NavController,
     private modalController: ModalController,
     private _loading: LoadingController,
+    private platform: Platform,
     private callNumber: CallNumber
 	){
 
@@ -66,7 +67,6 @@ export class CustomerPage implements AfterViewInit{
     console.log("list component called!!!");
     console.log(this.member);
 
-
   }
   ionViewDidEnter() {
     console.log("customer did enter....");
@@ -76,10 +76,16 @@ export class CustomerPage implements AfterViewInit{
   ionViewWillEnter() {
 
   }
+  async ngOnInit() {
+    await this.platform.ready();
+    this.loadStores();
+    //this.loadMap();
+
+    //this.changeTab(0);
+  }
   ngAfterViewInit(): void {
     //this.getCurrentPos();
-    this.loadStores();
-    this.loadMap();
+
   }
 
   getCurrentPos(){
@@ -178,17 +184,35 @@ export class CustomerPage implements AfterViewInit{
   calcTotalPrice(){
     this.total_price = 0;
     this.member_cart.forEach(e => {
-        this.total_price += e.delivery_price;
+        console.log(e);
+        //this.total_price += e.delivery_price;
+        let store_price = 0;
         e.products.forEach(p => {
-          this.total_price += p.price;
+          store_price += p.price;
         });
+        if(store_price >= e.free_delivery_price){
+          this.total_price += store_price;
+        }else{
+          this.total_price += store_price + e.delivery_price
+        }
     });
   }
 
-  processPayment(){
-    this.tab1 = true;
-    this.tab2 = false;
-    this.tab3 = true;
+   processPayment(c){
+
+     if(c < 5){
+       let x = document.getElementById('map');
+       if(!x){
+         setTimeout( () => {
+             console.log("Not ready");
+             let k = c + 1;
+             this.processPayment(k);
+         }, 1000);
+       }
+     }
+
+
+
 
     this.member_cart = JSON.parse(localStorage.getItem('member_cart'));
     console.log(this.member_cart);
@@ -196,12 +220,16 @@ export class CustomerPage implements AfterViewInit{
 
 
 
+
     if(this.mapElement){
       console.log("Element active");
       this.loadMap();
+
     }else{
       console.log("Element not active");
+
     }
+
   }
 
   loadMap() {
@@ -211,7 +239,7 @@ export class CustomerPage implements AfterViewInit{
 
     let latLng = new google.maps.LatLng(this.latitude, this.longitude);
     this.map = new google.maps.Map(this.mapElement.nativeElement, {
-      zoom: 12,
+      zoom: 15,
       center: latLng,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     });
@@ -226,8 +254,15 @@ export class CustomerPage implements AfterViewInit{
       localStorage.setItem("member_lng",marker.getPosition().lng());
       this.map.setCenter(marker.getPosition());
     });
-    google.maps.event.trigger(this.map, 'resize');
-    this.map.setZoom( this.map.getZoom() );
+    this.map.setCenter( latLng );
+    //console.log(this.map);
+
+    //  google.maps.event.addListener(this.map, "idle", function(){
+    //   google.maps.event.trigger(this.map, 'resize');
+    // });
+    // google.maps.event.trigger(this.map, 'resize');
+    // this.map.setZoom( this.map.getZoom() );
+    // this.map.resize();
   }
 
   async placeOrder(){
@@ -323,7 +358,7 @@ export class CustomerPage implements AfterViewInit{
         console.log(status);
 
         if(status.data == 3){
-          this.processPayment();
+          this.changeTab(1);
         }
 
       });
@@ -334,20 +369,20 @@ export class CustomerPage implements AfterViewInit{
   changeTab(t){
 
     if(t == 0){
-      this.tab1 = false;
-      this.tab2 = true;
-      this.tab3 = true;
+      this.tab1 = true;
+      this.tab2 = false;
+      this.tab3 = false;
       this.stores = [];
       this.loadMapModal();
     }else if (t == 1){
-      this.tab1 = true;
-      this.tab2 = false;
-      this.tab3 = true;
-      this.processPayment();
-    }else{
-      this.tab1 = true;
+      this.tab1 = false;
       this.tab2 = true;
       this.tab3 = false;
+      this.processPayment(0);
+    }else{
+      this.tab1 = false;
+      this.tab2 = false;
+      this.tab3 = true;
       this.loadMyOrder();
     }
   }

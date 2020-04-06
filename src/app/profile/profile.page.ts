@@ -53,7 +53,7 @@ export class ProfilePage implements OnInit{
     //alert(JSON.stringify(this.store));
   }
 
-  ngOnInit() {
+  async ngOnInit() {
 
 
     this.store = JSON.parse(localStorage.getItem('store'));
@@ -67,16 +67,17 @@ export class ProfilePage implements OnInit{
     // localStorage.setItem("store_lat",this.store.latitude);
     // localStorage.setItem("store_lng",this.store.longitude);
     //
-     this.loadStoreTypes();
-     this.buildForm();
+    //await this.platform.ready();
+    this.buildForm();
+    await this.loadStoreTypes();
+
 
     // this.latitude.patchValue( this.store.latitude );
     // this.longitude.patchValue( this.store.longitude );
 
   }
-  ionViewDidEnter() {
-
-
+  async ionViewDidEnter() {
+    await this.loadStoreTypes();
     this.loadMap();
   }
 
@@ -167,6 +168,7 @@ export class ProfilePage implements OnInit{
   loadStoreTypes(){
     this.profileservice.getStoreTypes().subscribe((data:any)=>{
       this.store_types = data;
+      console.log(this.store_types);
     })
   }
 
@@ -287,6 +289,7 @@ export class ProfilePage implements OnInit{
       promptpay: this.store.promptpay,
       mobile_number: this.store.mobile_number,
       delivery_price: this.store.delivery_price,
+      free_delivery_price: this.store.free_delivery_price,
       firstname: this.store.firstname,
       lastname: this.store.lastname,
       store_type_id: this.store.store_type_id,

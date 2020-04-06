@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [hidden]="tab1" style="background:#FFFFFF;">
+<ion-content *ngIf="tab1">
   <ion-searchbar placeholder="ค้นหาร้าน" color="primary" (ionChange)="searchStores($event.target.value)">
   </ion-searchbar>
 
@@ -33,7 +33,7 @@
           </ion-text>
           <ion-text slot="end">
             <small *ngIf="store.delivery_price">ระยะ {{store.distance | number }} km</small><br>
-            <small *ngIf="store.delivery_price">ค่าส่ง {{store.delivery_price}} ฿</small>
+            <small *ngIf="store.delivery_price">ค่าส่ง {{store.delivery_price}} ฿ (ขั้นต่ำ {{store.free_delivery_price}} ส่งฟรี)</small>
           </ion-text>
           <ion-button fill="clear" color="primary" slot="end" (click)="viewStore(store);">
             <ion-icon slot="icon-only" name="md-eye"></ion-icon>
@@ -47,7 +47,7 @@
    </ion-infinite-scroll> -->
 
 </ion-content>
-<ion-content [hidden]="tab2">
+<ion-content *ngIf="tab2">
 
   <ion-list  *ngFor="let cart of member_cart">
 
@@ -63,7 +63,7 @@
           <small *ngIf="cart.store_name"><b>ร้าน {{cart.store_name}}</b></small><br>
         </ion-text>
         <ion-text slot="end">
-          <small *ngIf="cart.delivery_price">ค่าส่ง {{cart.delivery_price}} ฿</small>
+          <small *ngIf="cart.delivery_price">ค่าส่ง {{cart.delivery_price}} ฿ (ขั้นต่ำ {{cart.free_delivery_price}} ส่งฟรี)</small>
         </ion-text>
         <ion-button fill="clear" color="primary" slot="end" (click)="callStore(cart.mobile_number);">
           <ion-icon slot="icon-only" name="ios-call"></ion-icon>
@@ -103,7 +103,6 @@
   <div #map id="map" style="height:250px;" ></div>
   <br>
 
-
   <ion-list lines="none">
 
     <ion-item>
@@ -130,7 +129,8 @@
 
 </ion-content>
 
-<ion-content [hidden]="tab3">
+
+<ion-content *ngIf="tab3">
   <ion-list *ngIf="carts">
       <ion-list-header >
         <ion-label>รายการซื้อสินค้า</ion-label>

@@ -12,7 +12,7 @@
   <ion-list>
 
     <ion-list-header >
-      <ion-label>รายการคำสั่งซื้อ (ค่าส่ง {{store.delivery_price}} บาท)</ion-label>
+      <ion-label>คำสั่งซื้อ : ค่าส่ง {{store.delivery_price}} ฿ (ขั้นต่ำ {{store.free_delivery_price}} ส่งฟรี)</ion-label>
     </ion-list-header>
 
 
@@ -23,7 +23,7 @@
         <ion-label>
           <h5>
             <ion-text color="dark">{{order.member.firstname}} </ion-text>
-            <ion-badge color="danger"> {{ order.price+store.delivery_price }} </ion-badge> <ion-text color="dark"> บาท </ion-text>
+            <ion-badge color="danger"> {{ order.price >= store.free_delivery_price? order.price : order.price+store.delivery_price }} </ion-badge> <ion-text color="dark"> บาท </ion-text>
           </h5>
         </ion-label>
         <ion-button fill="clear" color="danger" slot="end" (click)="deleteOrder(order.member.id);">

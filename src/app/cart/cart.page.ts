@@ -179,6 +179,7 @@ async getOrders(){
 
   this.cartService.getOrders(this.store.id).subscribe((data:any)=>{
     this.orders = data;
+    console.log(this.orders);
     loading.dismiss();
   }, err=>{
     loading.dismiss();

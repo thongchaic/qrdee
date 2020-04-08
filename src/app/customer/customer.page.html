@@ -13,12 +13,12 @@
 
   <ion-list *ngIf="stores">
       <ion-list-header >
-        <ion-label>ร้านค้าไกล้เคียง</ion-label>
+        <ion-label>ร้านค้าใกล้เคียง</ion-label>
       </ion-list-header>
 
       <ion-item *ngIf="stores && stores.length <=0 ">
         <ion-text>
-            ไม่พบร้านบริเวณไกล้ ๆ นี้
+            ไม่พบร้านบริเวณใกล้ ๆ นี้
         </ion-text>
       </ion-item>
 
@@ -33,7 +33,7 @@
           </ion-text>
           <ion-text slot="end">
             <small *ngIf="store.delivery_price">ระยะ {{store.distance | number }} km</small><br>
-            <small *ngIf="store.delivery_price">ค่าส่ง {{store.delivery_price}} ฿ (ขั้นต่ำ {{store.free_delivery_price}} ส่งฟรี)</small>
+            <small *ngIf="store.delivery_price">ค่าส่ง {{store.delivery_price}} ฿</small>
           </ion-text>
           <ion-button fill="clear" color="primary" slot="end" (click)="viewStore(store);">
             <ion-icon slot="icon-only" name="md-eye"></ion-icon>
@@ -50,20 +50,15 @@
 <ion-content *ngIf="tab2">
 
   <ion-list  *ngFor="let cart of member_cart">
-
-      <!-- <ion-list-header >
-        <ion-label>ตะกร้าสินค้า</ion-label>
-      </ion-list-header> -->
       <ion-item >
         <ion-avatar slot="start">
-          <!-- <img *ngIf="cart.store_pic" [src]="'https://qrdee.co/app/'+store.store_pic"> -->
-          <!-- <img *ngIf="!cart.store_pic" src="/assets/noimg.png"> -->
         </ion-avatar>
         <ion-text>
           <small *ngIf="cart.store_name"><b>ร้าน {{cart.store_name}}</b></small><br>
         </ion-text>
         <ion-text slot="end">
-          <small *ngIf="cart.delivery_price">ค่าส่ง {{cart.delivery_price}} ฿ (ขั้นต่ำ {{cart.free_delivery_price}} ส่งฟรี)</small>
+          <small *ngIf="cart.delivery_price">ค่าส่ง {{cart.delivery_price}} ฿</small><br>
+          <small *ngIf="cart.free_delivery_price">(ขั้นต่ำ {{cart.free_delivery_price}} ส่งฟรี)</small>
         </ion-text>
         <ion-button fill="clear" color="primary" slot="end" (click)="callStore(cart.mobile_number);">
           <ion-icon slot="icon-only" name="ios-call"></ion-icon>
@@ -100,7 +95,7 @@
   </ion-list>
 
   <ion-label position="floating">โปรดระบุจุดรับสินค้า</ion-label>
-  <div #map id="map" style="height:250px;" ></div>
+    <div #map id="map" style="height:250px;" ></div>
   <br>
 
   <ion-list lines="none">
@@ -126,9 +121,7 @@
       </ion-button>
     </ion-item>
   </ion-list>
-
 </ion-content>
-
 
 <ion-content *ngIf="tab3">
   <ion-list *ngIf="carts">

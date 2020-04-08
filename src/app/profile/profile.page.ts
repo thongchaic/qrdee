@@ -284,6 +284,9 @@ export class ProfilePage implements OnInit{
 
 
   buildForm() {
+    if(!this.store.free_delivery_price){
+      this.store.free_delivery_price = 300;
+    }
     this.form = this._formBuilder.group({
       store_name: this.store.store_name,
       promptpay: this.store.promptpay,

@@ -28,6 +28,7 @@
 
         <ion-text slot="start">
           <small>เลือกไว้แล้ว {{pick_count}} ชิ้น</small>
+          <small> (ขั้นต่ำ {{store.free_delivery_price}} ส่งฟรี)</small>
         </ion-text>
         <ion-button fill="clear" color="primary" slot="end" (click)="startPayment();">
           <ion-icon slot="icon-only" name="ios-cash"></ion-icon> ชำระเงิน

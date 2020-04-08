@@ -60,10 +60,8 @@ export class CustomerPage implements AfterViewInit{
     this.member = JSON.parse(localStorage.getItem('member'));
     this.latitude = this.member.latitude;
     this.longitude = this.member.longitude;
-
     this.mobile_number = this.member.mobile_number;
     this.firstname = this.member.firstname;
-
     console.log("list component called!!!");
     console.log(this.member);
 
@@ -211,15 +209,9 @@ export class CustomerPage implements AfterViewInit{
        }
      }
 
-
-
-
     this.member_cart = JSON.parse(localStorage.getItem('member_cart'));
     console.log(this.member_cart);
     this.calcTotalPrice();
-
-
-
 
     if(this.mapElement){
       console.log("Element active");

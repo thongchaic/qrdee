@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.qrdee-emarket" version="0.1.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="io.ionic.qrdee-emarket" version="0.1.6" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>QRDEE</name>
     <description>QRDEE e-market</description>
     <author email="qrdee@gmail.com" href="http://qrdee.co/surin">Ionic Framework Team</author>
-    <content original-src="index.html" src="http://192.168.6.101:8100" />
+    <content src="index.html" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -125,5 +125,4 @@
         <icon src="resources/windows/icon/StoreLogo.png" target="StoreLogo" />
         <splash src="resources/windows/splash/Splash.png" target="SplashScreen" />
     </platform>
-    <allow-navigation href="http://192.168.6.101:8100" sessionid="ac09a6a5" />
 </widget>

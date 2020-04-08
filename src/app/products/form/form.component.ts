@@ -176,6 +176,7 @@ selectPictures() {
        //alert(JSON.stringify(res));
        console.log("UPDATE RES=>");
        console.log(res);
+       //alert(JSON.stringify(res));
        loading.dismiss();
        this.toastService.showToast('แก้ไขสินค้าเรียบร้อยแล้ว', 'top');
        this.router.navigateByUrl('/products');
@@ -183,6 +184,7 @@ selectPictures() {
        loading.dismiss();
        console.log("ERROR update product=>");
        console.log(err);
+       //alert(JSON.stringify(err));
      });
    }
   }

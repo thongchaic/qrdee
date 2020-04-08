@@ -7,7 +7,7 @@
     </ion-avatar>
 
     <ion-title  >
-      {{ store.store_name }}
+      ร้าน {{ store.store_name }}
       <!-- <img  object-fit: cover src="/assets/noimg.png" > -->
     </ion-title>
 
@@ -21,43 +21,79 @@
 
 <ion-content>
 
+<ion-grid *ngIf="products">
+  <ion-item >
 
+    <ion-text slot="start">
+      <small>เลือกไว้แล้ว {{pick_count}} ชิ้น</small><br>
+      <small> (ขั้นต่ำ {{store.free_delivery_price}} ส่งฟรี)</small>
+    </ion-text>
+    <ion-button fill="clear" color="primary" slot="end" (click)="startPayment();">
+      <ion-icon slot="icon-only" name="ios-cash"></ion-icon> สั่งซื้อ
+    </ion-button>
+  </ion-item>
+    <ion-row responsive-sm wrap no-margin no-padding>
+      <ion-col   *ngFor="let product of products">
 
-  <ion-list *ngIf="products">
-      <ion-item >
-
-        <ion-text slot="start">
-          <small>เลือกไว้แล้ว {{pick_count}} ชิ้น</small>
-          <small> (ขั้นต่ำ {{store.free_delivery_price}} ส่งฟรี)</small>
-        </ion-text>
-        <ion-button fill="clear" color="primary" slot="end" (click)="startPayment();">
-          <ion-icon slot="icon-only" name="ios-cash"></ion-icon> ชำระเงิน
-        </ion-button>
+    <ion-card  no-margin no-padding >
+      <ion-item  >
+        <ion-label>{{ product.product_th }}</ion-label>
+        <ion-badge  color="danger"> {{product.price | number }} บาท </ion-badge>
+        <ion-button fill="outline" slot="end"  (click)="selectItem(product);">เลือก</ion-button>
       </ion-item>
+      <ion-card-content  *ngIf="store.store_pic">
+        <ion-img   style="height:200px;" [src]="'https://qrdee.co/app/'+product.thumbnail"></ion-img>
+        <ion-text *ngIf="product.details_th"><small> {{ product.details_th }} </small></ion-text>
+      </ion-card-content>
+    </ion-card>
 
-      <ion-item  *ngFor="let product of products">
-        <ion-avatar slot="start">
-          <img *ngIf="store.store_pic" [src]="'https://qrdee.co/app/'+product.thumbnail">
-          <img *ngIf="!store.store_pic" src="/assets/noimg.png">
-        </ion-avatar>
-        <ion-text>
-          <small *ngIf="product.product_th"><b>{{product.product_th}}</b></small><br>
-        </ion-text>
-        <ion-text slot="end">
-          <small *ngIf="product.price">ราคา {{product.price | number }} บาท</small><br>
-        </ion-text>
-        <ion-button fill="clear" color="secondary" slot="end" (click)="selectItem(product);">
-          <ion-icon slot="icon-only" name="ios-cart"></ion-icon>
-        </ion-button>
-      </ion-item>
 
-      <!-- <ion-item >
-        <ion-text>
-          <small *ngIf="store.delivery_price">**ร้านนี้ค่าส่ง {{store.delivery_price}} บาท</small><br>
-        </ion-text>
-      </ion-item> -->
+        <!-- <ion-card>
+            <ion-col col-12 no-margin no-padding><img src="{{product.product_th}}"/></ion-col>
+            <ion-col col-12 no-margin no-padding>
+              <ion-card-content>
+                <ion-card-title>
+                  {{ product.product_th }} <ion-badge item-end>{{ product.product_th }} km</ion-badge>
+                </ion-card-title>
+                <p>
+                  <small><rating [score]="5" [max]="5"></rating> ({{ product.product_th }})</small>
+                </p>
+              </ion-card-content>
+            </ion-col>
+        </ion-card> -->
+      </ion-col>
+    </ion-row>
+</ion-grid>
 
-  </ion-list>
+<!-- <ion-list *ngIf="products">
+    <ion-item >
+
+      <ion-text slot="start">
+        <small>เลือกไว้แล้ว {{pick_count}} ชิ้น</small>
+        <small> (ขั้นต่ำ {{store.free_delivery_price}} ส่งฟรี)</small>
+      </ion-text>
+      <ion-button fill="clear" color="primary" slot="end" (click)="startPayment();">
+        <ion-icon slot="icon-only" name="ios-cash"></ion-icon> ชำระเงิน
+      </ion-button>
+    </ion-item>
+
+    <ion-item  *ngFor="let product of products">
+      <ion-avatar slot="start">
+        <img *ngIf="store.store_pic" [src]="'https://qrdee.co/app/'+product.thumbnail">
+        <img *ngIf="!store.store_pic" src="/assets/noimg.png">
+      </ion-avatar>
+      <ion-text>
+        <small *ngIf="product.product_th"><b>{{product.product_th}}</b></small><br>
+      </ion-text>
+      <ion-text slot="end">
+        <small *ngIf="product.price">ราคา {{product.price | number }} บาท</small><br>
+      </ion-text>
+      <ion-button fill="clear" color="secondary" slot="end" (click)="selectItem(product);">
+        <ion-icon slot="icon-only" name="ios-cart"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+</ion-list> -->
 
 
 

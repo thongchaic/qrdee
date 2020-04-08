@@ -23,15 +23,15 @@
       </ion-item>
 
       <ion-item  *ngFor="let store of stores">
-          <ion-avatar slot="start">
+          <ion-avatar slot="start" (click)="viewStore(store);">
             <img *ngIf="store.store_pic" [src]="'https://qrdee.co/app/'+store.store_pic">
             <img *ngIf="!store.store_pic" src="/assets/noimg.png">
           </ion-avatar>
-          <ion-text>
+          <ion-text (click)="viewStore(store);">
             <small *ngIf="store.store_name"><b>{{store.store_name}}</b></small><br>
             <small *ngIf="store.store_type">{{store.store_type.store_type_th}}</small>
           </ion-text>
-          <ion-text slot="end">
+          <ion-text slot="end" (click)="viewStore(store);">
             <small *ngIf="store.delivery_price">ระยะ {{store.distance | number }} km</small><br>
             <small *ngIf="store.delivery_price">ค่าส่ง {{store.delivery_price}} ฿</small>
           </ion-text>

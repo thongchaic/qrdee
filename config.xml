@@ -3,7 +3,7 @@
     <name>QRDEE</name>
     <description>QRDEE e-market</description>
     <author email="qrdee@gmail.com" href="http://qrdee.co/surin">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.1.5:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />

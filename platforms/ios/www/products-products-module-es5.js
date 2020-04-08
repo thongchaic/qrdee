@@ -256,6 +256,7 @@ var FormComponent = /** @class */ (function () {
                                 //alert(JSON.stringify(res));
                                 console.log("UPDATE RES=>");
                                 console.log(res);
+                                //alert(JSON.stringify(res));
                                 loading.dismiss();
                                 _this.toastService.showToast('แก้ไขสินค้าเรียบร้อยแล้ว', 'top');
                                 _this.router.navigateByUrl('/products');
@@ -263,6 +264,7 @@ var FormComponent = /** @class */ (function () {
                                 loading.dismiss();
                                 console.log("ERROR update product=>");
                                 console.log(err);
+                                //alert(JSON.stringify(err));
                             });
                         }
                         return [2 /*return*/];

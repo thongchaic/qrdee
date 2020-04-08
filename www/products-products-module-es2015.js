@@ -245,6 +245,7 @@ let FormComponent = class FormComponent {
                     //alert(JSON.stringify(res));
                     console.log("UPDATE RES=>");
                     console.log(res);
+                    //alert(JSON.stringify(res));
                     loading.dismiss();
                     this.toastService.showToast('แก้ไขสินค้าเรียบร้อยแล้ว', 'top');
                     this.router.navigateByUrl('/products');
@@ -252,6 +253,7 @@ let FormComponent = class FormComponent {
                     loading.dismiss();
                     console.log("ERROR update product=>");
                     console.log(err);
+                    //alert(JSON.stringify(err));
                 });
             }
         });

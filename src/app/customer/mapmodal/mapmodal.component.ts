@@ -50,6 +50,7 @@ export class MapmodalComponent implements OnInit {
       await _loading.present();
 
       this._geolocation.getCurrentPosition().then((resp) => {
+
          _loading.dismiss();
          this.latitude = resp.coords.latitude;
          this.longitude = resp.coords.longitude;

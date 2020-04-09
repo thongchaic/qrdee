@@ -25,8 +25,8 @@ export class CustomerPage implements AfterViewInit{
   tab1 = true;
   tab2 = false;
   tab3 = false;
-  latitude: any;
-  longitude: any;
+  latitude:any = 14.883043;
+  longitude:any = 103.4928108;
   firstname:any;
   mobile_number:any;
   member:any;
@@ -37,6 +37,8 @@ export class CustomerPage implements AfterViewInit{
   member_cart:any[] = [];
   total_price = 0;
   notes:string = '';
+
+
 
   @ViewChild('map',{static:false}) mapElement: ElementRef;
   map: any;
@@ -58,12 +60,15 @@ export class CustomerPage implements AfterViewInit{
 
     localStorage.setItem('member_cart',JSON.stringify(this.member_cart));
     this.member = JSON.parse(localStorage.getItem('member'));
-    this.latitude = this.member.latitude;
-    this.longitude = this.member.longitude;
-    this.mobile_number = this.member.mobile_number;
-    this.firstname = this.member.firstname;
-    console.log("list component called!!!");
-    console.log(this.member);
+    if(this.member){
+      this.latitude = this.member.latitude;
+      this.longitude = this.member.longitude;
+      this.mobile_number = this.member.mobile_number;
+      this.firstname = this.member.firstname;
+      console.log("list component called!!!");
+      console.log(this.member);
+    }
+
 
   }
   ionViewDidEnter() {

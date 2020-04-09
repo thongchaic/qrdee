@@ -1,4 +1,4 @@
-<ion-header style="background:#FFFFFF;">
+<ion-header translucent>
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="tab1">
+<ion-content fullscreen *ngIf="tab1">
   <ion-searchbar placeholder="ค้นหาร้าน" color="primary" (ionChange)="searchStores($event.target.value)">
   </ion-searchbar>
 
@@ -15,14 +15,32 @@
       <ion-list-header >
         <ion-label>ร้านค้าใกล้เคียง</ion-label>
       </ion-list-header>
-
       <ion-item *ngIf="stores && stores.length <=0 ">
         <ion-text>
             ไม่พบร้านบริเวณใกล้ ๆ นี้
         </ion-text>
       </ion-item>
 
-      <ion-item  *ngFor="let store of stores">
+      <ion-card *ngFor="let store of stores" (click)="viewStore(store);">
+
+        <ion-row style="height: 100%;">
+          <ion-col size="4">
+            <ion-thumbnail style="height: 100%; width: 100%; border-radius: 2px;">
+              <img *ngIf="store.store_pic" [src]="'https://qrdee.co/app/'+store.store_pic" style="height: 100%; width: 100%; border-radius: 4px;">
+              <img *ngIf="!store.store_pic" src="/assets/noimg.png" style="height: 100%; width: 100%; border-radius: 4px;">
+            </ion-thumbnail>
+          </ion-col>
+
+          <ion-col size="8" style="line-height: 10px;">
+            <h6>{{ store.store_name }} <ion-badge color="primary">{{store.distance | number }} กม.</ion-badge></h6>
+            <p>{{ store.store_type.store_type_th }}</p>
+            <p>ค่าส่ง {{store.delivery_price}} ฿</p>
+          </ion-col>
+
+        </ion-row>
+
+      </ion-card>
+      <!-- <ion-item  *ngFor="let store of stores">
           <ion-avatar slot="start" (click)="viewStore(store);">
             <img *ngIf="store.store_pic" [src]="'https://qrdee.co/app/'+store.store_pic">
             <img *ngIf="!store.store_pic" src="/assets/noimg.png">
@@ -38,7 +56,9 @@
           <ion-button fill="clear" color="primary" slot="end" (click)="viewStore(store);">
             <ion-icon slot="icon-only" name="md-eye"></ion-icon>
           </ion-button>
-        </ion-item>
+
+
+        </ion-item> -->
   </ion-list>
 
   <!-- <ion-infinite-scroll threshold="50%" (ionInfinite)="infinitStores($event.target)">
@@ -151,7 +171,7 @@
         <ion-tab-bar slot="bottom">
           <ion-tab-button color="primary" (click)="changeTab(0)" >
               <ion-icon name="md-locate"></ion-icon>
-              <ion-label>ร้านค้าไกล้ๆ</ion-label>
+              <ion-label>ร้านค้าใกล้ๆ</ion-label>
           </ion-tab-button>
           <ion-tab-button color="primary" (click)="changeTab(1)" >
               <ion-icon name="md-cart"></ion-icon>

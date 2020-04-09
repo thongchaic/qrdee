@@ -39,7 +39,7 @@ export class CustomerPage implements AfterViewInit{
   total_price = 0;
   notes:string = '';
 
-  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
+  @ViewChild(IonInfiniteScroll, {static: false}) infiniteScroll: IonInfiniteScroll;
   @ViewChild('map',{static:false}) mapElement: ElementRef;
   map: any;
 
@@ -57,6 +57,7 @@ export class CustomerPage implements AfterViewInit{
     private platform: Platform,
     private callNumber: CallNumber
 	){
+
 
     localStorage.setItem('member_cart',JSON.stringify(this.member_cart));
     this.member = JSON.parse(localStorage.getItem('member'));
@@ -192,6 +193,7 @@ export class CustomerPage implements AfterViewInit{
   infinitStores(event){
 
 
+    
     if(this.q == ""){
       console.log("Load Stores....");
       this.loadStores(true);

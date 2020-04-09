@@ -7,12 +7,13 @@ import { ActivatedRoute, Router,NavigationExtras  } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { NavController, LoadingController } from '@ionic/angular';
 import { CallNumber } from '@ionic-native/call-number/ngx';
-
 import { ModalController } from '@ionic/angular';
 import { CartmodalComponent } from './cartmodal/cartmodal.component';
 import { CustomerService } from './shared/customer.service';
 import { MapmodalComponent } from './mapmodal/mapmodal.component';
 import { Platform } from '@ionic/angular';
+import { IonInfiniteScroll } from '@ionic/angular';
+
 declare var google;
 
 @Component({
@@ -38,8 +39,7 @@ export class CustomerPage implements AfterViewInit{
   total_price = 0;
   notes:string = '';
 
-
-
+  @ViewChild(IonInfiniteScroll) infiniteScroll: IonInfiniteScroll;
   @ViewChild('map',{static:false}) mapElement: ElementRef;
   map: any;
 
@@ -124,7 +124,7 @@ export class CustomerPage implements AfterViewInit{
   }
 
 
-  async loadStores(){
+  async loadStores(scrolled=false){
 
 
       if(this.latitude == null || this.longitude == null){
@@ -138,17 +138,30 @@ export class CustomerPage implements AfterViewInit{
       await loading.present();
 
       this.offset = await this.stores.length;
+
+      console.log(this.offset+", "+this.latitude+", "+this.longitude);
       await this.userservice.getStores(this.offset, this.latitude, this.longitude).subscribe((data:any)=>{
         //this.loading.dismissLoading();
 
         data.forEach(e => {
-          this.stores.push(e)
+          let f = this.stores.find( t => t.id == e.id);
+          if(!f){
+            this.stores.push(e);
+          }
+
         });
+
         console.log(this.stores);
         loading.dismiss();
+        if(scrolled){
+          this.infiniteScroll.complete();
+        }
 
       }, err=>{
         loading.dismiss();
+        if(scrolled){
+          this.infiniteScroll.complete();
+        }
       });
   }
 
@@ -171,17 +184,29 @@ export class CustomerPage implements AfterViewInit{
     this.userservice.searchStores(q, this.offset, this.latitude, this.longitude).subscribe((data:any)=>{
       console.log(data);
       this.stores = data;
+    }, err=>{
+      console.log(err);
     });
   }
 
-  infinitStores(e){
-    console.log("Infinit => "+this.q);
+  infinitStores(event){
+
+
     if(this.q == ""){
       console.log("Load Stores....");
-      this.loadStores();
+      this.loadStores(true);
     }else{
       this.searchStores(this.q);
     }
+      //
+      // setTimeout(() => {
+      // console.log('Done');
+      // this.infiniteScroll.complete();
+      //
+      //
+      // }, 500);
+
+
   }
 
   calcTotalPrice(){

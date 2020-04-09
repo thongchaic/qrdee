@@ -61,10 +61,10 @@
         </ion-item> -->
   </ion-list>
 
-  <!-- <ion-infinite-scroll threshold="50%" (ionInfinite)="infinitStores($event.target)">
+  <ion-infinite-scroll (ionInfinite)="infinitStores($event.target)" style="height: 5px;opacity: .01;">
      <ion-infinite-scroll-content>
      </ion-infinite-scroll-content>
-   </ion-infinite-scroll> -->
+   </ion-infinite-scroll>
 
 </ion-content>
 <ion-content *ngIf="tab2">
@@ -145,6 +145,7 @@
 
 <ion-content *ngIf="tab3">
   <ion-list *ngIf="carts">
+
       <ion-list-header >
         <ion-label>รายการซื้อสินค้า</ion-label>
       </ion-list-header>
@@ -162,6 +163,7 @@
             <ion-icon slot="icon-only" name="ios-call"></ion-icon>
           </ion-button>
         </ion-item>
+
   </ion-list>
 </ion-content>
 

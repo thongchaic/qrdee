@@ -13,6 +13,12 @@ constructor(
 ) { }
 
 
+addStoreStar(id, rating) {
+  return this.http.post(`https://qrdee.co/api/v2/rating/store/${id}`, { star: rating });
+} 
+addProductComment(id, comment) {
+  return this.http.post(`https://qrdee.co/api/v2/rating/product/${id}`, { comment: comment });
+} 
 
 // get(id) {
 //   return this.http.get<any>(`${this.baseUrl}/${id}`);

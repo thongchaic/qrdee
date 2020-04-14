@@ -1,4 +1,4 @@
-import { Component,ViewChild ,AfterViewInit,ElementRef,NgZone } from '@angular/core';
+import { Component,ViewChild ,AfterViewInit,ElementRef,NgZone, ViewEncapsulation } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { UserService } from './shared/user.service';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
@@ -20,6 +20,7 @@ declare var google;
   selector: 'app-customer',
   templateUrl: './customer.page.html',
   styleUrls: ['./customer.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class CustomerPage implements AfterViewInit{
 

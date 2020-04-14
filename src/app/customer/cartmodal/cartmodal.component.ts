@@ -1,14 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { ModalController, Events } from '@ionic/angular';
 import { ProductService } from '../../products/shared/product.service';
 import { ToastService } from '../../shared/services/toast.service';
 import { AlertController } from '@ionic/angular';
+import { FormControl } from '@angular/forms';
+import { CustomerService } from '../shared/customer.service';
 
 
 @Component({
   selector: 'app-cartmodal',
   templateUrl: './cartmodal.component.html',
   styleUrls: ['./cartmodal.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class CartmodalComponent implements OnInit {
 
@@ -16,10 +19,12 @@ export class CartmodalComponent implements OnInit {
   products:any[] = [];
   member_cart:any[] = [];
   pick_count:number = 0;
-  rate:any = 3;
+  product_rate = 4;
+  store_rate = 0;
 
   constructor(
     private productService: ProductService,
+    private customerService: CustomerService,
     private toastService: ToastService,
     private event : Events,
     private modalController: ModalController,
@@ -76,58 +81,17 @@ export class CartmodalComponent implements OnInit {
   }
 
 
-  async commentPrompt(){
+  async commentPrompt(pid, comments){
     const alert = await this.alertController.create({
       header: 'ความเห็น',
       inputs: [
         {
-          // name: 'name1',
+          name: 'comment',
           type: 'text',
-          placeholder: 'Placeholder 1'
-        },
-        {
-          // name: 'name2',
-          type: 'text',
-          id: 'name2-id',
-          value: 'hello',
-          placeholder: 'Placeholder 2'
-        },
-        // multiline input.
-        {
-          // name: 'paragraph',
-          id: 'paragraph',
-          type: 'textarea',
-          placeholder: 'Placeholder 3'
-        },
-        {
-          name: 'name3',
-          value: 'http://ionicframework.com',
-          type: 'url',
-          placeholder: 'Favorite site ever'
-        },
-        // input date with min & max
-        {
-          // name: 'name4',
-          type: 'date',
-          min: '2017-03-01',
-          max: '2018-01-12'
-        },
-        // input date without min nor max
-        {
-          // name: 'name5',
-          type: 'date'
-        },
-        {
-          // name: 'name6',
-          type: 'number',
-          min: -5,
-          max: 10
-        },
-        {
-          // name: 'name7',
-          type: 'text'
+          placeholder: 'ความคิดเห็น'
         }
       ],
+      message: comments.map(comment => '<p>' + comment.comment + '<p>').join(' '),
       buttons: [
         {
           text: 'ยกเลิก',
@@ -138,8 +102,9 @@ export class CartmodalComponent implements OnInit {
           }
         }, {
           text: 'ส่งความเห็น',
-          handler: () => {
-            console.log('Confirm Ok');
+          handler: (e) => {
+            console.log(pid);
+            this.customerService.addProductComment(pid, e.comment).subscribe(() => this.loadProducts());
           }
         }
       ]
@@ -155,11 +120,11 @@ export class CartmodalComponent implements OnInit {
     this.closeModal(3);
   }
 
-  addProductStar(event){
-    console.log(event);
+  addProductStar(id, star){
+    this.productService.addProductRate(id, star).subscribe(() => this.loadProducts());
   }
-  onRateChange(event){
-    console.log(event);
+  addStoreStar(id, star){
+    this.customerService.addStoreStar(id, star).subscribe(console.log);
   }
 
 

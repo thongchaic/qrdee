@@ -2,3 +2,26 @@ store-ion-rating {
   --star-color: gray;
   --star-color-filled: green;
 }
+
+#store-rating ion-buttons ion-button {
+  --padding-top: 0;
+  --padding-bottom: 0;
+  --padding-start: 4px;
+  --padding-end: 4px;
+  --box-shadow: none;
+  height: 20px;
+  font-size: 10px;
+}
+
+.rating-container ion-button {
+  --padding-start: 4px;
+  --padding-end: 4px;
+
+  ion-icon {
+		color: gray;
+  }
+  
+  ion-icon[ng-reflect-name="star"] {
+    color: #ffb400;
+  }
+}

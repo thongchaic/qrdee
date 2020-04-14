@@ -6,32 +6,30 @@
       <img *ngIf="!store.store_pic" src="/assets/noimg.png">
     </ion-avatar>
 
+    <div>
+      <ion-row>
+        <ion-col>
+          {{ store.store_name }}
+        </ion-col>
+      </ion-row>
 
+      <ion-row>
+        <ion-col no-margin no-padding>
+          <ul class="rating-container" style="display: inline; list-style: none;">
+            <li>
+              <ion-button fill size="small" *ngFor="let star of [0,1,2,3,4]" (click)="addStoreStar(store.id, star+1)">
+                <ion-icon [name]="product_rate > star ? 'star' : 'star-outline'"></ion-icon>
+              </ion-button>
+            </li>
+          </ul>
+        </ion-col>
+      </ion-row>
+    </div>
 
-
-    <ion-text>
-      <BR><BR>
-      <B>ร้าน {{ store.store_name }}</B>
-      <ion-rating class="store-ion-rating" no-margin no-padding [rate]="rate"
-      readonly="false"
-      size="small"
-      (rateChange)="onRateChange($event)">
-      </ion-rating>
-    </ion-text>
-
-    <ion-button fill="clear" color="danger" slot="end" (click)="forceDissmiss(0);">
-      <ion-icon name="ios-arrow-back"></ion-icon>Back
+    <ion-button fill="clear" size="small" color="danger" slot="end" (click)="forceDissmiss(0);">
+      <ion-icon name="ios-arrow-back"></ion-icon>
     </ion-button>
   </ion-toolbar>
-
-  <!-- <ion-toolbar>
-    <ion-rating no-margin no-padding [rate]="rate"
-    readonly="false"
-    size="small"
-    (ngModelChange)="rateStore($event);">
-  </ion-rating>
-  </ion-toolbar> -->
-
 
 
 </ion-header>
@@ -64,16 +62,26 @@
           </ion-card-content>
 
           <ion-row no-margin no-padding>
-            <ion-col no-margin no-padding>
+            <ion-col size="10">
             <!-- <button ion-button icon-start clear small>
             <ion-icon name="thumbs-up"></ion-icon>
             <div>12 Likes</div>
             </button> -->
-            <ion-rating no-margin no-padding [rate]="rate"
+            
+              <div class="rating-container">
+                <ul style="display: inline;">
+                  <li>
+                    <ion-button fill size="small" *ngFor="let star of [0,1,2,3,4]" (click)="addProductStar(product.id, star+1)">
+                      <ion-icon [name]="product_rate > star ? 'star' : 'star-outline'"></ion-icon>
+                    </ion-button>
+                  </li>
+                </ul>
+              </div>
+            <!-- <rating no-margin no-padding [rate]="rate"
               readonly="false"
               size="small"
-              (rateChange)="onRateChange($event)">
-            </ion-rating>
+              (rateChange)="addProductStar($event)">
+            </rating> -->
             </ion-col>
             <!-- <ion-col>
             <button ion-button icon-start clear small>
@@ -81,10 +89,10 @@
             <div>4 Comments</div>
             </button>
             </ion-col> -->
-            <ion-col align-self-center text-center (click)="commentPrompt();">
-            <ion-note color="primary"><ion-icon name="text"></ion-icon>
-              4
-            </ion-note>
+            <ion-col size="2" align-self-center text-center (click)="commentPrompt(product.id, product.comments);">
+              <ion-note color="primary"><ion-icon name="text"></ion-icon>
+                {{ product.comments.length }}
+              </ion-note>
             </ion-col>
           </ion-row>
 

@@ -111,6 +111,10 @@ export class ProductService {
     return fd;
   }
 
+  addProductRate(product_id, rating) {
+    return this.http.post(`https://qrdee.co/api/v2/rating/product/${product_id}`, { star: rating });
+  }
+
 
 
 

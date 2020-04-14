@@ -14,7 +14,8 @@ import { File } from '@ionic-native/file/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 // import { ImagePicker } from '@ionic-native/image-picker/ngx';
 // import { WebView } from '@ionic-native/ionic-webview/ngx';
-
+import { IonicMqttModule, MQTTService } from 'ionic-mqtt';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
 //ionic cordova run ios -lc -d --target="0D1FA3B0-AB5E-4F76-AB49-1E2D63774E7B"
 
@@ -34,6 +35,8 @@ import { Camera } from '@ionic-native/camera/ngx';
     Geolocation,
     File,
     Camera,
+    MQTTService,
+    LocalNotifications,
     // ImagePicker,
     // WebView,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }

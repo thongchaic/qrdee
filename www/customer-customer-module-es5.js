@@ -1,5 +1,226 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["customer-customer-module"],{
 
+/***/ "./node_modules/ionic-rating/fesm5/ionic-rating.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/ionic-rating/fesm5/ionic-rating.js ***!
+  \*********************************************************/
+/*! exports provided: IonRatingComponent, IonicRatingModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonRatingComponent", function() { return IonRatingComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IonicRatingModule", function() { return IonicRatingModule; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm5/forms.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+
+
+
+
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var IonRatingComponent = /** @class */ (function () {
+    function IonRatingComponent(cd) {
+        this.cd = cd;
+        this.hover = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.leave = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+        this.rateChange = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+    }
+    /**
+     * @param {?} changes
+     * @return {?}
+     */
+    IonRatingComponent.prototype.ngOnChanges = /**
+     * @param {?} changes
+     * @return {?}
+     */
+    function (changes) {
+        if (changes.rate) {
+            this.update(this.rate);
+        }
+    };
+    /**
+     * @private
+     * @param {?} value
+     * @param {?=} internalChange
+     * @return {?}
+     */
+    IonRatingComponent.prototype.update = /**
+     * @private
+     * @param {?} value
+     * @param {?=} internalChange
+     * @return {?}
+     */
+    function (value, internalChange) {
+        if (internalChange === void 0) { internalChange = true; }
+        if (!(this.readonly || this.disabled || this.rate === value)) {
+            this.rate = value;
+            this.rateChange.emit(this.rate);
+        }
+        if (internalChange) {
+            if (this.onChange) {
+                this.onChange(this.rate);
+            }
+            if (this.onTouched) {
+                this.onTouched();
+            }
+        }
+    };
+    /**
+     * @param {?} rate
+     * @return {?}
+     */
+    IonRatingComponent.prototype.onClick = /**
+     * @param {?} rate
+     * @return {?}
+     */
+    function (rate) {
+        this.update(this.resettable && this.rate === rate ? 0 : rate);
+    };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    IonRatingComponent.prototype.onMouseEnter = /**
+     * @param {?} value
+     * @return {?}
+     */
+    function (value) {
+        if (!(this.disabled || this.readonly)) {
+            this.hoverRate = value;
+        }
+        this.hover.emit(value);
+    };
+    /**
+     * @return {?}
+     */
+    IonRatingComponent.prototype.onMouseLeave = /**
+     * @return {?}
+     */
+    function () {
+        this.leave.emit(this.hoverRate);
+        this.hoverRate = 0;
+    };
+    /**
+     * @return {?}
+     */
+    IonRatingComponent.prototype.onBlur = /**
+     * @return {?}
+     */
+    function () {
+        if (this.onTouched) {
+            this.onTouched();
+        }
+    };
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    IonRatingComponent.prototype.writeValue = /**
+     * @param {?} value
+     * @return {?}
+     */
+    function (value) {
+        this.update(value, false);
+        this.cd.markForCheck();
+    };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    IonRatingComponent.prototype.registerOnChange = /**
+     * @param {?} fn
+     * @return {?}
+     */
+    function (fn) {
+        this.onChange = fn;
+    };
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    IonRatingComponent.prototype.registerOnTouched = /**
+     * @param {?} fn
+     * @return {?}
+     */
+    function (fn) {
+        this.onTouched = fn;
+    };
+    /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
+    IonRatingComponent.prototype.setDisabledState = /**
+     * @param {?} isDisabled
+     * @return {?}
+     */
+    function (isDisabled) {
+        this.disabled = isDisabled;
+    };
+    IonRatingComponent.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"], args: [{
+                    selector: 'ion-rating',
+                    template: "<ion-button *ngFor=\"let i of [1, 2, 3, 4, 5]\" type=\"button\" fill=\"clear\" [disabled]=\"disabled || readonly\"\n  (mouseenter)=\"onMouseEnter(i)\" (click)=\"onClick(i)\" [class.filled]=\"i <= hoverRate || (!hoverRate && i <= rate)\"\n  [class.readonly]=\"readonly\">\n  <ion-icon slot=\"icon-only\" name=\"star\" [size]=\"size\">\n  </ion-icon>\n</ion-button>",
+                    changeDetection: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectionStrategy"].OnPush,
+                    providers: [
+                        {
+                            provide: _angular_forms__WEBPACK_IMPORTED_MODULE_1__["NG_VALUE_ACCESSOR"],
+                            useExisting: Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["forwardRef"])((/**
+                             * @return {?}
+                             */
+                            function () { return IonRatingComponent; })),
+                            multi: true
+                        }
+                    ],
+                    styles: [":host{--star-color:gray;--star-color-filled:orange;display:inline-block}ion-button{--padding-start:0;--padding-end:0;--color:var(--star-color);--color-focused:var(--star-color);--color-activated:var(--star-color)}ion-button.filled{--color:var(--star-color-filled);--color-focused:var(--star-color-filled);--color-activated:var(--star-color-filled)}ion-button.readonly{--opacity:1}"]
+                }] }
+    ];
+    /** @nocollapse */
+    IonRatingComponent.ctorParameters = function () { return [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ChangeDetectorRef"] }
+    ]; };
+    IonRatingComponent.propDecorators = {
+        rate: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
+        readonly: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
+        resettable: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
+        size: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"] }],
+        hover: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"] }],
+        leave: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"] }],
+        rateChange: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"] }],
+        onMouseLeave: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["HostListener"], args: ['mouseleave', [],] }],
+        onBlur: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["HostListener"], args: ['blur', [],] }]
+    };
+    return IonRatingComponent;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+var IonicRatingModule = /** @class */ (function () {
+    function IonicRatingModule() {
+    }
+    IonicRatingModule.decorators = [
+        { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"], args: [{
+                    imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_1__["FormsModule"], _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonicModule"]],
+                    exports: [IonRatingComponent],
+                    declarations: [IonRatingComponent]
+                },] }
+    ];
+    return IonicRatingModule;
+}());
+
+
+//# sourceMappingURL=ionic-rating.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/index.js!./src/app/customer/cartmodal/cartmodal.component.html":
 /*!***************************************************************************************!*\
   !*** ./node_modules/raw-loader!./src/app/customer/cartmodal/cartmodal.component.html ***!
@@ -7,7 +228,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header padding=\"true\">\n  <ion-toolbar  *ngIf=\"store\">\n\n    <ion-avatar slot=\"start\">\n      <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\">\n      <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n    </ion-avatar>\n\n    <ion-title  >\n      ร้าน {{ store.store_name }}\n      <!-- <img  object-fit: cover src=\"/assets/noimg.png\" > -->\n    </ion-title>\n\n\n    <ion-button fill=\"clear\" color=\"danger\" slot=\"end\" (click)=\"forceDissmiss(0);\">\n      <ion-icon name=\"ios-arrow-back\"></ion-icon>Back\n    </ion-button>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n\n<ion-grid *ngIf=\"products\">\n  <ion-item >\n\n    <ion-text slot=\"start\">\n      <small>เลือกไว้แล้ว {{pick_count}} ชิ้น</small><br>\n      <small> (ขั้นต่ำ {{store.free_delivery_price}} ส่งฟรี)</small>\n    </ion-text>\n    <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"startPayment();\">\n      <ion-icon slot=\"icon-only\" name=\"ios-cash\"></ion-icon> สั่งซื้อ\n    </ion-button>\n  </ion-item>\n    <ion-row responsive-sm wrap no-margin no-padding>\n      <ion-col   *ngFor=\"let product of products\">\n\n    <ion-card  no-margin no-padding >\n      <ion-item  >\n        <ion-label>{{ product.product_th }}</ion-label>\n        <ion-badge  color=\"danger\"> {{product.price | number }} บาท </ion-badge>\n        <ion-button fill=\"outline\" slot=\"end\"  (click)=\"selectItem(product);\">เลือก</ion-button>\n      </ion-item>\n      <ion-card-content  *ngIf=\"store.store_pic\">\n        <ion-img   style=\"height:200px;\" [src]=\"'https://qrdee.co/app/'+product.thumbnail\"></ion-img>\n        <ion-text *ngIf=\"product.details_th\"><small> {{ product.details_th }} </small></ion-text>\n      </ion-card-content>\n    </ion-card>\n\n\n        <!-- <ion-card>\n            <ion-col col-12 no-margin no-padding><img src=\"{{product.product_th}}\"/></ion-col>\n            <ion-col col-12 no-margin no-padding>\n              <ion-card-content>\n                <ion-card-title>\n                  {{ product.product_th }} <ion-badge item-end>{{ product.product_th }} km</ion-badge>\n                </ion-card-title>\n                <p>\n                  <small><rating [score]=\"5\" [max]=\"5\"></rating> ({{ product.product_th }})</small>\n                </p>\n              </ion-card-content>\n            </ion-col>\n        </ion-card> -->\n      </ion-col>\n    </ion-row>\n</ion-grid>\n\n<!-- <ion-list *ngIf=\"products\">\n    <ion-item >\n\n      <ion-text slot=\"start\">\n        <small>เลือกไว้แล้ว {{pick_count}} ชิ้น</small>\n        <small> (ขั้นต่ำ {{store.free_delivery_price}} ส่งฟรี)</small>\n      </ion-text>\n      <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"startPayment();\">\n        <ion-icon slot=\"icon-only\" name=\"ios-cash\"></ion-icon> ชำระเงิน\n      </ion-button>\n    </ion-item>\n\n    <ion-item  *ngFor=\"let product of products\">\n      <ion-avatar slot=\"start\">\n        <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+product.thumbnail\">\n        <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n      </ion-avatar>\n      <ion-text>\n        <small *ngIf=\"product.product_th\"><b>{{product.product_th}}</b></small><br>\n      </ion-text>\n      <ion-text slot=\"end\">\n        <small *ngIf=\"product.price\">ราคา {{product.price | number }} บาท</small><br>\n      </ion-text>\n      <ion-button fill=\"clear\" color=\"secondary\" slot=\"end\" (click)=\"selectItem(product);\">\n        <ion-icon slot=\"icon-only\" name=\"ios-cart\"></ion-icon>\n      </ion-button>\n    </ion-item>\n\n</ion-list> -->\n\n\n\n</ion-content>\n"
+module.exports = "<ion-header padding=\"true\">\n  <ion-toolbar  *ngIf=\"store\">\n\n    <ion-avatar no-margin no-padding slot=\"start\">\n      <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\">\n      <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n    </ion-avatar>\n\n\n\n\n    <ion-text>\n      <BR><BR>\n      <B>ร้าน {{ store.store_name }}</B>\n      <ion-rating class=\"store-ion-rating\" no-margin no-padding [rate]=\"rate\"\n      readonly=\"false\"\n      size=\"small\"\n      (rateChange)=\"onRateChange($event)\">\n      </ion-rating>\n    </ion-text>\n\n    <ion-button fill=\"clear\" color=\"danger\" slot=\"end\" (click)=\"forceDissmiss(0);\">\n      <ion-icon name=\"ios-arrow-back\"></ion-icon>Back\n    </ion-button>\n  </ion-toolbar>\n\n  <!-- <ion-toolbar>\n    <ion-rating no-margin no-padding [rate]=\"rate\"\n    readonly=\"false\"\n    size=\"small\"\n    (ngModelChange)=\"rateStore($event);\">\n  </ion-rating>\n  </ion-toolbar> -->\n\n\n\n</ion-header>\n\n\n<ion-content>\n\n<ion-grid *ngIf=\"products\">\n  <ion-item>\n    <ion-text slot=\"start\">\n      <small>เลือกไว้แล้ว {{pick_count}} ชิ้น</small><br>\n      <small> (ขั้นต่ำ {{store.free_delivery_price}} ส่งฟรี)</small>\n    </ion-text>\n    <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"startPayment();\">\n      <ion-icon slot=\"icon-only\" name=\"ios-cash\"></ion-icon> สั่งซื้อ\n    </ion-button>\n  </ion-item>\n    <ion-row responsive-sm wrap no-margin no-padding>\n      <ion-col   *ngFor=\"let product of products\">\n\n        <ion-card  no-margin no-padding >\n          <ion-item>\n            <ion-text>{{ product.product_th }}</ion-text>\n            <ion-badge  color=\"danger\"> {{product.price | number }} บาท </ion-badge>\n            <ion-button fill=\"outline\" slot=\"end\"  (click)=\"selectItem(product);\">เลือก</ion-button>\n          </ion-item>\n          <ion-card-content  no-margin no-padding *ngIf=\"store.store_pic\">\n            <ion-img   style=\"height:200px;\" [src]=\"'https://qrdee.co/app/'+product.thumbnail\"></ion-img>\n            <ion-text *ngIf=\"product.details_th\"><small> {{ product.details_th }} </small></ion-text>\n          </ion-card-content>\n\n          <ion-row no-margin no-padding>\n            <ion-col no-margin no-padding>\n            <!-- <button ion-button icon-start clear small>\n            <ion-icon name=\"thumbs-up\"></ion-icon>\n            <div>12 Likes</div>\n            </button> -->\n            <ion-rating no-margin no-padding [rate]=\"rate\"\n              readonly=\"false\"\n              size=\"small\"\n              (rateChange)=\"onRateChange($event)\">\n            </ion-rating>\n            </ion-col>\n            <!-- <ion-col>\n            <button ion-button icon-start clear small>\n            <ion-icon name=\"text\"></ion-icon>\n            <div>4 Comments</div>\n            </button>\n            </ion-col> -->\n            <ion-col align-self-center text-center (click)=\"commentPrompt();\">\n            <ion-note color=\"primary\"><ion-icon name=\"text\"></ion-icon>\n              4\n            </ion-note>\n            </ion-col>\n          </ion-row>\n\n\n        </ion-card>\n\n\n        <!-- <ion-card>\n            <ion-col col-12 no-margin no-padding><img src=\"{{product.product_th}}\"/></ion-col>\n            <ion-col col-12 no-margin no-padding>\n              <ion-card-content>\n                <ion-card-title>\n                  {{ product.product_th }} <ion-badge item-end>{{ product.product_th }} km</ion-badge>\n                </ion-card-title>\n                <p>\n                  <small><rating [score]=\"5\" [max]=\"5\"></rating> ({{ product.product_th }})</small>\n                </p>\n              </ion-card-content>\n            </ion-col>\n        </ion-card> -->\n      </ion-col>\n    </ion-row>\n</ion-grid>\n\n<!-- <ion-list *ngIf=\"products\">\n    <ion-item >\n\n      <ion-text slot=\"start\">\n        <small>เลือกไว้แล้ว {{pick_count}} ชิ้น</small>\n        <small> (ขั้นต่ำ {{store.free_delivery_price}} ส่งฟรี)</small>\n      </ion-text>\n      <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"startPayment();\">\n        <ion-icon slot=\"icon-only\" name=\"ios-cash\"></ion-icon> ชำระเงิน\n      </ion-button>\n    </ion-item>\n\n    <ion-item  *ngFor=\"let product of products\">\n      <ion-avatar slot=\"start\">\n        <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+product.thumbnail\">\n        <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n      </ion-avatar>\n      <ion-text>\n        <small *ngIf=\"product.product_th\"><b>{{product.product_th}}</b></small><br>\n      </ion-text>\n      <ion-text slot=\"end\">\n        <small *ngIf=\"product.price\">ราคา {{product.price | number }} บาท</small><br>\n      </ion-text>\n      <ion-button fill=\"clear\" color=\"secondary\" slot=\"end\" (click)=\"selectItem(product);\">\n        <ion-icon slot=\"icon-only\" name=\"ios-cart\"></ion-icon>\n      </ion-button>\n    </ion-item>\n\n</ion-list> -->\n\n\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -18,7 +239,7 @@ module.exports = "<ion-header padding=\"true\">\n  <ion-toolbar  *ngIf=\"store\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header translucent>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>ซื้อสินค้า</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen *ngIf=\"tab1\">\n  <ion-searchbar placeholder=\"ค้นหาร้าน\" color=\"primary\" (ionChange)=\"searchStores($event.target.value)\">\n  </ion-searchbar>\n\n  <ion-list *ngIf=\"stores\">\n      <ion-list-header >\n        <ion-label>ร้านค้าใกล้เคียง</ion-label>\n      </ion-list-header>\n      <ion-item *ngIf=\"stores && stores.length <=0 \">\n        <ion-text>\n            ไม่พบร้านบริเวณใกล้ ๆ นี้\n        </ion-text>\n      </ion-item>\n\n      <ion-card *ngFor=\"let store of stores\" (click)=\"viewStore(store);\">\n\n        <ion-row style=\"height: 100%;\">\n          <ion-col size=\"4\">\n            <ion-thumbnail style=\"height: 100%; width: 100%; border-radius: 2px;\">\n              <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\" style=\"height: 100%; width: 100%; border-radius: 4px;\">\n              <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\" style=\"height: 100%; width: 100%; border-radius: 4px;\">\n            </ion-thumbnail>\n          </ion-col>\n\n          <ion-col size=\"8\" style=\"line-height: 10px;\">\n            <h6>{{ store.store_name }} <ion-badge color=\"primary\">{{store.distance | number }} กม.</ion-badge></h6>\n            <p>{{ store.store_type.store_type_th }}</p>\n            <p>ค่าส่ง {{store.delivery_price}} ฿</p>\n          </ion-col>\n\n        </ion-row>\n\n      </ion-card>\n      <!-- <ion-item  *ngFor=\"let store of stores\">\n          <ion-avatar slot=\"start\" (click)=\"viewStore(store);\">\n            <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\">\n            <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n          </ion-avatar>\n          <ion-text (click)=\"viewStore(store);\">\n            <small *ngIf=\"store.store_name\"><b>{{store.store_name}}</b></small><br>\n            <small *ngIf=\"store.store_type\">{{store.store_type.store_type_th}}</small>\n          </ion-text>\n          <ion-text slot=\"end\" (click)=\"viewStore(store);\">\n            <small *ngIf=\"store.delivery_price\">ระยะ {{store.distance | number }} km</small><br>\n            <small *ngIf=\"store.delivery_price\">ค่าส่ง {{store.delivery_price}} ฿</small>\n          </ion-text>\n          <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"viewStore(store);\">\n            <ion-icon slot=\"icon-only\" name=\"md-eye\"></ion-icon>\n          </ion-button>\n\n\n        </ion-item> -->\n  </ion-list>\n\n  <ion-infinite-scroll (ionInfinite)=\"infinitStores($event.target)\" style=\"height: 5px;opacity: .01;\">\n     <ion-infinite-scroll-content>\n     </ion-infinite-scroll-content>\n   </ion-infinite-scroll>\n\n</ion-content>\n<ion-content *ngIf=\"tab2\">\n\n  <ion-list  *ngFor=\"let cart of member_cart\">\n      <ion-item >\n        <ion-avatar slot=\"start\">\n        </ion-avatar>\n        <ion-text>\n          <small *ngIf=\"cart.store_name\"><b>ร้าน {{cart.store_name}}</b></small><br>\n        </ion-text>\n        <ion-text slot=\"end\">\n          <small *ngIf=\"cart.delivery_price\">ค่าส่ง {{cart.delivery_price}} ฿</small><br>\n          <small *ngIf=\"cart.free_delivery_price\">(ขั้นต่ำ {{cart.free_delivery_price}} ส่งฟรี)</small>\n        </ion-text>\n        <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"callStore(cart.mobile_number);\">\n          <ion-icon slot=\"icon-only\" name=\"ios-call\"></ion-icon>\n        </ion-button>\n      </ion-item>\n\n      <ion-item *ngFor=\"let prod of cart.products\">\n        <ion-avatar slot=\"start\">\n          <img *ngIf=\"prod.thumbnail\" [src]=\"'https://qrdee.co/app/'+prod.thumbnail\">\n          <img *ngIf=\"!prod.thumbnail\" src=\"/assets/noimg.png\">\n        </ion-avatar>\n        <ion-text>\n          <small *ngIf=\"prod.product_th\"><b>{{prod.product_th}}</b></small><br>\n        </ion-text>\n        <ion-text slot=\"end\">\n          <small *ngIf=\"prod.price\">{{prod.price}} ฿</small>\n        </ion-text>\n        <ion-button fill=\"clear\" color=\"danger\" slot=\"end\" (click)=\"removeItem(cart.id, prod.id);\">\n          <ion-icon slot=\"icon-only\" name=\"md-remove-circle\"></ion-icon>\n        </ion-button>\n      </ion-item>\n\n  </ion-list>\n\n  <ion-list lines=\"none\">\n    <ion-item>\n      <ion-text slot=\"start\">\n        <b *ngIf=\"total_price\">รวม {{total_price}} ฿</b>\n      </ion-text>\n      <ion-text slot=\"end\">\n        <small>**ชำระเงินปลายทางผ่าน QRCode</small>\n      </ion-text>\n    </ion-item>\n  </ion-list>\n\n  <ion-label position=\"floating\">โปรดระบุจุดรับสินค้า</ion-label>\n    <div #map id=\"map\" style=\"height:250px;\" ></div>\n  <br>\n\n  <ion-list lines=\"none\">\n\n    <ion-item>\n      <ion-label position=\"stacked\">ชื่อผู้รับ</ion-label>\n      <ion-input type=\"text\" [(ngModel)]=\"firstname\" style=\"background-color:#ded9d9;\"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position=\"stacked\">เบอร์โทรศัพท์</ion-label>\n      <ion-input type=\"text\" [(ngModel)]=\"mobile_number\" style=\"background-color:#ded9d9;\"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position=\"stacked\">รายละเอียดเพิ่มเติมสำหรับผู้ส่งของ</ion-label>\n      <ion-textarea [(ngModel)]=\"notes\" style=\"background-color:#ded9d9;\" rows=\"4\" placeholder=\"ตัวอย่าง. หน้าอาคาร 3 สาขาวิทยาการคอมพิวเตอร์ มหาวิทยาลัยราชภัฏสุรินทร์\"></ion-textarea>\n    </ion-item>\n\n    <ion-item>\n      <ion-button size=\"default\" slot=\"end\" (click)=\"placeOrder();\" color=\"tertiary\">\n        ส่งคำสั่งซื้อ\n      </ion-button>\n    </ion-item>\n  </ion-list>\n</ion-content>\n\n<ion-content *ngIf=\"tab3\">\n  <ion-list *ngIf=\"carts\">\n\n      <ion-list-header >\n        <ion-label>รายการซื้อสินค้า</ion-label>\n      </ion-list-header>\n\n      <ion-item  *ngFor=\"let cart of carts\">\n          <ion-avatar slot=\"start\">\n            <img *ngIf=\"cart.product.thumbnail\" [src]=\"'https://qrdee.co/app/'+cart.product.thumbnail\">\n            <img *ngIf=\"!cart.product.thumbnail\" src=\"/assets/noimg.png\">\n          </ion-avatar>\n          <ion-text slot=\"end\">\n            <small *ngIf=\"cart.product.product_th && cart.store.store_name\">{{cart.product.product_th}} จาก {{cart.store.store_name}}</small><br>\n            <small *ngIf=\"cart.created_at\">เมื่อ {{cart.created_at }}</small>\n          </ion-text>\n          <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"callStore(cart.store.mobile_number);\">\n            <ion-icon slot=\"icon-only\" name=\"ios-call\"></ion-icon>\n          </ion-button>\n        </ion-item>\n\n  </ion-list>\n</ion-content>\n\n<ion-footer style=\"background:#FFFFFF;\">\n  <ion-toolbar>\n    <ion-tabs>\n        <ion-tab-bar slot=\"bottom\">\n          <ion-tab-button color=\"primary\" (click)=\"changeTab(0)\" >\n              <ion-icon name=\"md-locate\"></ion-icon>\n              <ion-label>ร้านค้าใกล้ๆ</ion-label>\n          </ion-tab-button>\n          <ion-tab-button color=\"primary\" (click)=\"changeTab(1)\" >\n              <ion-icon name=\"md-cart\"></ion-icon>\n              <ion-label>คำสั่งซื้อ</ion-label>\n          </ion-tab-button>\n          <ion-tab-button color=\"primary\" (click)=\"changeTab(2)\" >\n              <ion-icon name=\"md-list-box\"></ion-icon>\n              <ion-label>รายการซื้อ</ion-label>\n          </ion-tab-button>\n        </ion-tab-bar>\n      </ion-tabs>\n   </ion-toolbar>\n</ion-footer>\n"
+module.exports = "<ion-header translucent>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>ซื้อสินค้า</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen *ngIf=\"tab1\">\n  <ion-searchbar placeholder=\"ค้นหา\" color=\"primary\" (ionChange)=\"searchStores($event.target.value)\">\n  </ion-searchbar>\n\n  <ion-list *ngIf=\"stores\">\n      <ion-list-header >\n        <ion-label>ร้านค้าใกล้เคียง</ion-label>\n      </ion-list-header>\n      <ion-item *ngIf=\"stores && stores.length <=0 \">\n        <ion-text>\n            ไม่พบร้านบริเวณใกล้ ๆ นี้\n        </ion-text>\n      </ion-item>\n\n      <ion-card *ngFor=\"let store of stores\" (click)=\"viewStore(store);\">\n\n        <ion-row style=\"height: 100%;\">\n          <ion-col size=\"4\">\n            <ion-thumbnail style=\"height: 100%; width: 100%; border-radius: 2px;\">\n              <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\" style=\"height: 100%; width: 100%; border-radius: 4px;\">\n              <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\" style=\"height: 100%; width: 100%; border-radius: 4px;\">\n            </ion-thumbnail>\n          </ion-col>\n\n          <ion-col size=\"8\" style=\"line-height: 10px;\">\n            <p no-padding>{{ store.store_name }} <ion-badge color=\"primary\">{{store.distance | number }} กม.</ion-badge></p>\n            <small no-padding>{{ store.store_type.store_type_th }}</small><br>\n            <small no-padding>ค่าส่ง {{store.delivery_price}} ฿</small><br>\n            <ion-rating no-margin no-padding [rate]=\"rate\"\n              readonly=\"true\"\n              size=\"small\">\n            </ion-rating>\n\n          </ion-col>\n\n        </ion-row>\n\n      </ion-card>\n      <!-- <ion-item  *ngFor=\"let store of stores\">\n          <ion-avatar slot=\"start\" (click)=\"viewStore(store);\">\n            <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\">\n            <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n          </ion-avatar>\n          <ion-text (click)=\"viewStore(store);\">\n            <small *ngIf=\"store.store_name\"><b>{{store.store_name}}</b></small><br>\n            <small *ngIf=\"store.store_type\">{{store.store_type.store_type_th}}</small>\n          </ion-text>\n          <ion-text slot=\"end\" (click)=\"viewStore(store);\">\n            <small *ngIf=\"store.delivery_price\">ระยะ {{store.distance | number }} km</small><br>\n            <small *ngIf=\"store.delivery_price\">ค่าส่ง {{store.delivery_price}} ฿</small>\n          </ion-text>\n          <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"viewStore(store);\">\n            <ion-icon slot=\"icon-only\" name=\"md-eye\"></ion-icon>\n          </ion-button>\n\n\n        </ion-item> -->\n  </ion-list>\n\n  <ion-infinite-scroll (ionInfinite)=\"infinitStores($event.target)\" style=\"height: 5px;opacity: .01;\">\n     <ion-infinite-scroll-content>\n     </ion-infinite-scroll-content>\n   </ion-infinite-scroll>\n\n</ion-content>\n<ion-content *ngIf=\"tab2\">\n\n  <ion-list  *ngFor=\"let cart of member_cart\">\n      <ion-item >\n        <ion-avatar slot=\"start\">\n        </ion-avatar>\n        <ion-text>\n          <small *ngIf=\"cart.store_name\"><b>ร้าน {{cart.store_name}}</b></small><br>\n        </ion-text>\n        <ion-text slot=\"end\">\n          <small *ngIf=\"cart.delivery_price\">ค่าส่ง {{cart.delivery_price}} ฿</small><br>\n          <small *ngIf=\"cart.free_delivery_price\">(ขั้นต่ำ {{cart.free_delivery_price}} ส่งฟรี)</small>\n        </ion-text>\n        <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"callStore(cart.mobile_number);\">\n          <ion-icon slot=\"icon-only\" name=\"ios-call\"></ion-icon>\n        </ion-button>\n      </ion-item>\n\n      <ion-item *ngFor=\"let prod of cart.products\">\n        <ion-avatar slot=\"start\">\n          <img *ngIf=\"prod.thumbnail\" [src]=\"'https://qrdee.co/app/'+prod.thumbnail\">\n          <img *ngIf=\"!prod.thumbnail\" src=\"/assets/noimg.png\">\n        </ion-avatar>\n        <ion-text>\n          <small *ngIf=\"prod.product_th\"><b>{{prod.product_th}}</b></small><br>\n        </ion-text>\n        <ion-text slot=\"end\">\n          <small *ngIf=\"prod.price\">{{prod.price}} ฿</small>\n        </ion-text>\n        <ion-button fill=\"clear\" color=\"danger\" slot=\"end\" (click)=\"removeItem(cart.id, prod.id);\">\n          <ion-icon slot=\"icon-only\" name=\"md-remove-circle\"></ion-icon>\n        </ion-button>\n      </ion-item>\n\n  </ion-list>\n\n  <ion-list lines=\"none\">\n    <ion-item>\n      <ion-text slot=\"start\">\n        <b *ngIf=\"total_price\">รวม {{total_price}} ฿</b>\n      </ion-text>\n      <ion-text slot=\"end\">\n        <small>**ชำระเงินปลายทางผ่าน QRCode</small>\n      </ion-text>\n    </ion-item>\n  </ion-list>\n\n  <ion-label position=\"floating\">โปรดระบุจุดรับสินค้า</ion-label>\n    <div #map id=\"map\" style=\"height:250px;\" ></div>\n  <br>\n\n  <ion-list lines=\"none\">\n\n    <ion-item>\n      <ion-label position=\"stacked\">ชื่อผู้รับ</ion-label>\n      <ion-input type=\"text\" [(ngModel)]=\"firstname\" style=\"background-color:#ded9d9;\"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position=\"stacked\">เบอร์โทรศัพท์</ion-label>\n      <ion-input type=\"text\" [(ngModel)]=\"mobile_number\" style=\"background-color:#ded9d9;\"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position=\"stacked\">รายละเอียดเพิ่มเติมสำหรับผู้ส่งของ</ion-label>\n      <ion-textarea [(ngModel)]=\"notes\" style=\"background-color:#ded9d9;\" rows=\"4\" placeholder=\"ตัวอย่าง. หน้าอาคาร 3 สาขาวิทยาการคอมพิวเตอร์ มหาวิทยาลัยราชภัฏสุรินทร์\"></ion-textarea>\n    </ion-item>\n\n    <ion-item>\n      <ion-button size=\"default\" slot=\"end\" (click)=\"placeOrder();\" color=\"tertiary\">\n        ส่งคำสั่งซื้อ\n      </ion-button>\n    </ion-item>\n  </ion-list>\n</ion-content>\n\n<ion-content *ngIf=\"tab3\">\n  <ion-list *ngIf=\"carts\">\n\n      <ion-list-header >\n        <ion-label>รายการซื้อสินค้า</ion-label>\n      </ion-list-header>\n\n      <ion-item  *ngFor=\"let cart of carts\">\n          <ion-avatar slot=\"start\">\n            <img *ngIf=\"cart.product.thumbnail\" [src]=\"'https://qrdee.co/app/'+cart.product.thumbnail\">\n            <img *ngIf=\"!cart.product.thumbnail\" src=\"/assets/noimg.png\">\n          </ion-avatar>\n          <ion-text slot=\"end\">\n            <small *ngIf=\"cart.product.product_th && cart.store.store_name\">{{cart.product.product_th}} จาก {{cart.store.store_name}}</small><br>\n            <small *ngIf=\"cart.created_at\">เมื่อ {{cart.created_at }}</small>\n          </ion-text>\n          <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"callStore(cart.store.mobile_number);\">\n            <ion-icon slot=\"icon-only\" name=\"ios-call\"></ion-icon>\n          </ion-button>\n        </ion-item>\n\n  </ion-list>\n</ion-content>\n\n<ion-footer style=\"background:#FFFFFF;\">\n  <ion-toolbar>\n    <ion-tabs>\n        <ion-tab-bar slot=\"bottom\">\n          <ion-tab-button color=\"primary\" (click)=\"changeTab(0)\" >\n              <ion-icon name=\"md-locate\"></ion-icon>\n              <ion-label>ร้านค้าใกล้ๆ</ion-label>\n          </ion-tab-button>\n          <ion-tab-button color=\"primary\" (click)=\"changeTab(1)\" >\n              <ion-icon name=\"md-cart\"></ion-icon>\n              <ion-label>คำสั่งซื้อ</ion-label>\n          </ion-tab-button>\n          <ion-tab-button color=\"primary\" (click)=\"changeTab(2)\" >\n              <ion-icon name=\"md-list-box\"></ion-icon>\n              <ion-label>รายการซื้อ</ion-label>\n          </ion-tab-button>\n        </ion-tab-bar>\n      </ion-tabs>\n   </ion-toolbar>\n</ion-footer>\n"
 
 /***/ }),
 
@@ -40,7 +261,7 @@ module.exports = "<ion-header translucent>\n  <ion-toolbar>\n\n    <ion-title>�
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2N1c3RvbWVyL2NhcnRtb2RhbC9jYXJ0bW9kYWwuY29tcG9uZW50LnNjc3MifQ== */"
+module.exports = "store-ion-rating {\n  --star-color: gray;\n  --star-color-filled: green; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy90aG9uZ2NoYWkvUHJvamVjdHMvcXJkZWUvc3JjL2FwcC9jdXN0b21lci9jYXJ0bW9kYWwvY2FydG1vZGFsLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usa0JBQWE7RUFDYiwwQkFBb0IsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2N1c3RvbWVyL2NhcnRtb2RhbC9jYXJ0bW9kYWwuY29tcG9uZW50LnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyJzdG9yZS1pb24tcmF0aW5nIHtcbiAgLS1zdGFyLWNvbG9yOiBncmF5O1xuICAtLXN0YXItY29sb3ItZmlsbGVkOiBncmVlbjtcbn1cbiJdfQ== */"
 
 /***/ }),
 
@@ -64,14 +285,18 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var CartmodalComponent = /** @class */ (function () {
-    function CartmodalComponent(productService, toastService, modalController) {
+    function CartmodalComponent(productService, toastService, event, modalController, alertController) {
         this.productService = productService;
         this.toastService = toastService;
+        this.event = event;
         this.modalController = modalController;
+        this.alertController = alertController;
         this.products = [];
         this.member_cart = [];
         this.pick_count = 0;
+        this.rate = 3;
         console.log(this.store);
         this.member_cart = JSON.parse(localStorage.getItem('member_cart'));
         this.calcPickCount();
@@ -119,9 +344,22 @@ var CartmodalComponent = /** @class */ (function () {
             //console.log(this.member_cart);
         });
     };
+    CartmodalComponent.prototype.commentPrompt = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                return [2 /*return*/];
+            });
+        });
+    };
     CartmodalComponent.prototype.startPayment = function () {
         // process &
         this.closeModal(3);
+    };
+    CartmodalComponent.prototype.addProductStar = function (event) {
+        console.log(event);
+    };
+    CartmodalComponent.prototype.onRateChange = function (event) {
+        console.log(event);
     };
     CartmodalComponent.prototype.forceDissmiss = function (val) {
         this.closeModal(val);
@@ -141,7 +379,9 @@ var CartmodalComponent = /** @class */ (function () {
     CartmodalComponent.ctorParameters = function () { return [
         { type: _products_shared_product_service__WEBPACK_IMPORTED_MODULE_3__["ProductService"] },
         { type: _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_4__["ToastService"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] }
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Events"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] }
     ]; };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
@@ -155,7 +395,9 @@ var CartmodalComponent = /** @class */ (function () {
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_products_shared_product_service__WEBPACK_IMPORTED_MODULE_3__["ProductService"],
             _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_4__["ToastService"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"]])
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Events"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]])
     ], CartmodalComponent);
     return CartmodalComponent;
 }());
@@ -187,6 +429,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cartmodal_cartmodal_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./cartmodal/cartmodal.component */ "./src/app/customer/cartmodal/cartmodal.component.ts");
 /* harmony import */ var _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/call-number/ngx */ "./node_modules/@ionic-native/call-number/ngx/index.js");
 /* harmony import */ var _mapmodal_mapmodal_component__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./mapmodal/mapmodal.component */ "./src/app/customer/mapmodal/mapmodal.component.ts");
+/* harmony import */ var ionic_rating__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ionic-rating */ "./node_modules/ionic-rating/fesm5/ionic-rating.js");
+
 
 
 
@@ -226,6 +470,7 @@ var CustomerPageModule = /** @class */ (function () {
                 _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
                 _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"],
                 _shared_shared_module__WEBPACK_IMPORTED_MODULE_6__["SharedModule"],
+                ionic_rating__WEBPACK_IMPORTED_MODULE_13__["IonicRatingModule"],
                 _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes)
             ],
             declarations: [
@@ -318,6 +563,7 @@ var CustomerPage = /** @class */ (function () {
         this.member_cart = [];
         this.total_price = 0;
         this.notes = '';
+        this.rate = 3;
         localStorage.setItem('member_cart', JSON.stringify(this.member_cart));
         this.member = JSON.parse(localStorage.getItem('member'));
         if (this.member) {
@@ -349,6 +595,9 @@ var CustomerPage = /** @class */ (function () {
     };
     CustomerPage.prototype.ngAfterViewInit = function () {
         //this.getCurrentPos();
+    };
+    CustomerPage.prototype.rateStore = function (e) {
+        console.log(e);
     };
     CustomerPage.prototype.getCurrentPos = function () {
         var _this = this;

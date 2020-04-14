@@ -4,7 +4,14 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router  } from '@angular/router';
 import { LoginStoreService } from './login/shared/login-store.service';
+import { MQTTService } from 'ionic-mqtt';
+import { v4 as uuidv4 } from 'uuid';
+import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 
+export declare enum ELocalNotificationTriggerUnit{
+    SECOND = 'second',
+    MINUTE = 'minute'
+}
 
 @Component({
   selector: 'app-root',
@@ -15,6 +22,28 @@ export class AppComponent implements OnInit {
 
   store:any = null;
   member:any = null;
+
+
+  private _mqttClient: any;
+  private TOPIC: string[] = [];
+  private MQTT_CONFIG: {
+    host: string,
+    port: number,
+    username: string,
+    password: string,
+    protocol: string,
+    path: string,
+    clientId: string
+  } = {
+    host: "qrdee.co",
+    port: 9001,
+    username:"miot",
+    password:"SrruMIoT@2019",
+    protocol: "ws",
+    path: "/ws",
+    clientId: uuidv4()
+  };
+
 
   // appPages = [
   //   { title: 'หน้าแรก', url: '/cart', icon: 'home' },
@@ -38,6 +67,8 @@ export class AppComponent implements OnInit {
     private statusBar: StatusBar,
     private event : Events,
     private router: Router,
+    private mqttService: MQTTService,
+    private localNotifications: LocalNotifications,
     private _loginService: LoginStoreService
   ) {
 
@@ -70,6 +101,10 @@ export class AppComponent implements OnInit {
       this.member = JSON.parse(localStorage.getItem('member'));
       console.log(this.member);
 
+      this.TOPIC = ['/qrdee/store/'+store.id];
+
+      this._mqttClient = this.mqttService.loadingMqtt(this._onConnectionLost, this._onMessageArrived, this.TOPIC, this.MQTT_CONFIG);
+
 
       if(!this.member){
           const member = {
@@ -91,6 +126,25 @@ export class AppComponent implements OnInit {
       }
 
     //this.initializeApp();
+
+  }
+
+  private _onConnectionLost(responseObject) {
+    console.log('_onConnectionLost', responseObject);
+    this._mqttClient = this.mqttService.loadingMqtt(this._onConnectionLost, this._onMessageArrived, this.TOPIC, this.MQTT_CONFIG);
+
+  }
+
+  private _onMessageArrived(message) {
+
+    console.log('message', message);
+    this.localNotifications.schedule({
+      id: 1,
+      title: 'title',
+      text: 'Single ILocalNotification',
+      trigger: {in: 2, unit:ELocalNotificationTriggerUnit.SECOND }
+    });
+
 
   }
 

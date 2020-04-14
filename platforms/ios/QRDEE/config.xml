@@ -56,10 +56,16 @@
     <feature name="IonicWebView">
         <param name="ios-package" value="CDVWKWebViewEngine" />
     </feature>
+    <feature name="Badge">
+        <param name="ios-package" value="APPBadge" />
+    </feature>
+    <feature name="LocalNotification">
+        <param name="ios-package" value="APPLocalNotification" />
+    </feature>
     <name>QRDEE</name>
     <description>QRDEE e-market</description>
     <author email="qrdee@gmail.com" href="http://qrdee.co/surin">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.6.101:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -69,6 +75,7 @@
     <allow-intent href="geo:*" />
     <allow-navigation href="http://192.168.6.104:8100" sessionid="d1bd71ae" />
     <allow-navigation href="http://192.168.1.5:8100" sessionid="8660315a" />
+    <allow-navigation href="http://192.168.6.101:8100" sessionid="466036ab" />
     <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
         <string>ใช้ตำแหน่งของท่านสำหรับค้นหาร้านบริเวณไกล้เคียง</string>
     </edit-config>

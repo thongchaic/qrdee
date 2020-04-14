@@ -3,7 +3,7 @@
     <name>QRDEE</name>
     <description>QRDEE e-market</description>
     <author email="qrdee@gmail.com" href="http://qrdee.co/surin">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.6.101:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -125,4 +125,5 @@
         <icon src="resources/windows/icon/StoreLogo.png" target="StoreLogo" />
         <splash src="resources/windows/splash/Splash.png" target="SplashScreen" />
     </platform>
+    <allow-navigation href="http://192.168.6.101:8100" sessionid="466036ab" />
 </widget>

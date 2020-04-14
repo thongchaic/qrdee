@@ -607,6 +607,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _login_shared_login_store_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./login/shared/login-store.service */ "./src/app/login/shared/login-store.service.ts");
+/* harmony import */ var ionic_mqtt__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ionic-mqtt */ "./node_modules/ionic-mqtt/dist/index.js");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/index.js");
+/* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/ngx/index.js");
+
+
+
 
 
 
@@ -630,7 +636,7 @@ var AppComponent = /** @class */ (function () {
     //   { title: 'ล็อคอิน', url: '/login', icon: 'pin' },
     //   { title: 'ออกจากระบบ', url: '/logout', icon: 'pin' },
     // ];
-    function AppComponent(platform, splashScreen, statusBar, event, router, _loginService) {
+    function AppComponent(platform, splashScreen, statusBar, event, router, mqttService, localNotifications, _loginService) {
         // this.currentStore = this._loginService.currentStoreValue;
         var _this = this;
         this.platform = platform;
@@ -638,9 +644,21 @@ var AppComponent = /** @class */ (function () {
         this.statusBar = statusBar;
         this.event = event;
         this.router = router;
+        this.mqttService = mqttService;
+        this.localNotifications = localNotifications;
         this._loginService = _loginService;
         this.store = null;
         this.member = null;
+        this.TOPIC = [];
+        this.MQTT_CONFIG = {
+            host: "qrdee.co",
+            port: 9001,
+            username: "miot",
+            password: "SrruMIoT@2019",
+            protocol: "ws",
+            path: "/ws",
+            clientId: Object(uuid__WEBPACK_IMPORTED_MODULE_8__["v4"])()
+        };
         console.log("=================START======================");
         this.event.subscribe('store:changed', function (trn) {
             _this.store = trn;
@@ -661,6 +679,8 @@ var AppComponent = /** @class */ (function () {
         console.log(this.store);
         this.member = JSON.parse(localStorage.getItem('member'));
         console.log(this.member);
+        this.TOPIC = ['/qrdee/store/' + store.id];
+        this._mqttClient = this.mqttService.loadingMqtt(this._onConnectionLost, this._onMessageArrived, this.TOPIC, this.MQTT_CONFIG);
         if (!this.member) {
             var member = {
                 id: null,
@@ -681,6 +701,17 @@ var AppComponent = /** @class */ (function () {
             localStorage.setItem('member', JSON.stringify(this.member));
         }
         //this.initializeApp();
+    };
+    AppComponent.prototype._onConnectionLost = function (responseObject) {
+        console.log('_onConnectionLost', responseObject);
+        this._mqttClient = this.mqttService.loadingMqtt(this._onConnectionLost, this._onMessageArrived, this.TOPIC, this.MQTT_CONFIG);
+    };
+    AppComponent.prototype._onMessageArrived = function (message) {
+        console.log('message', message);
+        this.localNotifications.schedule({
+            id: 1,
+            text: 'Single ILocalNotification'
+        });
     };
     AppComponent.prototype.ngOnInit = function () {
         // this._loginService.currentStore.subscribe(store => {
@@ -755,6 +786,8 @@ var AppComponent = /** @class */ (function () {
         { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Events"] },
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] },
+        { type: ionic_mqtt__WEBPACK_IMPORTED_MODULE_7__["MQTTService"] },
+        { type: _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_9__["LocalNotifications"] },
         { type: _login_shared_login_store_service__WEBPACK_IMPORTED_MODULE_6__["LoginStoreService"] }
     ]; };
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -768,6 +801,8 @@ var AppComponent = /** @class */ (function () {
             _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Events"],
             _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"],
+            ionic_mqtt__WEBPACK_IMPORTED_MODULE_7__["MQTTService"],
+            _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_9__["LocalNotifications"],
             _login_shared_login_store_service__WEBPACK_IMPORTED_MODULE_6__["LoginStoreService"]])
     ], AppComponent);
     return AppComponent;
@@ -801,6 +836,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/geolocation/ngx */ "./node_modules/@ionic-native/geolocation/ngx/index.js");
 /* harmony import */ var _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic-native/file/ngx */ "./node_modules/@ionic-native/file/ngx/index.js");
 /* harmony import */ var _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ionic-native/camera/ngx */ "./node_modules/@ionic-native/camera/ngx/index.js");
+/* harmony import */ var ionic_mqtt__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ionic-mqtt */ "./node_modules/ionic-mqtt/dist/index.js");
+/* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/ngx/index.js");
 
 
 
@@ -817,6 +854,8 @@ __webpack_require__.r(__webpack_exports__);
 
 // import { ImagePicker } from '@ionic-native/image-picker/ngx';
 // import { WebView } from '@ionic-native/ionic-webview/ngx';
+
+
 //ionic cordova run ios -lc -d --target="0D1FA3B0-AB5E-4F76-AB49-1E2D63774E7B"
 var AppModule = /** @class */ (function () {
     function AppModule() {
@@ -838,6 +877,8 @@ var AppModule = /** @class */ (function () {
                 _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_11__["Geolocation"],
                 _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_12__["File"],
                 _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_13__["Camera"],
+                ionic_mqtt__WEBPACK_IMPORTED_MODULE_14__["MQTTService"],
+                _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_15__["LocalNotifications"],
                 // ImagePicker,
                 // WebView,
                 { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicRouteStrategy"] }

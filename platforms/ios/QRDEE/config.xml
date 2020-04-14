@@ -69,7 +69,6 @@
     <allow-intent href="geo:*" />
     <allow-navigation href="http://192.168.6.104:8100" sessionid="d1bd71ae" />
     <allow-navigation href="http://192.168.1.5:8100" sessionid="8660315a" />
-    <allow-navigation href="http://192.168.6.102:8100" sessionid="e7e324a7" />
     <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
         <string>ใช้ตำแหน่งของท่านสำหรับค้นหาร้านบริเวณไกล้เคียง</string>
     </edit-config>

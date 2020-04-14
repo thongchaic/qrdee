@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content fullscreen *ngIf="tab1">
-  <ion-searchbar placeholder="ค้นหาร้าน" color="primary" (ionChange)="searchStores($event.target.value)">
+  <ion-searchbar placeholder="ค้นหา" color="primary" (ionChange)="searchStores($event.target.value)">
   </ion-searchbar>
 
   <ion-list *ngIf="stores">
@@ -32,9 +32,14 @@
           </ion-col>
 
           <ion-col size="8" style="line-height: 10px;">
-            <h6>{{ store.store_name }} <ion-badge color="primary">{{store.distance | number }} กม.</ion-badge></h6>
-            <p>{{ store.store_type.store_type_th }}</p>
-            <p>ค่าส่ง {{store.delivery_price}} ฿</p>
+            <p no-padding>{{ store.store_name }} <ion-badge color="primary">{{store.distance | number }} กม.</ion-badge></p>
+            <small no-padding>{{ store.store_type.store_type_th }}</small><br>
+            <small no-padding>ค่าส่ง {{store.delivery_price}} ฿</small><br>
+            <ion-rating no-margin no-padding [rate]="rate"
+              readonly="true"
+              size="small">
+            </ion-rating>
+
           </ion-col>
 
         </ion-row>

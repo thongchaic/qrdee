@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Events } from '@ionic/angular';
 import { ProductService } from '../../products/shared/product.service';
 import { ToastService } from '../../shared/services/toast.service';
+import { AlertController } from '@ionic/angular';
 
 
 @Component({
@@ -15,17 +16,21 @@ export class CartmodalComponent implements OnInit {
   products:any[] = [];
   member_cart:any[] = [];
   pick_count:number = 0;
+  rate:any = 3;
 
   constructor(
     private productService: ProductService,
     private toastService: ToastService,
-    private modalController: ModalController
+    private event : Events,
+    private modalController: ModalController,
+    public alertController: AlertController
   ) {
     console.log(this.store);
     this.member_cart =  JSON.parse(localStorage.getItem('member_cart'));
     this.calcPickCount();
-   }
 
+
+  }
   ngOnInit() {
     //console.log(this.store);
   }
@@ -69,9 +74,92 @@ export class CartmodalComponent implements OnInit {
     });
 
   }
+
+
+  async commentPrompt(){
+    const alert = await this.alertController.create({
+      header: 'ความเห็น',
+      inputs: [
+        {
+          // name: 'name1',
+          type: 'text',
+          placeholder: 'Placeholder 1'
+        },
+        {
+          // name: 'name2',
+          type: 'text',
+          id: 'name2-id',
+          value: 'hello',
+          placeholder: 'Placeholder 2'
+        },
+        // multiline input.
+        {
+          // name: 'paragraph',
+          id: 'paragraph',
+          type: 'textarea',
+          placeholder: 'Placeholder 3'
+        },
+        {
+          name: 'name3',
+          value: 'http://ionicframework.com',
+          type: 'url',
+          placeholder: 'Favorite site ever'
+        },
+        // input date with min & max
+        {
+          // name: 'name4',
+          type: 'date',
+          min: '2017-03-01',
+          max: '2018-01-12'
+        },
+        // input date without min nor max
+        {
+          // name: 'name5',
+          type: 'date'
+        },
+        {
+          // name: 'name6',
+          type: 'number',
+          min: -5,
+          max: 10
+        },
+        {
+          // name: 'name7',
+          type: 'text'
+        }
+      ],
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'ส่งความเห็น',
+          handler: () => {
+            console.log('Confirm Ok');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+
+  }
+
+
   startPayment(){
     // process &
     this.closeModal(3);
+  }
+
+  addProductStar(event){
+    console.log(event);
+  }
+  onRateChange(event){
+    console.log(event);
   }
 
 

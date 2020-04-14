@@ -38,6 +38,7 @@ export class CustomerPage implements AfterViewInit{
   member_cart:any[] = [];
   total_price = 0;
   notes:string = '';
+  rate = 3;
 
   @ViewChild(IonInfiniteScroll, {static: false}) infiniteScroll: IonInfiniteScroll;
   @ViewChild('map',{static:false}) mapElement: ElementRef;
@@ -90,6 +91,10 @@ export class CustomerPage implements AfterViewInit{
   ngAfterViewInit(): void {
     //this.getCurrentPos();
 
+  }
+
+  rateStore(e){
+    console.log(e);
   }
 
   getCurrentPos(){
@@ -152,7 +157,6 @@ export class CustomerPage implements AfterViewInit{
 
         });
 
-        console.log(this.stores);
         loading.dismiss();
         if(scrolled){
           this.infiniteScroll.complete();
@@ -193,7 +197,7 @@ export class CustomerPage implements AfterViewInit{
   infinitStores(event){
 
 
-    
+
     if(this.q == ""){
       console.log("Load Stores....");
       this.loadStores(true);

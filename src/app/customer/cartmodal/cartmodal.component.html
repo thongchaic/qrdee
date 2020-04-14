@@ -1,29 +1,46 @@
 <ion-header padding="true">
   <ion-toolbar  *ngIf="store">
 
-    <ion-avatar slot="start">
+    <ion-avatar no-margin no-padding slot="start">
       <img *ngIf="store.store_pic" [src]="'https://qrdee.co/app/'+store.store_pic">
       <img *ngIf="!store.store_pic" src="/assets/noimg.png">
     </ion-avatar>
 
-    <ion-title  >
-      ร้าน {{ store.store_name }}
-      <!-- <img  object-fit: cover src="/assets/noimg.png" > -->
-    </ion-title>
 
+
+
+    <ion-text>
+      <BR><BR>
+      <B>ร้าน {{ store.store_name }}</B>
+      <ion-rating class="store-ion-rating" no-margin no-padding [rate]="rate"
+      readonly="false"
+      size="small"
+      (rateChange)="onRateChange($event)">
+      </ion-rating>
+    </ion-text>
 
     <ion-button fill="clear" color="danger" slot="end" (click)="forceDissmiss(0);">
       <ion-icon name="ios-arrow-back"></ion-icon>Back
     </ion-button>
   </ion-toolbar>
+
+  <!-- <ion-toolbar>
+    <ion-rating no-margin no-padding [rate]="rate"
+    readonly="false"
+    size="small"
+    (ngModelChange)="rateStore($event);">
+  </ion-rating>
+  </ion-toolbar> -->
+
+
+
 </ion-header>
 
 
 <ion-content>
 
 <ion-grid *ngIf="products">
-  <ion-item >
-
+  <ion-item>
     <ion-text slot="start">
       <small>เลือกไว้แล้ว {{pick_count}} ชิ้น</small><br>
       <small> (ขั้นต่ำ {{store.free_delivery_price}} ส่งฟรี)</small>
@@ -35,17 +52,44 @@
     <ion-row responsive-sm wrap no-margin no-padding>
       <ion-col   *ngFor="let product of products">
 
-    <ion-card  no-margin no-padding >
-      <ion-item  >
-        <ion-label>{{ product.product_th }}</ion-label>
-        <ion-badge  color="danger"> {{product.price | number }} บาท </ion-badge>
-        <ion-button fill="outline" slot="end"  (click)="selectItem(product);">เลือก</ion-button>
-      </ion-item>
-      <ion-card-content  *ngIf="store.store_pic">
-        <ion-img   style="height:200px;" [src]="'https://qrdee.co/app/'+product.thumbnail"></ion-img>
-        <ion-text *ngIf="product.details_th"><small> {{ product.details_th }} </small></ion-text>
-      </ion-card-content>
-    </ion-card>
+        <ion-card  no-margin no-padding >
+          <ion-item>
+            <ion-text>{{ product.product_th }}</ion-text>
+            <ion-badge  color="danger"> {{product.price | number }} บาท </ion-badge>
+            <ion-button fill="outline" slot="end"  (click)="selectItem(product);">เลือก</ion-button>
+          </ion-item>
+          <ion-card-content  no-margin no-padding *ngIf="store.store_pic">
+            <ion-img   style="height:200px;" [src]="'https://qrdee.co/app/'+product.thumbnail"></ion-img>
+            <ion-text *ngIf="product.details_th"><small> {{ product.details_th }} </small></ion-text>
+          </ion-card-content>
+
+          <ion-row no-margin no-padding>
+            <ion-col no-margin no-padding>
+            <!-- <button ion-button icon-start clear small>
+            <ion-icon name="thumbs-up"></ion-icon>
+            <div>12 Likes</div>
+            </button> -->
+            <ion-rating no-margin no-padding [rate]="rate"
+              readonly="false"
+              size="small"
+              (rateChange)="onRateChange($event)">
+            </ion-rating>
+            </ion-col>
+            <!-- <ion-col>
+            <button ion-button icon-start clear small>
+            <ion-icon name="text"></ion-icon>
+            <div>4 Comments</div>
+            </button>
+            </ion-col> -->
+            <ion-col align-self-center text-center (click)="commentPrompt();">
+            <ion-note color="primary"><ion-icon name="text"></ion-icon>
+              4
+            </ion-note>
+            </ion-col>
+          </ion-row>
+
+
+        </ion-card>
 
 
         <!-- <ion-card>

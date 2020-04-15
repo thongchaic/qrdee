@@ -7,8 +7,9 @@ import { LoginStoreService } from './login/shared/login-store.service';
 import { MQTTService } from 'ionic-mqtt';
 import { v4 as uuidv4 } from 'uuid';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
-// import { BackgroundMode } from '@ionic-native/background-mode/ngx';
-// import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
+import {Observable} from "rxjs";
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
+import { Badge } from '@ionic-native/badge/ngx';
 
 
 export declare enum ELocalNotificationTriggerUnit{
@@ -57,11 +58,14 @@ export class AppComponent implements OnInit {
     private mqttService: MQTTService,
     public localNotifications: LocalNotifications,
     private _loginService: LoginStoreService,
-
-    // public backgroundMode: BackgroundMode,
+    private backgroundMode: BackgroundMode,
+    private badge: Badge
     // private push: Push
   ) {
     // this.currentStore = this._loginService.currentStoreValue;
+
+    localStorage.setItem('background','0');
+    localStorage.setItem('orders',JSON.stringify([]));
 
     console.log("=================START======================");
     this.event.subscribe('store:changed',trn=>{
@@ -76,7 +80,6 @@ export class AppComponent implements OnInit {
       this.reInit(store);
     }
 
-    //this.backgroundMode.enable();
     this.initializeApp();
 
 
@@ -115,11 +118,8 @@ export class AppComponent implements OnInit {
 
       this._mqttClient = this.mqttService.loadingMqtt(this._onConnectionLost, this._onMessageArrived, this.TOPIC, this.MQTT_CONFIG);
 
-
       this.localNotifications.schedule({
         title: 'ยินดีต้อนรับสู่ QRDee'
-        // text: 'Single ILocalNotification',
-        // trigger: {in: 2, unit:ELocalNotificationTriggerUnit.SECOND }
       });
 
     //this.initializeApp();
@@ -128,7 +128,7 @@ export class AppComponent implements OnInit {
 
   _onConnectionLost(responseObject) {
     console.log('_onConnectionLost');
-    console.log(responseObject);
+    //console.log(responseObject);
   //  this._mqttClient = this.mqttService.loadingMqtt(this._onConnectionLost, this._onMessageArrived, this.TOPIC, this.MQTT_CONFIG);
 
   }
@@ -138,60 +138,38 @@ export class AppComponent implements OnInit {
 
     try{
 
-
-      alert("มีคำสั่งซื้อมาใหม่ "+message.payloadString+" บาท");
-      // localStorage.setItem('orders', JSON.stringify(message));
-      // console.log(" BG => "+localStorage.getItem('orders'));
-      //console.log(message);
-
-      // if(!this.background){
-      //   console.log('message');
-      //   console.log(message);
-      //   alert("มีคำสั่งซื้อมาใหม่ "+message.payloadString+" บาท");
-      // }else{
-      //   console.log("Background.....");
-      //   console.log(message);
-      // }
-
-      // this.localNotifications.schedule({
-      //   id: 1,
-      //   title: 'ยินดีต้อนรับสู่ QRDee',
-      //   // text: 'Single ILocalNotification',
-      //   trigger: {in: 2, unit:ELocalNotificationTriggerUnit.SECOND }
-      // });
-      //this.showNotification();
+      if(localStorage.getItem('background') == '0'){
+        alert("มีคำสั่งซื้อมาใหม่ "+message.payloadString+" บาท");
+      }else{
+        //console.log("Background mode is on.....");
+        //console.log(message);
+        let tmp = JSON.parse(localStorage.getItem('orders'));
+        tmp.push(message);
+        localStorage.setItem('orders',JSON.stringify(tmp));
+      }
 
     }catch(e){
-      console.log('message.e');
+      console.log('.e');
       console.log(e);
     }
 
 
  }
-  // showNotification(){
-  //   this.localNotifications.schedule({
-  //     id: this.notify_id,
-  //     title: 'ยินดีต้อนรับสู่'
-  //   });
-  //   this.notify_id++;
-  //   //
-  //   // this.platform.ready().then(() => {
-  //   //
-  //   // });
-  // }
+  showNotification(price){
+    this.localNotifications.schedule({
+      title: 'มีคำสั่งซื้อมาใหม่ '+price+" บาท"
+    });
+  }
   trackOrders(){
-    // if(this.orders > 0){
-    //   this.orders = 0;
-    //   this.showNotification();
-    // }
 
-    // try{
-    //   console.log("tracking orders....");
-    //   this.showNotification();
-    // }catch(e){
-    //   console.log("tracking orders error...");
-    //   console.log(e);
-    // }
+    console.log("tracking orders..."+localStorage.getItem('background'));
+    let orders = JSON.parse(localStorage.getItem('orders'));
+    //console.log(orders);
+    orders.forEach(e => {
+      this.showNotification(e.payloadString);
+      this.badge.increase(1);
+    });
+    localStorage.setItem('orders',JSON.stringify([]));
 
   }
 
@@ -220,15 +198,7 @@ export class AppComponent implements OnInit {
   }
 
    home(){
-     // this.localNotifications.schedule({
-     //   id: 1,
-     //   title: 'title',
-     //   // text: 'Single ILocalNotification',
-     //   // trigger: {in: 2, unit:ELocalNotificationTriggerUnit.SECOND }
-     // });
-
-     //this.showNotification();
-
+     this.badge.clear();
       this.router.navigate(['cart']);
    }
 
@@ -249,7 +219,6 @@ export class AppComponent implements OnInit {
        this.router.navigate(['/products/imgs']);
    }
 
-
    profile(){
        this.router.navigate(['profile']);
    }
@@ -266,7 +235,6 @@ export class AppComponent implements OnInit {
        this.router.navigate(['stats']);
    }
 
-
    sell(){
        this.router.navigate(['sell-stats']);
    }
@@ -279,63 +247,30 @@ export class AppComponent implements OnInit {
        this.router.navigate(['store-orders']);
    }
 
-  // pushPermission(){
-  //   this.push.hasPermission()
-  //   .then((res: any) => {
-  //
-  //     if (res.isEnabled) {
-  //       console.log('We have permission to send push notifications');
-  //
-  //       this.push.listChannels().then((channels) => console.log('List of channels', channels))
-  //
-  //
-  //       const options: PushOptions = {
-  //         android: {},
-  //         ios: {
-  //           alert: 'true',
-  //           badge: true,
-  //           sound: 'false'
-  //         },
-  //         windows: {},
-  //         browser: {
-  //           pushServiceURL: 'http://push.api.phonegap.com/v1/push'
-  //         }
-  //       }
-  //
-  //       const pushObject: PushObject = this.push.init(options);
-  //       //
-  //       // pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
-  //       //
-  //       // pushObject.on('registration').subscribe((registration: any) => console.log('Device registered', registration));
-  //       //
-  //       // pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
-  //
-  //     } else {
-  //       console.log('We do not have permission to send push notifications');
-  //     }
-  //
-  //   });
-  //
-  // }
-
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
       //this.pushPermission();
-      //
-      // this.backgroundMode.on('activate').subscribe(() => {
-      //   console.log('activated');
-      //   //this.interval_id = setInterval(this.trackOrders, 3000);
-      // });
-      // this.backgroundMode.on('deactivate').subscribe(() => {
-      //   console.log('deactivated');
-      //   //clearInterval(this.interval_id);
-      //   //setInterval(this.trackOrders, 2000);
-      // });
-      // this.backgroundMode.enable();
-      // //setInterval(this.trackOrders, 3000);
+      this.backgroundMode.on('activate').subscribe(() => {
+
+        console.log('activated');
+        localStorage.setItem('background','1');
+        localStorage.setItem('orders',JSON.stringify([]));
+        this.interval_id = setInterval(()=>{
+            this.trackOrders();
+       }, 5000);
+
+      });
+      this.backgroundMode.on('deactivate').subscribe(() => {
+        console.log('deactivated');
+        localStorage.setItem('background','0');
+        clearInterval(this.interval_id);
+        //setInterval(this.trackOrders, 2000);
+      });
+      this.backgroundMode.enable();
+      //setInterval(this.trackOrders, 3000);
       // this.showNotification();
 
 

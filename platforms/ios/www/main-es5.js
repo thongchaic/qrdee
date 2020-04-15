@@ -610,6 +610,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var ionic_mqtt__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ionic-mqtt */ "./node_modules/ionic-mqtt/dist/index.js");
 /* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/index.js");
 /* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/ngx/index.js");
+/* harmony import */ var _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/background-mode/ngx */ "./node_modules/@ionic-native/background-mode/ngx/index.js");
+/* harmony import */ var _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/badge/ngx */ "./node_modules/@ionic-native/badge/ngx/index.js");
+
+
 
 
 
@@ -621,7 +625,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var AppComponent = /** @class */ (function () {
-    function AppComponent(platform, splashScreen, statusBar, event, router, mqttService, localNotifications, _loginService) {
+    function AppComponent(platform, splashScreen, statusBar, event, router, mqttService, localNotifications, _loginService, backgroundMode, badge
+    // private push: Push
+    ) {
         // this.currentStore = this._loginService.currentStoreValue;
         var _this = this;
         this.platform = platform;
@@ -632,6 +638,8 @@ var AppComponent = /** @class */ (function () {
         this.mqttService = mqttService;
         this.localNotifications = localNotifications;
         this._loginService = _loginService;
+        this.backgroundMode = backgroundMode;
+        this.badge = badge;
         this.store = null;
         this.member = null;
         this.notify_id = 1;
@@ -646,6 +654,8 @@ var AppComponent = /** @class */ (function () {
             path: "/ws",
             clientId: Object(uuid__WEBPACK_IMPORTED_MODULE_8__["v4"])()
         };
+        localStorage.setItem('background', '0');
+        localStorage.setItem('orders', JSON.stringify([]));
         console.log("=================START======================");
         this.event.subscribe('store:changed', function (trn) {
             _this.store = trn;
@@ -656,7 +666,6 @@ var AppComponent = /** @class */ (function () {
         if (store) {
             this.reInit(store);
         }
-        //this.backgroundMode.enable();
         this.initializeApp();
     }
     AppComponent.prototype.reInit = function (store) {
@@ -690,66 +699,47 @@ var AppComponent = /** @class */ (function () {
         this._mqttClient = this.mqttService.loadingMqtt(this._onConnectionLost, this._onMessageArrived, this.TOPIC, this.MQTT_CONFIG);
         this.localNotifications.schedule({
             title: 'ยินดีต้อนรับสู่ QRDee'
-            // text: 'Single ILocalNotification',
-            // trigger: {in: 2, unit:ELocalNotificationTriggerUnit.SECOND }
         });
         //this.initializeApp();
     };
     AppComponent.prototype._onConnectionLost = function (responseObject) {
         console.log('_onConnectionLost');
-        console.log(responseObject);
+        //console.log(responseObject);
         //  this._mqttClient = this.mqttService.loadingMqtt(this._onConnectionLost, this._onMessageArrived, this.TOPIC, this.MQTT_CONFIG);
     };
     AppComponent.prototype._onMessageArrived = function (message) {
         try {
-            alert("มีคำสั่งซื้อมาใหม่ " + message.payloadString + " บาท");
-            // localStorage.setItem('orders', JSON.stringify(message));
-            // console.log(" BG => "+localStorage.getItem('orders'));
-            //console.log(message);
-            // if(!this.background){
-            //   console.log('message');
-            //   console.log(message);
-            //   alert("มีคำสั่งซื้อมาใหม่ "+message.payloadString+" บาท");
-            // }else{
-            //   console.log("Background.....");
-            //   console.log(message);
-            // }
-            // this.localNotifications.schedule({
-            //   id: 1,
-            //   title: 'ยินดีต้อนรับสู่ QRDee',
-            //   // text: 'Single ILocalNotification',
-            //   trigger: {in: 2, unit:ELocalNotificationTriggerUnit.SECOND }
-            // });
-            //this.showNotification();
+            if (localStorage.getItem('background') == '0') {
+                alert("มีคำสั่งซื้อมาใหม่ " + message.payloadString + " บาท");
+            }
+            else {
+                //console.log("Background mode is on.....");
+                //console.log(message);
+                var tmp = JSON.parse(localStorage.getItem('orders'));
+                tmp.push(message);
+                localStorage.setItem('orders', JSON.stringify(tmp));
+            }
         }
         catch (e) {
-            console.log('message.e');
+            console.log('.e');
             console.log(e);
         }
     };
-    // showNotification(){
-    //   this.localNotifications.schedule({
-    //     id: this.notify_id,
-    //     title: 'ยินดีต้อนรับสู่'
-    //   });
-    //   this.notify_id++;
-    //   //
-    //   // this.platform.ready().then(() => {
-    //   //
-    //   // });
-    // }
+    AppComponent.prototype.showNotification = function (price) {
+        this.localNotifications.schedule({
+            title: 'มีคำสั่งซื้อมาใหม่ ' + price + " บาท"
+        });
+    };
     AppComponent.prototype.trackOrders = function () {
-        // if(this.orders > 0){
-        //   this.orders = 0;
-        //   this.showNotification();
-        // }
-        // try{
-        //   console.log("tracking orders....");
-        //   this.showNotification();
-        // }catch(e){
-        //   console.log("tracking orders error...");
-        //   console.log(e);
-        // }
+        var _this = this;
+        console.log("tracking orders..." + localStorage.getItem('background'));
+        var orders = JSON.parse(localStorage.getItem('orders'));
+        //console.log(orders);
+        orders.forEach(function (e) {
+            _this.showNotification(e.payloadString);
+            _this.badge.increase(1);
+        });
+        localStorage.setItem('orders', JSON.stringify([]));
     };
     AppComponent.prototype.ngOnInit = function () {
         // this._loginService.currentStore.subscribe(store => {
@@ -772,13 +762,7 @@ var AppComponent = /** @class */ (function () {
         this.router.navigate(['login']);
     };
     AppComponent.prototype.home = function () {
-        // this.localNotifications.schedule({
-        //   id: 1,
-        //   title: 'title',
-        //   // text: 'Single ILocalNotification',
-        //   // trigger: {in: 2, unit:ELocalNotificationTriggerUnit.SECOND }
-        // });
-        //this.showNotification();
+        this.badge.clear();
         this.router.navigate(['cart']);
     };
     AppComponent.prototype.logout = function () {
@@ -818,62 +802,28 @@ var AppComponent = /** @class */ (function () {
     AppComponent.prototype.order = function () {
         this.router.navigate(['store-orders']);
     };
-    // pushPermission(){
-    //   this.push.hasPermission()
-    //   .then((res: any) => {
-    //
-    //     if (res.isEnabled) {
-    //       console.log('We have permission to send push notifications');
-    //
-    //       this.push.listChannels().then((channels) => console.log('List of channels', channels))
-    //
-    //
-    //       const options: PushOptions = {
-    //         android: {},
-    //         ios: {
-    //           alert: 'true',
-    //           badge: true,
-    //           sound: 'false'
-    //         },
-    //         windows: {},
-    //         browser: {
-    //           pushServiceURL: 'http://push.api.phonegap.com/v1/push'
-    //         }
-    //       }
-    //
-    //       const pushObject: PushObject = this.push.init(options);
-    //       //
-    //       // pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
-    //       //
-    //       // pushObject.on('registration').subscribe((registration: any) => console.log('Device registered', registration));
-    //       //
-    //       // pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
-    //
-    //     } else {
-    //       console.log('We do not have permission to send push notifications');
-    //     }
-    //
-    //   });
-    //
-    // }
     AppComponent.prototype.initializeApp = function () {
         var _this = this;
         this.platform.ready().then(function () {
             _this.statusBar.styleDefault();
             _this.splashScreen.hide();
             //this.pushPermission();
-            //
-            // this.backgroundMode.on('activate').subscribe(() => {
-            //   console.log('activated');
-            //   //this.interval_id = setInterval(this.trackOrders, 3000);
-            // });
-            // this.backgroundMode.on('deactivate').subscribe(() => {
-            //   console.log('deactivated');
-            //   //clearInterval(this.interval_id);
-            //   //setInterval(this.trackOrders, 2000);
-            // });
-            // this.backgroundMode.enable();
-            // //setInterval(this.trackOrders, 3000);
+            _this.backgroundMode.on('activate').subscribe(function () {
+                console.log('activated');
+                localStorage.setItem('background', '1');
+                localStorage.setItem('orders', JSON.stringify([]));
+                _this.interval_id = setInterval(function () {
+                    _this.trackOrders();
+                }, 5000);
+            });
+            _this.backgroundMode.on('deactivate').subscribe(function () {
+                console.log('deactivated');
+                localStorage.setItem('background', '0');
+                clearInterval(_this.interval_id);
+                //setInterval(this.trackOrders, 2000);
+            });
+            _this.backgroundMode.enable();
+            //setInterval(this.trackOrders, 3000);
             // this.showNotification();
         });
     };
@@ -885,7 +835,9 @@ var AppComponent = /** @class */ (function () {
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] },
         { type: ionic_mqtt__WEBPACK_IMPORTED_MODULE_7__["MQTTService"] },
         { type: _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_9__["LocalNotifications"] },
-        { type: _login_shared_login_store_service__WEBPACK_IMPORTED_MODULE_6__["LoginStoreService"] }
+        { type: _login_shared_login_store_service__WEBPACK_IMPORTED_MODULE_6__["LoginStoreService"] },
+        { type: _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_10__["BackgroundMode"] },
+        { type: _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_11__["Badge"] }
     ]; };
     AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -900,7 +852,11 @@ var AppComponent = /** @class */ (function () {
             _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"],
             ionic_mqtt__WEBPACK_IMPORTED_MODULE_7__["MQTTService"],
             _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_9__["LocalNotifications"],
-            _login_shared_login_store_service__WEBPACK_IMPORTED_MODULE_6__["LoginStoreService"]])
+            _login_shared_login_store_service__WEBPACK_IMPORTED_MODULE_6__["LoginStoreService"],
+            _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_10__["BackgroundMode"],
+            _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_11__["Badge"]
+            // private push: Push
+        ])
     ], AppComponent);
     return AppComponent;
 }());
@@ -935,6 +891,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ionic-native/camera/ngx */ "./node_modules/@ionic-native/camera/ngx/index.js");
 /* harmony import */ var ionic_mqtt__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ionic-mqtt */ "./node_modules/ionic-mqtt/dist/index.js");
 /* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/ngx/index.js");
+/* harmony import */ var _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @ionic-native/badge/ngx */ "./node_modules/@ionic-native/badge/ngx/index.js");
+/* harmony import */ var _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @ionic-native/background-mode/ngx */ "./node_modules/@ionic-native/background-mode/ngx/index.js");
 
 
 
@@ -953,7 +911,8 @@ __webpack_require__.r(__webpack_exports__);
 // import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 
-// import { BackgroundMode } from '@ionic-native/background-mode/ngx';
+
+
 // import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
 //ionic cordova run ios -lc -d --target="0D1FA3B0-AB5E-4F76-AB49-1E2D63774E7B"
 var AppModule = /** @class */ (function () {
@@ -978,7 +937,8 @@ var AppModule = /** @class */ (function () {
                 _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_13__["Camera"],
                 ionic_mqtt__WEBPACK_IMPORTED_MODULE_14__["MQTTService"],
                 _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_15__["LocalNotifications"],
-                // BackgroundMode,
+                _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_17__["BackgroundMode"],
+                _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_16__["Badge"],
                 // Push,
                 { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicRouteStrategy"] }
             ],

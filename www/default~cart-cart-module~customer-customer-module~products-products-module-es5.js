@@ -38,6 +38,7 @@ var ProductService = /** @class */ (function () {
     ProductService.prototype.getProducts = function (store_id, limit, offset) {
         if (limit === void 0) { limit = 0; }
         if (offset === void 0) { offset = 0; }
+        console.log("https://qrdee.co/api/v2/products/" + store_id + "?limit=" + limit + "&offset=" + offset);
         return this.http.get("https://qrdee.co/api/v2/products/" + store_id + "?limit=" + limit + "&offset=" + offset);
     };
     ProductService.prototype.getAllproduct = function (id) {
@@ -101,6 +102,9 @@ var ProductService = /** @class */ (function () {
         fd.append('price', data.price);
         fd.append('cost', data.cost);
         return fd;
+    };
+    ProductService.prototype.addProductRate = function (product_id, rating) {
+        return this.http.post("https://qrdee.co/api/v2/rating/product/" + product_id, { star: rating });
     };
     ProductService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }

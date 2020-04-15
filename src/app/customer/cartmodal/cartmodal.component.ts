@@ -1,14 +1,17 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { ModalController, Events } from '@ionic/angular';
 import { ProductService } from '../../products/shared/product.service';
 import { ToastService } from '../../shared/services/toast.service';
 import { AlertController } from '@ionic/angular';
+import { FormControl } from '@angular/forms';
+import { CustomerService } from '../shared/customer.service';
 
 
 @Component({
   selector: 'app-cartmodal',
   templateUrl: './cartmodal.component.html',
   styleUrls: ['./cartmodal.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class CartmodalComponent implements OnInit {
 
@@ -16,10 +19,12 @@ export class CartmodalComponent implements OnInit {
   products:any[] = [];
   member_cart:any[] = [];
   pick_count:number = 0;
-  rate:any = 3;
+  product_rate = 3;
+  store_rate = 0;
 
   constructor(
     private productService: ProductService,
+    private customerService: CustomerService,
     private toastService: ToastService,
     private event : Events,
     private modalController: ModalController,
@@ -76,76 +81,42 @@ export class CartmodalComponent implements OnInit {
   }
 
 
-  async commentPrompt(){
-    // const alert = await this.alertController.create({
-    //   header: 'ความเห็น',
-    //   inputs: [
-    //     {
-    //       // name: 'name1',
-    //       type: 'text',
-    //       placeholder: 'Placeholder 1'
-    //     },
-    //     {
-    //       // name: 'name2',
-    //       type: 'text',
-    //       id: 'name2-id',
-    //       value: 'hello',
-    //       placeholder: 'Placeholder 2'
-    //     },
-    //     // multiline input.
-    //     {
-    //       // name: 'paragraph',
-    //       id: 'paragraph',
-    //       type: 'textarea',
-    //       placeholder: 'Placeholder 3'
-    //     },
-    //     {
-    //       name: 'name3',
-    //       value: 'http://ionicframework.com',
-    //       type: 'url',
-    //       placeholder: 'Favorite site ever'
-    //     },
-    //     // input date with min & max
-    //     {
-    //       // name: 'name4',
-    //       type: 'date',
-    //       min: '2017-03-01',
-    //       max: '2018-01-12'
-    //     },
-    //     // input date without min nor max
-    //     {
-    //       // name: 'name5',
-    //       type: 'date'
-    //     },
-    //     {
-    //       // name: 'name6',
-    //       type: 'number',
-    //       min: -5,
-    //       max: 10
-    //     },
-    //     {
-    //       // name: 'name7',
-    //       type: 'text'
-    //     }
-    //   ],
-    //   buttons: [
-    //     {
-    //       text: 'ยกเลิก',
-    //       role: 'cancel',
-    //       cssClass: 'secondary',
-    //       handler: () => {
-    //         console.log('Confirm Cancel');
-    //       }
-    //     }, {
-    //       text: 'ส่งความเห็น',
-    //       handler: () => {
-    //         console.log('Confirm Ok');
-    //       }
-    //     }
-    //   ]
-    // });
-    //
-    // await alert.present();
+  async commentPrompt(pid, comments){
+    const alert = await this.alertController.create({
+      header: 'ความเห็น',
+      inputs: [
+        {
+          name: 'comment',
+          type: 'text',
+          placeholder: 'เพิ่มข้อคิดเห็น'
+        }
+      ],
+      message: "<ion-list no-margin no-padding>"+comments.map(comment => "<ion-item no-margin no-padding><small>" + comment.comment + "<sub> เมื่อ:"+(new Date(comment.created_at.replace(/-/g, '/')).toISOString().slice(0, 10))+"</sub></small></ion-item>").join(" ")+"</ion-list>",
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: 'ส่ง',
+          handler: (e) => {
+            if(e.comment != ""){
+              console.log(pid);
+              this.customerService.addProductComment(pid, e.comment).subscribe(() => {
+                this.toastService.showToast('เราได้รับข้อคิดเห็นของท่านแล้ว', 'top');
+                this.loadProducts();
+              });
+            }
+
+          }
+        }
+      ]
+    });
+
+    await alert.present();
 
   }
 
@@ -155,11 +126,16 @@ export class CartmodalComponent implements OnInit {
     this.closeModal(3);
   }
 
-  addProductStar(event){
-    console.log(event);
+  addProductStar(id, star){
+    this.productService.addProductRate(id, star).subscribe(() => {
+      this.toastService.showToast('เราได้รับดาวจากท่านแล้ว', 'top');
+      //this.loadProducts();
+    });
   }
-  onRateChange(event){
-    console.log(event);
+  addStoreStar(id, star){
+    this.customerService.addStoreStar(id, star).subscribe(()=>{
+      this.toastService.showToast('เราได้รับดาวจากท่านแล้ว', 'top');
+    });
   }
 
 

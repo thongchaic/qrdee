@@ -18,6 +18,7 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
 //import { CallNumber } from '@ionic-native/call-number';
 import { LoadingController } from '@ionic/angular';
 
+import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
 declare var google;
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';

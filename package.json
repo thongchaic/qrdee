@@ -19,6 +19,7 @@
     "@angular/platform-browser": "~8.1.2",
     "@angular/platform-browser-dynamic": "~8.1.2",
     "@angular/router": "~8.1.2",
+    "@ionic-native/background-mode": "^5.23.0",
     "@ionic-native/barcode-scanner": "^5.23.0",
     "@ionic-native/call-number": "^5.23.0",
     "@ionic-native/camera": "^5.23.0",
@@ -36,6 +37,7 @@
     "chart.js": "^2.9.3",
     "cordova-android": "^8.1.0",
     "cordova-ios": "^5.1.1",
+    "cordova-plugin-background-mode": "^0.7.3",
     "cordova-plugin-badge": "^0.8.8",
     "cordova-plugin-camera": "^4.1.0",
     "cordova-plugin-device": "2.0.2",
@@ -109,7 +111,8 @@
       "cordova-plugin-file": {},
       "mx.ferreyra.callnumber": {},
       "cordova-plugin-ionic-webview": {},
-      "cordova-plugin-local-notification": {}
+      "cordova-plugin-local-notification": {},
+      "cordova-plugin-background-mode": {}
     },
     "platforms": [
       "ios"

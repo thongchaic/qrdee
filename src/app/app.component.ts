@@ -7,6 +7,9 @@ import { LoginStoreService } from './login/shared/login-store.service';
 import { MQTTService } from 'ionic-mqtt';
 import { v4 as uuidv4 } from 'uuid';
 import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
+// import { BackgroundMode } from '@ionic-native/background-mode/ngx';
+// import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
+
 
 export declare enum ELocalNotificationTriggerUnit{
     SECOND = 'second',
@@ -22,7 +25,8 @@ export class AppComponent implements OnInit {
 
   store:any = null;
   member:any = null;
-
+  notify_id = 1;
+  interval_id = 9;
 
   private _mqttClient: any;
   private TOPIC: string[] = [];
@@ -44,23 +48,6 @@ export class AppComponent implements OnInit {
     clientId: uuidv4()
   };
 
-
-  // appPages = [
-  //   { title: 'หน้าแรก', url: '/cart', icon: 'home' },
-  //   { title: 'สินค้า', url: '/products', icon: 'cube' },
-  //   { title: 'นำเข้าสินค้า', url: '/products/create', icon: 'arrow-round-up' },
-  //   { title: 'เพิ่มรูป', url: '/products/froms', icon: 'arrow-round-up' },
-  //   { title: 'ข้อมูลร้าน', url: '/profile', icon: 'albums' },
-  //   { title: 'ออเดอร์สินค้า', url: '/store-orders', icon: 'cart' },
-  //   { title: 'เรียกคนส่งของ', url: '/store-logistic', icon: 'pin' },
-  //   { title: 'ขนส่งสินค้า', url: '/logistic', icon: 'pin' },
-  //   { title: 'สรุปการขาย', url: '/sell-stats', icon: 'albums' },
-  //   { title: 'เลือกร้านค้า', url: '/customer', icon: 'albums' },
-  //   { title: 'สถิติ', url: '/stats', icon: 'cart' },
-  //   { title: 'ล็อคอิน', url: '/login', icon: 'pin' },
-  //   { title: 'ออกจากระบบ', url: '/logout', icon: 'pin' },
-  // ];
-
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -68,10 +55,12 @@ export class AppComponent implements OnInit {
     private event : Events,
     private router: Router,
     private mqttService: MQTTService,
-    private localNotifications: LocalNotifications,
-    private _loginService: LoginStoreService
-  ) {
+    public localNotifications: LocalNotifications,
+    private _loginService: LoginStoreService,
 
+    // public backgroundMode: BackgroundMode,
+    // private push: Push
+  ) {
     // this.currentStore = this._loginService.currentStoreValue;
 
     console.log("=================START======================");
@@ -87,7 +76,11 @@ export class AppComponent implements OnInit {
       this.reInit(store);
     }
 
+    //this.backgroundMode.enable();
     this.initializeApp();
+
+
+
 
   }
   reInit(store){
@@ -96,15 +89,10 @@ export class AppComponent implements OnInit {
       console.log(store);
       this.store = JSON.parse(localStorage.getItem('store'));
       localStorage.setItem('store', JSON.stringify(store));
-
       console.log(this.store);
       this.member = JSON.parse(localStorage.getItem('member'));
       console.log(this.member);
-
       this.TOPIC = ['/qrdee/store/'+store.id];
-
-      this._mqttClient = this.mqttService.loadingMqtt(this._onConnectionLost, this._onMessageArrived, this.TOPIC, this.MQTT_CONFIG);
-
 
       if(!this.member){
           const member = {
@@ -125,26 +113,85 @@ export class AppComponent implements OnInit {
           localStorage.setItem('member', JSON.stringify(this.member));
       }
 
+      this._mqttClient = this.mqttService.loadingMqtt(this._onConnectionLost, this._onMessageArrived, this.TOPIC, this.MQTT_CONFIG);
+
+
+      this.localNotifications.schedule({
+        title: 'ยินดีต้อนรับสู่ QRDee'
+        // text: 'Single ILocalNotification',
+        // trigger: {in: 2, unit:ELocalNotificationTriggerUnit.SECOND }
+      });
+
     //this.initializeApp();
 
   }
 
-  private _onConnectionLost(responseObject) {
-    console.log('_onConnectionLost', responseObject);
-    this._mqttClient = this.mqttService.loadingMqtt(this._onConnectionLost, this._onMessageArrived, this.TOPIC, this.MQTT_CONFIG);
+  _onConnectionLost(responseObject) {
+    console.log('_onConnectionLost');
+    console.log(responseObject);
+  //  this._mqttClient = this.mqttService.loadingMqtt(this._onConnectionLost, this._onMessageArrived, this.TOPIC, this.MQTT_CONFIG);
 
   }
 
-  private _onMessageArrived(message) {
+  _onMessageArrived(message) {
 
-    console.log('message', message);
-    this.localNotifications.schedule({
-      id: 1,
-      title: 'title',
-      text: 'Single ILocalNotification',
-      trigger: {in: 2, unit:ELocalNotificationTriggerUnit.SECOND }
-    });
 
+    try{
+
+
+      alert("มีคำสั่งซื้อมาใหม่ "+message.payloadString+" บาท");
+      // localStorage.setItem('orders', JSON.stringify(message));
+      // console.log(" BG => "+localStorage.getItem('orders'));
+      //console.log(message);
+
+      // if(!this.background){
+      //   console.log('message');
+      //   console.log(message);
+      //   alert("มีคำสั่งซื้อมาใหม่ "+message.payloadString+" บาท");
+      // }else{
+      //   console.log("Background.....");
+      //   console.log(message);
+      // }
+
+      // this.localNotifications.schedule({
+      //   id: 1,
+      //   title: 'ยินดีต้อนรับสู่ QRDee',
+      //   // text: 'Single ILocalNotification',
+      //   trigger: {in: 2, unit:ELocalNotificationTriggerUnit.SECOND }
+      // });
+      //this.showNotification();
+
+    }catch(e){
+      console.log('message.e');
+      console.log(e);
+    }
+
+
+ }
+  // showNotification(){
+  //   this.localNotifications.schedule({
+  //     id: this.notify_id,
+  //     title: 'ยินดีต้อนรับสู่'
+  //   });
+  //   this.notify_id++;
+  //   //
+  //   // this.platform.ready().then(() => {
+  //   //
+  //   // });
+  // }
+  trackOrders(){
+    // if(this.orders > 0){
+    //   this.orders = 0;
+    //   this.showNotification();
+    // }
+
+    // try{
+    //   console.log("tracking orders....");
+    //   this.showNotification();
+    // }catch(e){
+    //   console.log("tracking orders error...");
+    //   console.log(e);
+    // }
 
   }
 
@@ -173,6 +220,15 @@ export class AppComponent implements OnInit {
   }
 
    home(){
+     // this.localNotifications.schedule({
+     //   id: 1,
+     //   title: 'title',
+     //   // text: 'Single ILocalNotification',
+     //   // trigger: {in: 2, unit:ELocalNotificationTriggerUnit.SECOND }
+     // });
+
+     //this.showNotification();
+
       this.router.navigate(['cart']);
    }
 
@@ -223,10 +279,66 @@ export class AppComponent implements OnInit {
        this.router.navigate(['store-orders']);
    }
 
+  // pushPermission(){
+  //   this.push.hasPermission()
+  //   .then((res: any) => {
+  //
+  //     if (res.isEnabled) {
+  //       console.log('We have permission to send push notifications');
+  //
+  //       this.push.listChannels().then((channels) => console.log('List of channels', channels))
+  //
+  //
+  //       const options: PushOptions = {
+  //         android: {},
+  //         ios: {
+  //           alert: 'true',
+  //           badge: true,
+  //           sound: 'false'
+  //         },
+  //         windows: {},
+  //         browser: {
+  //           pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+  //         }
+  //       }
+  //
+  //       const pushObject: PushObject = this.push.init(options);
+  //       //
+  //       // pushObject.on('notification').subscribe((notification: any) => console.log('Received a notification', notification));
+  //       //
+  //       // pushObject.on('registration').subscribe((registration: any) => console.log('Device registered', registration));
+  //       //
+  //       // pushObject.on('error').subscribe(error => console.error('Error with Push plugin', error));
+  //
+  //     } else {
+  //       console.log('We do not have permission to send push notifications');
+  //     }
+  //
+  //   });
+  //
+  // }
+
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      //this.pushPermission();
+      //
+      // this.backgroundMode.on('activate').subscribe(() => {
+      //   console.log('activated');
+      //   //this.interval_id = setInterval(this.trackOrders, 3000);
+      // });
+      // this.backgroundMode.on('deactivate').subscribe(() => {
+      //   console.log('deactivated');
+      //   //clearInterval(this.interval_id);
+      //   //setInterval(this.trackOrders, 2000);
+      // });
+      // this.backgroundMode.enable();
+      // //setInterval(this.trackOrders, 3000);
+      // this.showNotification();
+
+
     });
   }
 }

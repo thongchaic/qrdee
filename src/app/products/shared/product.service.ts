@@ -31,6 +31,7 @@ export class ProductService {
     return this.http.get<any>(`https://qrdee.co/api/v2/products?id=${product_id}`);
   }
   getProducts(store_id,limit=0,offset=0){
+    console.log(`https://qrdee.co/api/v2/products/${store_id}?limit=${limit}&offset=${offset}`);
     return this.http.get<any>(`https://qrdee.co/api/v2/products/${store_id}?limit=${limit}&offset=${offset}`);
   }
 
@@ -77,6 +78,7 @@ export class ProductService {
 
   getProductStore_id(id){
      // console.log(`https://qrdee.co/api/v1/store_id/${id}`);
+
     return this.http.get<any>(`https://qrdee.co/api/v1/store_id/${id}`);
   }
 
@@ -109,6 +111,10 @@ export class ProductService {
     fd.append('cost', data.cost);
 
     return fd;
+  }
+
+  addProductRate(product_id, rating) {
+    return this.http.post(`https://qrdee.co/api/v2/rating/product/${product_id}`, { star: rating });
   }
 
 

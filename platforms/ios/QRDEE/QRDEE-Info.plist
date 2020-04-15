@@ -68,6 +68,10 @@
 		<string>UIInterfaceOrientationPortraitUpsideDown</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>audio</string>
+	</array>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>ใช้ตำแหน่งของท่านสำหรับค้นหาร้านบริเวณไกล้เคียง</string>
 	<key>NSLocationAlwaysUsageDescription</key>

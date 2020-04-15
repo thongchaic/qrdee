@@ -10,7 +10,6 @@ import { FormsService } from '../products/shared/forms.service';
 import { CartmodalComponent } from './cartmodal/cartmodal.component';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { MapmodalComponent } from './mapmodal/mapmodal.component';
-import { IonicRatingModule } from 'ionic-rating';
 
 
 const routes: Routes = [
@@ -36,7 +35,6 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     SharedModule,
-    IonicRatingModule,
     RouterModule.forChild(routes)
   ],
   declarations: [
@@ -44,7 +42,7 @@ const routes: Routes = [
     CartmodalComponent,
     MapmodalComponent
   ],
-  entryComponents: [MapmodalComponent],
+  entryComponents: [MapmodalComponent, CartmodalComponent],
   providers: [UserService,FormsService,CallNumber],
 })
 export class CustomerPageModule {}

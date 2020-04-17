@@ -513,7 +513,7 @@ module.exports = webpackAsyncContext;
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-app>\n  <ion-split-pane>\n    <ion-menu>\n      <ion-header>\n        <ion-toolbar>\n          <ion-title>เมนู</ion-title>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content>\n\n        <ion-list>\n          <ng-container *ngIf=\"store\">\n            <ion-menu-toggle auto-hide=\"false\" >\n              <ion-item (click)=\"home()\">\n                <ion-label>\n                    หน้าแรก\n                </ion-label>\n              </ion-item>\n              <ion-item (click)=\"product()\">\n                <ion-label>\n                    สินค้าของฉัน\n                </ion-label>\n              </ion-item>\n              <!-- <ion-item *ngIf=\"store.store_type_id == 5\" (click)=\"postproduct()\">\n                <ion-label >\n                    นำเข้าสินค้า\n                </ion-label>\n              </ion-item> -->\n              <!-- <ion-item *ngIf=\"usertype == 3\" (click)=\"postproductimg()\">\n                <ion-label >\n                    สั่งสินค้า\n                </ion-label>\n              </ion-item> -->\n            <ion-item  (click)=\"stats()\">\n              <ion-label>\n                สรุปยอดขาย\n              </ion-label>\n            </ion-item>\n              <ion-item (click)=\"profile()\">\n                <ion-label >\n                  จัดการร้านค้า\n                </ion-label>\n              </ion-item>\n\n              <!-- <ion-item (click)=\"logistic()\">\n                <ion-label >\n                    ขนส่งสินค้า\n                </ion-label>\n              </ion-item > -->\n\n\n              <!-- <ion-item *ngIf=\"store.store_type_id == 5\" (click)=\"sell()\">\n                <ion-label >\n                    สรุปการขาย\n                </ion-label>\n              </ion-item> -->\n            <!-- <ion-item *ngIf=\"usertype == 1\" (click)=\"delivery()\">\n                <ion-label >\n                    เรียกคนส่งของ\n                </ion-label>\n              </ion-item> -->\n              <!-- <ion-item *ngIf=\"usertype == 1\" (click)=\"order()\">\n                <ion-label >\n                    ออเดอร์สินค้า\n                </ion-label>\n              </ion-item> -->\n\n              <ion-item  (click)=\"customer()\">\n                <ion-label>\n                    สั่งซื้อสินค้า\n                </ion-label>\n              </ion-item>\n\n              <!-- <ion-item (click)=\"logout()\">\n                <ion-label >\n                    ออกจากระบบ\n                </ion-label>\n              </ion-item> -->\n\n            </ion-menu-toggle>\n          </ng-container>\n\n          <ng-container *ngIf=\"!store\">\n            <ion-menu-toggle auto-hide=\"false\" >\n              <ion-item  (click)=\"customer()\">\n                <ion-label>\n                    สั่งซื้อสินค้า\n                </ion-label>\n              </ion-item>\n\n              <ion-item (click)=\"login()\">\n                <ion-label >\n                  เข้าสู่ระบบ\n                </ion-label>\n              </ion-item>\n            </ion-menu-toggle>\n          </ng-container>\n        </ion-list>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet main></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n\n<!-- <ion-app>\n  <ion-split-pane>\n    <ion-menu>\n      <ion-header>\n        <ion-toolbar>\n          <ion-title>Menu</ion-title>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content>\n        <ion-list>\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appPages\">\n            <ion-item [routerDirection]=\"'root'\" [routerLink]=\"[p.url]\">\n              <ion-icon slot=\"start\" [name]=\"p.icon\"></ion-icon>\n              <ion-label>\n                {{p.title}}\n              </ion-label>\n            </ion-item>\n          </ion-menu-toggle>\n        </ion-list>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet main></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n -->\n"
+module.exports = "<ion-app>\n  <ion-split-pane>\n    <ion-menu>\n      <ion-header>\n        <ion-toolbar>\n          <ion-title>เมนู</ion-title>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content>\n\n        <ion-list>\n          <ng-container *ngIf=\"store\">\n            <ion-menu-toggle auto-hide=\"false\" >\n              <ion-item (click)=\"home()\">\n                <ion-label>\n                    หน้าแรก\n                </ion-label>\n              </ion-item>\n              <ion-item (click)=\"product()\">\n                <ion-label>\n                    สินค้าของฉัน\n                </ion-label>\n              </ion-item>\n              <!-- <ion-item *ngIf=\"store.store_type_id == 5\" (click)=\"postproduct()\">\n                <ion-label >\n                    นำเข้าสินค้า\n                </ion-label>\n              </ion-item> -->\n              <!-- <ion-item *ngIf=\"usertype == 3\" (click)=\"postproductimg()\">\n                <ion-label >\n                    สั่งสินค้า\n                </ion-label>\n              </ion-item> -->\n            <ion-item  (click)=\"stats()\">\n              <ion-label>\n                สรุปยอดขาย\n              </ion-label>\n            </ion-item>\n              <ion-item (click)=\"profile()\">\n                <ion-label >\n                  จัดการร้านค้า\n                </ion-label>\n              </ion-item>\n\n              <!-- <ion-item (click)=\"logistic()\">\n                <ion-label >\n                    ขนส่งสินค้า\n                </ion-label>\n              </ion-item > -->\n\n\n              <!-- <ion-item *ngIf=\"store.store_type_id == 5\" (click)=\"sell()\">\n                <ion-label >\n                    สรุปการขาย\n                </ion-label>\n              </ion-item> -->\n            <!-- <ion-item *ngIf=\"usertype == 1\" (click)=\"delivery()\">\n                <ion-label >\n                    เรียกคนส่งของ\n                </ion-label>\n              </ion-item> -->\n              <!-- <ion-item *ngIf=\"usertype == 1\" (click)=\"order()\">\n                <ion-label >\n                    ออเดอร์สินค้า\n                </ion-label>\n              </ion-item> -->\n\n              <ion-item  (click)=\"customer()\">\n                <ion-label>\n                    สั่งซื้อสินค้า\n                </ion-label>\n              </ion-item>\n\n              <!-- <ion-item (click)=\"logout()\">\n                <ion-label >\n                    ออกจากระบบ\n                </ion-label>\n              </ion-item> -->\n\n            </ion-menu-toggle>\n          </ng-container>\n\n          <ng-container *ngIf=\"!store\">\n            <ion-menu-toggle auto-hide=\"false\" >\n              <ion-item  (click)=\"customer()\">\n                <ion-label>\n                    ซื้อสินค้า\n                </ion-label>\n              </ion-item>\n\n              <ion-item (click)=\"login()\">\n                <ion-label >\n                  เข้าสู่ระบบ\n                </ion-label>\n              </ion-item>\n            </ion-menu-toggle>\n          </ng-container>\n        </ion-list>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet main></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n\n<!-- <ion-app>\n  <ion-split-pane>\n    <ion-menu>\n      <ion-header>\n        <ion-toolbar>\n          <ion-title>Menu</ion-title>\n        </ion-toolbar>\n      </ion-header>\n      <ion-content>\n        <ion-list>\n          <ion-menu-toggle auto-hide=\"false\" *ngFor=\"let p of appPages\">\n            <ion-item [routerDirection]=\"'root'\" [routerLink]=\"[p.url]\">\n              <ion-icon slot=\"start\" [name]=\"p.icon\"></ion-icon>\n              <ion-label>\n                {{p.title}}\n              </ion-label>\n            </ion-item>\n          </ion-menu-toggle>\n        </ion-list>\n      </ion-content>\n    </ion-menu>\n    <ion-router-outlet main></ion-router-outlet>\n  </ion-split-pane>\n</ion-app>\n -->\n"
 
 /***/ }),
 
@@ -598,6 +598,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic-native/status-bar/ngx */ "./node_modules/@ionic-native/status-bar/ngx/index.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _login_shared_login_store_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./login/shared/login-store.service */ "./src/app/login/shared/login-store.service.ts");
+/* harmony import */ var ionic_mqtt__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ionic-mqtt */ "./node_modules/ionic-mqtt/dist/index.js");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/index.js");
+/* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/ngx/index.js");
+/* harmony import */ var _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/background-mode/ngx */ "./node_modules/@ionic-native/background-mode/ngx/index.js");
+/* harmony import */ var _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/badge/ngx */ "./node_modules/@ionic-native/badge/ngx/index.js");
+
+
+
+
+
 
 
 
@@ -606,31 +616,30 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AppComponent = class AppComponent {
-    // appPages = [
-    //   { title: 'หน้าแรก', url: '/cart', icon: 'home' },
-    //   { title: 'สินค้า', url: '/products', icon: 'cube' },
-    //   { title: 'นำเข้าสินค้า', url: '/products/create', icon: 'arrow-round-up' },
-    //   { title: 'เพิ่มรูป', url: '/products/froms', icon: 'arrow-round-up' },
-    //   { title: 'ข้อมูลร้าน', url: '/profile', icon: 'albums' },
-    //   { title: 'ออเดอร์สินค้า', url: '/store-orders', icon: 'cart' },
-    //   { title: 'เรียกคนส่งของ', url: '/store-logistic', icon: 'pin' },
-    //   { title: 'ขนส่งสินค้า', url: '/logistic', icon: 'pin' },
-    //   { title: 'สรุปการขาย', url: '/sell-stats', icon: 'albums' },
-    //   { title: 'เลือกร้านค้า', url: '/customer', icon: 'albums' },
-    //   { title: 'สถิติ', url: '/stats', icon: 'cart' },
-    //   { title: 'ล็อคอิน', url: '/login', icon: 'pin' },
-    //   { title: 'ออกจากระบบ', url: '/logout', icon: 'pin' },
-    // ];
-    constructor(platform, splashScreen, statusBar, event, router, _loginService) {
+    constructor(platform, splashScreen, statusBar, event, router, mqttService, localNotifications, _loginService, backgroundMode, badge
+    // private push: Push
+    ) {
         // this.currentStore = this._loginService.currentStoreValue;
         this.platform = platform;
         this.splashScreen = splashScreen;
         this.statusBar = statusBar;
         this.event = event;
         this.router = router;
+        this.mqttService = mqttService;
+        this.localNotifications = localNotifications;
         this._loginService = _loginService;
+        this.backgroundMode = backgroundMode;
+        this.badge = badge;
         this.store = null;
         this.member = null;
+        this.notify_id = 1;
+        this.interval_id = 0;
+        this.interval_lo = 0;
+        this.mqtt_refresh = 0;
+        this.background = false;
+        this._mqttClient = null;
+        // localStorage.setItem('background','0');
+        // localStorage.setItem('orders',JSON.stringify([]));
         console.log("=================START======================");
         this.event.subscribe('store:changed', trn => {
             this.store = trn;
@@ -670,29 +679,123 @@ let AppComponent = class AppComponent {
             this.member.lastname = this.store.lastname;
             localStorage.setItem('member', JSON.stringify(this.member));
         }
-        //this.initializeApp();
+        this.mqttConnect();
+        //
+        this.localNotifications.schedule({
+            title: 'ยินดีต้อนรับสู่ QRDee'
+        });
     }
-    ngOnInit() {
-        // this._loginService.currentStore.subscribe(store => {
-        //   console.log("INIT===>");
-        //   console.log(store);
-        //   this.store = store
-        // });
-        // console.log("_______app.ngOnInit=>_");
-        // console.log(JSON.parse(localStorage.getItem('store')));
-        // if(localStorage.getItem('store')){
-        //   this.store = JSON.parse(localStorage.getItem('store'));
+    _onConnectionLost(responseObject) {
+        console.log('_onConnectionLost ' + this.background);
+        // if(this.interval_id>0){
+        //   console.log("Stop interval on lost => "+this.interval_id);
+        //   clearInterval(this.interval_id);
+        //   this.interval_id = 0;
         // }
+        this._mqttClient = null;
+        if (this.interval_lo <= 0) {
+            this.interval_lo = setInterval(() => {
+                console.log("_onConnectionLost.interval..." + this.interval_lo);
+                this.mqttConnect();
+            }, 5000);
+        }
     }
-    ionViewWillEnter() {
-        // console.log("_______app.ionViewWillEnter=>_");
-        // console.log(JSON.parse(localStorage.getItem('store')));
+    _onMessageArrived(message) {
+        try {
+            console.log(this.background);
+            if (message.destinationName == "/qrdee/store/broadcast") {
+                this.showBroadcastNotification(message.payloadString);
+            }
+            else {
+                this.showNotification(message.payloadString);
+                this.badge.increase(1);
+            }
+        }
+        catch (e) {
+            console.log('.e');
+            console.log(e);
+        }
+    }
+    mqttConnect() {
+        if (this.store && this._mqttClient == null) {
+            let TOPIC = [];
+            let MQTT_CONFIG = {
+                host: "qrdee.co",
+                port: 9001,
+                username: "miot",
+                password: "SrruMIoT@2019",
+                protocol: "ws",
+                path: "/ws",
+                clientId: Object(uuid__WEBPACK_IMPORTED_MODULE_8__["v4"])()
+            };
+            TOPIC = ["/qrdee/store/" + this.store.id,
+                "/qrdee/store/broadcast"];
+            console.log("Connecting to mqtt....", TOPIC);
+            console.log(MQTT_CONFIG);
+            try {
+                this._mqttClient = this.mqttService.loadingMqtt((lost) => {
+                    this._onConnectionLost(lost);
+                }, (arrived) => {
+                    this._onMessageArrived(arrived);
+                }, TOPIC, MQTT_CONFIG);
+            }
+            catch (ee) {
+                console.log("MQTT connect errr....");
+                this._mqttClient = null;
+                //this.mqttConnect();
+            }
+        }
+        else {
+            console.log("_mqttClient not null => " + this.interval_id);
+            try {
+                console.log("Try .. sendMessage");
+                this.mqttService.sendMessage('/qrdee/ping', '0');
+                // if(!this.background){
+                if (this.interval_lo > 0) {
+                    console.log("stop interval " + this.interval_lo);
+                    clearInterval(this.interval_lo);
+                    this.interval_lo = 0;
+                }
+                // }
+            }
+            catch (eee) {
+                console.log("sendMessage error ... ", eee);
+                this._mqttClient = null;
+            }
+        }
+    }
+    showNotification(price) {
+        this.localNotifications.schedule({
+            title: 'มีคำสั่งซื้อมาใหม่ ' + price + " บาท"
+        });
+    }
+    showBroadcastNotification(title) {
+        this.localNotifications.schedule({
+            title: title
+        });
+    }
+    // trackOrders(){
+    //
+    //   console.log("tracking orders..."+localStorage.getItem('background'));
+    //   let orders = JSON.parse(localStorage.getItem('orders'));
+    //   this.mqttConnect();
+    //   orders.forEach(e => {
+    //     this.showNotification(e.payloadString);
+    //     this.badge.increase(1);
+    //   });
+    //   localStorage.setItem('orders',JSON.stringify([]));
+    //
+    // }
+    ngOnInit() {
+        console.log("_______app.ngOnInit=>_");
+        this.mqttConnect();
     }
     login() {
         console.log("____login))))");
         this.router.navigate(['login']);
     }
     home() {
+        this.badge.clear();
         this.router.navigate(['cart']);
     }
     logout() {
@@ -736,6 +839,24 @@ let AppComponent = class AppComponent {
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
             this.splashScreen.hide();
+            this.backgroundMode.on('activate').subscribe(() => {
+                console.log('activated');
+                this.background = true;
+                this.interval_id = setInterval(() => {
+                    console.log("backgroundMode.interval..." + this.interval_id);
+                    this.mqttConnect();
+                }, 5000);
+            });
+            this.backgroundMode.on('deactivate').subscribe(() => {
+                console.log('deactivated....');
+                this.background = false;
+                if (this.interval_id > 0) {
+                    console.log("stop interval " + this.interval_id);
+                    clearInterval(this.interval_id);
+                    this.interval_id = 0;
+                }
+            });
+            this.backgroundMode.enable();
         });
     }
 };
@@ -745,7 +866,11 @@ AppComponent.ctorParameters = () => [
     { type: _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Events"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] },
-    { type: _login_shared_login_store_service__WEBPACK_IMPORTED_MODULE_6__["LoginStoreService"] }
+    { type: ionic_mqtt__WEBPACK_IMPORTED_MODULE_7__["MQTTService"] },
+    { type: _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_9__["LocalNotifications"] },
+    { type: _login_shared_login_store_service__WEBPACK_IMPORTED_MODULE_6__["LoginStoreService"] },
+    { type: _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_10__["BackgroundMode"] },
+    { type: _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_11__["Badge"] }
 ];
 AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -758,7 +883,13 @@ AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _ionic_native_status_bar_ngx__WEBPACK_IMPORTED_MODULE_4__["StatusBar"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Events"],
         _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"],
-        _login_shared_login_store_service__WEBPACK_IMPORTED_MODULE_6__["LoginStoreService"]])
+        ionic_mqtt__WEBPACK_IMPORTED_MODULE_7__["MQTTService"],
+        _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_9__["LocalNotifications"],
+        _login_shared_login_store_service__WEBPACK_IMPORTED_MODULE_6__["LoginStoreService"],
+        _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_10__["BackgroundMode"],
+        _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_11__["Badge"]
+        // private push: Push
+    ])
 ], AppComponent);
 
 
@@ -789,6 +920,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/geolocation/ngx */ "./node_modules/@ionic-native/geolocation/ngx/index.js");
 /* harmony import */ var _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic-native/file/ngx */ "./node_modules/@ionic-native/file/ngx/index.js");
 /* harmony import */ var _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ionic-native/camera/ngx */ "./node_modules/@ionic-native/camera/ngx/index.js");
+/* harmony import */ var ionic_mqtt__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ionic-mqtt */ "./node_modules/ionic-mqtt/dist/index.js");
+/* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/ngx/index.js");
+/* harmony import */ var _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @ionic-native/badge/ngx */ "./node_modules/@ionic-native/badge/ngx/index.js");
+/* harmony import */ var _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @ionic-native/background-mode/ngx */ "./node_modules/@ionic-native/background-mode/ngx/index.js");
 
 
 
@@ -805,6 +940,11 @@ __webpack_require__.r(__webpack_exports__);
 
 // import { ImagePicker } from '@ionic-native/image-picker/ngx';
 // import { WebView } from '@ionic-native/ionic-webview/ngx';
+
+
+
+
+// import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
 //ionic cordova run ios -lc -d --target="0D1FA3B0-AB5E-4F76-AB49-1E2D63774E7B"
 let AppModule = class AppModule {
 };
@@ -825,8 +965,11 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_11__["Geolocation"],
             _ionic_native_file_ngx__WEBPACK_IMPORTED_MODULE_12__["File"],
             _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_13__["Camera"],
-            // ImagePicker,
-            // WebView,
+            ionic_mqtt__WEBPACK_IMPORTED_MODULE_14__["MQTTService"],
+            _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_15__["LocalNotifications"],
+            _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_17__["BackgroundMode"],
+            _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_16__["Badge"],
+            // Push,
             { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicRouteStrategy"] }
         ],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_9__["AppComponent"]]

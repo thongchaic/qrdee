@@ -234,17 +234,20 @@ export class CustomerPage implements AfterViewInit{
   }
 
    processPayment(c){
-
-     if(c < 5){
-       let x = document.getElementById('map');
-       if(!x){
-         setTimeout( () => {
-             console.log("Not ready");
-             let k = c + 1;
-             this.processPayment(k);
-         }, 1000);
-       }
+     console.log("C="+c);
+     let x = document.getElementById('map');
+     if(!x && c < 100){
+       setTimeout( () => {
+           console.log("Not ready");
+           let k = c + 1;
+           this.processPayment(k);
+       }, 100);
+       return;
      }
+     if(!x){
+       alert("กดปุ่มคำสั่งซื้ออีกครั้ง");
+     }
+
 
     this.member_cart = JSON.parse(localStorage.getItem('member_cart'));
     console.log(this.member_cart);

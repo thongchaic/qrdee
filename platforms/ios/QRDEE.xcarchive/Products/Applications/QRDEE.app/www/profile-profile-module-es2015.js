@@ -18,7 +18,7 @@ module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>จัดการร้านค้า</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-label position=\"floating\">จัดการตำแหน่งร้าน</ion-label>\n  <div id=\"map\" #map style=\"height:250px;\"></div>\n\n\n  <ion-list [formGroup]=\"form\">\n    <ion-item>\n        <b>แก้ไขข้อมูลร้านค้า</b>\n    </ion-item>\n    <ion-item-group >\n      <ion-item lines=\"none\">\n        <ion-img class=\"center\" style=\"width: 250px; height: 180px;\"  *ngIf=\"store_pic\" [src]=\"store_pic\"></ion-img>\n        <!-- <ion-img  *ngIf=\"!store_pic\" src=\"/assets/noimg.png\"></ion-img> -->\n      </ion-item>\n      <ion-grid>\n        <ion-row justify-content-center>\n          <ion-button size=\"small\" color=\"primary\" (click)=\"getPicture()\">ถ่ายรูปร้านค้า</ion-button>\n          <ion-button size=\"small\" color=\"secondary\" (click)=\"selectPictures();\">เลือกจากอัลบั้ม</ion-button>\n        </ion-row>\n      </ion-grid>\n    </ion-item-group>\n     <ion-item>\n        <b slot=\"start\">ชื่อร้าน</b>\n        <ion-input slot=\"end\" color=\"primary\" type=\"text\" formControlName=\"store_name\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">พร้อมเพย์</b>\n         <ion-input slot=\"end\"  color=\"primary\" type=\"text\" formControlName=\"promptpay\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">โทรศัพท์</b>\n         <ion-input slot=\"end\" color=\"primary\" type=\"text\" formControlName=\"mobile_number\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">ค่าขนส่ง</b>\n         <ion-input slot=\"end\" color=\"primary\" type=\"number\" formControlName=\"delivery_price\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">ชื่อ</b>\n         <ion-input slot=\"end\" color=\"primary\" type=\"text\" formControlName=\"firstname\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">นามสกุล</b>\n         <ion-input slot=\"end\" color=\"primary\" type=\"text\" formControlName=\"lastname\" ></ion-input>\n     </ion-item>\n\n     <ion-item>\n       <ion-label color=\"primary\" position=\"stacked\">ประเภทร้านค้า</ion-label>\n       <ion-select formControlName=\"store_type_id\">\n         <ion-select-option\n           *ngFor=\"let type of store_types\"\n           [value]=\"type.id\"\n           [selected]=\"type.id === store.store_type_id\">\n           {{ type.store_type_th }}\n         </ion-select-option>\n       </ion-select>\n     </ion-item>\n </ion-list>\n\n  <ion-card style=\"background:#FFFFF0;\">\n    <ion-card-content *ngIf=\"store\">\n      <ion-button type=\"submit\" shape=\"round\" expand=\"full\" color=\"primary\" (click)=\"submit()\">\n          <ion-icon name=\"create\"></ion-icon>\n          &nbsp;ปรับปรุงข้อมูล\n      </ion-button>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>จัดการร้านค้า</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-label position=\"floating\">จัดการตำแหน่งร้าน</ion-label>\n  <div id=\"map\" #map style=\"height:250px;\"></div>\n\n\n  <ion-list [formGroup]=\"form\">\n    <ion-item>\n        <b>แก้ไขข้อมูลร้านค้า</b>\n    </ion-item>\n    <ion-item-group >\n      <ion-item lines=\"none\">\n        <ion-img class=\"center\" style=\"width: 250px; height: 180px;\"  *ngIf=\"store_pic\" [src]=\"store_pic\"></ion-img>\n        <!-- <ion-img  *ngIf=\"!store_pic\" src=\"/assets/noimg.png\"></ion-img> -->\n      </ion-item>\n      <ion-grid>\n        <ion-row justify-content-center>\n          <ion-button size=\"small\" color=\"primary\" (click)=\"getPicture()\">ถ่ายรูปร้านค้า</ion-button>\n          <ion-button size=\"small\" color=\"secondary\" (click)=\"selectPictures();\">เลือกจากอัลบั้ม</ion-button>\n        </ion-row>\n      </ion-grid>\n    </ion-item-group>\n     <ion-item>\n        <b slot=\"start\">ชื่อร้าน</b>\n        <ion-input slot=\"end\" color=\"primary\" type=\"text\" formControlName=\"store_name\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">พร้อมเพย์</b>\n         <ion-input slot=\"end\"  color=\"primary\" type=\"text\" formControlName=\"promptpay\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">โทรศัพท์</b>\n         <ion-input slot=\"end\" color=\"primary\" type=\"text\" formControlName=\"mobile_number\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">ค่าขนส่ง</b>\n         <ion-input slot=\"end\" color=\"primary\" type=\"number\" formControlName=\"delivery_price\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">ขั้นต่ำ ฟรีค่าขนส่ง</b>\n         <ion-input slot=\"end\" color=\"primary\" type=\"number\" formControlName=\"free_delivery_price\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">ชื่อ</b>\n         <ion-input slot=\"end\" color=\"primary\" type=\"text\" formControlName=\"firstname\" ></ion-input>\n     </ion-item>\n     <ion-item>\n         <b slot=\"start\">นามสกุล</b>\n         <ion-input slot=\"end\" color=\"primary\" type=\"text\" formControlName=\"lastname\" ></ion-input>\n     </ion-item>\n\n     <ion-item>\n       <ion-label color=\"primary\" position=\"stacked\">ประเภทร้านค้า</ion-label>\n       <ion-select formControlName=\"store_type_id\">\n         <ion-select-option\n           *ngFor=\"let type of store_types\"\n           [value]=\"type.id\"\n           [selected]=\"type.id === store.store_type_id\">\n           {{ type.store_type_th }}\n         </ion-select-option>\n       </ion-select>\n     </ion-item>\n </ion-list>\n\n  <ion-card style=\"background:#FFFFF0;\">\n    <ion-card-content *ngIf=\"store\">\n      <ion-button type=\"submit\" shape=\"round\" expand=\"full\" color=\"primary\" (click)=\"submit()\">\n          <ion-icon name=\"create\"></ion-icon>\n          &nbsp;ปรับปรุงข้อมูล\n      </ion-button>\n    </ion-card-content>\n  </ion-card>\n</ion-content>\n"
 
 /***/ }),
 
@@ -362,22 +362,28 @@ let ProfilePage = class ProfilePage {
         //alert(JSON.stringify(this.store));
     }
     ngOnInit() {
-        this.store = JSON.parse(localStorage.getItem('store'));
-        console.log(this.store);
-        this.store_pic = this.store.store_pic;
-        if (this.store_pic) {
-            this.store_pic = 'https://qrdee.co/app/' + this.store_pic;
-        }
-        // localStorage.setItem("store_lat",this.store.latitude);
-        // localStorage.setItem("store_lng",this.store.longitude);
-        //
-        this.loadStoreTypes();
-        this.buildForm();
-        // this.latitude.patchValue( this.store.latitude );
-        // this.longitude.patchValue( this.store.longitude );
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            this.store = JSON.parse(localStorage.getItem('store'));
+            console.log(this.store);
+            this.store_pic = this.store.store_pic;
+            if (this.store_pic) {
+                this.store_pic = 'https://qrdee.co/app/' + this.store_pic;
+            }
+            // localStorage.setItem("store_lat",this.store.latitude);
+            // localStorage.setItem("store_lng",this.store.longitude);
+            //
+            //await this.platform.ready();
+            this.buildForm();
+            yield this.loadStoreTypes();
+            // this.latitude.patchValue( this.store.latitude );
+            // this.longitude.patchValue( this.store.longitude );
+        });
     }
     ionViewDidEnter() {
-        this.loadMap();
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            yield this.loadStoreTypes();
+            this.loadMap();
+        });
     }
     // ionViewWillEnter() {
     //this.loadProfile();
@@ -448,6 +454,7 @@ let ProfilePage = class ProfilePage {
     loadStoreTypes() {
         this.profileservice.getStoreTypes().subscribe((data) => {
             this.store_types = data;
+            console.log(this.store_types);
         });
     }
     loadMap() {
@@ -547,11 +554,15 @@ let ProfilePage = class ProfilePage {
         });
     }
     buildForm() {
+        if (!this.store.free_delivery_price) {
+            this.store.free_delivery_price = 300;
+        }
         this.form = this._formBuilder.group({
             store_name: this.store.store_name,
             promptpay: this.store.promptpay,
             mobile_number: this.store.mobile_number,
             delivery_price: this.store.delivery_price,
+            free_delivery_price: this.store.free_delivery_price,
             firstname: this.store.firstname,
             lastname: this.store.lastname,
             store_type_id: this.store.store_type_id,

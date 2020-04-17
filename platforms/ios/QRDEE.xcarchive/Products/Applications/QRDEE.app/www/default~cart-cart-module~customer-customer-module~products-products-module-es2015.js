@@ -36,6 +36,7 @@ let ProductService = class ProductService {
         return this.http.get(`https://qrdee.co/api/v2/products?id=${product_id}`);
     }
     getProducts(store_id, limit = 0, offset = 0) {
+        console.log(`https://qrdee.co/api/v2/products/${store_id}?limit=${limit}&offset=${offset}`);
         return this.http.get(`https://qrdee.co/api/v2/products/${store_id}?limit=${limit}&offset=${offset}`);
     }
     getAllproduct(id) {
@@ -99,6 +100,9 @@ let ProductService = class ProductService {
         fd.append('price', data.price);
         fd.append('cost', data.cost);
         return fd;
+    }
+    addProductRate(product_id, rating) {
+        return this.http.post(`https://qrdee.co/api/v2/rating/product/${product_id}`, { star: rating });
     }
 };
 ProductService.ctorParameters = () => [

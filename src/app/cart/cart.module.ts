@@ -17,6 +17,8 @@ import { AddComponent } from './add/add.component';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx'
 import { QRCodeModule } from 'angularx-qrcode';
 import { CallNumber } from '@ionic-native/call-number/ngx';
+import { Badge } from '@ionic-native/badge/ngx';
+
 const routes: Routes = [
   {
     path: '',
@@ -57,7 +59,8 @@ const routes: Routes = [
     CartService,
     ProductService,
     BarcodeScanner,
-    CallNumber
+    CallNumber,
+    Badge
   ],
    schemas: [
         CUSTOM_ELEMENTS_SCHEMA,

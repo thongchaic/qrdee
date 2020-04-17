@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header padding=\"true\">\n  <ion-toolbar  *ngIf=\"store\">\n\n    <ion-avatar slot=\"start\">\n      <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\">\n      <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n    </ion-avatar>\n\n    <ion-title  >\n      {{ store.store_name }}\n      <!-- <img  object-fit: cover src=\"/assets/noimg.png\" > -->\n    </ion-title>\n\n\n    <ion-button fill=\"clear\" color=\"danger\" slot=\"end\" (click)=\"forceDissmiss(0);\">\n      <ion-icon name=\"ios-arrow-back\"></ion-icon>Back\n    </ion-button>\n  </ion-toolbar>\n</ion-header>\n\n\n<ion-content>\n\n\n\n  <ion-list *ngIf=\"products\">\n      <ion-item >\n\n        <ion-text slot=\"start\">\n          <small>เลือกไว้แล้ว {{pick_count}} ชิ้น</small>\n        </ion-text>\n        <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"startPayment();\">\n          <ion-icon slot=\"icon-only\" name=\"ios-cash\"></ion-icon> ชำระเงิน\n        </ion-button>\n      </ion-item>\n\n      <ion-item  *ngFor=\"let product of products\">\n        <ion-avatar slot=\"start\">\n          <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+product.thumbnail\">\n          <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n        </ion-avatar>\n        <ion-text>\n          <small *ngIf=\"product.product_th\"><b>{{product.product_th}}</b></small><br>\n        </ion-text>\n        <ion-text slot=\"end\">\n          <small *ngIf=\"product.price\">ราคา {{product.price | number }} บาท</small><br>\n        </ion-text>\n        <ion-button fill=\"clear\" color=\"secondary\" slot=\"end\" (click)=\"selectItem(product);\">\n          <ion-icon slot=\"icon-only\" name=\"ios-cart\"></ion-icon>\n        </ion-button>\n      </ion-item>\n\n      <ion-item >\n        <ion-text>\n          <small *ngIf=\"store.delivery_price\">**ร้านนี้ค่าส่ง {{store.delivery_price}} บาท</small><br>\n        </ion-text>\n      </ion-item>\n\n  </ion-list>\n\n\n\n</ion-content>\n"
+module.exports = "<ion-header padding=\"true\">\n  <ion-toolbar  *ngIf=\"store\">\n\n    <ion-avatar no-margin no-padding slot=\"start\">\n      <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\">\n      <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n    </ion-avatar>\n\n    <div no-margin no-padding>\n      <ion-row no-margin no-padding>\n        <ion-col no-margin no-padding>\n          {{ store.store_name }}\n        </ion-col>\n      </ion-row>\n\n      <ion-row no-margin no-padding>\n        <ion-col no-margin no-padding>\n          <ul no-margin no-padding class=\"rating-container\" style=\"display: inline; list-style: none;\">\n            <li no-margin no-padding >\n              <ion-button no-margin no-padding fill size=\"small\" *ngFor=\"let star of [0,1,2,3,4]\" (click)=\"addStoreStar(store.id, star+1)\">\n                <ion-icon no-margin no-padding [name]=\"store.star > star ? 'star' : 'star-outline'\"></ion-icon>\n              </ion-button>\n            </li>\n          </ul>\n        </ion-col>\n      </ion-row>\n    </div>\n\n    <ion-button fill=\"clear\" size=\"small\" color=\"danger\" slot=\"end\" (click)=\"forceDissmiss(0);\">\n      <ion-icon name=\"ios-arrow-back\"></ion-icon>กลับ\n    </ion-button>\n  </ion-toolbar>\n\n</ion-header>\n\n\n<ion-content>\n\n<ion-grid *ngIf=\"products\">\n  <ion-item>\n    <ion-text slot=\"start\">\n      <small>เลือกไว้แล้ว {{pick_count}} ชิ้น</small><br>\n      <small> (ขั้นต่ำ {{store.free_delivery_price}} ส่งฟรี)</small>\n    </ion-text>\n    <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"startPayment();\">\n      <ion-icon slot=\"icon-only\" name=\"ios-cash\"></ion-icon> สั่งซื้อ\n    </ion-button>\n  </ion-item>\n    <ion-row responsive-sm wrap no-margin no-padding>\n      <ion-col   *ngFor=\"let product of products\">\n\n        <ion-card  no-margin no-padding >\n          <ion-item>\n            <ion-text>{{ product.product_th }}</ion-text>\n            <ion-badge  color=\"danger\"> {{product.price | number }} บาท </ion-badge>\n            <ion-button fill=\"outline\" slot=\"end\"  (click)=\"selectItem(product);\">เลือก</ion-button>\n          </ion-item>\n          <ion-card-content  no-margin no-padding *ngIf=\"store.store_pic\">\n            <ion-img   style=\"height:200px;\" [src]=\"'https://qrdee.co/app/'+product.thumbnail\"></ion-img>\n            <ion-text *ngIf=\"product.details_th\"><small> {{ product.details_th }} </small></ion-text>\n          </ion-card-content>\n\n          <ion-row no-margin no-padding>\n            <ion-col size=\"10\">\n            <!-- <button ion-button icon-start clear small>\n            <ion-icon name=\"thumbs-up\"></ion-icon>\n            <div>12 Likes</div>\n            </button> -->\n\n              <div class=\"rating-container\">\n                <ul style=\"display: inline;\">\n                  <li>\n                    <ion-button fill size=\"small\" *ngFor=\"let star of [0,1,2,3,4]\" (click)=\"addProductStar(product.id, star+1)\">\n                      <ion-icon [name]=\"product.star > star ? 'star' : 'star-outline'\"></ion-icon>\n                    </ion-button>\n                  </li>\n                </ul>\n              </div>\n            <!-- <rating no-margin no-padding [rate]=\"rate\"\n              readonly=\"false\"\n              size=\"small\"\n              (rateChange)=\"addProductStar($event)\">\n            </rating> -->\n            </ion-col>\n            <!-- <ion-col>\n            <button ion-button icon-start clear small>\n            <ion-icon name=\"text\"></ion-icon>\n            <div>4 Comments</div>\n            </button>\n            </ion-col> -->\n            <ion-col size=\"2\" align-self-center text-center (click)=\"commentPrompt(product.id, product.comments);\">\n              <ion-note color=\"primary\"><ion-icon name=\"text\"></ion-icon>\n                {{ product.comments.length }}\n              </ion-note>\n            </ion-col>\n          </ion-row>\n\n\n        </ion-card>\n\n\n        <!-- <ion-card>\n            <ion-col col-12 no-margin no-padding><img src=\"{{product.product_th}}\"/></ion-col>\n            <ion-col col-12 no-margin no-padding>\n              <ion-card-content>\n                <ion-card-title>\n                  {{ product.product_th }} <ion-badge item-end>{{ product.product_th }} km</ion-badge>\n                </ion-card-title>\n                <p>\n                  <small><rating [score]=\"5\" [max]=\"5\"></rating> ({{ product.product_th }})</small>\n                </p>\n              </ion-card-content>\n            </ion-col>\n        </ion-card> -->\n      </ion-col>\n    </ion-row>\n</ion-grid>\n\n<!-- <ion-list *ngIf=\"products\">\n    <ion-item >\n\n      <ion-text slot=\"start\">\n        <small>เลือกไว้แล้ว {{pick_count}} ชิ้น</small>\n        <small> (ขั้นต่ำ {{store.free_delivery_price}} ส่งฟรี)</small>\n      </ion-text>\n      <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"startPayment();\">\n        <ion-icon slot=\"icon-only\" name=\"ios-cash\"></ion-icon> ชำระเงิน\n      </ion-button>\n    </ion-item>\n\n    <ion-item  *ngFor=\"let product of products\">\n      <ion-avatar slot=\"start\">\n        <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+product.thumbnail\">\n        <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n      </ion-avatar>\n      <ion-text>\n        <small *ngIf=\"product.product_th\"><b>{{product.product_th}}</b></small><br>\n      </ion-text>\n      <ion-text slot=\"end\">\n        <small *ngIf=\"product.price\">ราคา {{product.price | number }} บาท</small><br>\n      </ion-text>\n      <ion-button fill=\"clear\" color=\"secondary\" slot=\"end\" (click)=\"selectItem(product);\">\n        <ion-icon slot=\"icon-only\" name=\"ios-cart\"></ion-icon>\n      </ion-button>\n    </ion-item>\n\n</ion-list> -->\n\n\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -18,7 +18,7 @@ module.exports = "<ion-header padding=\"true\">\n  <ion-toolbar  *ngIf=\"store\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header style=\"background:#FFFFFF;\">\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>ซื้อสินค้า</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content [hidden]=\"tab1\" style=\"background:#FFFFFF;\">\n  <ion-searchbar placeholder=\"ค้นหาร้าน\" color=\"primary\" (ionChange)=\"searchStores($event.target.value)\">\n  </ion-searchbar>\n\n  <ion-list *ngIf=\"stores\">\n      <ion-list-header >\n        <ion-label>ร้านค้าไกล้เคียง</ion-label>\n      </ion-list-header>\n\n      <ion-item *ngIf=\"stores && stores.length <=0 \">\n        <ion-text>\n            ไม่พบร้านบริเวณไกล้ ๆ นี้\n        </ion-text>\n      </ion-item>\n\n      <ion-item  *ngFor=\"let store of stores\">\n          <ion-avatar slot=\"start\">\n            <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\">\n            <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n          </ion-avatar>\n          <ion-text>\n            <small *ngIf=\"store.store_name\"><b>{{store.store_name}}</b></small><br>\n            <small *ngIf=\"store.store_type\">{{store.store_type.store_type_th}}</small>\n          </ion-text>\n          <ion-text slot=\"end\">\n            <small *ngIf=\"store.delivery_price\">ระยะ {{store.distance | number }} km</small><br>\n            <small *ngIf=\"store.delivery_price\">ค่าส่ง {{store.delivery_price}} ฿</small>\n          </ion-text>\n          <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"viewStore(store);\">\n            <ion-icon slot=\"icon-only\" name=\"md-eye\"></ion-icon>\n          </ion-button>\n        </ion-item>\n  </ion-list>\n\n  <!-- <ion-infinite-scroll threshold=\"50%\" (ionInfinite)=\"infinitStores($event.target)\">\n     <ion-infinite-scroll-content>\n     </ion-infinite-scroll-content>\n   </ion-infinite-scroll> -->\n\n</ion-content>\n<ion-content [hidden]=\"tab2\">\n\n  <ion-list  *ngFor=\"let cart of member_cart\">\n\n      <!-- <ion-list-header >\n        <ion-label>ตะกร้าสินค้า</ion-label>\n      </ion-list-header> -->\n      <ion-item >\n        <ion-avatar slot=\"start\">\n          <!-- <img *ngIf=\"cart.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\"> -->\n          <!-- <img *ngIf=\"!cart.store_pic\" src=\"/assets/noimg.png\"> -->\n        </ion-avatar>\n        <ion-text>\n          <small *ngIf=\"cart.store_name\"><b>ร้าน {{cart.store_name}}</b></small><br>\n        </ion-text>\n        <ion-text slot=\"end\">\n          <small *ngIf=\"cart.delivery_price\">ค่าส่ง {{cart.delivery_price}} ฿</small>\n        </ion-text>\n        <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"callStore(cart.mobile_number);\">\n          <ion-icon slot=\"icon-only\" name=\"ios-call\"></ion-icon>\n        </ion-button>\n      </ion-item>\n\n      <ion-item *ngFor=\"let prod of cart.products\">\n        <ion-avatar slot=\"start\">\n          <img *ngIf=\"prod.thumbnail\" [src]=\"'https://qrdee.co/app/'+prod.thumbnail\">\n          <img *ngIf=\"!prod.thumbnail\" src=\"/assets/noimg.png\">\n        </ion-avatar>\n        <ion-text>\n          <small *ngIf=\"prod.product_th\"><b>{{prod.product_th}}</b></small><br>\n        </ion-text>\n        <ion-text slot=\"end\">\n          <small *ngIf=\"prod.price\">{{prod.price}} ฿</small>\n        </ion-text>\n        <ion-button fill=\"clear\" color=\"danger\" slot=\"end\" (click)=\"removeItem(cart.id, prod.id);\">\n          <ion-icon slot=\"icon-only\" name=\"md-remove-circle\"></ion-icon>\n        </ion-button>\n      </ion-item>\n\n  </ion-list>\n\n  <ion-list lines=\"none\">\n    <ion-item>\n      <ion-text slot=\"start\">\n        <b *ngIf=\"total_price\">รวม {{total_price}} ฿</b>\n      </ion-text>\n      <ion-text slot=\"end\">\n        <small>**ชำระเงินปลายทางผ่าน QRCode</small>\n      </ion-text>\n    </ion-item>\n  </ion-list>\n\n  <ion-label position=\"floating\">โปรดระบุจุดรับสินค้า</ion-label>\n  <div #mapElement style=\"height:250px;\" ></div>\n  <br>\n\n\n  <ion-list lines=\"none\">\n\n    <ion-item>\n      <ion-label position=\"stacked\">ชื่อผู้รับ</ion-label>\n      <ion-input type=\"text\" [(ngModel)]=\"firstname\" style=\"background-color:#ded9d9;\"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position=\"stacked\">เบอร์โทรศัพท์</ion-label>\n      <ion-input type=\"text\" [(ngModel)]=\"mobile_number\" style=\"background-color:#ded9d9;\"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position=\"stacked\">รายละเอียดเพิ่มเติมสำหรับผู้ส่งของ</ion-label>\n      <ion-textarea [(ngModel)]=\"notes\" style=\"background-color:#ded9d9;\" rows=\"4\" placeholder=\"ตัวอย่าง. หน้าอาคาร 3 สาขาวิทยาการคอมพิวเตอร์ มหาวิทยาลัยราชภัฏสุรินทร์\"></ion-textarea>\n    </ion-item>\n\n    <ion-item>\n      <ion-button size=\"default\" slot=\"end\" (click)=\"placeOrder();\" color=\"tertiary\">\n        ส่งคำสั่งซื้อ\n      </ion-button>\n    </ion-item>\n  </ion-list>\n\n</ion-content>\n\n<ion-content [hidden]=\"tab3\">\n  <ion-list *ngIf=\"carts\">\n      <ion-list-header >\n        <ion-label>รายการซื้อสินค้า</ion-label>\n      </ion-list-header>\n\n      <ion-item  *ngFor=\"let cart of carts\">\n          <ion-avatar slot=\"start\">\n            <img *ngIf=\"cart.product.thumbnail\" [src]=\"'https://qrdee.co/app/'+cart.product.thumbnail\">\n            <img *ngIf=\"!cart.product.thumbnail\" src=\"/assets/noimg.png\">\n          </ion-avatar>\n          <ion-text slot=\"end\">\n            <small *ngIf=\"cart.product.product_th && cart.store.store_name\">{{cart.product.product_th}} จาก {{cart.store.store_name}}</small><br>\n            <small *ngIf=\"cart.created_at\">เมื่อ {{cart.created_at }}</small>\n          </ion-text>\n          <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"callStore(cart.store.mobile_number);\">\n            <ion-icon slot=\"icon-only\" name=\"ios-call\"></ion-icon>\n          </ion-button>\n        </ion-item>\n  </ion-list>\n</ion-content>\n\n<ion-footer style=\"background:#FFFFFF;\">\n  <ion-toolbar>\n    <ion-tabs>\n        <ion-tab-bar slot=\"bottom\">\n          <ion-tab-button color=\"primary\" (click)=\"changeTab(0)\" >\n              <ion-icon name=\"md-locate\"></ion-icon>\n              <ion-label>ร้านค้าไกล้ๆ</ion-label>\n          </ion-tab-button>\n          <ion-tab-button color=\"primary\" (click)=\"changeTab(1)\" >\n              <ion-icon name=\"md-cart\"></ion-icon>\n              <ion-label>คำสั่งซื้อ</ion-label>\n          </ion-tab-button>\n          <ion-tab-button color=\"primary\" (click)=\"changeTab(2)\" >\n              <ion-icon name=\"md-list-box\"></ion-icon>\n              <ion-label>รายการซื้อ</ion-label>\n          </ion-tab-button>\n        </ion-tab-bar>\n      </ion-tabs>\n   </ion-toolbar>\n</ion-footer>\n"
+module.exports = "<ion-header translucent>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>ซื้อสินค้า</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content fullscreen *ngIf=\"tab1\">\n  <ion-searchbar placeholder=\"ค้นหา\" color=\"primary\" (ionChange)=\"searchStores($event.target.value)\">\n  </ion-searchbar>\n\n  <ion-list *ngIf=\"stores\">\n      <ion-list-header >\n        <ion-label>ร้านค้าใกล้เคียง</ion-label>\n      </ion-list-header>\n      <ion-item *ngIf=\"stores && stores.length <=0 \">\n        <ion-text>\n            ไม่พบร้านบริเวณใกล้ ๆ นี้\n        </ion-text>\n      </ion-item>\n\n      <ion-card *ngFor=\"let store of stores\" (click)=\"viewStore(store);\">\n\n        <ion-row style=\"height: 100%;\">\n          <ion-col size=\"4\">\n            <ion-thumbnail style=\"height: 100%; width: 100%; border-radius: 2px;\">\n              <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\" style=\"height: 100%; width: 100%; border-radius: 4px;\">\n              <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\" style=\"height: 100%; width: 100%; border-radius: 4px;\">\n            </ion-thumbnail>\n          </ion-col>\n\n          <ion-col size=\"8\" style=\"line-height: 10px;\">\n            <p no-padding>{{ store.store_name }} <ion-badge color=\"primary\">{{store.distance | number }} กม.</ion-badge></p>\n            <small no-padding>{{ store.store_type.store_type_th }}</small><br>\n            <small no-padding>ค่าส่ง {{store.delivery_price}} ฿</small><br>\n            <ul class=\"rating-container\" style=\"display: inline; list-style: none;\">\n              <li>\n                <ion-button fill size=\"small\" *ngFor=\"let star of [0,1,2,3,4]\">\n                  <ion-icon [name]=\"store.star > star ? 'star' : 'star-outline'\"></ion-icon>\n                </ion-button>\n              </li>\n            </ul>\n          </ion-col>\n\n        </ion-row>\n\n      </ion-card>\n      <!-- <ion-item  *ngFor=\"let store of stores\">\n          <ion-avatar slot=\"start\" (click)=\"viewStore(store);\">\n            <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\">\n            <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n          </ion-avatar>\n          <ion-text (click)=\"viewStore(store);\">\n            <small *ngIf=\"store.store_name\"><b>{{store.store_name}}</b></small><br>\n            <small *ngIf=\"store.store_type\">{{store.store_type.store_type_th}}</small>\n          </ion-text>\n          <ion-text slot=\"end\" (click)=\"viewStore(store);\">\n            <small *ngIf=\"store.delivery_price\">ระยะ {{store.distance | number }} km</small><br>\n            <small *ngIf=\"store.delivery_price\">ค่าส่ง {{store.delivery_price}} ฿</small>\n          </ion-text>\n          <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"viewStore(store);\">\n            <ion-icon slot=\"icon-only\" name=\"md-eye\"></ion-icon>\n          </ion-button>\n\n\n        </ion-item> -->\n  </ion-list>\n\n  <ion-infinite-scroll (ionInfinite)=\"infinitStores($event.target)\" style=\"height: 5px;opacity: .01;\">\n     <ion-infinite-scroll-content>\n     </ion-infinite-scroll-content>\n   </ion-infinite-scroll>\n\n</ion-content>\n<ion-content *ngIf=\"tab2\">\n\n  <ion-list  *ngFor=\"let cart of member_cart\">\n      <ion-item >\n        <ion-avatar slot=\"start\">\n        </ion-avatar>\n        <ion-text>\n          <small *ngIf=\"cart.store_name\"><b>ร้าน {{cart.store_name}}</b></small><br>\n        </ion-text>\n        <ion-text slot=\"end\">\n          <small *ngIf=\"cart.delivery_price\">ค่าส่ง {{cart.delivery_price}} ฿</small><br>\n          <small *ngIf=\"cart.free_delivery_price\">(ขั้นต่ำ {{cart.free_delivery_price}} ส่งฟรี)</small>\n        </ion-text>\n        <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"callStore(cart.mobile_number);\">\n          <ion-icon slot=\"icon-only\" name=\"ios-call\"></ion-icon>\n        </ion-button>\n      </ion-item>\n\n      <ion-item *ngFor=\"let prod of cart.products\">\n        <ion-avatar slot=\"start\">\n          <img *ngIf=\"prod.thumbnail\" [src]=\"'https://qrdee.co/app/'+prod.thumbnail\">\n          <img *ngIf=\"!prod.thumbnail\" src=\"/assets/noimg.png\">\n        </ion-avatar>\n        <ion-text>\n          <small *ngIf=\"prod.product_th\"><b>{{prod.product_th}}</b></small><br>\n        </ion-text>\n        <ion-text slot=\"end\">\n          <small *ngIf=\"prod.price\">{{prod.price}} ฿</small>\n        </ion-text>\n        <ion-button fill=\"clear\" color=\"danger\" slot=\"end\" (click)=\"removeItem(cart.id, prod.id);\">\n          <ion-icon slot=\"icon-only\" name=\"md-remove-circle\"></ion-icon>\n        </ion-button>\n      </ion-item>\n\n  </ion-list>\n\n  <ion-list lines=\"none\">\n    <ion-item>\n      <ion-text slot=\"start\">\n        <b *ngIf=\"total_price\">รวม {{total_price}} ฿</b>\n      </ion-text>\n      <ion-text slot=\"end\">\n        <small>**ชำระเงินปลายทางผ่าน QRCode</small>\n      </ion-text>\n    </ion-item>\n  </ion-list>\n\n  <ion-label position=\"floating\">โปรดระบุจุดรับสินค้า</ion-label>\n    <div #map id=\"map\" style=\"height:250px;\" ></div>\n  <br>\n\n\n\n  <ion-list lines=\"none\">\n\n    <ion-item>\n      <ion-label position=\"stacked\">ชื่อผู้รับ</ion-label>\n      <ion-input type=\"text\" [(ngModel)]=\"firstname\" style=\"background-color:#ded9d9;\"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position=\"stacked\">เบอร์โทรศัพท์</ion-label>\n      <ion-input type=\"text\" [(ngModel)]=\"mobile_number\" style=\"background-color:#ded9d9;\"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label position=\"stacked\">รายละเอียดเพิ่มเติมสำหรับผู้ส่งของ</ion-label>\n      <ion-textarea [(ngModel)]=\"notes\" style=\"background-color:#ded9d9;\" rows=\"4\" placeholder=\"ตัวอย่าง. หน้าอาคาร 3 สาขาวิทยาการคอมพิวเตอร์ มหาวิทยาลัยราชภัฏสุรินทร์\"></ion-textarea>\n    </ion-item>\n\n    <ion-item>\n      <ion-button size=\"default\" slot=\"end\" (click)=\"placeOrder();\" color=\"tertiary\">\n        ส่งคำสั่งซื้อ\n      </ion-button>\n    </ion-item>\n  </ion-list>\n</ion-content>\n\n<ion-content *ngIf=\"tab3\">\n  <ion-list *ngIf=\"carts\">\n\n      <ion-list-header >\n        <ion-label>รายการซื้อสินค้า</ion-label>\n      </ion-list-header>\n\n      <ion-item  *ngFor=\"let cart of carts\">\n          <ion-avatar slot=\"start\">\n            <img *ngIf=\"cart.product.thumbnail\" [src]=\"'https://qrdee.co/app/'+cart.product.thumbnail\">\n            <img *ngIf=\"!cart.product.thumbnail\" src=\"/assets/noimg.png\">\n          </ion-avatar>\n          <ion-text slot=\"end\">\n            <small *ngIf=\"cart.product.product_th && cart.store.store_name\">{{cart.product.product_th}} จาก {{cart.store.store_name}}</small><br>\n            <small *ngIf=\"cart.created_at\">เมื่อ {{cart.created_at }}</small>\n          </ion-text>\n          <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"callStore(cart.store.mobile_number);\">\n            <ion-icon slot=\"icon-only\" name=\"ios-call\"></ion-icon>\n          </ion-button>\n        </ion-item>\n\n  </ion-list>\n</ion-content>\n\n<ion-footer style=\"background:#FFFFFF;\">\n  <ion-toolbar>\n    <ion-tabs>\n        <ion-tab-bar slot=\"bottom\">\n          <ion-tab-button color=\"primary\" (click)=\"changeTab(0)\" >\n              <ion-icon name=\"md-locate\"></ion-icon>\n              <ion-label>ร้านค้าใกล้ๆ</ion-label>\n          </ion-tab-button>\n          <ion-tab-button color=\"primary\" (click)=\"changeTab(1)\" >\n              <ion-icon name=\"md-cart\"></ion-icon>\n              <ion-label>คำสั่งซื้อ</ion-label>\n          </ion-tab-button>\n          <ion-tab-button color=\"primary\" (click)=\"changeTab(2)\" >\n              <ion-icon name=\"md-list-box\"></ion-icon>\n              <ion-label>รายการซื้อ</ion-label>\n          </ion-tab-button>\n        </ion-tab-bar>\n      </ion-tabs>\n   </ion-toolbar>\n</ion-footer>\n"
 
 /***/ }),
 
@@ -29,7 +29,7 @@ module.exports = "<ion-header style=\"background:#FFFFFF;\">\n  <ion-toolbar>\n 
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header translucent>\n  <ion-toolbar>\n\n    <ion-title>ระบุตำแหน่ง</ion-title>\n    <ion-button fill=\"clear\" color=\"danger\" slot=\"end\" (click)=\"dismissModal();\">\n      <ion-icon name=\"ios-arrow-back\"></ion-icon>Back\n    </ion-button>\n\n  </ion-toolbar>\n</ion-header>\n<ion-content fullscreen>\n  <div #map id=\"map\" style=\"height: 100%;\"></div>\n</ion-content>\n\n<ion-footer>\n  <ion-button expand=\"full\"  shape=\"round\" color=\"primary\"   (click)=\"accept();\">ค้นหาร้าน</ion-button>\n</ion-footer>\n"
+module.exports = "<ion-header translucent>\n  <ion-toolbar>\n\n    <ion-title>ระบุตำแหน่ง</ion-title>\n    <ion-button fill=\"clear\" color=\"danger\" slot=\"end\" (click)=\"dismissModal();\">\n      <ion-icon name=\"ios-arrow-back\"></ion-icon>กลับ\n    </ion-button>\n\n  </ion-toolbar>\n</ion-header>\n<ion-content fullscreen>\n  <div #map id=\"map\" style=\"height: 100%;\"></div>\n</ion-content>\n\n<ion-footer>\n  <ion-button expand=\"full\"  shape=\"round\" color=\"primary\"   (click)=\"accept();\">ค้นหาร้าน</ion-button>\n</ion-footer>\n"
 
 /***/ }),
 
@@ -40,7 +40,7 @@ module.exports = "<ion-header translucent>\n  <ion-toolbar>\n\n    <ion-title>�
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL2N1c3RvbWVyL2NhcnRtb2RhbC9jYXJ0bW9kYWwuY29tcG9uZW50LnNjc3MifQ== */"
+module.exports = "store-ion-rating {\n  --star-color: gray;\n  --star-color-filled: green; }\n\n#store-rating ion-buttons ion-button {\n  --padding-top: 0;\n  --padding-bottom: 0;\n  --padding-start: 4px;\n  --padding-end: 4px;\n  --box-shadow: none;\n  height: 20px;\n  font-size: 10px; }\n\n.rating-container ion-button {\n  --padding-start: 4px;\n  --padding-end: 4px; }\n\n.rating-container ion-button ion-icon {\n    color: gray; }\n\n.rating-container ion-button ion-icon[ng-reflect-name=\"star\"] {\n    color: #ffb400; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy90aG9uZ2NoYWkvUHJvamVjdHMvcXJkZWUvc3JjL2FwcC9jdXN0b21lci9jYXJ0bW9kYWwvY2FydG1vZGFsLmNvbXBvbmVudC5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0Usa0JBQWE7RUFDYiwwQkFBb0IsRUFBQTs7QUFHdEI7RUFDRSxnQkFBYztFQUNkLG1CQUFpQjtFQUNqQixvQkFBZ0I7RUFDaEIsa0JBQWM7RUFDZCxrQkFBYTtFQUNiLFlBQVk7RUFDWixlQUFlLEVBQUE7O0FBR2pCO0VBQ0Usb0JBQWdCO0VBQ2hCLGtCQUFjLEVBQUE7O0FBRmhCO0lBS0UsV0FBVyxFQUFBOztBQUxiO0lBU0ksY0FBYyxFQUFBIiwiZmlsZSI6InNyYy9hcHAvY3VzdG9tZXIvY2FydG1vZGFsL2NhcnRtb2RhbC5jb21wb25lbnQuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbInN0b3JlLWlvbi1yYXRpbmcge1xuICAtLXN0YXItY29sb3I6IGdyYXk7XG4gIC0tc3Rhci1jb2xvci1maWxsZWQ6IGdyZWVuO1xufVxuXG4jc3RvcmUtcmF0aW5nIGlvbi1idXR0b25zIGlvbi1idXR0b24ge1xuICAtLXBhZGRpbmctdG9wOiAwO1xuICAtLXBhZGRpbmctYm90dG9tOiAwO1xuICAtLXBhZGRpbmctc3RhcnQ6IDRweDtcbiAgLS1wYWRkaW5nLWVuZDogNHB4O1xuICAtLWJveC1zaGFkb3c6IG5vbmU7XG4gIGhlaWdodDogMjBweDtcbiAgZm9udC1zaXplOiAxMHB4O1xufVxuXG4ucmF0aW5nLWNvbnRhaW5lciBpb24tYnV0dG9uIHtcbiAgLS1wYWRkaW5nLXN0YXJ0OiA0cHg7XG4gIC0tcGFkZGluZy1lbmQ6IDRweDtcblxuICBpb24taWNvbiB7XG5cdFx0Y29sb3I6IGdyYXk7XG4gIH1cbiAgXG4gIGlvbi1pY29uW25nLXJlZmxlY3QtbmFtZT1cInN0YXJcIl0ge1xuICAgIGNvbG9yOiAjZmZiNDAwO1xuICB9XG59Il19 */"
 
 /***/ }),
 
@@ -59,19 +59,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _products_shared_product_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../products/shared/product.service */ "./src/app/products/shared/product.service.ts");
 /* harmony import */ var _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../shared/services/toast.service */ "./src/app/shared/services/toast.service.ts");
+/* harmony import */ var _shared_customer_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/customer.service */ "./src/app/customer/shared/customer.service.ts");
+
+
 
 
 
 
 
 let CartmodalComponent = class CartmodalComponent {
-    constructor(productService, toastService, modalController) {
+    constructor(productService, customerService, toastService, event, modalController, alertController) {
         this.productService = productService;
+        this.customerService = customerService;
         this.toastService = toastService;
+        this.event = event;
         this.modalController = modalController;
+        this.alertController = alertController;
         this.products = [];
         this.member_cart = [];
         this.pick_count = 0;
+        this.product_rate = 3;
+        this.store_rate = 0;
         console.log(this.store);
         this.member_cart = JSON.parse(localStorage.getItem('member_cart'));
         this.calcPickCount();
@@ -116,9 +124,57 @@ let CartmodalComponent = class CartmodalComponent {
             //console.log(this.member_cart);
         });
     }
+    commentPrompt(pid, comments) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header: 'ความเห็น',
+                inputs: [
+                    {
+                        name: 'comment',
+                        type: 'text',
+                        placeholder: 'เพิ่มข้อคิดเห็น'
+                    }
+                ],
+                message: "<ion-list no-margin no-padding>" + comments.map(comment => "<ion-item no-margin no-padding><small>" + comment.comment + "<sub> เมื่อ:" + (new Date(comment.created_at.replace(/-/g, '/')).toISOString().slice(0, 10)) + "</sub></small></ion-item>").join(" ") + "</ion-list>",
+                buttons: [
+                    {
+                        text: 'ยกเลิก',
+                        role: 'cancel',
+                        cssClass: 'secondary',
+                        handler: () => {
+                            console.log('Confirm Cancel');
+                        }
+                    }, {
+                        text: 'ส่ง',
+                        handler: (e) => {
+                            if (e.comment != "") {
+                                console.log(pid);
+                                this.customerService.addProductComment(pid, e.comment).subscribe(() => {
+                                    this.toastService.showToast('เราได้รับข้อคิดเห็นของท่านแล้ว', 'top');
+                                    this.loadProducts();
+                                });
+                            }
+                        }
+                    }
+                ]
+            });
+            yield alert.present();
+        });
+    }
     startPayment() {
         // process &
         this.closeModal(3);
+    }
+    addProductStar(id, star) {
+        this.productService.addProductRate(id, star).subscribe(() => {
+            this.toastService.showToast('เราได้รับดาวจากท่านแล้ว', 'top');
+            //this.loadProducts();
+        });
+    }
+    addStoreStar(id, star) {
+        this.customerService.addStoreStar(id, star).subscribe(() => {
+            this.toastService.showToast('เราได้รับดาวจากท่านแล้ว', 'top');
+        });
     }
     forceDissmiss(val) {
         this.closeModal(val);
@@ -131,8 +187,11 @@ let CartmodalComponent = class CartmodalComponent {
 };
 CartmodalComponent.ctorParameters = () => [
     { type: _products_shared_product_service__WEBPACK_IMPORTED_MODULE_3__["ProductService"] },
+    { type: _shared_customer_service__WEBPACK_IMPORTED_MODULE_5__["CustomerService"] },
     { type: _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_4__["ToastService"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Events"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
@@ -142,11 +201,15 @@ CartmodalComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-cartmodal',
         template: __webpack_require__(/*! raw-loader!./cartmodal.component.html */ "./node_modules/raw-loader/index.js!./src/app/customer/cartmodal/cartmodal.component.html"),
+        encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewEncapsulation"].None,
         styles: [__webpack_require__(/*! ./cartmodal.component.scss */ "./src/app/customer/cartmodal/cartmodal.component.scss")]
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_products_shared_product_service__WEBPACK_IMPORTED_MODULE_3__["ProductService"],
+        _shared_customer_service__WEBPACK_IMPORTED_MODULE_5__["CustomerService"],
         _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_4__["ToastService"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"]])
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Events"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]])
 ], CartmodalComponent);
 
 
@@ -221,7 +284,7 @@ CustomerPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _cartmodal_cartmodal_component__WEBPACK_IMPORTED_MODULE_10__["CartmodalComponent"],
             _mapmodal_mapmodal_component__WEBPACK_IMPORTED_MODULE_12__["MapmodalComponent"]
         ],
-        entryComponents: [_mapmodal_mapmodal_component__WEBPACK_IMPORTED_MODULE_12__["MapmodalComponent"]],
+        entryComponents: [_mapmodal_mapmodal_component__WEBPACK_IMPORTED_MODULE_12__["MapmodalComponent"], _cartmodal_cartmodal_component__WEBPACK_IMPORTED_MODULE_10__["CartmodalComponent"]],
         providers: [_shared_user_service__WEBPACK_IMPORTED_MODULE_8__["UserService"], _products_shared_forms_service__WEBPACK_IMPORTED_MODULE_9__["FormsService"], _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_11__["CallNumber"]],
     })
 ], CustomerPageModule);
@@ -237,7 +300,7 @@ CustomerPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".btn1 {\n  height: 100px;\n  --background: #33FFCC ; }\n\n.btn2 {\n  height: 100px;\n  --background: #66CCFF ; }\n\n.img_store {\n  width: 80px;\n  height: 80px; }\n\n.bk {\n  width: 100px;\n  height: 60px;\n  position: absolute;\n  top: 65%;\n  left: 65%;\n  margin-top: -100px;\n  margin-left: -100px; }\n\n.bg {\n  --background: url('https://image.freepik.com/free-vector/city-background-design_1300-380.jpg'); }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy90aG9uZ2NoYWkvUHJvamVjdHMvcXJkZWUvc3JjL2FwcC9jdXN0b21lci9jdXN0b21lci5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDQyxhQUFhO0VBQ2Isc0JBQWEsRUFBQTs7QUFHZDtFQUNDLGFBQWE7RUFDYixzQkFBYSxFQUFBOztBQUdkO0VBQ0MsV0FBVztFQUFFLFlBQVksRUFBQTs7QUFFMUI7RUFDQyxZQUFXO0VBQ1gsWUFBWTtFQUNaLGtCQUFrQjtFQUNsQixRQUFRO0VBQ1IsU0FBUTtFQUNSLGtCQUFrQjtFQUNsQixtQkFBbUIsRUFBQTs7QUFHcEI7RUFDRSw4RkFBYSxFQUFBIiwiZmlsZSI6InNyYy9hcHAvY3VzdG9tZXIvY3VzdG9tZXIucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmJ0bjEge1xyXG5cdGhlaWdodDogMTAwcHg7XHJcblx0LS1iYWNrZ3JvdW5kOiAjMzNGRkNDIDsgXHJcblx0XHJcbn1cclxuLmJ0bjIge1xyXG5cdGhlaWdodDogMTAwcHg7XHJcblx0LS1iYWNrZ3JvdW5kOiAjNjZDQ0ZGIDsgXHJcblxyXG59XHJcbi5pbWdfc3RvcmV7XHJcblx0d2lkdGg6IDgwcHg7IGhlaWdodDogODBweDtcclxufVxyXG4uYmsge1xyXG5cdHdpZHRoOjEwMHB4O1xyXG5cdGhlaWdodDogNjBweDtcclxuXHRwb3NpdGlvbjogYWJzb2x1dGU7XHJcblx0dG9wOiA2NSU7XHJcblx0bGVmdDo2NSU7XHJcblx0bWFyZ2luLXRvcDogLTEwMHB4O1xyXG5cdG1hcmdpbi1sZWZ0OiAtMTAwcHg7XHJcblx0Ly8gYm94LXNoYWRvdzogNXB4IDVweCAxMHB4IDEwcHggcmdiYSg1MCw1MCw1MCwuNCk7XHJcblx0fVxyXG4uYmcge1xyXG5cdFx0LS1iYWNrZ3JvdW5kOiB1cmwoJ2h0dHBzOi8vaW1hZ2UuZnJlZXBpay5jb20vZnJlZS12ZWN0b3IvY2l0eS1iYWNrZ3JvdW5kLWRlc2lnbl8xMzAwLTM4MC5qcGcnKTtcclxuXHQgIC8vIC0tYmFja2dyb3VuZCA6IGxpbmVhci1ncmFkaWVudCg5MGRlZywgIzMzQ0NGRiA1MCUsICNDQ0ZGRkYgNTAlKTsgXHJcbiAgIFxyXG4gICB9ICJdfQ== */"
+module.exports = ".btn1 {\n  height: 100px;\n  --background: #33FFCC ; }\n\n.btn2 {\n  height: 100px;\n  --background: #66CCFF ; }\n\n.img_store {\n  width: 80px;\n  height: 80px; }\n\n.bk {\n  width: 100px;\n  height: 60px;\n  position: absolute;\n  top: 65%;\n  left: 65%;\n  margin-top: -100px;\n  margin-left: -100px; }\n\n.bg {\n  --background: url('https://image.freepik.com/free-vector/city-background-design_1300-380.jpg'); }\n\n.rating-container ion-button {\n  --padding-start: 4px;\n  --padding-end: 4px; }\n\n.rating-container ion-button ion-icon {\n    color: gray; }\n\n.rating-container ion-button ion-icon[ng-reflect-name=\"star\"] {\n    color: #ffb400; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy90aG9uZ2NoYWkvUHJvamVjdHMvcXJkZWUvc3JjL2FwcC9jdXN0b21lci9jdXN0b21lci5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDQyxhQUFhO0VBQ2Isc0JBQWEsRUFBQTs7QUFHZDtFQUNDLGFBQWE7RUFDYixzQkFBYSxFQUFBOztBQUdkO0VBQ0MsV0FBVztFQUFFLFlBQVksRUFBQTs7QUFFMUI7RUFDQyxZQUFXO0VBQ1gsWUFBWTtFQUNaLGtCQUFrQjtFQUNsQixRQUFRO0VBQ1IsU0FBUTtFQUNSLGtCQUFrQjtFQUNsQixtQkFBbUIsRUFBQTs7QUFHcEI7RUFDRSw4RkFBYSxFQUFBOztBQUtiO0VBQ0Esb0JBQWdCO0VBQ2hCLGtCQUFjLEVBQUE7O0FBRmQ7SUFLQyxXQUFXLEVBQUE7O0FBTFo7SUFTQyxjQUFjLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9jdXN0b21lci9jdXN0b21lci5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuYnRuMSB7XHJcblx0aGVpZ2h0OiAxMDBweDtcclxuXHQtLWJhY2tncm91bmQ6ICMzM0ZGQ0MgO1xyXG5cclxufVxyXG4uYnRuMiB7XHJcblx0aGVpZ2h0OiAxMDBweDtcclxuXHQtLWJhY2tncm91bmQ6ICM2NkNDRkYgO1xyXG5cclxufVxyXG4uaW1nX3N0b3Jle1xyXG5cdHdpZHRoOiA4MHB4OyBoZWlnaHQ6IDgwcHg7XHJcbn1cclxuLmJrIHtcclxuXHR3aWR0aDoxMDBweDtcclxuXHRoZWlnaHQ6IDYwcHg7XHJcblx0cG9zaXRpb246IGFic29sdXRlO1xyXG5cdHRvcDogNjUlO1xyXG5cdGxlZnQ6NjUlO1xyXG5cdG1hcmdpbi10b3A6IC0xMDBweDtcclxuXHRtYXJnaW4tbGVmdDogLTEwMHB4O1xyXG5cdC8vIGJveC1zaGFkb3c6IDVweCA1cHggMTBweCAxMHB4IHJnYmEoNTAsNTAsNTAsLjQpO1xyXG5cdH1cclxuLmJnIHtcclxuXHRcdC0tYmFja2dyb3VuZDogdXJsKCdodHRwczovL2ltYWdlLmZyZWVwaWsuY29tL2ZyZWUtdmVjdG9yL2NpdHktYmFja2dyb3VuZC1kZXNpZ25fMTMwMC0zODAuanBnJyk7XHJcblx0ICAvLyAtLWJhY2tncm91bmQgOiBsaW5lYXItZ3JhZGllbnQoOTBkZWcsICMzM0NDRkYgNTAlLCAjQ0NGRkZGIDUwJSk7XHJcblxyXG4gICB9XHJcblxyXG5cdCAucmF0aW5nLWNvbnRhaW5lciBpb24tYnV0dG9uIHtcclxuXHRcdC0tcGFkZGluZy1zdGFydDogNHB4O1xyXG5cdFx0LS1wYWRkaW5nLWVuZDogNHB4O1xyXG5cdFxyXG5cdFx0aW9uLWljb24ge1xyXG5cdFx0XHRjb2xvcjogZ3JheTtcclxuXHRcdH1cclxuXHRcdFxyXG5cdFx0aW9uLWljb25bbmctcmVmbGVjdC1uYW1lPVwic3RhclwiXSB7XHJcblx0XHRcdGNvbG9yOiAjZmZiNDAwO1xyXG5cdFx0fVxyXG5cdH0iXX0= */"
 
 /***/ }),
 
@@ -276,8 +339,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 let CustomerPage = class CustomerPage {
-    constructor(geolocation, userservice, toastService, route, router, http, builder, navCtrl, modalController, _loading, callNumber) {
+    constructor(geolocation, userservice, toastService, route, router, http, builder, navCtrl, modalController, _loading, platform, callNumber) {
         this.geolocation = geolocation;
         this.userservice = userservice;
         this.toastService = toastService;
@@ -288,10 +353,13 @@ let CustomerPage = class CustomerPage {
         this.navCtrl = navCtrl;
         this.modalController = modalController;
         this._loading = _loading;
+        this.platform = platform;
         this.callNumber = callNumber;
-        this.tab1 = false;
-        this.tab2 = true;
-        this.tab3 = true;
+        this.tab1 = true;
+        this.tab2 = false;
+        this.tab3 = false;
+        this.latitude = 14.883043;
+        this.longitude = 103.4928108;
         this.stores = [];
         this.carts = [];
         this.offset = 0;
@@ -299,22 +367,36 @@ let CustomerPage = class CustomerPage {
         this.member_cart = [];
         this.total_price = 0;
         this.notes = '';
+        this.rate = 3;
         localStorage.setItem('member_cart', JSON.stringify(this.member_cart));
         this.member = JSON.parse(localStorage.getItem('member'));
-        this.latitude = this.member.latitude;
-        this.longitude = this.member.longitude;
-        this.mobile_number = this.member.mobile_number;
-        this.firstname = this.member.firstname;
-        console.log("list component called!!!");
-        console.log(this.member);
-        this.loadStores();
+        if (this.member) {
+            this.latitude = this.member.latitude;
+            this.longitude = this.member.longitude;
+            this.mobile_number = this.member.mobile_number;
+            this.firstname = this.member.firstname;
+            console.log("list component called!!!");
+            console.log(this.member);
+        }
     }
     ionViewDidEnter() {
+        console.log("customer did enter....");
     }
     ionViewWillEnter() {
     }
+    ngOnInit() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            yield this.platform.ready();
+            this.loadStores();
+            //this.loadMap();
+            //this.changeTab(0);
+        });
+    }
     ngAfterViewInit() {
         //this.getCurrentPos();
+    }
+    rateStore(e) {
+        console.log(e);
     }
     getCurrentPos() {
         this.geolocation.getCurrentPosition().then((resp) => {
@@ -344,7 +426,7 @@ let CustomerPage = class CustomerPage {
             });
         });
     }
-    loadStores() {
+    loadStores(scrolled = false) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             if (this.latitude == null || this.longitude == null) {
                 this.loadMapModal();
@@ -353,15 +435,24 @@ let CustomerPage = class CustomerPage {
             const loading = yield this._loading.create();
             yield loading.present();
             this.offset = yield this.stores.length;
+            console.log(this.offset + ", " + this.latitude + ", " + this.longitude);
             yield this.userservice.getStores(this.offset, this.latitude, this.longitude).subscribe((data) => {
                 //this.loading.dismissLoading();
                 data.forEach(e => {
-                    this.stores.push(e);
+                    let f = this.stores.find(t => t.id == e.id);
+                    if (!f) {
+                        this.stores.push(e);
+                    }
                 });
-                console.log(this.stores);
                 loading.dismiss();
+                if (scrolled) {
+                    this.infiniteScroll.complete();
+                }
             }, err => {
                 loading.dismiss();
+                if (scrolled) {
+                    this.infiniteScroll.complete();
+                }
             });
         });
     }
@@ -380,31 +471,57 @@ let CustomerPage = class CustomerPage {
         this.userservice.searchStores(q, this.offset, this.latitude, this.longitude).subscribe((data) => {
             console.log(data);
             this.stores = data;
+        }, err => {
+            console.log(err);
         });
     }
-    infinitStores(e) {
-        console.log("Infinit => " + this.q);
+    infinitStores(event) {
         if (this.q == "") {
             console.log("Load Stores....");
-            this.loadStores();
+            this.loadStores(true);
         }
         else {
             this.searchStores(this.q);
         }
+        //
+        // setTimeout(() => {
+        // console.log('Done');
+        // this.infiniteScroll.complete();
+        //
+        //
+        // }, 500);
     }
     calcTotalPrice() {
         this.total_price = 0;
         this.member_cart.forEach(e => {
-            this.total_price += e.delivery_price;
+            console.log(e);
+            //this.total_price += e.delivery_price;
+            let store_price = 0;
             e.products.forEach(p => {
-                this.total_price += p.price;
+                store_price += p.price;
             });
+            if (store_price >= e.free_delivery_price) {
+                this.total_price += store_price;
+            }
+            else {
+                this.total_price += store_price + e.delivery_price;
+            }
         });
     }
-    processPayment() {
-        this.tab1 = true;
-        this.tab2 = false;
-        this.tab3 = true;
+    processPayment(c) {
+        console.log("C=" + c);
+        let x = document.getElementById('map');
+        if (!x && c < 100) {
+            setTimeout(() => {
+                console.log("Not ready");
+                let k = c + 1;
+                this.processPayment(k);
+            }, 100);
+            return;
+        }
+        if (!x) {
+            alert("กดปุ่มคำสั่งซื้ออีกครั้ง");
+        }
         this.member_cart = JSON.parse(localStorage.getItem('member_cart'));
         console.log(this.member_cart);
         this.calcTotalPrice();
@@ -421,7 +538,7 @@ let CustomerPage = class CustomerPage {
         localStorage.setItem("member_lng", this.longitude);
         let latLng = new google.maps.LatLng(this.latitude, this.longitude);
         this.map = new google.maps.Map(this.mapElement.nativeElement, {
-            zoom: 12,
+            zoom: 15,
             center: latLng,
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
@@ -436,6 +553,14 @@ let CustomerPage = class CustomerPage {
             localStorage.setItem("member_lng", marker.getPosition().lng());
             this.map.setCenter(marker.getPosition());
         });
+        this.map.setCenter(latLng);
+        //console.log(this.map);
+        //  google.maps.event.addListener(this.map, "idle", function(){
+        //   google.maps.event.trigger(this.map, 'resize');
+        // });
+        // google.maps.event.trigger(this.map, 'resize');
+        // this.map.setZoom( this.map.getZoom() );
+        // this.map.resize();
     }
     placeOrder() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
@@ -512,7 +637,7 @@ let CustomerPage = class CustomerPage {
                 console.log("dismis => ");
                 console.log(status);
                 if (status.data == 3) {
-                    this.processPayment();
+                    this.changeTab(1);
                 }
             });
             return yield modal.present();
@@ -520,22 +645,22 @@ let CustomerPage = class CustomerPage {
     }
     changeTab(t) {
         if (t == 0) {
-            this.tab1 = false;
-            this.tab2 = true;
-            this.tab3 = true;
+            this.tab1 = true;
+            this.tab2 = false;
+            this.tab3 = false;
             this.stores = [];
             this.loadMapModal();
         }
         else if (t == 1) {
-            this.tab1 = true;
-            this.tab2 = false;
-            this.tab3 = true;
-            this.processPayment();
-        }
-        else {
-            this.tab1 = true;
+            this.tab1 = false;
             this.tab2 = true;
             this.tab3 = false;
+            this.processPayment(0);
+        }
+        else {
+            this.tab1 = false;
+            this.tab2 = false;
+            this.tab3 = true;
             this.loadMyOrder();
         }
     }
@@ -564,16 +689,22 @@ CustomerPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["NavController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["ModalController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["LoadingController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["Platform"] },
     { type: _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_9__["CallNumber"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('mapElement', { static: false }),
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(_ionic_angular__WEBPACK_IMPORTED_MODULE_8__["IonInfiniteScroll"], { static: false }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["IonInfiniteScroll"])
+], CustomerPage.prototype, "infiniteScroll", void 0);
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('map', { static: false }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"])
 ], CustomerPage.prototype, "mapElement", void 0);
 CustomerPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-customer',
         template: __webpack_require__(/*! raw-loader!./customer.page.html */ "./node_modules/raw-loader/index.js!./src/app/customer/customer.page.html"),
+        encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewEncapsulation"].None,
         styles: [__webpack_require__(/*! ./customer.page.scss */ "./src/app/customer/customer.page.scss")]
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_2__["Geolocation"],
@@ -586,6 +717,7 @@ CustomerPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["NavController"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["ModalController"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["LoadingController"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_8__["Platform"],
         _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_9__["CallNumber"]])
 ], CustomerPage);
 
@@ -723,6 +855,47 @@ MapmodalComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_3__["Geolocation"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]])
 ], MapmodalComponent);
+
+
+
+/***/ }),
+
+/***/ "./src/app/customer/shared/customer.service.ts":
+/*!*****************************************************!*\
+  !*** ./src/app/customer/shared/customer.service.ts ***!
+  \*****************************************************/
+/*! exports provided: CustomerService */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomerService", function() { return CustomerService; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm2015/http.js");
+
+
+
+let CustomerService = class CustomerService {
+    constructor(http) {
+        this.http = http;
+    }
+    addStoreStar(id, rating) {
+        return this.http.post(`https://qrdee.co/api/v2/rating/store/${id}`, { star: rating });
+    }
+    addProductComment(id, comment) {
+        return this.http.post(`https://qrdee.co/api/v2/rating/product/${id}`, { comment: comment });
+    }
+};
+CustomerService.ctorParameters = () => [
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
+];
+CustomerService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
+        providedIn: 'root'
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"]])
+], CustomerService);
 
 
 

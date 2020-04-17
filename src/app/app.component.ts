@@ -27,27 +27,14 @@ export class AppComponent implements OnInit {
   store:any = null;
   member:any = null;
   notify_id = 1;
-  interval_id = 9;
+  interval_id = 0;
+  interval_lo = 0;
+  mqtt_refresh = 0;
+  background = false;
+  hungry_internet = false;
 
-  private _mqttClient: any;
-  private TOPIC: string[] = [];
-  private MQTT_CONFIG: {
-    host: string,
-    port: number,
-    username: string,
-    password: string,
-    protocol: string,
-    path: string,
-    clientId: string
-  } = {
-    host: "qrdee.co",
-    port: 9001,
-    username:"miot",
-    password:"SrruMIoT@2019",
-    protocol: "ws",
-    path: "/ws",
-    clientId: uuidv4()
-  };
+  private _mqttClient: any = null;
+
 
   constructor(
     private platform: Platform,
@@ -64,8 +51,8 @@ export class AppComponent implements OnInit {
   ) {
     // this.currentStore = this._loginService.currentStoreValue;
 
-    localStorage.setItem('background','0');
-    localStorage.setItem('orders',JSON.stringify([]));
+    // localStorage.setItem('background','0');
+    // localStorage.setItem('orders',JSON.stringify([]));
 
     console.log("=================START======================");
     this.event.subscribe('store:changed',trn=>{
@@ -79,23 +66,21 @@ export class AppComponent implements OnInit {
     if(store){
       this.reInit(store);
     }
-
     this.initializeApp();
-
-
-
 
   }
   reInit(store){
+
 
       console.log("Received broadcast ===>");
       console.log(store);
       this.store = JSON.parse(localStorage.getItem('store'));
       localStorage.setItem('store', JSON.stringify(store));
       console.log(this.store);
+
       this.member = JSON.parse(localStorage.getItem('member'));
       console.log(this.member);
-      this.TOPIC = ['/qrdee/store/'+store.id];
+
 
       if(!this.member){
           const member = {
@@ -116,81 +101,147 @@ export class AppComponent implements OnInit {
           localStorage.setItem('member', JSON.stringify(this.member));
       }
 
-      this._mqttClient = this.mqttService.loadingMqtt(this._onConnectionLost, this._onMessageArrived, this.TOPIC, this.MQTT_CONFIG);
-
+      this.mqttConnect();
+      //
       this.localNotifications.schedule({
         title: 'ยินดีต้อนรับสู่ QRDee'
       });
 
-    //this.initializeApp();
-
   }
 
   _onConnectionLost(responseObject) {
-    console.log('_onConnectionLost');
-    //console.log(responseObject);
-  //  this._mqttClient = this.mqttService.loadingMqtt(this._onConnectionLost, this._onMessageArrived, this.TOPIC, this.MQTT_CONFIG);
+      console.log('_onConnectionLost '+this.background);
+
+      this._mqttClient = null;
+      if(this.interval_lo <=0){
+        this.interval_lo = setInterval(()=>{
+          console.log("_onConnectionLost.interval..."+this.interval_lo);
+          this.mqttConnect();
+        }, 2000);
+      }
+
 
   }
 
   _onMessageArrived(message) {
 
-
     try{
 
-      if(localStorage.getItem('background') == '0'){
-        alert("มีคำสั่งซื้อมาใหม่ "+message.payloadString+" บาท");
+      console.log(this.background);
+
+      if(message.destinationName == "/qrdee/store/broadcast"){
+        this.showBroadcastNotification(message.payloadString);
       }else{
-        //console.log("Background mode is on.....");
-        //console.log(message);
-        let tmp = JSON.parse(localStorage.getItem('orders'));
-        tmp.push(message);
-        localStorage.setItem('orders',JSON.stringify(tmp));
+        this.showNotification(message.payloadString);
+        this.badge.increase(1);
+
       }
+
 
     }catch(e){
       console.log('.e');
       console.log(e);
     }
+ }
 
+ mqttConnect(){
+   if(this.store && this._mqttClient==null){
+     let TOPIC: string[] = [];
+     let MQTT_CONFIG: {
+       host: string,
+       port: number,
+       username: string,
+       password: string,
+       protocol: string,
+       path: string,
+       clientId: string
+     } = {
+       host: "qrdee.co",
+       port: 9001,
+       username:"miot",
+       password:"SrruMIoT@2019",
+       protocol: "ws",
+       path: "/ws",
+       clientId: uuidv4()
+     };
+
+     TOPIC = ["/qrdee/store/"+this.store.id,
+     "/qrdee/store/broadcast"];
+     console.log("Connecting to mqtt....",TOPIC);
+     console.log(MQTT_CONFIG);
+     try{
+       this._mqttClient = this.mqttService.loadingMqtt( (lost)=>{
+         this._onConnectionLost(lost);
+       }, (arrived)=>{
+         this._onMessageArrived(arrived);
+       }, TOPIC, MQTT_CONFIG);
+
+     }catch(ee){
+       console.log("MQTT connect errr....");
+       this._mqttClient = null;
+       //this.mqttConnect();
+     }
+
+   }else{
+
+     console.log("_mqttClient not null => "+this.interval_id);
+     try{
+       console.log("Try .. sendMessage");
+       this.mqttService.sendMessage('/qrdee/ping','0');
+       // if(!this.background){
+         if(this.interval_lo>0){
+           console.log("stop interval "+this.interval_lo);
+           clearInterval(this.interval_lo);
+           this.interval_lo = 0;
+           this.hungry_internet = false;
+         }
+       // }
+     }catch(eee){
+       console.log("sendMessage error ... ", eee);
+       this._mqttClient = null;
+     }
+
+   }
 
  }
+ // onBackground(){
+ //   if(this.interval_lo>0){
+ //
+ //     if(!this.hungry_internet){
+ //       this.showBroadcastNotification("เชื่อมต่ออินเทอร์เน็ตไม่ได้");
+ //       this.hungry_internet = !this.hungry_internet;
+ //     }
+ //
+ //   }
+ // }
+
   showNotification(price){
     this.localNotifications.schedule({
       title: 'มีคำสั่งซื้อมาใหม่ '+price+" บาท"
     });
   }
-  trackOrders(){
-
-    console.log("tracking orders..."+localStorage.getItem('background'));
-    let orders = JSON.parse(localStorage.getItem('orders'));
-    //console.log(orders);
-    orders.forEach(e => {
-      this.showNotification(e.payloadString);
-      this.badge.increase(1);
+  showBroadcastNotification(title){
+    this.localNotifications.schedule({
+      title: title
     });
-    localStorage.setItem('orders',JSON.stringify([]));
-
   }
+  // trackOrders(){
+  //
+  //   console.log("tracking orders..."+localStorage.getItem('background'));
+  //   let orders = JSON.parse(localStorage.getItem('orders'));
+  //   this.mqttConnect();
+  //   orders.forEach(e => {
+  //     this.showNotification(e.payloadString);
+  //     this.badge.increase(1);
+  //   });
+  //   localStorage.setItem('orders',JSON.stringify([]));
+  //
+  // }
 
   ngOnInit() {
-    // this._loginService.currentStore.subscribe(store => {
-    //   console.log("INIT===>");
-    //   console.log(store);
-    //   this.store = store
-    // });
-    // console.log("_______app.ngOnInit=>_");
-    // console.log(JSON.parse(localStorage.getItem('store')));
-    // if(localStorage.getItem('store')){
-    //   this.store = JSON.parse(localStorage.getItem('store'));
-    // }
+    console.log("_______app.ngOnInit=>_");
+    this.mqttConnect();
   }
-
-  ionViewWillEnter() {
-    // console.log("_______app.ionViewWillEnter=>_");
-    // console.log(JSON.parse(localStorage.getItem('store')));
-  }
-
 
   login(){
     console.log("____login))))");
@@ -198,8 +249,9 @@ export class AppComponent implements OnInit {
   }
 
    home(){
-     this.badge.clear();
-      this.router.navigate(['cart']);
+    this.badge.clear();
+    this.router.navigate(['cart']);
+
    }
 
    logout(){
@@ -209,7 +261,7 @@ export class AppComponent implements OnInit {
      // this._loginService.logout();
    }
    product(){
-       this.router.navigate(['products']);
+      this.router.navigate(['products']);
    }
    postproduct(){
        this.router.navigate(['/products/create']);
@@ -220,7 +272,7 @@ export class AppComponent implements OnInit {
    }
 
    profile(){
-       this.router.navigate(['profile']);
+     this.router.navigate(['profile']);
    }
 
    logistic(){
@@ -236,7 +288,7 @@ export class AppComponent implements OnInit {
    }
 
    sell(){
-       this.router.navigate(['sell-stats']);
+     this.router.navigate(['sell-stats']);
    }
 
    delivery(){
@@ -252,27 +304,29 @@ export class AppComponent implements OnInit {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-      //this.pushPermission();
       this.backgroundMode.on('activate').subscribe(() => {
-
         console.log('activated');
-        localStorage.setItem('background','1');
-        localStorage.setItem('orders',JSON.stringify([]));
-        this.interval_id = setInterval(()=>{
-            this.trackOrders();
-       }, 5000);
+        this.background = true;
+        this.mqttConnect();
+        // this.interval_id = setInterval(()=>{
+        //   console.log("backgroundMode.interval..."+this.interval_id);
+        //   //this.onBackground();
+        // }, 3000);
 
       });
+
       this.backgroundMode.on('deactivate').subscribe(() => {
-        console.log('deactivated');
-        localStorage.setItem('background','0');
-        clearInterval(this.interval_id);
-        //setInterval(this.trackOrders, 2000);
+        console.log('deactivated....');
+        this.background = false;
+        this.mqttConnect();
+        // if(this.interval_id>0){
+        //   console.log("stop interval "+this.interval_id);
+        //   clearInterval(this.interval_id);
+        //   this.interval_id = 0;
+        // }
       });
-      this.backgroundMode.enable();
-      //setInterval(this.trackOrders, 3000);
-      // this.showNotification();
 
+      this.backgroundMode.enable();
 
     });
   }

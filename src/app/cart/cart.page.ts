@@ -17,6 +17,7 @@ import { BarcodeScanner, BarcodeScanResult, BarcodeScannerOptions } from '@ionic
 import { CallNumber } from '@ionic-native/call-number/ngx';
 //import { CallNumber } from '@ionic-native/call-number';
 import { LoadingController } from '@ionic/angular';
+import { Badge } from '@ionic-native/badge/ngx';
 
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 
@@ -87,7 +88,8 @@ export class CartPage {
     private barcodeScanner: BarcodeScanner,
     private builder: FormBuilder,
     private _loading: LoadingController,
-    private callNumber: CallNumber
+    private callNumber: CallNumber,
+    private badge: Badge
   ) {
 
      // this.productService.getAll().subscribe(resp => {
@@ -123,6 +125,7 @@ export class CartPage {
     this.store = JSON.parse(localStorage.getItem('store'));
     this.getOrders();
     this.getProducts();
+
   }
   ngAfterViewInit(): void {
 
@@ -182,11 +185,11 @@ async getOrders(){
     this.orders = data;
     console.log(this.orders);
     loading.dismiss();
+    this.badge.clear();
   }, err=>{
     loading.dismiss();
   });
 }
-
 async getProducts(){
   const loading = await this._loading.create();
   await loading.present();

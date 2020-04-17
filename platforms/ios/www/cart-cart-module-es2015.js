@@ -993,6 +993,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ionic-native/barcode-scanner/ngx */ "./node_modules/@ionic-native/barcode-scanner/ngx/index.js");
 /* harmony import */ var angularx_qrcode__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! angularx-qrcode */ "./node_modules/angularx-qrcode/dist/index.js");
 /* harmony import */ var _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @ionic-native/call-number/ngx */ "./node_modules/@ionic-native/call-number/ngx/index.js");
+/* harmony import */ var _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @ionic-native/badge/ngx */ "./node_modules/@ionic-native/badge/ngx/index.js");
+
 
 
 
@@ -1053,7 +1055,8 @@ CartPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _shared_cart_service__WEBPACK_IMPORTED_MODULE_11__["CartService"],
             _products_shared_product_service__WEBPACK_IMPORTED_MODULE_10__["ProductService"],
             _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_15__["BarcodeScanner"],
-            _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_17__["CallNumber"]
+            _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_17__["CallNumber"],
+            _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_18__["Badge"]
         ],
         schemas: [
             _angular_core__WEBPACK_IMPORTED_MODULE_1__["CUSTOM_ELEMENTS_SCHEMA"],
@@ -1103,7 +1106,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! @ionic-native/geolocation/ngx */ "./node_modules/@ionic-native/geolocation/ngx/index.js");
 /* harmony import */ var _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! @ionic-native/barcode-scanner/ngx */ "./node_modules/@ionic-native/barcode-scanner/ngx/index.js");
 /* harmony import */ var _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ionic-native/call-number/ngx */ "./node_modules/@ionic-native/call-number/ngx/index.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @ionic-native/badge/ngx */ "./node_modules/@ionic-native/badge/ngx/index.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 
 
 
@@ -1125,8 +1129,9 @@ __webpack_require__.r(__webpack_exports__);
 //import { CallNumber } from '@ionic-native/call-number';
 
 
+
 let CartPage = class CartPage {
-    constructor(cartService, transactionService, productService, toastService, alertService, qrService, modalController, http, router, route, geolocation, barcodeScanner, builder, _loading, callNumber) {
+    constructor(cartService, transactionService, productService, toastService, alertService, qrService, modalController, http, router, route, geolocation, barcodeScanner, builder, _loading, callNumber, badge) {
         // this.productService.getAll().subscribe(resp => {
         //   this.product_all = resp.products.data;
         //   alert(this.product_all);
@@ -1147,6 +1152,7 @@ let CartPage = class CartPage {
         this.builder = builder;
         this._loading = _loading;
         this.callNumber = callNumber;
+        this.badge = badge;
         this.scanChange = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"];
         this.product_code = '';
         this.productFound = false;
@@ -1243,6 +1249,7 @@ let CartPage = class CartPage {
                 this.orders = data;
                 console.log(this.orders);
                 loading.dismiss();
+                this.badge.clear();
             }, err => {
                 loading.dismiss();
             });
@@ -1492,9 +1499,10 @@ CartPage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_12__["ActivatedRoute"] },
     { type: _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_13__["Geolocation"] },
     { type: _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_14__["BarcodeScanner"] },
-    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_16__["FormBuilder"] },
+    { type: _angular_forms__WEBPACK_IMPORTED_MODULE_17__["FormBuilder"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["LoadingController"] },
-    { type: _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_15__["CallNumber"] }
+    { type: _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_15__["CallNumber"] },
+    { type: _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_16__["Badge"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
@@ -1522,9 +1530,10 @@ CartPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _angular_router__WEBPACK_IMPORTED_MODULE_12__["ActivatedRoute"],
         _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_13__["Geolocation"],
         _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_14__["BarcodeScanner"],
-        _angular_forms__WEBPACK_IMPORTED_MODULE_16__["FormBuilder"],
+        _angular_forms__WEBPACK_IMPORTED_MODULE_17__["FormBuilder"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["LoadingController"],
-        _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_15__["CallNumber"]])
+        _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_15__["CallNumber"],
+        _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_16__["Badge"]])
 ], CartPage);
 
 

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ModalController, LoadingController } from '@ionic/angular';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { FormControl } from '@angular/forms';
-
+import { ToastService } from '../../shared/services/toast.service';
 declare var google;
 
 @Component({
@@ -23,7 +23,9 @@ export class MapmodalComponent implements OnInit {
   constructor(
     private _modalCtrl: ModalController,
     private _geolocation: Geolocation,
-    private _loading: LoadingController) { }
+    private _loading: LoadingController,
+    private toastService:ToastService
+  ) { }
 
   ngOnInit() {
 
@@ -71,6 +73,27 @@ export class MapmodalComponent implements OnInit {
       this.loadMap();
     }
 
+  }
+  async useGps(){
+
+    const _loading = await this._loading.create();
+    await _loading.present();
+
+    this._geolocation.getCurrentPosition().then((resp) => {
+
+       _loading.dismiss();
+       this.latitude = resp.coords.latitude;
+       this.longitude = resp.coords.longitude;
+
+       this.member.longitude = this.longitude;
+       this.member.latitude = this.latitude;
+       localStorage.setItem('member', JSON.stringify(this.member));
+       this.loadMap();
+
+    }).catch((error) => {
+      _loading.dismiss();
+      this.toastService.showToast('เข้าถึงตำแหน่งปัจจุบันไม่ได้', 'top');
+    });
   }
 
 

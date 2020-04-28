@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header padding=\"true\">\n  <ion-toolbar  *ngIf=\"store\">\n\n    <ion-avatar no-margin no-padding slot=\"start\">\n      <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\">\n      <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n    </ion-avatar>\n\n    <div no-margin no-padding>\n      <ion-row no-margin no-padding>\n        <ion-col no-margin no-padding>\n          {{ store.store_name }}\n        </ion-col>\n      </ion-row>\n\n      <ion-row no-margin no-padding>\n        <ion-col no-margin no-padding>\n          <ul no-margin no-padding class=\"rating-container\" style=\"display: inline; list-style: none;\">\n            <li no-margin no-padding >\n              <ion-button no-margin no-padding fill size=\"small\" *ngFor=\"let star of [0,1,2,3,4]\" (click)=\"addStoreStar(store.id, star+1)\">\n                <ion-icon no-margin no-padding [name]=\"store.star > star ? 'star' : 'star-outline'\"></ion-icon>\n              </ion-button>\n            </li>\n          </ul>\n        </ion-col>\n      </ion-row>\n    </div>\n\n    <ion-button fill=\"clear\" size=\"small\" color=\"danger\" slot=\"end\" (click)=\"forceDissmiss(0);\">\n      <ion-icon name=\"ios-arrow-back\"></ion-icon>กลับ\n    </ion-button>\n  </ion-toolbar>\n\n</ion-header>\n\n\n<ion-content>\n\n<ion-grid *ngIf=\"products\">\n  <ion-item>\n    <ion-text slot=\"start\">\n      <small>เลือกไว้แล้ว {{pick_count}} ชิ้น</small><br>\n      <small> (ขั้นต่ำ {{store.free_delivery_price}} ส่งฟรี)</small>\n    </ion-text>\n    <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"startPayment();\">\n      <ion-icon slot=\"icon-only\" name=\"ios-cash\"></ion-icon> สั่งซื้อ\n    </ion-button>\n  </ion-item>\n    <ion-row responsive-sm wrap no-margin no-padding>\n      <ion-col   *ngFor=\"let product of products\">\n\n        <ion-card  no-margin no-padding >\n          <ion-item>\n            <ion-text>{{ product.product_th }}</ion-text>\n            <ion-badge  color=\"danger\"> {{product.price | number }} บาท </ion-badge>\n            <ion-button fill=\"outline\" slot=\"end\"  (click)=\"selectItem(product);\">เลือก</ion-button>\n          </ion-item>\n          <ion-card-content  no-margin no-padding *ngIf=\"store.store_pic\">\n            <ion-img   style=\"height:200px;\" [src]=\"'https://qrdee.co/app/'+product.thumbnail\"></ion-img>\n            <ion-text *ngIf=\"product.details_th\"><small> {{ product.details_th }} </small></ion-text>\n          </ion-card-content>\n\n          <ion-row no-margin no-padding>\n            <ion-col size=\"10\">\n            <!-- <button ion-button icon-start clear small>\n            <ion-icon name=\"thumbs-up\"></ion-icon>\n            <div>12 Likes</div>\n            </button> -->\n\n              <div class=\"rating-container\">\n                <ul style=\"display: inline;\">\n                  <li>\n                    <ion-button fill size=\"small\" *ngFor=\"let star of [0,1,2,3,4]\" (click)=\"addProductStar(product.id, star+1)\">\n                      <ion-icon [name]=\"product.star > star ? 'star' : 'star-outline'\"></ion-icon>\n                    </ion-button>\n                  </li>\n                </ul>\n              </div>\n            <!-- <rating no-margin no-padding [rate]=\"rate\"\n              readonly=\"false\"\n              size=\"small\"\n              (rateChange)=\"addProductStar($event)\">\n            </rating> -->\n            </ion-col>\n            <!-- <ion-col>\n            <button ion-button icon-start clear small>\n            <ion-icon name=\"text\"></ion-icon>\n            <div>4 Comments</div>\n            </button>\n            </ion-col> -->\n            <ion-col size=\"2\" align-self-center text-center (click)=\"commentPrompt(product.id, product.comments);\">\n              <ion-note color=\"primary\"><ion-icon name=\"text\"></ion-icon>\n                {{ product.comments.length }}\n              </ion-note>\n            </ion-col>\n          </ion-row>\n\n\n        </ion-card>\n\n\n        <!-- <ion-card>\n            <ion-col col-12 no-margin no-padding><img src=\"{{product.product_th}}\"/></ion-col>\n            <ion-col col-12 no-margin no-padding>\n              <ion-card-content>\n                <ion-card-title>\n                  {{ product.product_th }} <ion-badge item-end>{{ product.product_th }} km</ion-badge>\n                </ion-card-title>\n                <p>\n                  <small><rating [score]=\"5\" [max]=\"5\"></rating> ({{ product.product_th }})</small>\n                </p>\n              </ion-card-content>\n            </ion-col>\n        </ion-card> -->\n      </ion-col>\n    </ion-row>\n</ion-grid>\n\n<!-- <ion-list *ngIf=\"products\">\n    <ion-item >\n\n      <ion-text slot=\"start\">\n        <small>เลือกไว้แล้ว {{pick_count}} ชิ้น</small>\n        <small> (ขั้นต่ำ {{store.free_delivery_price}} ส่งฟรี)</small>\n      </ion-text>\n      <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"startPayment();\">\n        <ion-icon slot=\"icon-only\" name=\"ios-cash\"></ion-icon> ชำระเงิน\n      </ion-button>\n    </ion-item>\n\n    <ion-item  *ngFor=\"let product of products\">\n      <ion-avatar slot=\"start\">\n        <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+product.thumbnail\">\n        <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n      </ion-avatar>\n      <ion-text>\n        <small *ngIf=\"product.product_th\"><b>{{product.product_th}}</b></small><br>\n      </ion-text>\n      <ion-text slot=\"end\">\n        <small *ngIf=\"product.price\">ราคา {{product.price | number }} บาท</small><br>\n      </ion-text>\n      <ion-button fill=\"clear\" color=\"secondary\" slot=\"end\" (click)=\"selectItem(product);\">\n        <ion-icon slot=\"icon-only\" name=\"ios-cart\"></ion-icon>\n      </ion-button>\n    </ion-item>\n\n</ion-list> -->\n\n\n\n</ion-content>\n"
+module.exports = "<ion-header padding=\"true\">\n  <ion-toolbar  *ngIf=\"store\">\n\n    <ion-avatar no-margin no-padding slot=\"start\">\n      <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+store.store_pic\">\n      <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n    </ion-avatar>\n\n    <div no-margin no-padding>\n      <ion-row no-margin no-padding>\n        <ion-col no-margin no-padding>\n          {{ store.store_name }}\n        </ion-col>\n      </ion-row>\n\n      <ion-row no-margin no-padding>\n        <ion-col size=\"12\" no-margin no-padding>\n          <ul no-margin no-padding class=\"rating-container\" style=\"display: inline; list-style: none;\">\n            <li no-margin no-padding >\n              <ion-button no-margin no-padding fill size=\"small\" *ngFor=\"let star of [0,1,2,3,4]\" (click)=\"addStoreStar(store.id, star+1)\">\n                <ion-icon no-margin no-padding [name]=\"store.star > star ? 'star' : 'star-outline'\"></ion-icon>\n              </ion-button>\n            </li>\n          </ul>\n        </ion-col>\n      </ion-row>\n    </div>\n\n    <ion-button fill=\"clear\" size=\"small\" color=\"danger\" slot=\"end\" (click)=\"forceDissmiss(0);\">\n      <ion-icon name=\"ios-arrow-back\"></ion-icon>กลับ\n    </ion-button>\n  </ion-toolbar>\n\n</ion-header>\n\n\n<ion-content>\n\n<ion-grid *ngIf=\"products\">\n  <ion-item>\n    <ion-text slot=\"start\">\n      <small>เลือกไว้แล้ว {{pick_count}} ชิ้น</small><br>\n      <small> (ขั้นต่ำ {{store.free_delivery_price}} ส่งฟรี)</small>\n    </ion-text>\n    <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"startPayment();\">\n      <ion-icon slot=\"icon-only\" name=\"ios-cash\"></ion-icon> สั่งซื้อ\n    </ion-button>\n  </ion-item>\n    <ion-row responsive-sm wrap no-margin no-padding>\n      <ion-col size=\"12\"  *ngFor=\"let product of products\">\n\n        <ion-card  no-margin no-padding >\n          <ion-item>\n            <ion-text>{{ product.product_th }}</ion-text>\n            <ion-badge  color=\"danger\"> {{product.price | number }} บาท </ion-badge>\n            <ion-button fill=\"outline\" slot=\"end\"  (click)=\"selectItem(product);\">เลือก</ion-button>\n          </ion-item>\n          <ion-card-content  no-margin no-padding *ngIf=\"product.thumbnail\">\n            <ion-img   style=\"height:200px;\" [src]=\"'https://qrdee.co/app/'+product.thumbnail\"></ion-img>\n            <ion-text *ngIf=\"product.details_th\"><small> {{ product.details_th }} </small></ion-text>\n          </ion-card-content>\n\n          <ion-row no-margin no-padding>\n            <ion-col size=\"10\">\n            <!-- <button ion-button icon-start clear small>\n            <ion-icon name=\"thumbs-up\"></ion-icon>\n            <div>12 Likes</div>\n            </button> -->\n\n              <div class=\"rating-container\">\n                <ul style=\"display: inline;\">\n                  <li>\n                    <ion-button fill size=\"small\" *ngFor=\"let star of [0,1,2,3,4]\" (click)=\"addProductStar(product.id, star+1)\">\n                      <ion-icon [name]=\"product.star > star ? 'star' : 'star-outline'\"></ion-icon>\n                    </ion-button>\n                  </li>\n                </ul>\n              </div>\n            <!-- <rating no-margin no-padding [rate]=\"rate\"\n              readonly=\"false\"\n              size=\"small\"\n              (rateChange)=\"addProductStar($event)\">\n            </rating> -->\n            </ion-col>\n            <!-- <ion-col>\n            <button ion-button icon-start clear small>\n            <ion-icon name=\"text\"></ion-icon>\n            <div>4 Comments</div>\n            </button>\n            </ion-col> -->\n            <ion-col size=\"2\" align-self-center text-center (click)=\"commentPrompt(product.id, product.comments);\">\n              <ion-note color=\"primary\"><ion-icon name=\"text\"></ion-icon>\n                {{ product.comments.length }}\n              </ion-note>\n            </ion-col>\n          </ion-row>\n\n\n        </ion-card>\n\n\n        <!-- <ion-card>\n            <ion-col col-12 no-margin no-padding><img src=\"{{product.product_th}}\"/></ion-col>\n            <ion-col col-12 no-margin no-padding>\n              <ion-card-content>\n                <ion-card-title>\n                  {{ product.product_th }} <ion-badge item-end>{{ product.product_th }} km</ion-badge>\n                </ion-card-title>\n                <p>\n                  <small><rating [score]=\"5\" [max]=\"5\"></rating> ({{ product.product_th }})</small>\n                </p>\n              </ion-card-content>\n            </ion-col>\n        </ion-card> -->\n      </ion-col>\n    </ion-row>\n</ion-grid>\n\n<!-- <ion-list *ngIf=\"products\">\n    <ion-item >\n\n      <ion-text slot=\"start\">\n        <small>เลือกไว้แล้ว {{pick_count}} ชิ้น</small>\n        <small> (ขั้นต่ำ {{store.free_delivery_price}} ส่งฟรี)</small>\n      </ion-text>\n      <ion-button fill=\"clear\" color=\"primary\" slot=\"end\" (click)=\"startPayment();\">\n        <ion-icon slot=\"icon-only\" name=\"ios-cash\"></ion-icon> ชำระเงิน\n      </ion-button>\n    </ion-item>\n\n    <ion-item  *ngFor=\"let product of products\">\n      <ion-avatar slot=\"start\">\n        <img *ngIf=\"store.store_pic\" [src]=\"'https://qrdee.co/app/'+product.thumbnail\">\n        <img *ngIf=\"!store.store_pic\" src=\"/assets/noimg.png\">\n      </ion-avatar>\n      <ion-text>\n        <small *ngIf=\"product.product_th\"><b>{{product.product_th}}</b></small><br>\n      </ion-text>\n      <ion-text slot=\"end\">\n        <small *ngIf=\"product.price\">ราคา {{product.price | number }} บาท</small><br>\n      </ion-text>\n      <ion-button fill=\"clear\" color=\"secondary\" slot=\"end\" (click)=\"selectItem(product);\">\n        <ion-icon slot=\"icon-only\" name=\"ios-cart\"></ion-icon>\n      </ion-button>\n    </ion-item>\n\n</ion-list> -->\n\n\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -29,7 +29,7 @@ module.exports = "<ion-header translucent>\n  <ion-toolbar>\n    <ion-buttons sl
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header translucent>\n  <ion-toolbar>\n\n    <ion-title>ระบุตำแหน่ง</ion-title>\n    <ion-button fill=\"clear\" color=\"danger\" slot=\"end\" (click)=\"dismissModal();\">\n      <ion-icon name=\"ios-arrow-back\"></ion-icon>กลับ\n    </ion-button>\n\n  </ion-toolbar>\n</ion-header>\n<ion-content fullscreen>\n  <div #map id=\"map\" style=\"height: 100%;\"></div>\n</ion-content>\n\n<ion-footer>\n  <ion-button expand=\"full\"  shape=\"round\" color=\"primary\"   (click)=\"accept();\">ค้นหาร้าน</ion-button>\n</ion-footer>\n"
+module.exports = "<ion-header translucent>\n  <ion-toolbar>\n\n    <ion-title>ระบุตำแหน่ง</ion-title>\n    <ion-button fill=\"clear\" color=\"danger\" slot=\"end\" (click)=\"dismissModal();\">\n      <ion-icon name=\"ios-arrow-back\"></ion-icon>กลับ\n    </ion-button>\n\n  </ion-toolbar>\n</ion-header>\n<ion-content fullscreen>\n  <div #map id=\"map\" style=\"height: 100%;\"></div>\n</ion-content>\n\n<ion-footer>\n  <ion-row>\n    <ion-col size=\"10\">\n      <ion-button expand=\"full\"  color=\"primary\"   (click)=\"accept();\">ค้นหาร้าน</ion-button>\n    </ion-col>\n    <ion-col size=\"2\">\n        <ion-button expand=\"full\" color=\"secondary\"   (click)=\"useGps();\">\n          <ion-icon name=\"md-locate\"></ion-icon>\n        </ion-button>\n    </ion-col>\n  </ion-row>\n</ion-footer>\n"
 
 /***/ }),
 
@@ -863,15 +863,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic-native/geolocation/ngx */ "./node_modules/@ionic-native/geolocation/ngx/index.js");
+/* harmony import */ var _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../shared/services/toast.service */ "./src/app/shared/services/toast.service.ts");
+
 
 
 
 
 var MapmodalComponent = /** @class */ (function () {
-    function MapmodalComponent(_modalCtrl, _geolocation, _loading) {
+    function MapmodalComponent(_modalCtrl, _geolocation, _loading, toastService) {
         this._modalCtrl = _modalCtrl;
         this._geolocation = _geolocation;
         this._loading = _loading;
+        this.toastService = toastService;
         this.latitude = 14.8718084;
         this.longitude = 103.4962797;
     }
@@ -921,6 +924,35 @@ var MapmodalComponent = /** @class */ (function () {
             });
         });
     };
+    MapmodalComponent.prototype.useGps = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var _loading;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this._loading.create()];
+                    case 1:
+                        _loading = _a.sent();
+                        return [4 /*yield*/, _loading.present()];
+                    case 2:
+                        _a.sent();
+                        this._geolocation.getCurrentPosition().then(function (resp) {
+                            _loading.dismiss();
+                            _this.latitude = resp.coords.latitude;
+                            _this.longitude = resp.coords.longitude;
+                            _this.member.longitude = _this.longitude;
+                            _this.member.latitude = _this.latitude;
+                            localStorage.setItem('member', JSON.stringify(_this.member));
+                            _this.loadMap();
+                        }).catch(function (error) {
+                            _loading.dismiss();
+                            _this.toastService.showToast('เข้าถึงตำแหน่งปัจจุบันไม่ได้', 'top');
+                        });
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     MapmodalComponent.prototype.dismissModal = function () {
         this.latitude = localStorage.getItem('select_lat');
         this.longitude = localStorage.getItem('select_lng');
@@ -963,7 +995,8 @@ var MapmodalComponent = /** @class */ (function () {
     MapmodalComponent.ctorParameters = function () { return [
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] },
         { type: _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_3__["Geolocation"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] }
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] },
+        { type: _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_4__["ToastService"] }
     ]; };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('map', { static: false }),
@@ -977,7 +1010,8 @@ var MapmodalComponent = /** @class */ (function () {
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"],
             _ionic_native_geolocation_ngx__WEBPACK_IMPORTED_MODULE_3__["Geolocation"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"]])
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"],
+            _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_4__["ToastService"]])
     ], MapmodalComponent);
     return MapmodalComponent;
 }());

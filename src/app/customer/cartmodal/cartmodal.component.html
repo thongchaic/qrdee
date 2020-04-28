@@ -14,7 +14,7 @@
       </ion-row>
 
       <ion-row no-margin no-padding>
-        <ion-col no-margin no-padding>
+        <ion-col size="12" no-margin no-padding>
           <ul no-margin no-padding class="rating-container" style="display: inline; list-style: none;">
             <li no-margin no-padding >
               <ion-button no-margin no-padding fill size="small" *ngFor="let star of [0,1,2,3,4]" (click)="addStoreStar(store.id, star+1)">
@@ -47,7 +47,7 @@
     </ion-button>
   </ion-item>
     <ion-row responsive-sm wrap no-margin no-padding>
-      <ion-col   *ngFor="let product of products">
+      <ion-col size="12"  *ngFor="let product of products">
 
         <ion-card  no-margin no-padding >
           <ion-item>
@@ -55,7 +55,7 @@
             <ion-badge  color="danger"> {{product.price | number }} บาท </ion-badge>
             <ion-button fill="outline" slot="end"  (click)="selectItem(product);">เลือก</ion-button>
           </ion-item>
-          <ion-card-content  no-margin no-padding *ngIf="store.store_pic">
+          <ion-card-content  no-margin no-padding *ngIf="product.thumbnail">
             <ion-img   style="height:200px;" [src]="'https://qrdee.co/app/'+product.thumbnail"></ion-img>
             <ion-text *ngIf="product.details_th"><small> {{ product.details_th }} </small></ion-text>
           </ion-card-content>

@@ -37,7 +37,7 @@
             <small no-padding>ค่าส่ง {{store.delivery_price}} ฿</small><br>
             <ul class="rating-container" style="display: inline; list-style: none;">
               <li>
-                <ion-button fill size="small" *ngFor="let star of [0,1,2,3,4]">
+                <ion-button class="ion-button" fill size="small" *ngFor="let star of [0,1,2,3,4]">
                   <ion-icon [name]="store.star > star ? 'star' : 'star-outline'"></ion-icon>
                 </ion-button>
               </li>
@@ -178,21 +178,25 @@
 
 <ion-footer style="background:#FFFFFF;">
   <ion-toolbar>
-    <ion-tabs>
-        <ion-tab-bar slot="bottom">
-          <ion-tab-button color="primary" (click)="changeTab(0)" >
-              <ion-icon name="md-locate"></ion-icon>
-              <ion-label>ร้านค้าใกล้ๆ</ion-label>
-          </ion-tab-button>
-          <ion-tab-button color="primary" (click)="changeTab(1)" >
-              <ion-icon name="md-cart"></ion-icon>
+    <ion-row>
+      <ion-col no-padding>
+          <button ion-button  block clear color="primary-alt" (click)="changeTab(0)">
+            <ion-icon size="large" name="md-locate"></ion-icon><br>
+            <ion-label>ร้านค้าใกล้ๆ</ion-label>
+          </button>
+      </ion-col>
+      <ion-col no-padding>
+          <button ion-button block clear color="primary-alt" (click)="changeTab(1)">
+            <ion-icon size="large" name="md-cart"></ion-icon><br>
               <ion-label>คำสั่งซื้อ</ion-label>
-          </ion-tab-button>
-          <ion-tab-button color="primary" (click)="changeTab(2)" >
-              <ion-icon name="md-list-box"></ion-icon>
-              <ion-label>รายการซื้อ</ion-label>
-          </ion-tab-button>
-        </ion-tab-bar>
-      </ion-tabs>
-   </ion-toolbar>
+          </button>
+      </ion-col>
+      <ion-col no-padding>
+        <button ion-button block clear color="primary-alt" (click)="changeTab(2)" >
+          <ion-icon size="large" name="md-list-box"></ion-icon><br>
+            <ion-label>รายการซื้อ</ion-label>
+        </button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
 </ion-footer>

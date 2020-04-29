@@ -1,41 +1,24 @@
-.btn1 {
-	height: 100px;
-	--background: #33FFCC ;
-
+.ios ion-footer .toolbar:last-child {
+  padding-bottom: calc(constant(safe-area-inset-bottom) + 4px);
+  padding-bottom: calc(env(safe-area-inset-bottom) + 4px);
+  min-height: calc(44px + constant(safe-area-inset-bottom));
+  min-height: calc(44px + env(safe-area-inset-bottom));
 }
-.btn2 {
-	height: 100px;
-	--background: #66CCFF ;
 
-}
-.img_store{
-	width: 80px; height: 80px;
-}
-.bk {
-	width:100px;
-	height: 60px;
-	position: absolute;
-	top: 65%;
-	left:65%;
-	margin-top: -100px;
-	margin-left: -100px;
-	// box-shadow: 5px 5px 10px 10px rgba(50,50,50,.4);
-	}
-.bg {
-		--background: url('https://image.freepik.com/free-vector/city-background-design_1300-380.jpg');
-	  // --background : linear-gradient(90deg, #33CCFF 50%, #CCFFFF 50%);
-
-   }
-
-	 .rating-container ion-button {
+.rating-container .ion-button {
 		--padding-start: 4px;
 		--padding-end: 4px;
-	
+
 		ion-icon {
 			color: gray;
 		}
-		
+
 		ion-icon[ng-reflect-name="star"] {
 			color: #ffb400;
 		}
-	}
+}
+.footer-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

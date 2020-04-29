@@ -16,6 +16,9 @@ import { IonInfiniteScroll } from '@ionic/angular';
 
 declare var google;
 
+
+
+
 @Component({
   selector: 'app-customer',
   templateUrl: './customer.page.html',
@@ -243,9 +246,6 @@ export class CustomerPage implements AfterViewInit{
            this.processPayment(k);
        }, 100);
        return;
-     }
-     if(!x){
-       alert("กดปุ่มคำสั่งซื้ออีกครั้ง");
      }
 
 

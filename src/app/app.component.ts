@@ -134,6 +134,7 @@ export class AppComponent implements OnInit {
       }else{
         this.showNotification(message.payloadString);
         this.badge.increase(1);
+        this.router.navigate(['cart']);
 
       }
 

@@ -603,6 +603,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/ngx/index.js");
 /* harmony import */ var _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @ionic-native/background-mode/ngx */ "./node_modules/@ionic-native/background-mode/ngx/index.js");
 /* harmony import */ var _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! @ionic-native/badge/ngx */ "./node_modules/@ionic-native/badge/ngx/index.js");
+/* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/ngx/index.js");
+
 
 
 
@@ -616,7 +618,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let AppComponent = class AppComponent {
-    constructor(platform, splashScreen, statusBar, event, router, mqttService, localNotifications, _loginService, backgroundMode, badge
+    constructor(platform, splashScreen, statusBar, event, router, mqttService, localNotifications, _loginService, backgroundMode, badge, network
     // private push: Push
     ) {
         // this.currentStore = this._loginService.currentStoreValue;
@@ -630,6 +632,7 @@ let AppComponent = class AppComponent {
         this._loginService = _loginService;
         this.backgroundMode = backgroundMode;
         this.badge = badge;
+        this.network = network;
         this.store = null;
         this.member = null;
         this.notify_id = 1;
@@ -650,6 +653,7 @@ let AppComponent = class AppComponent {
         let store = JSON.parse(localStorage.getItem('store'));
         if (store) {
             this.reInit(store);
+            this.networkMon();
         }
         this.initializeApp();
     }
@@ -689,12 +693,12 @@ let AppComponent = class AppComponent {
     _onConnectionLost(responseObject) {
         console.log('_onConnectionLost ' + this.background);
         this._mqttClient = null;
-        if (this.interval_lo <= 0) {
-            this.interval_lo = setInterval(() => {
-                console.log("_onConnectionLost.interval..." + this.interval_lo);
-                this.mqttConnect();
-            }, 2000);
-        }
+        // if(this.interval_lo <=0){
+        //   this.interval_lo = setInterval(()=>{
+        //     console.log("_onConnectionLost.interval..."+this.interval_lo);
+        //     this.mqttConnect();
+        //   }, 2000);
+        // }
     }
     _onMessageArrived(message) {
         try {
@@ -706,6 +710,7 @@ let AppComponent = class AppComponent {
                 this.showNotification(message.payloadString);
                 this.badge.increase(1);
                 this.router.navigate(['cart']);
+                this.event.publish('store:orders', message);
             }
         }
         catch (e) {
@@ -742,25 +747,28 @@ let AppComponent = class AppComponent {
                 //this.mqttConnect();
             }
         }
-        else {
-            console.log("_mqttClient not null => " + this.interval_id);
-            try {
-                console.log("Try .. sendMessage");
-                this.mqttService.sendMessage('/qrdee/ping', '0');
-                // if(!this.background){
-                if (this.interval_lo > 0) {
-                    console.log("stop interval " + this.interval_lo);
-                    clearInterval(this.interval_lo);
-                    this.interval_lo = 0;
-                    this.hungry_internet = false;
-                }
-                // }
-            }
-            catch (eee) {
-                console.log("sendMessage error ... ", eee);
-                this._mqttClient = null;
-            }
-        }
+        // else{
+        //
+        //   console.log("_mqttClient not null ["+this.interval_id+"]");
+        //   try{
+        //     console.log("Try .. sendMessage");
+        //     this.mqttService.sendMessage('/qrdee/ping','0');
+        //     // if(!this.background){
+        //       // if(this.interval_lo>0){
+        //       //   console.log("stop interval "+this.interval_lo);
+        //       //   clearInterval(this.interval_lo);
+        //       //   this.interval_lo = 0;
+        //       //   this.hungry_internet = false;
+        //       // }
+        //     // }
+        //   }catch(eee){
+        //     console.log("sendMessage error ... ", eee);
+        //     this.interval_lo = 0;
+        //     this._mqttClient = null;
+        //     this._onConnectionLost(null);
+        //   }
+        //
+        // }
     }
     // onBackground(){
     //   if(this.interval_lo>0){
@@ -843,6 +851,24 @@ let AppComponent = class AppComponent {
     order() {
         this.router.navigate(['store-orders']);
     }
+    networkMon() {
+        let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
+            console.log('network was disconnected :-(');
+            this._mqttClient = null;
+            alert("ไม่มีการเชื่อมต่ออินเทอร์เน็ต");
+        });
+        let connectSubscription = this.network.onConnect().subscribe(() => {
+            console.log('network connected!');
+            this.mqttConnect();
+            // setTimeout(() => {
+            //   console.log("connection type = "+this.network.type);
+            //   //this.mqttConnect();
+            //   if (this.network.type === 'wifi') {
+            //     console.log('we got a wifi connection, woohoo!');
+            //   }
+            // }, 3000);
+        });
+    }
     initializeApp() {
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
@@ -855,6 +881,7 @@ let AppComponent = class AppComponent {
                 //   console.log("backgroundMode.interval..."+this.interval_id);
                 //   //this.onBackground();
                 // }, 3000);
+                //this.networkMon();
             });
             this.backgroundMode.on('deactivate').subscribe(() => {
                 console.log('deactivated....');
@@ -880,7 +907,8 @@ AppComponent.ctorParameters = () => [
     { type: _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_9__["LocalNotifications"] },
     { type: _login_shared_login_store_service__WEBPACK_IMPORTED_MODULE_6__["LoginStoreService"] },
     { type: _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_10__["BackgroundMode"] },
-    { type: _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_11__["Badge"] }
+    { type: _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_11__["Badge"] },
+    { type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_12__["Network"] }
 ];
 AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -897,7 +925,8 @@ AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_9__["LocalNotifications"],
         _login_shared_login_store_service__WEBPACK_IMPORTED_MODULE_6__["LoginStoreService"],
         _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_10__["BackgroundMode"],
-        _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_11__["Badge"]
+        _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_11__["Badge"],
+        _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_12__["Network"]
         // private push: Push
     ])
 ], AppComponent);
@@ -934,6 +963,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @ionic-native/local-notifications/ngx */ "./node_modules/@ionic-native/local-notifications/ngx/index.js");
 /* harmony import */ var _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! @ionic-native/badge/ngx */ "./node_modules/@ionic-native/badge/ngx/index.js");
 /* harmony import */ var _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! @ionic-native/background-mode/ngx */ "./node_modules/@ionic-native/background-mode/ngx/index.js");
+/* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/ngx/index.js");
 
 
 
@@ -955,6 +985,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
+
 //ionic cordova run ios -lc -d --target="0D1FA3B0-AB5E-4F76-AB49-1E2D63774E7B"
 let AppModule = class AppModule {
 };
@@ -979,6 +1010,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _ionic_native_local_notifications_ngx__WEBPACK_IMPORTED_MODULE_15__["LocalNotifications"],
             _ionic_native_background_mode_ngx__WEBPACK_IMPORTED_MODULE_17__["BackgroundMode"],
             _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_16__["Badge"],
+            _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_18__["Network"],
             // Push,
             { provide: _angular_router__WEBPACK_IMPORTED_MODULE_3__["RouteReuseStrategy"], useClass: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicRouteStrategy"] }
         ],

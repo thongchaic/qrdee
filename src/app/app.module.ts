@@ -18,7 +18,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import { Badge } from '@ionic-native/badge/ngx';
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 // import { Push, PushObject, PushOptions } from '@ionic-native/push/ngx';
-
+import { Network } from '@ionic-native/network/ngx';
 //ionic cordova run ios -lc -d --target="0D1FA3B0-AB5E-4F76-AB49-1E2D63774E7B"
 
 @NgModule({
@@ -41,6 +41,7 @@ import { BackgroundMode } from '@ionic-native/background-mode/ngx';
     LocalNotifications,
     BackgroundMode,
     Badge,
+    Network,
     // Push,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

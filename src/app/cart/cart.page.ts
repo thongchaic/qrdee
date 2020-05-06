@@ -18,8 +18,8 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
 //import { CallNumber } from '@ionic-native/call-number';
 import { LoadingController } from '@ionic/angular';
 import { Badge } from '@ionic-native/badge/ngx';
-
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
+import { Events } from '@ionic/angular';
 
 declare var google;
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
@@ -89,7 +89,8 @@ export class CartPage {
     private builder: FormBuilder,
     private _loading: LoadingController,
     private callNumber: CallNumber,
-    private badge: Badge
+    private badge: Badge,
+    private event : Events
   ) {
 
      // this.productService.getAll().subscribe(resp => {
@@ -114,6 +115,9 @@ export class CartPage {
     //
     //   }
     // });
+    this.event.subscribe('store:orders',trn=>{
+       this.getOrders();
+    });
 
   }
 
@@ -303,6 +307,10 @@ deleteOrder(member_id){
           this.getOrders();
         });
       }else{
+
+          console.log("Find riders.....");
+
+
       }
     });
     return await modal.present();

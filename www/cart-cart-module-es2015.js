@@ -886,7 +886,7 @@ module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\"
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n      <ion-title>คำสั่งซื้อ</ion-title>\n    <ion-button fill=\"clear\" color=\"danger\" slot=\"end\" (click)=\"forceDissmiss(0);\">\n      <ion-icon name=\"ios-arrow-back\"></ion-icon>กลับ\n    </ion-button>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-label position=\"floating\">ตำแหน่งผู้รับ</ion-label>\n  <div #map id=\"map\" style=\"height:250px;\"></div>\n\n  <ion-card style=\"background:#FFFFFF;\">\n    <ion-card-content>\n\n      <ion-row>\n        <ion-col size=\"3\">\n          ผู้รับ\n        </ion-col>\n        <ion-col size=\"9\">\n          {{order.member.firstname}} {{order.member.lastname}}\n        </ion-col>\n      </ion-row>\n\n      <ion-row>\n        <ion-col size=\"3\">\n          เบอร์โทร์\n        </ion-col>\n        <ion-col size=\"9\">\n          {{order.member.mobile_number}}\n        </ion-col>\n      </ion-row>\n\n      <ion-row>\n        <ion-col size=\"3\">\n          สินค้า\n        </ion-col>\n        <ion-col size=\"9\">\n          <h2 *ngFor=\"let ord of order.orders\"> {{ ord.product.product_th }} {{ord.price}} บาท x {{ord.qty}} ชิ้น </h2>\n          <p *ngIf=\"order.orders.length>0\">{{order.orders[0].notes}}</p>\n        </ion-col>\n      </ion-row>\n\n      <ion-row>\n        <ion-col size=\"3\">\n          ค่าขนส่ง\n        </ion-col>\n        <ion-col size=\"9\">\n          {{ order.price >= store.free_delivery_price? 0 : store.delivery_price}}\n        </ion-col>\n      </ion-row>\n\n      <ion-row>\n        <ion-col size=\"3\">\n          รวม\n        </ion-col>\n        <ion-col size=\"3\">\n          {{ order.price >= store.free_delivery_price? order.price : order.price+store.delivery_price }}\n        </ion-col>\n        <ion-col size=\"6\">\n            <ion-button shape=\"round\" size=\"small\" color=\"danger\" (click)=\"openQR( order.price >= store.free_delivery_price? order.price : order.price+store.delivery_price )\">รับชำระเงิน</ion-button>\n        </ion-col>\n      </ion-row>\n\n      <br>\n      <ion-row>\n\n        <ion-col size=\"6\">\n          <ion-button expand=\"full\"  color=\"primary\"  (click)=\"forceDissmiss(1)\">ส่งสินค้าสำเร็จ</ion-button>\n        </ion-col>\n        <ion-col size=\"6\">\n          <ion-button expand=\"full\"  color=\"primary\"   (click)=\"forceDissmiss(0)\">กลับ</ion-button>\n        </ion-col>\n      </ion-row>\n\n    </ion-card-content>\n  </ion-card>\n\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n      <ion-title>คำสั่งซื้อ</ion-title>\n    <ion-button fill=\"clear\" color=\"danger\" slot=\"end\" (click)=\"forceDissmiss(0);\">\n      <ion-icon name=\"ios-arrow-back\"></ion-icon>กลับ\n    </ion-button>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n  <ion-label position=\"floating\">ตำแหน่งผู้รับ</ion-label>\n  <div #map id=\"map\" style=\"height:250px;\"></div>\n\n  <ion-card style=\"background:#FFFFFF;\">\n    <ion-card-content>\n\n      <ion-row>\n        <ion-col size=\"3\">\n          ผู้รับ\n        </ion-col>\n        <ion-col size=\"9\">\n          {{order.member.firstname}} {{order.member.lastname}}\n        </ion-col>\n      </ion-row>\n\n      <ion-row>\n        <ion-col size=\"3\">\n          เบอร์โทร์\n        </ion-col>\n        <ion-col size=\"9\">\n          {{order.member.mobile_number}}\n        </ion-col>\n      </ion-row>\n\n      <ion-row>\n        <ion-col size=\"3\">\n          สินค้า\n        </ion-col>\n        <ion-col size=\"9\">\n          <h2 *ngFor=\"let ord of order.orders\"> {{ ord.product.product_th }} {{ord.price}} บาท x {{ord.qty}} ชิ้น </h2>\n          <p *ngIf=\"order.orders.length>0\">{{order.orders[0].notes}}</p>\n        </ion-col>\n      </ion-row>\n\n      <ion-row>\n        <ion-col size=\"3\">\n          ค่าขนส่ง\n        </ion-col>\n        <ion-col size=\"9\">\n          {{ order.price >= store.free_delivery_price? 0 : store.delivery_price}}\n        </ion-col>\n      </ion-row>\n\n      <ion-row>\n        <ion-col size=\"3\">\n          รวม\n        </ion-col>\n        <ion-col size=\"3\">\n          {{ order.price >= store.free_delivery_price? order.price : order.price+store.delivery_price }}\n        </ion-col>\n        <ion-col size=\"6\">\n            <ion-button shape=\"round\" size=\"small\" color=\"danger\" (click)=\"openQR( order.price >= store.free_delivery_price? order.price : order.price+store.delivery_price )\">รับชำระเงิน</ion-button>\n        </ion-col>\n      </ion-row>\n\n      <br>\n      <ion-row>\n\n        <ion-col size=\"6\">\n          <ion-button expand=\"full\"  color=\"primary\"  (click)=\"forceDissmiss(1)\">ส่งสินค้าสำเร็จ</ion-button>\n        </ion-col>\n        <ion-col size=\"6\">\n          <ion-button expand=\"full\"  color=\"primary\"   (click)=\"forceDissmiss(0)\">ปิด</ion-button>\n        </ion-col>\n      </ion-row>\n\n    </ion-card-content>\n  </ion-card>\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -1130,8 +1130,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 let CartPage = class CartPage {
-    constructor(cartService, transactionService, productService, toastService, alertService, qrService, modalController, http, router, route, geolocation, barcodeScanner, builder, _loading, callNumber, badge) {
+    constructor(cartService, transactionService, productService, toastService, alertService, qrService, modalController, http, router, route, geolocation, barcodeScanner, builder, _loading, callNumber, badge, event) {
         // this.productService.getAll().subscribe(resp => {
         //   this.product_all = resp.products.data;
         //   alert(this.product_all);
@@ -1153,6 +1154,7 @@ let CartPage = class CartPage {
         this._loading = _loading;
         this.callNumber = callNumber;
         this.badge = badge;
+        this.event = event;
         this.scanChange = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["EventEmitter"];
         this.product_code = '';
         this.productFound = false;
@@ -1183,6 +1185,9 @@ let CartPage = class CartPage {
         //
         //   }
         // });
+        this.event.subscribe('store:orders', trn => {
+            this.getOrders();
+        });
     }
     ionViewWillEnter() {
         // this.getOrders();
@@ -1363,6 +1368,7 @@ let CartPage = class CartPage {
                     });
                 }
                 else {
+                    console.log("Find riders.....");
                 }
             });
             return yield modal.present();
@@ -1502,7 +1508,8 @@ CartPage.ctorParameters = () => [
     { type: _angular_forms__WEBPACK_IMPORTED_MODULE_17__["FormBuilder"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["LoadingController"] },
     { type: _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_15__["CallNumber"] },
-    { type: _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_16__["Badge"] }
+    { type: _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_16__["Badge"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["Events"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Output"])(),
@@ -1533,7 +1540,8 @@ CartPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _angular_forms__WEBPACK_IMPORTED_MODULE_17__["FormBuilder"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["LoadingController"],
         _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_15__["CallNumber"],
-        _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_16__["Badge"]])
+        _ionic_native_badge_ngx__WEBPACK_IMPORTED_MODULE_16__["Badge"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["Events"]])
 ], CartPage);
 
 

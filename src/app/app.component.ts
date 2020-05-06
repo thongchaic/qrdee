@@ -10,6 +10,7 @@ import { LocalNotifications } from '@ionic-native/local-notifications/ngx';
 import {Observable} from "rxjs";
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 import { Badge } from '@ionic-native/badge/ngx';
+import { Network } from '@ionic-native/network/ngx';
 
 
 export declare enum ELocalNotificationTriggerUnit{
@@ -46,7 +47,8 @@ export class AppComponent implements OnInit {
     public localNotifications: LocalNotifications,
     private _loginService: LoginStoreService,
     private backgroundMode: BackgroundMode,
-    private badge: Badge
+    private badge: Badge,
+    private network: Network
     // private push: Push
   ) {
     // this.currentStore = this._loginService.currentStoreValue;
@@ -61,10 +63,10 @@ export class AppComponent implements OnInit {
        this.reInit(trn);
     });
 
-
     let store = JSON.parse(localStorage.getItem('store'));
     if(store){
       this.reInit(store);
+      this.networkMon();
     }
     this.initializeApp();
 
@@ -80,7 +82,6 @@ export class AppComponent implements OnInit {
 
       this.member = JSON.parse(localStorage.getItem('member'));
       console.log(this.member);
-
 
       if(!this.member){
           const member = {
@@ -113,12 +114,12 @@ export class AppComponent implements OnInit {
       console.log('_onConnectionLost '+this.background);
 
       this._mqttClient = null;
-      if(this.interval_lo <=0){
-        this.interval_lo = setInterval(()=>{
-          console.log("_onConnectionLost.interval..."+this.interval_lo);
-          this.mqttConnect();
-        }, 2000);
-      }
+      // if(this.interval_lo <=0){
+      //   this.interval_lo = setInterval(()=>{
+      //     console.log("_onConnectionLost.interval..."+this.interval_lo);
+      //     this.mqttConnect();
+      //   }, 2000);
+      // }
 
 
   }
@@ -135,6 +136,7 @@ export class AppComponent implements OnInit {
         this.showNotification(message.payloadString);
         this.badge.increase(1);
         this.router.navigate(['cart']);
+        this.event.publish('store:orders',message);
 
       }
 
@@ -183,26 +185,29 @@ export class AppComponent implements OnInit {
        //this.mqttConnect();
      }
 
-   }else{
-
-     console.log("_mqttClient not null => "+this.interval_id);
-     try{
-       console.log("Try .. sendMessage");
-       this.mqttService.sendMessage('/qrdee/ping','0');
-       // if(!this.background){
-         if(this.interval_lo>0){
-           console.log("stop interval "+this.interval_lo);
-           clearInterval(this.interval_lo);
-           this.interval_lo = 0;
-           this.hungry_internet = false;
-         }
-       // }
-     }catch(eee){
-       console.log("sendMessage error ... ", eee);
-       this._mqttClient = null;
-     }
-
    }
+   // else{
+   //
+   //   console.log("_mqttClient not null ["+this.interval_id+"]");
+   //   try{
+   //     console.log("Try .. sendMessage");
+   //     this.mqttService.sendMessage('/qrdee/ping','0');
+   //     // if(!this.background){
+   //       // if(this.interval_lo>0){
+   //       //   console.log("stop interval "+this.interval_lo);
+   //       //   clearInterval(this.interval_lo);
+   //       //   this.interval_lo = 0;
+   //       //   this.hungry_internet = false;
+   //       // }
+   //     // }
+   //   }catch(eee){
+   //     console.log("sendMessage error ... ", eee);
+   //     this.interval_lo = 0;
+   //     this._mqttClient = null;
+   //     this._onConnectionLost(null);
+   //   }
+   //
+   // }
 
  }
  // onBackground(){
@@ -299,7 +304,27 @@ export class AppComponent implements OnInit {
     order(){
        this.router.navigate(['store-orders']);
    }
+  networkMon(){
 
+    let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
+      console.log('network was disconnected :-(');
+      this._mqttClient = null;
+      alert("ไม่มีการเชื่อมต่ออินเทอร์เน็ต");
+    });
+
+    let connectSubscription = this.network.onConnect().subscribe(() => {
+      console.log('network connected!');
+      this.mqttConnect();
+      // setTimeout(() => {
+      //   console.log("connection type = "+this.network.type);
+      //   //this.mqttConnect();
+      //   if (this.network.type === 'wifi') {
+      //     console.log('we got a wifi connection, woohoo!');
+      //   }
+      // }, 3000);
+    });
+
+  }
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
@@ -313,6 +338,7 @@ export class AppComponent implements OnInit {
         //   console.log("backgroundMode.interval..."+this.interval_id);
         //   //this.onBackground();
         // }, 3000);
+        //this.networkMon();
 
       });
 

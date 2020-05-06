@@ -12,6 +12,7 @@
 		05D2A7B8D1DD413F9F85CF3E /* PSPDFThreadSafeMutableDictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = F81A7A0B7634449F902133B1 /* PSPDFThreadSafeMutableDictionary.m */; settings = {COMPILER_FLAGS = "-w"; }; };
 		0A7F71ABEB794D899C8B46F9 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 210A1BC381EF41B7B5009BBE /* QuartzCore.framework */; };
 		0BD7A801C2B14FEB9049367B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E42BBECF0ED541D498C7DE1F /* UIKit.framework */; };
+		0F564B83F956458E82DD6F37 /* CDVConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 662B6237679C48C2B68B687D /* CDVConnection.m */; };
 		0FE53B0BDB7045B9B397ECD6 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC15093D512540BEA4C75DC1 /* CoreImage.framework */; };
 		19B2DBE412934A4493FD8075 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C15F1B48BE624ED4B7029C75 /* OpenGLES.framework */; };
 		19CF77769E7F4A9CB0650D61 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 178956DD869541A99295575F /* WebKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -66,6 +67,7 @@
 		D5DF4E32C90C4ACE8232FC91 /* GoogleMapsBase.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D7645582D8344D4B9213CFF0 /* GoogleMapsBase.framework */; };
 		D77D404605EA4FCC92492C28 /* sqlite3.c in Sources */ = {isa = PBXBuildFile; fileRef = FA9B9683D69D418B95D48EFD /* sqlite3.c */; settings = {COMPILER_FLAGS = "-w -DSQLITE_THREADSAFE=1 -DSQLITE_DEFAULT_SYNCHRONOUS=3 -DSQLITE_DEFAULT_MEMSTATUS=0 -DSQLITE_OMIT_DECLTYPE -DSQLITE_OMIT_DEPRECATED -DSQLITE_OMIT_PROGRESS_CALLBACK -DSQLITE_OMIT_SHARED_CACHE -DSQLITE_TEMP_STORE=2 -DSQLITE_OMIT_LOAD_EXTENSION -DSQLITE_ENABLE_FTS3 -DSQLITE_ENABLE_FTS3_PARENTHESIS -DSQLITE_ENABLE_FTS4 -DSQLITE_ENABLE_RTREE -DSQLITE_DEFAULT_PAGE_SIZE=4096"; }; };
 		E3DF9F6A582145DCB671110D /* CDVCamera.m in Sources */ = {isa = PBXBuildFile; fileRef = CA248658D0DD45508B3006DB /* CDVCamera.m */; };
+		E9E9E18C10EC4B59881ED86E /* CDVReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 1B96C89EDD6A4DB0A762F182 /* CDVReachability.m */; };
 		EA7DBF529FB44EBDB1251070 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F30570D2B4A24599BB06D320 /* ImageIO.framework */; };
 		F598CE51C38F4F898A33C57F /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EB38AEC27454D0E9A3BFAA5 /* libc++.tbd */; };
 		FE43EF87ABF74358A72C076C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCD84A3D02D048B997FC89C6 /* SystemConfiguration.framework */; };
@@ -105,10 +107,12 @@
 		18B08AA2EF344D2B9BA55886 /* APPNotificationContent.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = APPNotificationContent.m; path = "cordova-plugin-local-notification/APPNotificationContent.m"; sourceTree = "<group>"; };
 		19273152F6AF4469838D5FF6 /* CDVExif.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVExif.h; path = "cordova-plugin-camera/CDVExif.h"; sourceTree = "<group>"; };
 		1AD855CEB16742158D9749CF /* APPNotificationContent.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = APPNotificationContent.h; path = "cordova-plugin-local-notification/APPNotificationContent.h"; sourceTree = "<group>"; };
+		1B96C89EDD6A4DB0A762F182 /* CDVReachability.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVReachability.m; path = "cordova-plugin-network-information/CDVReachability.m"; sourceTree = "<group>"; };
 		1BA2CAEB101B4F1DA4ABCCC2 /* APPBackgroundMode.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = APPBackgroundMode.h; path = "cordova-plugin-background-mode/APPBackgroundMode.h"; sourceTree = "<group>"; };
+		1D114076248F45028E2D49B0 /* CDVConnection.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVConnection.h; path = "cordova-plugin-network-information/CDVConnection.h"; sourceTree = "<group>"; };
 		1D3623240D0F684500981E51 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		1D3623250D0F684500981E51 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		1D6058910D05DD3D006BFB54 /* QRDEE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QRDEE.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		1D6058910D05DD3D006BFB54 /* ตลาดนัดเมืองช้าง.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ตลาดนัดเมืองช้าง.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F29B2887F95462B8C1FCC50 /* APPLocalNotification.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = APPLocalNotification.h; path = "cordova-plugin-local-notification/APPLocalNotification.h"; sourceTree = "<group>"; };
 		210A1BC381EF41B7B5009BBE /* QuartzCore.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		28643CA76582446BA03E97C6 /* CDVLocation.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVLocation.h; path = "cordova-plugin-geolocation/CDVLocation.h"; sourceTree = "<group>"; };
@@ -131,12 +135,14 @@
 		46623D2C236040BE8E6396F2 /* CDVSplashScreen.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVSplashScreen.h; path = "cordova-plugin-splashscreen/CDVSplashScreen.h"; sourceTree = "<group>"; };
 		476023FAA4574FB39565B94E /* UserNotifications.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		49A6677AE33142C0BA62CDAA /* CoreLocation.framework */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		4C8A0C1963244C34996D3BF0 /* CDVReachability.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVReachability.h; path = "cordova-plugin-network-information/CDVReachability.h"; sourceTree = "<group>"; };
 		4D204787290344129E89B8DD /* CDVWKProcessPoolFactory.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVWKProcessPoolFactory.m; path = "cordova-plugin-ionic-webview/CDVWKProcessPoolFactory.m"; sourceTree = "<group>"; };
 		5990144846F643EA9AD474A0 /* CFCallNumber.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CFCallNumber.m; path = mx.ferreyra.callnumber/CFCallNumber.m; sourceTree = "<group>"; };
 		599DD823F062440E91FBA29B /* sqlite3.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = sqlite3.h; path = "cordova-sqlite-storage/sqlite3.h"; sourceTree = "<group>"; };
 		5C216368ADD04930BE0E19CA /* CDVIonicKeyboard.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = CDVIonicKeyboard.h; path = "cordova-plugin-ionic-keyboard/CDVIonicKeyboard.h"; sourceTree = "<group>"; };
 		5E765B6C9B4C440CA2990F6A /* CDVSplashScreen.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVSplashScreen.m; path = "cordova-plugin-splashscreen/CDVSplashScreen.m"; sourceTree = "<group>"; };
 		61A0C7DF55EC43B08D209C01 /* UNNotificationRequest+APPLocalNotification.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "UNNotificationRequest+APPLocalNotification.h"; path = "cordova-plugin-local-notification/UNNotificationRequest+APPLocalNotification.h"; sourceTree = "<group>"; };
+		662B6237679C48C2B68B687D /* CDVConnection.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVConnection.m; path = "cordova-plugin-network-information/CDVConnection.m"; sourceTree = "<group>"; };
 		67CFF98EA1D04B8D941B66FE /* CDVViewController+SplashScreen.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = "CDVViewController+SplashScreen.h"; path = "cordova-plugin-splashscreen/CDVViewController+SplashScreen.h"; sourceTree = "<group>"; };
 		689C1417FE8C48419804F6A7 /* PSPDFThreadSafeMutableDictionary.h */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.h; name = PSPDFThreadSafeMutableDictionary.h; path = "cordova-sqlite-storage/PSPDFThreadSafeMutableDictionary.h"; sourceTree = "<group>"; };
 		6961DEDDFFEF4EC18F5CF1F8 /* CDVDevice.m */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = sourcecode.c.objc; name = CDVDevice.m; path = "cordova-plugin-device/CDVDevice.m"; sourceTree = "<group>"; };
@@ -254,7 +260,7 @@
 		19C28FACFE9D520D11CA2CBB /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				1D6058910D05DD3D006BFB54 /* QRDEE.app */,
+				1D6058910D05DD3D006BFB54 /* ตลาดนัดเมืองช้าง.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -422,6 +428,10 @@
 				6A7CE59140A142FCBA49CFFF /* APPMethodMagic.m */,
 				1BA2CAEB101B4F1DA4ABCCC2 /* APPBackgroundMode.h */,
 				7482C0F5DDE74EE284D4F5EF /* APPMethodMagic.h */,
+				662B6237679C48C2B68B687D /* CDVConnection.m */,
+				1B96C89EDD6A4DB0A762F182 /* CDVReachability.m */,
+				1D114076248F45028E2D49B0 /* CDVConnection.h */,
+				4C8A0C1963244C34996D3BF0 /* CDVReachability.h */,
 			);
 			name = Plugins;
 			path = QRDEE/Plugins;
@@ -456,7 +466,7 @@
 			);
 			name = QRDEE;
 			productName = QRDEE;
-			productReference = 1D6058910D05DD3D006BFB54 /* QRDEE.app */;
+			productReference = 1D6058910D05DD3D006BFB54 /* ตลาดนัดเมืองช้าง.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -603,6 +613,8 @@
 				B1D80D78CC36456C9D2CC0B7 /* UNNotificationRequest+APPLocalNotification.m in Sources */,
 				4D323D13137544AFB4D9F110 /* APPBackgroundMode.m in Sources */,
 				D5B42BE2BC8E4B0FB3E12B64 /* APPMethodMagic.m in Sources */,
+				0F564B83F956458E82DD6F37 /* CDVConnection.m in Sources */,
+				E9E9E18C10EC4B59881ED86E /* CDVReachability.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -646,8 +658,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				MARKETING_VERSION = 0.2.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.ionic.qrdee-emarket";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "ตลาดนัดเมืองช้าง";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WK_WEB_VIEW_ONLY = 1;
 			};
 			name = Debug;
 		};
@@ -680,9 +693,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				MARKETING_VERSION = 0.2.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = "io.ionic.qrdee-emarket";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "ตลาดนัดเมืองช้าง";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
+				WK_WEB_VIEW_ONLY = 1;
 			};
 			name = Release;
 		};
@@ -726,7 +740,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "io.ionic.qrdee-emarket";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
-				WK_WEB_VIEW_ONLY = 0;
+				WK_WEB_VIEW_ONLY = 1;
 			};
 			name = Debug;
 		};
@@ -768,7 +782,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "io.ionic.qrdee-emarket";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = NO;
-				WK_WEB_VIEW_ONLY = 0;
+				WK_WEB_VIEW_ONLY = 1;
 			};
 			name = Release;
 		};

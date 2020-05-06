@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.qrdee-emarket" version="0.2.7" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>QRDEE</name>
-    <description>QRDEE e-market</description>
+<widget id="io.ionic.qrdee-emarket" version="0.2.8" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>ตลาดนัดเมืองช้าง</name>
+    <description>ตลาดนัดเมืองช้าง</description>
     <author email="qrdee@gmail.com" href="http://qrdee.co/surin">QRDee Team</author>
     <content src="index.html" />
     <access origin="*" />
@@ -11,6 +11,7 @@
     <allow-intent href="sms:*" />
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
+    <preference name="WKWebViewOnly" value="true" />
     <preference name="ScrollEnabled" value="false" />
     <preference name="android-minSdkVersion" value="19" />
     <preference name="BackupWebStorage" value="none" />
@@ -123,7 +124,4 @@
         <icon src="resources/windows/icon/StoreLogo.png" target="StoreLogo" />
         <splash src="resources/windows/splash/Splash.png" target="SplashScreen" />
     </platform>
-    <allow-navigation href="http://192.168.6.101:8100" sessionid="0ef36c3f" />
-    <allow-navigation href="http://192.168.1.5:8100" sessionid="0ebc434f" />
-    <allow-navigation href="http://192.168.6.102:8100" sessionid="edf1c588" />
 </widget>

@@ -1,4 +1,4 @@
-import { Component, OnInit,ElementRef,ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef,ViewChild } from '@angular/core';
 import { NavController, LoadingController, ToastController } from '@ionic/angular';
 import { RegisterStoreService } from './shared/register-store.service';
 import { Router  } from '@angular/router';
@@ -87,8 +87,6 @@ export class RegisterPage{
       loading.dismiss();
       this.loadMap();
     });
-
-
    }
    loadMap() {
 
@@ -176,9 +174,7 @@ export class RegisterPage{
       //alert("Register");
       const loading = await this._loading.create();
       await loading.present();
-
-
-
+      
       this.latitude = localStorage.getItem('regis_lat');
       this.longitude = localStorage.getItem('regis_lng');
 

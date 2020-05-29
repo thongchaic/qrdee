@@ -359,30 +359,30 @@ export class AppComponent implements OnInit {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
 
-      this.backgroundMode.on('activate').subscribe(() => {
-        console.log('activated');
-        this.background = true;
-        this.mqttConnect();
-        // this.interval_id = setInterval(()=>{
-        //   console.log("backgroundMode.interval..."+this.interval_id);
-        //   //this.onBackground();
-        // }, 3000);
-        //this.networkMon();
+      // this.backgroundMode.on('activate').subscribe(() => {
+      //   console.log('activated');
+      //   this.background = true;
+      //   this.mqttConnect();
+      //   // this.interval_id = setInterval(()=>{
+      //   //   console.log("backgroundMode.interval..."+this.interval_id);
+      //   //   //this.onBackground();
+      //   // }, 3000);
+      //   //this.networkMon();
 
-      });
+      // });
 
-      this.backgroundMode.on('deactivate').subscribe(() => {
-        console.log('deactivated....');
-        this.background = false;
-        this.mqttConnect();
-        // if(this.interval_id>0){
-        //   console.log("stop interval "+this.interval_id);
-        //   clearInterval(this.interval_id);
-        //   this.interval_id = 0;
-        // }
-      });
+      // this.backgroundMode.on('deactivate').subscribe(() => {
+      //   console.log('deactivated....');
+      //   this.background = false;
+      //   this.mqttConnect();
+      //   // if(this.interval_id>0){
+      //   //   console.log("stop interval "+this.interval_id);
+      //   //   clearInterval(this.interval_id);
+      //   //   this.interval_id = 0;
+      //   // }
+      // });
 
-      this.backgroundMode.enable();
+      // this.backgroundMode.enable();
 
     });
   }

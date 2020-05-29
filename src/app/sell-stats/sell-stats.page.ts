@@ -5,6 +5,7 @@ import { SellStatsService } from './shared/sell-stats.service';
 import { ToastService } from '../shared/services/toast.service';
 import { Router,NavigationExtras  } from '@angular/router';
 import { IonInfiniteScroll } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sell-stats',
@@ -23,6 +24,7 @@ export class SellStatsPage implements OnInit {
     private alertController: AlertController,
     private toastService: ToastService,
     private router: Router,
+    private _translate: TranslateService
   	) {
   
      }

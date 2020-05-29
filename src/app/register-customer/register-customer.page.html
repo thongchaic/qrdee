@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>ซื้อสินค้า</ion-title>
+    <ion-title>{{ 'registerCustomerPage.register | translate' }}</ion-title>
     <ion-buttons slot="end">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -18,29 +18,29 @@
        <ion-list>
       <ion-item>
         <ion-label position="floating" ></ion-label>
-        <ion-input type="text" [(ngModel)]="firstname" placeholder="ชื่อ"></ion-input>
+        <ion-input type="text" [(ngModel)]="firstname" [placeholder]="'registerCustomerPage.firstName | translate'"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating"></ion-label>
-         <ion-input type="text"  [(ngModel)]="lastname" placeholder="นามสกุล"></ion-input>
+         <ion-input type="text"  [(ngModel)]="lastname" [placeholder]="'registerCustomerPage.lastName | translate'"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating" ></ion-label>
-        <ion-input type="text"  [(ngModel)]="mobile_number" placeholder="เบอร์โทร"></ion-input>
+        <ion-input type="text"  [(ngModel)]="mobile_number" [placeholder]="'registerCustomerPage.tel | translate'"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating"></ion-label>
-        <ion-input type="text" [(ngModel)]="email" placeholder="อีเมล์"></ion-input>
+        <ion-input type="text" [(ngModel)]="email" [placeholder]="'registerCustomerPage.email | translate'"></ion-input>
       </ion-item>
         <ion-item>
         <ion-label position="floating"></ion-label>
-        <ion-input type="password"  [(ngModel)]="password" placeholder="รหัสผ่าน"></ion-input>
+        <ion-input type="password"  [(ngModel)]="password" [placeholder]="'registerCustomerPage.password | translate'"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating" ></ion-label>
-        <ion-input type="password"  [(ngModel)]="repassword" placeholder="รหัสผ่านยืนยัน"></ion-input>
+        <ion-input type="password"  [(ngModel)]="repassword" [placeholder]="'registerCustomerPage.confirmPassword | translate'"></ion-input>
       </ion-item>
-     <ion-button type="submit" expand="full" color="success" (click)="Register_customer()">ลงทะเบียน</ion-button>
+     <ion-button type="submit" expand="full" color="success" (click)="Register_customer()">{{ 'registerCustomerPage.register | translate' }}</ion-button>
  </ion-list>
 </ion-card-content>
 </ion-card>

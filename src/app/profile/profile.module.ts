@@ -9,6 +9,7 @@ import { ProfilePage } from './profile.page';
 import { FormComponent } from './form/form.component';
 import { File } from '@ionic-native/file/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
+import { TranslateModule } from '@ngx-translate/core';
 // import { ImagePicker } from '@ionic-native/image-picker/ngx';
 // import { WebView } from '@ionic-native/ionic-webview/ngx';
 
@@ -30,7 +31,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     SharedModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    TranslateModule.forChild()
   ],
   declarations: [ProfilePage,FormComponent],
   providers: [

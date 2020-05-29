@@ -9,6 +9,7 @@ import { File } from '@ionic-native/file/ngx';
 // import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
 import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-form',
@@ -48,6 +49,7 @@ imageSrc = '';
      @Inject(File) private file: File,
      // @Inject(WebView) private webView: WebView,
     // private imagePicker: ImagePicker,
+    private _translate: TranslateService
     ) { }
 
  ionViewWillEnter() {

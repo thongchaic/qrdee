@@ -14,6 +14,7 @@ import { LoadingController, Events } from '@ionic/angular';
 //   Marker
 // } from '@ionic-native/google-maps';
 import { Platform } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var google;
 
@@ -46,7 +47,8 @@ export class ProfilePage implements OnInit{
     private _formBuilder: FormBuilder,
     private event : Events,
     private platform: Platform,
-    private _loading: LoadingController
+    private _loading: LoadingController,
+    private _translate: TranslateService
   ){
 
 
@@ -289,12 +291,15 @@ export class ProfilePage implements OnInit{
     }
     this.form = this._formBuilder.group({
       store_name: this.store.store_name,
+      store_name_en: this.store.store_name,
       promptpay: this.store.promptpay,
       mobile_number: this.store.mobile_number,
       delivery_price: this.store.delivery_price,
       free_delivery_price: this.store.free_delivery_price,
       firstname: this.store.firstname,
       lastname: this.store.lastname,
+      firstname_en: this.store.firstname,
+      lastname_en: this.store.lastname,
       store_type_id: this.store.store_type_id,
       latitude: this.store.latitude,
       longitude: this.store.longitude,

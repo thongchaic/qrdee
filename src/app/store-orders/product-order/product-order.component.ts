@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../shared/order.service';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-product-order',
@@ -13,20 +14,21 @@ export class ProductOrderComponent implements OnInit {
      product_orders:any;
   constructor(
    private orderService: OrderService,
-    private route: ActivatedRoute
-  	) {
-        this.route.queryParams.subscribe(params => {
-          console.log(params);
-          if (params && params.special) {
-            this.code_randoms = JSON.parse(params.special);
-            console.log('code_randoms: ',this.code_randoms);
+    private route: ActivatedRoute,
+    private _translate: TranslateService
+  ) {
+    this.route.queryParams.subscribe(params => {
+      console.log(params);
+      if (params && params.special) {
+        this.code_randoms = JSON.parse(params.special);
+        console.log('code_randoms: ',this.code_randoms);
 
-          }
-        });
-    }
+      }
+    });
+  }
 
 
- ionViewWillEnter() {
+  ionViewWillEnter() {
     this.loadProduct();
   }
 

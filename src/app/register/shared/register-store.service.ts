@@ -12,11 +12,12 @@ export class RegisterStoreService {
   {
 
   }
-  registerstore(password,promptpay,store_name,latitude,longitude,store_type_id){
+  registerstore(password,promptpay,store_name,store_name_en,latitude,longitude,store_type_id){
     const body = {
       password : password,
       promptpay : promptpay,
       store_name:store_name,
+      store_name_en:store_name_en,
       latitude:latitude,
       longitude:longitude,
       store_type_id:store_type_id

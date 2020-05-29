@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>    
-    <ion-title>ขนส่ง</ion-title>
+    <ion-title>{{ 'logisticPage.transport' | translate }}</ion-title>
     <ion-buttons slot="end">
     </ion-buttons>
   </ion-toolbar>
@@ -16,7 +16,7 @@
       <ion-button class="btn2" expand="block" routerLink="/logistic/delivery/codedelivery">
        <div class="ion-text-center" >
           <img src="https://cdn0.iconfinder.com/data/icons/map-and-navigation-1/65/7-512.png" class="img_logistic">
-             <br><b>ส่งสินค้า</b> 
+             <br><b>{{ 'logisticPage.delivery' | translate }}</b> 
         </div>
       </ion-button>
     </ion-col>
@@ -27,7 +27,7 @@
      <ion-button class="btn2" expand="block" routerLink="/logistic/delivery/show">
        <div class="ion-text-center" >
           <img src="https://www.openghong.com/wp-content/uploads/2018/06/delive-300x300.png" class="img_logistic">
-             <br><b>ประวัติขนส่งสินค้า</b> 
+             <br><b>{{ 'logisticPage.transportHistory' | translate }}</b> 
         </div>
       </ion-button>
     </ion-col>
@@ -35,7 +35,7 @@
      <ion-button class="btn2" expand="block" routerLink="/logistic/history">
        <div class="ion-text-center" >
           <img src="https://freesvg.org/img/Faceless-Man-Avatar.png" class="img_logistic">
-             <br><b>ข้อมูลผู้ขนส่ง</b> 
+             <br><b>{{ 'logisticPage.information' | translate }}</b> 
         </div>
       </ion-button>
     </ion-col>

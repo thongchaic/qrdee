@@ -8,6 +8,7 @@ import { ToastService } from '../../shared/services/toast.service';
 import { AlertService } from '../../shared/services/alert.service';
 import { Camera } from '@ionic-native/camera/ngx';
 import { File } from '@ionic-native/file/ngx';
+import { TranslateService } from '@ngx-translate/core';
 // import { WebView } from '@ionic-native/ionic-webview/ngx';
 // import { ImagePicker } from '@ionic-native/image-picker/ngx';
 @Component({
@@ -27,6 +28,9 @@ profileForm: FormGroup = this.builder.group({
     firstname: ['', Validators.required],
     lastname: ['', Validators.required],
     store_name: ['', Validators.required],
+    firstname_en: ['', Validators.required],
+    lastname_en: ['', Validators.required],
+    store_name_en: ['', Validators.required],
     store_type_id: ['', Validators.required],
     store_pic: null
 });
@@ -46,7 +50,8 @@ constructor(
     private toastService: ToastService,
     private alertService: AlertService,
     @Inject(Camera)  private camera: Camera,
-    @Inject(File)  private file: File
+    @Inject(File)  private file: File,
+    private _translate: TranslateService
     // @Inject(WebView)  private webView: WebView
 
 ) {  }

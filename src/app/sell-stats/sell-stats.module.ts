@@ -8,6 +8,7 @@ import { SellStatsService }  from './shared/sell-stats.service';
 import { HttpClientInterceptor } from '../shared/interceptors/httpclient.interceptor';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
+import { TranslateModule } from '@ngx-translate/core';
 const routes: Routes = [
   {
     path: '',
@@ -21,7 +22,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     SharedModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    TranslateModule.forChild()
   ],
   declarations: [SellStatsPage],
    providers: [SellStatsService,

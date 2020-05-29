@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>สรุปยอดขาย</ion-title>
+    <ion-title>{{ 'statsPage.summary' | translate }}</ion-title>
     <!-- <ion-buttons slot="end">
       <ion-back-button></ion-back-button>
     </ion-buttons> -->
@@ -15,20 +15,20 @@
 <!-- วัน -->
   <ion-card style="background:#FFFFFF;">
     <ion-card-header>
-      <h5>รายวันนี้  <b *ngIf="stat_data"> {{stat_data.hourly.total}} </b> บาท</h5>
+      <h5>{{ 'statsPage.dailyIncome' | translate }}  <b *ngIf="stat_data"> {{stat_data.hourly.total}} </b> ฿</h5>
     </ion-card-header>
     <canvas #barChartD></canvas>
-    <p *ngIf="stat_data">ณ​ วันที่ {{stat_data.date}} {{stat_data.month}} {{stat_data.year}}</p>
+    <p *ngIf="stat_data">{{ 'statsPage.day' | translate }} {{stat_data.date}} {{stat_data.month}} {{stat_data.year}}</p>
   </ion-card>
 
 
 <!-- เดือน -->
  <ion-card style="background:#FFFFFF;">
     <ion-card-header>
-    <h6 *ngIf="stat_data"> เดือนนี้ {{stat_data.daily.total}} บาท</h6>
+    <h6 *ngIf="stat_data"> {{ 'statsPage.monthlyIncome' | translate }} {{stat_data.daily.total}} ฿</h6>
     </ion-card-header>
     <canvas #barChartM></canvas>
-    <p *ngIf="stat_data">ณ เดือน {{stat_data.month}} {{stat_data.year}}</p>
+    <p *ngIf="stat_data">{{ 'statsPage.month' | translate }} {{stat_data.month}} {{stat_data.year}}</p>
   </ion-card>
 
 
@@ -36,10 +36,10 @@
 
    <ion-card style="background:#FFFFFF;">
     <ion-card-header>
-    <h6 *ngIf="stat_data">ปีนี้ {{stat_data.monthly.total}} บาท</h6>
+    <h6 *ngIf="stat_data">{{ 'statsPage.yearlyIncome' | translate }} {{stat_data.monthly.total}} ฿</h6>
     </ion-card-header>
       <canvas #barChartY></canvas>
-      <p *ngIf="stat_data">ณ ปี {{stat_data.year}}</p>
+      <p *ngIf="stat_data">{{ 'statsPage.year' | translate }} {{stat_data.year}}</p>
   </ion-card>
 <br/>
 

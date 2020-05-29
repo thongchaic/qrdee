@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>แก้ไขข้อมูล</ion-title>
+    <ion-title>{{ 'profilePage.form.edit' | translate }}</ion-title>
      <ion-buttons slot="end">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -21,46 +21,58 @@
         </ion-item>
         <ion-grid>
           <ion-row justify-content-center>
-            <ion-button size="small" color="primary" (click)="getPicture()">ถ่ายรูปสินค้า</ion-button>
-            <ion-button size="small" color="secondary" (click)="selectPictures()">เลือกจากอัลบั้ม</ion-button>
+            <ion-button size="small" color="primary" (click)="getPicture()">{{ 'profilePage.form.takePhoto' | translate }}</ion-button>
+            <ion-button size="small" color="secondary" (click)="selectPictures()">{{ 'profilePage.form.selectPhoto' | translate }}</ion-button>
           </ion-row>
         </ion-grid>
       </ion-item-group>
         <ion-item>
-          <b slot="start"> ร้าน</b>
+          <b slot="start"> {{ 'profilePage.form.storeTh' | translate }}</b>
           <ion-input  type="text" formControlName="store_name"></ion-input>
         </ion-item>
         <ion-item>
-          <b slot="start">พร้อมเพย์</b>
+          <b slot="start"> {{ 'profilePage.form.storeEn' | translate }}</b>
+          <ion-input  type="text" formControlName="store_name_en"></ion-input>
+        </ion-item>
+        <ion-item>
+          <b slot="start">{{ 'profilePage.form.promptpay' | translate }}</b>
           <ion-input  type="text" formControlName="promptpay"></ion-input>
         </ion-item>
          <ion-item>
-          <b slot="start">ชื่อ</b>
+          <b slot="start">{{ 'profilePage.form.firstNameTh' | translate }}</b>
           <ion-input  type="text" formControlName="firstname"></ion-input>
         </ion-item>
+         <ion-item>
+          <b slot="start">{{ 'profilePage.form.firstNameEn' | translate }}</b>
+          <ion-input  type="text" formControlName="firstname_en"></ion-input>
+        </ion-item>
         <ion-item>
-          <b slot="start"> นามสกุล</b>
+          <b slot="start"> {{ 'profilePage.form.lastNameTh' | translate }}</b>
           <ion-input  type="text" formControlName="lastname"></ion-input>
         </ion-item>
         <ion-item>
-          <b slot="start">เบอร์โทร</b>
+          <b slot="start"> {{ 'profilePage.form.lastNameEn' | translate }}</b>
+          <ion-input  type="text" formControlName="lastname_en"></ion-input>
+        </ion-item>
+        <ion-item>
+          <b slot="start">{{ 'profilePage.form.tel' | translate }}</b>
           <ion-input  type="text" formControlName="mobile_number"></ion-input>
         </ion-item>
         <ion-item>
-          <ion-label position="floating"><b slot="start">ประเภทร้าน</b></ion-label>
+          <ion-label position="floating"><b slot="start">{{ 'profilePage.form.storeType' | translate }}</b></ion-label>
           <ion-select formControlName="store_type_id">
             <ion-select-option
               *ngFor="let store_type of store_types"
               [value]="store_type.id"
               [selected]="store_type.id === profileForm.get('store_type_id').value">
-              {{ store_type.store_type_th }}
+              {{ store_type['store_type_' + _translate.getDefaultLang() ] }}
             </ion-select-option>
           </ion-select>
         </ion-item>
       </ion-card-content>
       <ion-button type="submit" expand="full" color="success" (click)="submit()">
        <ion-icon name="logo-buffer"></ion-icon>
-      &nbsp;บันทึก</ion-button>
+      &nbsp;{{ 'profilePage.form.submit' | translate }}</ion-button>
     </ion-card>
   </form>
 </ion-content>

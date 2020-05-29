@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>    
-    <ion-title>ขนส่ง</ion-title>
+    <ion-title>{{ 'logisticPage.transport' | translate }}</ion-title>
     <ion-buttons slot="end">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -15,7 +15,7 @@
  <div #mapElement ></div>
  <form [formGroup]="directionForm">
    <ion-item class="inputs"> 
-        <ion-input type="text"  placeholder="ใส่รหัสส่งสินค้า" class="input"
+        <ion-input type="text"  placeholder="{{ 'logisticPage.specifyCode' | translate }}" class="input"
         (ionChange)="search($event.target.value)">
         </ion-input> 
  
@@ -36,7 +36,7 @@
         </ion-avatar> -->
         <ion-label text-wrap>
           
-          <h5><ion-text color="dark">รหัส: {{ searchcode.firstname  }}</ion-text></h5>
+          <h5><ion-text color="dark">{{ 'logisticPage.code' | translate }}: {{ searchcode.firstname  }}</ion-text></h5>
         </ion-label>
       </ion-item>
  </div>

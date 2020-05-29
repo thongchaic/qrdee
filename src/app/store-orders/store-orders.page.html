@@ -3,14 +3,14 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>    
-    <ion-title>ออเดอร์สินค้า</ion-title>
+    <ion-title>{{ 'storeOrderPage.order' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content>
 
   <ion-button expand="full" color="success"  (click)="hide()">
     <ion-icon name="arrow-dropright"></ion-icon>
-    &nbsp;เรียกคนส่งของ</ion-button>
+    &nbsp;{{ 'storeOrderPage.call' | translate }}</ion-button>
 <!-- 
     <ion-button expand="full" color="success"  (click)="!hide()">
       <ion-icon name="arrow-down"></ion-icon>
@@ -29,7 +29,7 @@
         <ion-icon ios="ios-pin" md="md-pin"></ion-icon>
         {{product_logistic.delivery_status.delivery_status_th}}<br>
         {{product_logistic.delivery_type.delivery_type_th}} <br>
-        โทร: {{product_logistic.mobile_number}}<br>
+        {{ 'storeOrderPage.tel' | translate }}: {{product_logistic.mobile_number}}<br>
         </p>
       </ion-item> 
     </ion-col> 
@@ -47,9 +47,9 @@
             <ion-item (click)="order_store_product(order.code_randoms)">
                  <img slot="start" src="https://www.tmbfoundation.or.th/img/icon/shop/img-cart-empty@2x.png?1545205815"class="img_store" >
                  <p style="font-weight: bold; font-size: 14px;">
-                  คุณ{{order.firstname}}  {{order.lastname}} <br> 
+                  {{order.firstname}}  {{order.lastname}} <br> 
                   {{ order.updated_at}}<br> 
-                  รหัสส่งสินค้า {{ order.code_randoms}}
+                  {{ 'storeOrderPage.code' | translate }} {{ order.code_randoms}}
                 </p> 
                  <ion-icon ios="ios-arrow-dropright" md="md-arrow-dropright"></ion-icon>
               </ion-item> 

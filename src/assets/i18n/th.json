@@ -139,6 +139,27 @@
       "back": "กลับ"
     }
   },
+  "profilePage": {
+    "manageStore": "จัดการร้านค้า",
+    "manageStorePosition": "จัดการตำแหน่งร้าน",    
+    "form": {
+      "edit": "แก้ไขข้อมูล",
+      "takePhoto": "ถ่ายรูปสินค้า",
+      "selectPhoto": "เลือกจากอัลบั้ม",
+      "promptpay": "พร้อมเพย์",
+      "storeTh": "ชื่อร้านภาษาไทย",
+      "storeEn": "ชื่อร้านภาษาอังกฤษ",
+      "firstNameTh": "ชื่อภาษาไทย",
+      "firstNameEn": "ชื่อภาษาอังกฤษ",
+      "lastNameTh": "นามสกุลภาษาไทย",
+      "lastNameEn": "นามสกุลภาษาอังกฤษ",
+      "tel": "เบอร์โทร",
+      "storeType": "ประเภทร้าน",
+      "submit": "บันทึก",
+      "shippingCost": "ค่าขนส่ง",
+      "minShippingCost": "ขั้นต่ำ ฟรีค่าขนส่ง"
+    }
+  },
   "loginPage": {
     "lang": "th",
     "langText": "ภาษาไทย",
@@ -149,6 +170,85 @@
     "rider": "ส่งสินค้า",
     "telephone": "เบอร์โทรศัพท์",
     "password": "รหัสผ่าน"
+  },
+  "registerPage": {
+    "register": "ลงทะเบียนร้าน",
+    "storePosition": "ตำแหน่งร้าน",
+    "storeNameTh": "ชื่อร้านภาษาไทย",
+    "storeNameEn": "ชื่อร้านภาษาอังกฤษ",
+    "promptpay": "พร้อมเพย์",
+    "tel": "เบอร์โทร",
+    "password": "รหัสผ่าน",
+    "confirmPassword": "ยืนยันรหัสผ่าน"
+  },
+  "registerCustomerPage": {
+    "register": "ลงทะเบียน",
+    "firstName": "ชื่อ",
+    "lastName": "นามสกุล",
+    "tel": "เบอร์โทร",
+    "email": "อีเมล",
+    "password": "รหัสผ่าน",
+    "confirmPassword": "ยืนยันรหัสผ่าน"
+  },
+  "registerLogisticPage": {
+    "register": "สมัครเป็นผู้ส่งสินค้า",
+    "firstName": "ชื่อ",
+    "lastName": "นามสกุล",
+    "vehicleNumber": "เลขทะเบียนรถ",
+    "tel": "เบอร์โทร",
+    "email": "อีเมล",
+    "password": "รหัสผ่าน",
+    "confirmPassword": "ยืนยันรหัสผ่าน"
+  },
+  "riderPage": {
+    "request": "คำขอให้ส่งสินค้า",
+    "store": "ร้าน",
+    "shippingCost": "ค่าส่ง",
+    "km": "กม.",
+    "when": "เมื่อ",
+    "distance": "ระยะทาง",
+    "routes": {
+      "destination": "เส้นทางส่งสินค้า",
+      "back": "กลับ",
+      "store": "ร้าน",
+      "shippingCost": "ค่าส่ง",
+      "customer": "ผู้รับ",
+      "tel": "โทรศัพท์",
+      "qrcode": "QRCode รับชำระเงิน",
+      "success": "ส่งสินค้าสำเร็จ"
+    }    
+  },
+  "sellStatsPage": {
+    "summary": "สรุปการขาย",
+    "latest": "ล่าสุด",
+    "sell": "ขาย/บริการ",
+    "time": "ชั้น/ครั้ง"
+  },
+  "statsPage": {
+    "summary": "สรุปยอดขาย",
+    "dailyIncome": "รายได้วันนี้",
+    "day": "ณ​ วันที่",
+    "monthlyIncome": "รายได้เดือนนี้",
+    "month": "เดือนนี้",
+    "yearlyIncome": "รายได้ปีนี้",
+    "year": "ณ ปี"
+  },
+  "storeLogisticPage": {
+    "call": "เรียกคนส่งสินค้า",
+    "tel": "โทร"
+  },
+  "storeOrderPage": {
+    "order": "ออเดอร์สินค้า",
+    "callRider": "เรียกคนส่งของ",
+    "tel": "โทร",
+    "code": "รหัสส่งสินค้า",
+    "productOrder": {
+      "order": "ออเดอร์สินค้า",
+      "productList": "รายการสินค้าที่ต้องจัดส่ง",
+      "productId": "รหัสสินค้า",
+      "productName": "ชื่อสินค้า",
+      "amount": "จำนวน"
+    }
   },
   "settingPage": {
     "setting": "ตั้งค่า",

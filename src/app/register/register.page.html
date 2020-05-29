@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>เปิดร้านออนไลน์</ion-title>
+    <ion-title>{{ 'registerPage.register' | translate }}</ion-title>
     <ion-buttons slot="end">
       <ion-back-button defaultHref="login"></ion-back-button>
     </ion-buttons>
@@ -19,30 +19,34 @@
 
   <ion-card style="background:#FFFFFF;">
     <ion-card-content>
-      <ion-label position="floating">ตำแหน่งร้าน</ion-label>
+      <ion-label position="floating">{{ 'registerPage.storePosition' | translate }}</ion-label>
 
       <ion-list>
         <ion-item>
           <ion-label position="floating"></ion-label>
-          <ion-input type="text" [(ngModel)]="store_name" placeholder="ชื่อร้าน"></ion-input>
+          <ion-input type="text" [(ngModel)]="store_name" [placeholder]="'registerPage.storeNameTh' | translate"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating"></ion-label>
+          <ion-input type="text" [(ngModel)]="store_name_en" [placeholder]="'registerPage.storeNameEn' | translate"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label position="floating"></ion-label>
-          <ion-input type="text" [(ngModel)]="promptpay" placeholder="เบอร์โทรศัพท์"></ion-input>
+          <ion-input type="text" [(ngModel)]="promptpay" [placeholder]="'registerPage.promptpay' | translate"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label position="floating"></ion-label>
-          <ion-input type="text"  [(ngModel)]="password" placeholder="รหัสผ่าน"></ion-input>
+          <ion-input type="text"  [(ngModel)]="password" [placeholder]="'registerPage.password' | translate"></ion-input>
         </ion-item>
 
         <ion-item>
           <ion-label position="floating" ></ion-label>
-          <ion-input type="text"  [(ngModel)]="repassword" placeholder="ยืนยันรหัสผ่าน"></ion-input>
+          <ion-input type="text"  [(ngModel)]="repassword" [placeholder]="'registerPage.confirmPassword' | translate"></ion-input>
         </ion-item>
 
-        <ion-button type="submit"  expand="block" color="primary" (click)="registStore()">ลงทะเบียน</ion-button>
+        <ion-button type="submit"  expand="block" color="primary" (click)="registStore()">{{ 'registerPage.register' | translate }}</ion-button>
       </ion-list>
     </ion-card-content>
   </ion-card>

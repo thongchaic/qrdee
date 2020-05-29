@@ -30,6 +30,7 @@ export class RegisterPage{
   repassword:string ='';
   promptpay:string='';
   store_name :string='';
+  store_name_en :string='';
   latitude:any='';
   longitude:any='';
   dummyMarker:any;
@@ -181,7 +182,7 @@ export class RegisterPage{
       console.log("Register with =>> "+this.latitude+" / "+this.longitude);
 
 
-      this.registerService.registerstore(this.password,this.promptpay,this.store_name,this.latitude,this.longitude,5).subscribe(trn => {
+      this.registerService.registerstore(this.password,this.promptpay,this.store_name, this.store_name_en,this.latitude,this.longitude,5).subscribe(trn => {
           loading.dismiss();
           localStorage.setItem('store', JSON.stringify(trn));
           this.event.publish('store:changed',trn);

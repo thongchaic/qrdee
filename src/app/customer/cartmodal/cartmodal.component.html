@@ -9,10 +9,10 @@
     <div no-margin no-padding>
       <ion-row no-margin no-padding>
         <ion-col>
-          <ion-button (click)="storeLocation()">ตำแหน่ง</ion-button>
+          <ion-button (click)="storeLocation()">{{ 'customerPage.position' | translate }}</ion-button>
         </ion-col>
         <ion-col no-margin no-padding>
-          {{ store.store_name }}
+          {{ _translate.getDefaultLang() === 'th' ? store.store_name : store['store_name_' + _translate.getDefaultLang()] }}
         </ion-col>
       </ion-row>
 

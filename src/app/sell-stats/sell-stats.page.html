@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>สรุปการขาย</ion-title>
+    <ion-title>{{ 'sellStatsPage.summary' | translate }}</ion-title>
     <ion-buttons slot="end">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -17,9 +17,9 @@
       <img src="https://coffeeprincesurat.files.wordpress.com/2009/01/logo_final4.jpg?w=300&h=300">
     </ion-avatar>
     <ion-label text-wrap>
-      <b>{{ sellstats.product_th}}</b><br>
-      ล่าสุด {{ sellstats.updated_at}}<br><br>
-      ขาย/บริการ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{ sellstats.amount}}</b> ชั้น/ครั้ง
+      <b>{{ sellstats['product_' + _translate.getDefaultLang()]}}</b><br>
+      {{ 'sellStatsPage.latest' | translate }} {{ sellstats.updated_at}}<br><br>
+      {{ 'sellStatsPage.sell' | translate }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{ sellstats.amount}}</b> {{ 'sellStatsPage.time' | translate }}
     </ion-label>
   </ion-item>
 </ion-card>

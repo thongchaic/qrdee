@@ -11,13 +11,15 @@ import { IonicMqttModule, MQTTService } from 'ionic-mqtt';
 
 import { RidersPage } from './riders.page';
 import { RoutesComponent } from './routes/routes.component';
+import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
     RidersPageRoutingModule,
-    QRCodeModule
+    QRCodeModule,
+    TranslateModule.forChild()
   ],
   declarations: [
     RidersPage, 

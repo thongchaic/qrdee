@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>คำขอให้ส่งสินค้า</ion-title>
+    <ion-title>{{ 'riderPage.request' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -30,10 +30,10 @@
       </ion-col>
   
       <ion-col size="6" style="line-height: 10px;" (click)="viewOrder(order);">
-        <p no-padding>ร้าน {{ order.store.store_name }} </p>
-        <small no-padding>ค่าส่ง <ion-badge color="danger">{{ order.store.delivery_price | number }} บาท</ion-badge></small><br>
-        <small no-padding>ระยะทาง {{ order.distance | number }} กม. </small><br>
-        <small *ngIf="order.items.length>0" no-padding>เมื่อ {{ order.items[0].requested_at }}</small><br>
+        <p no-padding>{{ 'riderPage.store' | translate }} {{ order.store.store_name }} </p>
+        <small no-padding>{{ 'riderPage.shippingCost' | translate }} <ion-badge color="danger">{{ order.store.delivery_price | number }} ฿</ion-badge></small><br>
+        <small no-padding>{{ 'riderPage.distance' | translate }} {{ order.distance | number }} {{ 'riderPage.km' | translate }} </small><br>
+        <small *ngIf="order.items.length>0" no-padding>{{ 'riderPage.when' | translate }} {{ order.items[0].requested_at }}</small><br>
 
       </ion-col>
       <ion-col size="4"><br>

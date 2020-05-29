@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { LogisticService } from '../shared/logistic.service';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-history',
@@ -15,7 +16,8 @@ export class HistoryComponent {
     url = environment.url;
   constructor( 
     private http: HttpClient,
-    private logistic:LogisticService
+    private logistic:LogisticService,
+    private _translate: TranslateService
     ) {
     console.log('history');
   }

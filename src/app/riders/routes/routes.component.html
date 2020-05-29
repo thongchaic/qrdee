@@ -1,14 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>เส้นทางส่งสินค้า</ion-title>
+    <ion-title>{{ 'riderPage.routes.destination' | translate }}</ion-title>
     <ion-button *ngIf="type == 0" fill="clear" color="danger" slot="end" (click)="forceDissmiss(0);">
-      <ion-icon name="ios-arrow-back"></ion-icon>กลับ
+      <ion-icon name="ios-arrow-back"></ion-icon>{{ 'riderPage.routes.back' | translate }}
     </ion-button>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-label position="floating">เส้นทางส่งสินค้า</ion-label>
+  <ion-label position="floating">{{ 'riderPage.routes.destination' | translate }}</ion-label>
   <div #map id="map" style="height:250px;"></div>
 
 
@@ -22,9 +22,9 @@
       </ion-col>
   
       <ion-col size="8" style="line-height: 10px;" >
-        <p no-padding>ร้าน {{ order.store.store_name }} </p>
-        <small no-padding>ค่าส่ง <ion-badge color="danger">{{ order.store.delivery_price | number }} บาท</ion-badge></small><br>
-        <small no-padding>โทรศัพท์ {{ order.store.mobile_number }}</small><br>
+        <p no-padding>{{ 'riderPage.routes.store' | translate }} {{ order.store.store_name }} </p>
+        <small no-padding>{{ 'riderPage.routes.shippingCost' | translate }} <ion-badge color="danger">{{ order.store.delivery_price | number }} ฿</ion-badge></small><br>
+        <small no-padding>{{ 'riderPage.routes.tel' | translate }} {{ order.store.mobile_number }}</small><br>
       </ion-col>
       <ion-col size="2"><br>
         <ion-button icon-only (click)="startCall(order.store.mobile_number)">
@@ -43,8 +43,8 @@
       </ion-col>
   
       <ion-col size="8" style="line-height: 10px;" >
-        <p no-padding>ผู้รับ {{ order.member.firstname }} {{ order.member.lastname }}</p>
-        <small no-padding>โทรศัพท์ {{ order.member.mobile_number }}</small><br>
+        <p no-padding>{{ 'riderPage.routes.customer' | translate }} {{ order.member.firstname }} {{ order.member.lastname }}</p>
+        <small no-padding>{{ 'riderPage.routes.tel' | translate }} {{ order.member.mobile_number }}</small><br>
         <!-- <small no-padding>ระยะทาง {{ order.distance | number }} กม. </small><br> -->
       </ion-col>
       <ion-col size="2"><br>
@@ -55,7 +55,7 @@
     </ion-row>
   </ion-card>
 
-  <ion-label *ngIf="prompt_payload != ''" position="floating">QRCode รับชำระเงิน</ion-label>
+  <ion-label *ngIf="prompt_payload != ''" position="floating">{{ 'riderPage.routes.qrcode' | translate }}</ion-label>
   <ion-card>
     <qrcode  *ngIf="prompt_payload != ''" [qrdata]="prompt_payload" [size]="256" [level]="'M'"></qrcode>
   </ion-card>
@@ -66,6 +66,6 @@
 
 <ion-footer *ngIf="type != 0" style="background:#FFFFFF;">
   <ion-toolbar>
-    <ion-button  expand="block" color="primary" (click)="finishedDelivery();">ส่งสินค้าสำเร็จ</ion-button>
+    <ion-button  expand="block" color="primary" (click)="finishedDelivery();">{{ 'riderPage.routes.success' | translate }}</ion-button>
   </ion-toolbar>
 </ion-footer>

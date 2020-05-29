@@ -9,6 +9,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductOrderComponent } from './product-order/product-order.component';
 import { StoreOrdersPage } from './store-orders.page';
 import { OrderService } from './shared/order.service';
+import { TranslateModule } from '@ngx-translate/core';
 const routes: Routes = [
   {
     path: '',
@@ -30,7 +31,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     HttpClientModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    TranslateModule.forChild()
   ],
   declarations: [
   StoreOrdersPage,

@@ -3,11 +3,11 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>    
-    <ion-title>ออเดอร์สินค้า</ion-title>
+    <ion-title>{{ 'storeOrderPage.productOrder.order' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 <div class="ion-text-center backgrounds height">
-    <p> <b>รายการสินค้าที่ต้องจัดส่ง</b></p>
+    <p> <b>{{ 'storeOrderPage.productOrder.productList' | translate }}</b></p>
 </div>
 
 <ion-content class="app-background">
@@ -17,17 +17,17 @@
 			  <ion-row class="ion-justify-content-between" style="background:#FFDAB9">
 			  	 <ion-col size="4">
 			      <b style="font-size: 14px;">
-			       รหัสสินค้า
+							{{ 'storeOrderPage.productOrder.productId' | translate }}
 			      </b>
 			    </ion-col>
 			    <ion-col size="5">
 			      <b style="font-size: 14px;">
-			       ชื่อสินค้า
+							{{ 'storeOrderPage.productOrder.productName' | translate }}
 			      </b>
 			    </ion-col>
 			    <ion-col size="3">
 			      <b style="font-size: 14px;">
-			       จำนวน
+							{{ 'storeOrderPage.productOrder.amount' | translate }}
 			      </b>
 			    </ion-col>
 			  </ion-row>
@@ -43,7 +43,7 @@
 			    </ion-col>
 			    <ion-col size="5">
 			      <div>
-			       {{ product_order.product_th }}
+			       {{ product_order['product_' + _translate.getDefaultLang()] }}
 			      </div>
 			    </ion-col>
 			    <ion-col size="2">

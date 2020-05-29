@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>สมัครเป็นผู้ส่งสินค้า</ion-title>
+    <ion-title>{{ 'registerLogisticPage.register | translate' }}</ion-title>
     <ion-buttons slot="end">
       <ion-back-button defaultHref="login"></ion-back-button>
     </ion-buttons>
@@ -15,34 +15,34 @@
        <ion-list>
       <ion-item>
         <ion-label position="floating" ></ion-label>
-        <ion-input type="text" [(ngModel)]="firstname" placeholder="ชื่อ"></ion-input>
+        <ion-input type="text" [(ngModel)]="firstname" [placeholder]="'registerLogisticPage.firstName | translate'"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating"></ion-label>
-         <ion-input type="text"  [(ngModel)]="lastname" placeholder="นามสกุล"></ion-input>
+         <ion-input type="text"  [(ngModel)]="lastname" [placeholder]="'registerLogisticPage.lastName | translate'"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating" ></ion-label>
-        <ion-input type="text"  [(ngModel)]="car_number" placeholder="เลขทะเบียนรถ"></ion-input>
+        <ion-input type="text"  [(ngModel)]="car_number" [placeholder]="'registerLogisticPage.vehicleNumber | translate'"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating" ></ion-label>
-        <ion-input type="text"  [(ngModel)]="mobile_number" placeholder="เบอร์โทร"></ion-input>
+        <ion-input type="text"  [(ngModel)]="mobile_number" [placeholder]="'registerLogisticPage.tel | translate'"></ion-input>
       </ion-item>
       <!-- <ion-item>
         <ion-label position="floating"></ion-label>
-        <ion-input type="text" [(ngModel)]="email" placeholder="อีเมล์"></ion-input>
+        <ion-input type="text" [(ngModel)]="email" [placeholder]="'registerLogisticPage.register | translate'"></ion-input>
       </ion-item> -->
         <ion-item>
         <ion-label position="floating"></ion-label>
-        <ion-input type="text"  [(ngModel)]="password" placeholder="รหัสผ่าน"></ion-input>
+        <ion-input type="text"  [(ngModel)]="password" [placeholder]="'registerLogisticPage.password | translate'"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating" ></ion-label>
-        <ion-input type="text"  [(ngModel)]="repassword" placeholder="รหัสผ่านยืนยัน"></ion-input>
+        <ion-input type="text"  [(ngModel)]="repassword" [placeholder]="'registerLogisticPage.confirmPassword | translate'"></ion-input>
       </ion-item>
       <br>
-      <ion-button type="submit" expand="block" color="primary" (click)="RegisterLlogistic()">ลงทะเบียน</ion-button>
+      <ion-button type="submit" expand="block" color="primary" (click)="RegisterLlogistic()">{{ 'registerLogisticPage.register | translate' }}</ion-button>
  </ion-list>
 </ion-card-content>
 </ion-card>

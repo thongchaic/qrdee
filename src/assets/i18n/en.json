@@ -4,11 +4,161 @@
     "home": "Home",
     "myProducts": "My Products",
     "summary": "Summary",
-    "manageStore": "Store",
-    "orderList": "Order List",
+    "manageStore": "Manage Store",
+    "orderList": "Order",
     "buy": "Buy",
     "login": "Login",
     "setting": "Setting"
+  },
+  "cartPage": {
+    "order": "Order",
+    "cart": "Cart",
+    "back": "Back",
+    "cPosition": "Customer Position",
+    "target": "Consignee",
+    "telephone": "Telephone",
+    "product": "Product",
+    "shippingCost": "Shipping Cost",
+    "total": "Total",
+    "totalPrice": "Total Price",
+    "acceptPayment": "Accept Payment",
+    "success": "Success",
+    "deliverSuccess": "Deliver Success",
+    "call": "Call Rider",
+    "qrPayment": "QR Payment",
+    "bath": "Bath",
+    "cancel": "Cancel",
+    "minCost": "Min Cost",
+    "free": "Free",
+    "amount": "Amount",
+    "genQr": "Generate QR",
+    "productList": "Product List"
+  },
+  "customerPage": {
+    "back": "Back",
+    "select": "Select",
+    "each": "Each",
+    "minCost": "Min Cost",
+    "free": "Free",
+    "order": "Order",
+    "specifyLocation": "Specify Location",
+    "storeLocation": "Location",
+    "find": "Find",
+    "buy": "Buy",
+    "nearbyStores": "Nearby Stores",
+    "storeNotFound": "Store Not Found",
+    "shippingCost": "Shipping Cost",
+    "total": "Total",
+    "qrPayment": "**Accept QRCode",
+    "specifyTargetPoint": "Specify Target Point",
+    "targetName": "Consignee Name",
+    "telephone": "Telephone",
+    "note": "Note",
+    "acceptOrder": "Accept Order",
+    "orderList": "Order List",
+    "from": "From",
+    "when": "When",
+    "km": "Km"
+  },
+  "deliveryPage": {
+    "delivery": "Delivery",
+    "targetPosition": "Consignee Position"
+  },
+  "logisticPage": {
+    "shippingInformation": "Shipping Information",
+    "cName": "Customer Name",
+    "tel": "Telephone",
+    "submit": "Submit",
+    "specifyCode": "Specify Code",
+    "transport": "Transport",
+    "code": "Code",
+    "delivery": "Delivery",
+    "transportHistory": "Transport History",
+    "information": "Information",
+    "form": {
+      "edit": "Edit",
+      "takePhoto": "Take a Photo",
+      "selectPhoto": "Select Photo",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "tel": "Telephone",
+      "vehicle": "Vehicle Type",
+      "vehicleNumber": "Vehicle Number",
+      "vehicleStatus": "Vehicle Status",
+      "submit": "Submit"
+    },
+    "history": {
+      "information": "Information",
+      "tel": "Telephone",
+      "vehicle": "Vehicle",
+      "vehicleNumber": "Vehicle Number",
+      "vehicleStatus": "Vehicle status",
+      "submit": "Submit"
+    },
+    "show": {
+      "transport": "Transport",
+      "history": "History",
+      "to": "To",
+      "when": "When"
+
+    }
+  },
+  "productsPage": {
+    "forms": {
+      "position": "Position",
+      "km": "Km",
+      "distance": "Distance"
+    },
+    "form": {
+      "edit": "Edit",
+      "takePhoto": "Take a Photo",
+      "selectPhoto": "Select Photo",
+      "thName": "Thai product name",
+      "enName": "English product name",
+      "thDes": "Thai description",
+      "enDes": "English description",
+      "category": "Category",
+      "price": "Price",
+      "cost": "Cost",
+      "submit": "Submit"
+    },
+    "list": {
+      "myProducts": "My Products",
+      "addProduct": "Add Product"
+    },
+    "show": {
+      "productId": "Product Id",
+      "price": "Price",
+      "cost": "Cost",
+      "amount": "Amount",
+      "back": "Back"
+    },
+    "showCustomer": {
+      "price": "Price",
+      "description": "Description",
+      "back": "Back"
+    }
+  },
+  "profilePage": {
+    "manageStore": "Manage store",
+    "manageStorePosition": "Manage position",    
+    "form": {
+      "edit": "Edit",
+      "takePhoto": "Take a Photo",
+      "selectPhoto": "Select Photo",
+      "promptpay": "Promptpay",
+      "storeTh": "Thai store name",
+      "storeEn": "English store name",
+      "firstNameTh": "Thai first name",
+      "firstNameEn": "English first name",
+      "lastNameTh": "Thai last name",
+      "lastNameEn": "English first name",
+      "tel": "Telephone",
+      "storeType": "Store type",
+      "submit": "Submit",
+      "shippingCost": "Shipping Cost",
+      "minShippingCost": "Min Shipping Cost"
+    }
   },
   "loginPage": {
     "lang": "en",
@@ -21,9 +171,88 @@
     "telephone": "Telephone",
     "password": "Password"
   },
+  "registerPage": {
+    "register": "Register",
+    "storePosition": "ตำแหน่งร้าน",
+    "storeNameTh": "Thai store name",
+    "storeNameEn": "English store name",
+    "promptpay": "Promptpay",
+    "tel": "Telephone",
+    "password": "Password",
+    "confirmPassword": "Confirm Password"
+  },
+  "registerCustomerPage": {
+    "register": "Register",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "tel": "Telephone",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password"
+  },
+  "registerLogisticPage": {
+    "register": "Register",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "vehicleNumber": "Vehicle Number",
+    "tel": "Telephone",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password"
+  },
+  "riderPage": {
+    "request": "Request order",
+    "store": "Store",
+    "shippingCost": "Shipping Cost",
+    "km": "Km",
+    "when": "When",
+    "distance": "Distance",
+    "routes": {
+      "destination": "Destination",
+      "back": "Back",
+      "store": "Store",
+      "shippingCost": "Shipping cost",
+      "customer": "Customer",
+      "tel": "Telephone",
+      "qrcode": "QRCode Payment",
+      "success": "Success"
+    }    
+  },
+  "sellStatsPage": {
+    "summary": "Summary",
+    "latest": "Latest",
+    "sell": "Sell",
+    "time": "Time"
+  },
+  "statsPage": {
+    "summary": "Summary",
+    "dailyIncome": "Daily Income",
+    "day": "Day",
+    "monthlyIncome": "Monthly Income",
+    "month": "Month",
+    "yearlyIncome": "Yearly Income",
+    "year": "Year"
+  },
+  "storeLogisticPage": {
+    "call": "Call rider",
+    "tel": "Telephone"
+  },
+  "storeOrderPage": {
+    "order": "Order",
+    "callRider": "Call rider",
+    "tel": "Telephone",
+    "code": "Code",
+    "productOrder": {
+      "order": "Order",
+      "productList": "Product List",
+      "productId": "Product Id",
+      "productName": "Product Name",
+      "amount": "Amount"
+    }
+  },
   "settingPage": {
     "setting": "Setting",
     "selectLang": "Language",
-    "selectLanguage": "Select Language"
+    "selectLanguage": "Select language"
   }
 }

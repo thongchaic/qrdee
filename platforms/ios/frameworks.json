@@ -14,7 +14,7 @@
     "SystemConfiguration.framework": 2,
     "UIKit.framework": 1,
     "AVFoundation.framework": 2,
-    "AudioToolbox.framework": 1,
     "WebKit.framework": 1,
-    "UserNotifications.framework": 1
+    "UserNotifications.framework": 1,
+    "AudioToolbox.framework": 1
 }

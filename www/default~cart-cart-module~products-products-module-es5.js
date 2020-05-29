@@ -84,6 +84,16 @@ var CartService = /** @class */ (function () {
         };
         return this.http.put("https://qrdee.co/api/v2/orders/" + store_id, body);
     };
+    CartService.prototype.callRider = function (store_id, member_id) {
+        var body = {
+            member_id: member_id,
+            request_riders: true
+        };
+        return this.http.put("https://qrdee.co/api/v2/orders/" + store_id, body);
+    };
+    CartService.prototype.cancelRequest = function (id) {
+        return this.http.put("https://qrdee.co/api/v2/cancel_req/" + id, {});
+    };
     CartService.prototype.getStoreMaps = function (store_id) {
         return this.http.get("https://qrdee.co/api/v1/transaction_store_maps/" + store_id);
     };

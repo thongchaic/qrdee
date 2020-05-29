@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>เส้นทางส่งสินค้า</ion-title>
+    <ion-button *ngIf="type == 0" fill="clear" color="danger" slot="end" (click)="forceDissmiss(0);">
+      <ion-icon name="ios-arrow-back"></ion-icon>กลับ
+    </ion-button>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-label position="floating">เส้นทางส่งสินค้า</ion-label>
+  <div #map id="map" style="height:250px;"></div>
+
+
+  <ion-card  no-margin no-padding >
+    <ion-row>
+      <ion-col size="2">
+        <ion-thumbnail style="height: 100%; width: 100%; border-radius: 2px;">
+          <img *ngIf="order.store.store_pic" [src]="'https://qrdee.co/app/'+order.store.store_pic" style="height: 100%; width: 100%; border-radius: 4px;">
+          <img *ngIf="!order.store.store_pic" src="/assets/noimg.png" style="height: 100%; width: 100%; border-radius: 4px;">
+        </ion-thumbnail>
+      </ion-col>
+  
+      <ion-col size="8" style="line-height: 10px;" >
+        <p no-padding>ร้าน {{ order.store.store_name }} </p>
+        <small no-padding>ค่าส่ง <ion-badge color="danger">{{ order.store.delivery_price | number }} บาท</ion-badge></small><br>
+        <small no-padding>โทรศัพท์ {{ order.store.mobile_number }}</small><br>
+      </ion-col>
+      <ion-col size="2"><br>
+        <ion-button icon-only (click)="startCall(order.store.mobile_number)">
+          <ion-icon slot="icon-only" size="small" clear expand="block" name="call"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  <ion-card  no-margin no-padding >
+    <ion-row>
+      <ion-col size="2" >
+        <ion-thumbnail style="height: 100%; width: 100%; border-radius: 2px;">
+          <img src="/assets/noimg.png" style="height: 100%; width: 100%; border-radius: 4px;">
+        </ion-thumbnail>
+      </ion-col>
+  
+      <ion-col size="8" style="line-height: 10px;" >
+        <p no-padding>ผู้รับ {{ order.member.firstname }} {{ order.member.lastname }}</p>
+        <small no-padding>โทรศัพท์ {{ order.member.mobile_number }}</small><br>
+        <!-- <small no-padding>ระยะทาง {{ order.distance | number }} กม. </small><br> -->
+      </ion-col>
+      <ion-col size="2"><br>
+        <ion-button icon-only (click)="startCall(order.member.mobile_number)">
+          <ion-icon slot="icon-only" size="small" clear expand="block" name="call"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+  <ion-label *ngIf="prompt_payload != ''" position="floating">QRCode รับชำระเงิน</ion-label>
+  <ion-card>
+    <qrcode  *ngIf="prompt_payload != ''" [qrdata]="prompt_payload" [size]="256" [level]="'M'"></qrcode>
+  </ion-card>
+<br><br><br>
+
+</ion-content>
+
+
+<ion-footer *ngIf="type != 0" style="background:#FFFFFF;">
+  <ion-toolbar>
+    <ion-button  expand="block" color="primary" (click)="finishedDelivery();">ส่งสินค้าสำเร็จ</ion-button>
+  </ion-toolbar>
+</ion-footer>

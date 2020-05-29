@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Platform,Events } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Router  } from '@angular/router';
+import { Router, RouterEvent } from '@angular/router';
 import { LoginStoreService } from './login/shared/login-store.service';
 import { MQTTService } from 'ionic-mqtt';
 import { v4 as uuidv4 } from 'uuid';
@@ -11,6 +11,7 @@ import {Observable} from "rxjs";
 import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 import { Badge } from '@ionic-native/badge/ngx';
 import { Network } from '@ionic-native/network/ngx';
+import { UserService } from './shared/user.service';
 
 
 export declare enum ELocalNotificationTriggerUnit{
@@ -27,6 +28,10 @@ export class AppComponent implements OnInit {
 
   store:any = null;
   member:any = null;
+  user:any = null;
+
+
+
   notify_id = 1;
   interval_id = 0;
   interval_lo = 0;
@@ -48,7 +53,8 @@ export class AppComponent implements OnInit {
     private _loginService: LoginStoreService,
     private backgroundMode: BackgroundMode,
     private badge: Badge,
-    private network: Network
+    private network: Network,
+    private _user: UserService
     // private push: Push
   ) {
     // this.currentStore = this._loginService.currentStoreValue;
@@ -56,32 +62,50 @@ export class AppComponent implements OnInit {
     // localStorage.setItem('background','0');
     // localStorage.setItem('orders',JSON.stringify([]));
 
-    console.log("=================START======================");
-    this.event.subscribe('store:changed',trn=>{
-       this.store = trn;
-       //this.currentStore = trn;
-       this.reInit(trn);
+    // console.log("=================START======================");
+    // this.event.subscribe('store:changed',trn=>{
+    //    this.store = trn;
+    //    //this.currentStore = trn;
+    //    this.reInit(trn);
+    // });
+
+    this.router.events.subscribe((event: RouterEvent) => {
+      if(event.url){
+        console.log(event.url);
+        this.user = this._user.storeOrRider();
+        console.log(this.user);
+        if(this.user.store){
+          this.reInit();
+        }
+      }
     });
 
-    let store = JSON.parse(localStorage.getItem('store'));
-    if(store){
-      this.reInit(store);
+    this.user = this._user.storeOrRider();
+
+
+    // let store = JSON.parse(localStorage.getItem('store'));
+    if(this.user.store){
+
+      this.reInit();
       this.networkMon();
+      
+      this.localNotifications.schedule({
+        title: 'ยินดีต้อนรับสู่ QRDee'
+      });
+
     }
     this.initializeApp();
 
   }
-  reInit(store){
 
+  reInit(){
 
-      console.log("Received broadcast ===>");
-      console.log(store);
-      this.store = JSON.parse(localStorage.getItem('store'));
-      localStorage.setItem('store', JSON.stringify(store));
-      console.log(this.store);
+      this.store = this._user.getStore();
+      // localStorage.setItem('store', JSON.stringify(store));
+      // console.log(this.store);
 
-      this.member = JSON.parse(localStorage.getItem('member'));
-      console.log(this.member);
+      this.member = this._user.getMember();//JSON.parse(localStorage.getItem('member'));
+      //console.log(this.member);
 
       if(!this.member){
           const member = {
@@ -92,21 +116,20 @@ export class AppComponent implements OnInit {
             firstname:this.store.firstname,
             lastname:this.store.lastname
           }
-          localStorage.setItem('member', JSON.stringify(member));
-      }else{
-          this.member.mobile_number = this.store.mobile_number;
-          this.member.latitude = this.store.latitude;
-          this.member.longitude = this.store.longitude;
-          this.member.firstname = this.store.firstname;
-          this.member.lastname = this.store.lastname;
-          localStorage.setItem('member', JSON.stringify(this.member));
+          this._user.storeMember(member);
+          //localStorage.setItem('member', JSON.stringify(member));
       }
-
+      // else{
+      //       this.member.mobile_number = this.store.mobile_number;
+      //       this.member.latitude = this.store.latitude;
+      //       this.member.longitude = this.store.longitude;
+      //       this.member.firstname = this.store.firstname;
+      //       this.member.lastname = this.store.lastname;
+      //       this._user.storeMember(this.member);
+      //       //localStorage.setItem('member', JSON.stringify(this.member));
+      //   }
       this.mqttConnect();
-      //
-      this.localNotifications.schedule({
-        title: 'ยินดีต้อนรับสู่ QRDee'
-      });
+      
 
   }
 
@@ -254,11 +277,15 @@ export class AppComponent implements OnInit {
      this.router.navigate(['login']);
   }
 
-   home(){
-    this.badge.clear();
-    this.router.navigate(['cart']);
+  orderList(){
+    this.router.navigate(['riders']);
+  }
 
-   }
+  home(){
+  this.badge.clear();
+  this.router.navigate(['cart']);
+
+  }
 
    logout(){
      this.store = null;
@@ -325,6 +352,10 @@ export class AppComponent implements OnInit {
     });
 
   }
+
+
+
+
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();

@@ -2,7 +2,7 @@
 
 platform :ios, '10.0'
 
-target 'QRDEE' do
-	project 'QRDEE.xcodeproj'
+target 'ตลาดนัดเมืองช้าง' do
+	project 'ตลาดนัดเมืองช้าง.xcodeproj'
 
 end

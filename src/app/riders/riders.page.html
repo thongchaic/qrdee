@@ -1,9 +1,55 @@
-<ion-header>
+<ion-header translucent>
   <ion-toolbar>
-    <ion-title>riders</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>คำขอให้ส่งสินค้า</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+
+
+
+  <ion-item lines="none">
+    <ion-button size="small" slot="end" icon-only expand="block" (click)="loadRiderOrders()">
+      <ion-icon  color="success"  name="refresh" ></ion-icon>
+    </ion-button>
+  </ion-item>
+
+
+
+
+  <ion-card  no-margin no-padding *ngFor="let order of orders"  >
+    <ion-row>
+      <ion-col size="2" (click)="viewOrder(order);">
+        <ion-thumbnail style="height: 100%; width: 100%; border-radius: 2px;">
+          <img *ngIf="order.store.store_pic" [src]="'https://qrdee.co/app/'+order.store.store_pic" style="height: 100%; width: 100%; border-radius: 4px;">
+          <img *ngIf="!order.store.store_pic" src="/assets/noimg.png" style="height: 100%; width: 100%; border-radius: 4px;">
+        </ion-thumbnail>
+      </ion-col>
+  
+      <ion-col size="6" style="line-height: 10px;" (click)="viewOrder(product);">
+        <p no-padding>ร้าน {{ order.store.store_name }} </p>
+        <small no-padding>ค่าส่ง <ion-badge color="danger">{{ order.store.delivery_price | number }} บาท</ion-badge></small><br>
+        <small no-padding>ระยะทาง {{ order.distance | number }} กม. </small><br>
+        <small *ngIf="order.items.length>0" no-padding>เมื่อ {{ order.items[0].requested_at }}</small><br>
+
+      </ion-col>
+      <ion-col size="4"><br>
+        <ion-button icon-only (click)="acceptOrder(order)">
+          <ion-icon slot="icon-only" size="small" clear expand="block" name="bicycle"></ion-icon>
+        </ion-button>
+        <ion-button  (click)="viewOrder(order)">
+          <ion-icon slot="icon-only" size="small" color="success" expand="block" name="eye" ></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-card>
+
+
+
+
+
 
 </ion-content>

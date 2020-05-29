@@ -44,7 +44,6 @@ export class DvrmodalComponent {
     this.store = JSON.parse(localStorage.getItem('store'));
 
 
-
   }
   openQR(price){
     console.log(this.order);
@@ -136,6 +135,16 @@ export class DvrmodalComponent {
     //     url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
     //   }
     // });
+
+  }
+  callRider(){
+    this.cartService.callRider(this.store.id, this.order.member_id ).subscribe((data:any)=>{
+      console.log(data);
+      this.closeModal(2);
+
+    }, err=>{
+      
+    });
 
   }
 

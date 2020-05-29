@@ -1,16 +1,15 @@
 <ion-header>
   <ion-toolbar>
-    <ion-buttons slot="start">
-      <!-- <ion-menu-button></ion-menu-button> -->
-    </ion-buttons>
-    <ion-title>ส่งสินค้า</ion-title>
+    <ion-title>สมัครเป็นผู้ส่งสินค้า</ion-title>
     <ion-buttons slot="end">
-      <ion-back-button></ion-back-button>
+      <ion-back-button defaultHref="login"></ion-back-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="app-background">
+
+
+<ion-content>
   <ion-card style="background:#FFFFFF;">
     <ion-card-content >
        <ion-list>
@@ -30,19 +29,20 @@
         <ion-label position="floating" ></ion-label>
         <ion-input type="text"  [(ngModel)]="mobile_number" placeholder="เบอร์โทร"></ion-input>
       </ion-item>
-      <ion-item>
+      <!-- <ion-item>
         <ion-label position="floating"></ion-label>
         <ion-input type="text" [(ngModel)]="email" placeholder="อีเมล์"></ion-input>
-      </ion-item>
+      </ion-item> -->
         <ion-item>
         <ion-label position="floating"></ion-label>
-        <ion-input type="password"  [(ngModel)]="password" placeholder="รหัสผ่าน"></ion-input>
+        <ion-input type="text"  [(ngModel)]="password" placeholder="รหัสผ่าน"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating" ></ion-label>
-        <ion-input type="password"  [(ngModel)]="repassword" placeholder="รหัสผ่านยืนยัน"></ion-input>
+        <ion-input type="text"  [(ngModel)]="repassword" placeholder="รหัสผ่านยืนยัน"></ion-input>
       </ion-item>
-     <ion-button type="submit" expand="full" color="success" (click)="RegisterLlogistic()">ลงทะเบียน</ion-button>
+      <br>
+      <ion-button type="submit" expand="block" color="primary" (click)="RegisterLlogistic()">ลงทะเบียน</ion-button>
  </ion-list>
 </ion-card-content>
 </ion-card>

@@ -13,19 +13,17 @@ export class RegisterLogisticService {
   constructor(private http: HttpClient) 
   { }
 
-	registerlogistic(password,firstname,lastname,mobile_number,email,car_number){
+	registerlogistic(password,firstname,lastname,mobile_number,car_number){
 	  const body = {
 	      // username : username,
 	      password : password,
 	      firstname : firstname,
 	      lastname  : lastname,
 	      car_number : car_number,
-	      mobile_number : mobile_number,
-	      // store_name:store_name,
-	      email:email,
+	      mobile_number : mobile_number
 	    }
 	    console.log(body);
-	  return this.http.post<any>(`https://qrdee.co/api/v1/delivery_register`,body);
+	  return this.http.post<any>(`https://qrdee.co/api/v2/rider`,body);
 	}
 
 }

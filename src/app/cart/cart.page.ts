@@ -306,14 +306,43 @@ deleteOrder(member_id){
         this.cartService.completeOrder(this.store.id,order.member_id).subscribe((data:any)=>{
           this.getOrders();
         });
-      }else{
+      }if(status.data == 2){
+
+
 
           console.log("Find riders.....");
+          setTimeout(()=>{
+
+            this.cartService.getOrders(this.store.id).subscribe((data:any)=>{
+              console.log(data);
+              data.forEach(e => {
+                 e.orders.forEach(oo => {
+                   if(oo.requested_at && !oo.accepted_at){
+                     console.log("incompleted !! ",oo.id);
+                     this.cancelRequest(oo.id);
+                    // alert(`สินค้า ${oo.product.product_th} ไม่มีผู้รับส่งสินค้า ลองใหม่อีกครั้ง `);//
+                     this.toastService.showLongToast(`สินค้า ${oo.product.product_th} ไม่มีใครรับส่งสินค้า ลองใหม่อีกครั้ง `,'top');
+                   }
+                 });
+
+              });
+
+            }, err=>{
+            });
+
+          } , 60000);
 
 
       }
     });
     return await modal.present();
+  }
+  cancelRequest(id){
+
+    this.cartService.cancelRequest(id).subscribe((data:any)=>{
+      console.log(data);
+    });
+
   }
 
   newTransaction() {

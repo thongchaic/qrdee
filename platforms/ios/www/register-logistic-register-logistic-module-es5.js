@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <!-- <ion-menu-button></ion-menu-button> -->\n    </ion-buttons>\n    <ion-title>ส่งสินค้า</ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-back-button></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content class=\"app-background\">\n  <ion-card style=\"background:#FFFFFF;\">\n    <ion-card-content >\n       <ion-list>\n      <ion-item>\n        <ion-label position=\"floating\" ></ion-label>\n        <ion-input type=\"text\" [(ngModel)]=\"firstname\" placeholder=\"ชื่อ\"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label position=\"floating\"></ion-label>\n         <ion-input type=\"text\"  [(ngModel)]=\"lastname\" placeholder=\"นามสกุล\"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label position=\"floating\" ></ion-label>\n        <ion-input type=\"text\"  [(ngModel)]=\"car_number\" placeholder=\"เลขทะเบียนรถ\"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label position=\"floating\" ></ion-label>\n        <ion-input type=\"text\"  [(ngModel)]=\"mobile_number\" placeholder=\"เบอร์โทร\"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label position=\"floating\"></ion-label>\n        <ion-input type=\"text\" [(ngModel)]=\"email\" placeholder=\"อีเมล์\"></ion-input>\n      </ion-item>\n        <ion-item>\n        <ion-label position=\"floating\"></ion-label>\n        <ion-input type=\"password\"  [(ngModel)]=\"password\" placeholder=\"รหัสผ่าน\"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label position=\"floating\" ></ion-label>\n        <ion-input type=\"password\"  [(ngModel)]=\"repassword\" placeholder=\"รหัสผ่านยืนยัน\"></ion-input>\n      </ion-item>\n     <ion-button type=\"submit\" expand=\"full\" color=\"success\" (click)=\"RegisterLlogistic()\">ลงทะเบียน</ion-button>\n </ion-list>\n</ion-card-content>\n</ion-card>\n</ion-content>\n"
+module.exports = "<ion-header>\n  <ion-toolbar>\n    <ion-title>สมัครเป็นผู้ส่งสินค้า</ion-title>\n    <ion-buttons slot=\"end\">\n      <ion-back-button defaultHref=\"login\"></ion-back-button>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n\n\n\n<ion-content>\n  <ion-card style=\"background:#FFFFFF;\">\n    <ion-card-content >\n       <ion-list>\n      <ion-item>\n        <ion-label position=\"floating\" ></ion-label>\n        <ion-input type=\"text\" [(ngModel)]=\"firstname\" placeholder=\"ชื่อ\"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label position=\"floating\"></ion-label>\n         <ion-input type=\"text\"  [(ngModel)]=\"lastname\" placeholder=\"นามสกุล\"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label position=\"floating\" ></ion-label>\n        <ion-input type=\"text\"  [(ngModel)]=\"car_number\" placeholder=\"เลขทะเบียนรถ\"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label position=\"floating\" ></ion-label>\n        <ion-input type=\"text\"  [(ngModel)]=\"mobile_number\" placeholder=\"เบอร์โทร\"></ion-input>\n      </ion-item>\n      <!-- <ion-item>\n        <ion-label position=\"floating\"></ion-label>\n        <ion-input type=\"text\" [(ngModel)]=\"email\" placeholder=\"อีเมล์\"></ion-input>\n      </ion-item> -->\n        <ion-item>\n        <ion-label position=\"floating\"></ion-label>\n        <ion-input type=\"text\"  [(ngModel)]=\"password\" placeholder=\"รหัสผ่าน\"></ion-input>\n      </ion-item>\n      <ion-item>\n        <ion-label position=\"floating\" ></ion-label>\n        <ion-input type=\"text\"  [(ngModel)]=\"repassword\" placeholder=\"รหัสผ่านยืนยัน\"></ion-input>\n      </ion-item>\n      <br>\n      <ion-button type=\"submit\" expand=\"block\" color=\"primary\" (click)=\"RegisterLlogistic()\">ลงทะเบียน</ion-button>\n </ion-list>\n</ion-card-content>\n</ion-card>\n</ion-content>\n"
 
 /***/ }),
 
@@ -72,7 +72,7 @@ var RegisterLogisticPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".app-background {\n  --background: url('/assets/bg1.jpg') 0 0/100% 100% no-repeat; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy90aG9uZ2NoYWkvUHJvamVjdHMvcXJkZWUvc3JjL2FwcC9yZWdpc3Rlci1sb2dpc3RpYy9yZWdpc3Rlci1sb2dpc3RpYy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSw0REFBYSxFQUFBIiwiZmlsZSI6InNyYy9hcHAvcmVnaXN0ZXItbG9naXN0aWMvcmVnaXN0ZXItbG9naXN0aWMucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmFwcC1iYWNrZ3JvdW5ke1xyXG5cdCAtLWJhY2tncm91bmQ6IHVybCgnL2Fzc2V0cy9iZzEuanBnJykgMCAwLzEwMCUgMTAwJSBuby1yZXBlYXQ7XHJcbn0iXX0= */"
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3JlZ2lzdGVyLWxvZ2lzdGljL3JlZ2lzdGVyLWxvZ2lzdGljLnBhZ2Uuc2NzcyJ9 */"
 
 /***/ }),
 
@@ -91,37 +91,58 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _shared_register_logistic_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./shared/register-logistic.service */ "./src/app/register-logistic/shared/register-logistic.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 /* harmony import */ var _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../shared/services/toast.service */ "./src/app/shared/services/toast.service.ts");
+/* harmony import */ var _shared_user_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/user.service */ "./src/app/shared/user.service.ts");
+
 
 
 
 
 
 var RegisterLogisticPage = /** @class */ (function () {
-    function RegisterLogisticPage(router, registerService, toastService) {
+    //email:string='';
+    function RegisterLogisticPage(router, registerService, toastService, user) {
         this.router = router;
         this.registerService = registerService;
         this.toastService = toastService;
+        this.user = user;
         this.password = '';
         this.repassword = '';
         this.firstname = '';
         this.lastname = '';
         this.car_number = '';
         this.mobile_number = '';
-        // store_name :string='';
-        this.email = '';
     }
     RegisterLogisticPage.prototype.RegisterLlogistic = function () {
         var _this = this;
-        this.registerService.registerlogistic(this.password, this.firstname, this.lastname, this.mobile_number, this.email, this.car_number).subscribe(function (trn) {
-            console.log(trn);
-            _this.toastService.showToast('ลงทะเบียนสำเร็จแล้ว กรุณาล็อคอิน', 'top');
-            _this.router.navigateByUrl('/login');
+        console.log(this.password, this.repassword, this.firstname, this.lastname, this.car_number, this.mobile_number);
+        if (this.password != this.repassword) {
+            this.toastService.showToast("รหัสผ่านไม่ตรงกัน", 'top');
+            return;
+        }
+        this.registerService.registerlogistic(this.password, this.firstname, this.lastname, this.mobile_number, this.car_number).subscribe(function (rider) {
+            console.log(rider);
+            _this.user.storeUser(rider, 2);
+            var member = _this.user.getMember(); //JSON.parse(localStorage.getItem('member'));
+            if (!member) {
+                var member_1 = {
+                    id: null,
+                    mobile_number: rider.mobile_number,
+                    latitude: 14.8718084,
+                    longitude: 103.4962797,
+                    firstname: rider.firstname,
+                    lastname: rider.lastname
+                };
+                _this.user.storeMember(member_1);
+            }
+            //  this.toastService.showToast('ลงทะเบียนสำเร็จแล้ว กรุณาล็อคอิน', 'top');
+            _this.router.navigateByUrl('/riders');
         });
     };
     RegisterLogisticPage.ctorParameters = function () { return [
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"] },
         { type: _shared_register_logistic_service__WEBPACK_IMPORTED_MODULE_2__["RegisterLogisticService"] },
-        { type: _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_4__["ToastService"] }
+        { type: _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_4__["ToastService"] },
+        { type: _shared_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"] }
     ]; };
     RegisterLogisticPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -131,7 +152,8 @@ var RegisterLogisticPage = /** @class */ (function () {
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["Router"],
             _shared_register_logistic_service__WEBPACK_IMPORTED_MODULE_2__["RegisterLogisticService"],
-            _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_4__["ToastService"]])
+            _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_4__["ToastService"],
+            _shared_user_service__WEBPACK_IMPORTED_MODULE_5__["UserService"]])
     ], RegisterLogisticPage);
     return RegisterLogisticPage;
 }());
@@ -163,19 +185,17 @@ var RegisterLogisticService = /** @class */ (function () {
         this.http = http;
         this.baseUrl = "" + _environments_environment__WEBPACK_IMPORTED_MODULE_3__["environment"].api_url;
     }
-    RegisterLogisticService.prototype.registerlogistic = function (password, firstname, lastname, mobile_number, email, car_number) {
+    RegisterLogisticService.prototype.registerlogistic = function (password, firstname, lastname, mobile_number, car_number) {
         var body = {
             // username : username,
             password: password,
             firstname: firstname,
             lastname: lastname,
             car_number: car_number,
-            mobile_number: mobile_number,
-            // store_name:store_name,
-            email: email,
+            mobile_number: mobile_number
         };
         console.log(body);
-        return this.http.post("https://qrdee.co/api/v1/delivery_register", body);
+        return this.http.post("https://qrdee.co/api/v2/rider", body);
     };
     RegisterLogisticService.ctorParameters = function () { return [
         { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpClient"] }
@@ -222,6 +242,25 @@ var ToastService = /** @class */ (function () {
                             message: message,
                             position: position,
                             duration: 1000,
+                            color: 'dark'
+                        })];
+                    case 1:
+                        toast = _a.sent();
+                        toast.present();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    ToastService.prototype.showLongToast = function (message, position) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var toast;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.toastController.create({
+                            message: message,
+                            position: position,
+                            duration: 30000,
                             color: 'dark'
                         })];
                     case 1:

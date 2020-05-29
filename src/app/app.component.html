@@ -8,8 +8,8 @@
       </ion-header>
       <ion-content>
 
-        <ion-list>
-          <ng-container *ngIf="store">
+        <ion-list *ngIf="user">
+          <ng-container *ngIf="user.store">
             <ion-menu-toggle auto-hide="false" >
               <ion-item (click)="home()">
                 <ion-label>
@@ -21,16 +21,6 @@
                     สินค้าของฉัน
                 </ion-label>
               </ion-item>
-              <!-- <ion-item *ngIf="store.store_type_id == 5" (click)="postproduct()">
-                <ion-label >
-                    นำเข้าสินค้า
-                </ion-label>
-              </ion-item> -->
-              <!-- <ion-item *ngIf="usertype == 3" (click)="postproductimg()">
-                <ion-label >
-                    สั่งสินค้า
-                </ion-label>
-              </ion-item> -->
             <ion-item  (click)="stats()">
               <ion-label>
                 สรุปยอดขาย
@@ -41,46 +31,32 @@
                   จัดการร้านค้า
                 </ion-label>
               </ion-item>
-
-              <!-- <ion-item (click)="logistic()">
-                <ion-label >
-                    ขนส่งสินค้า
-                </ion-label>
-              </ion-item > -->
-
-
-              <!-- <ion-item *ngIf="store.store_type_id == 5" (click)="sell()">
-                <ion-label >
-                    สรุปการขาย
-                </ion-label>
-              </ion-item> -->
-            <!-- <ion-item *ngIf="usertype == 1" (click)="delivery()">
-                <ion-label >
-                    เรียกคนส่งของ
-                </ion-label>
-              </ion-item> -->
-              <!-- <ion-item *ngIf="usertype == 1" (click)="order()">
-                <ion-label >
-                    ออเดอร์สินค้า
-                </ion-label>
-              </ion-item> -->
-
               <ion-item  (click)="customer()">
                 <ion-label>
                     สั่งซื้อสินค้า
                 </ion-label>
               </ion-item>
-
-              <!-- <ion-item (click)="logout()">
-                <ion-label >
-                    ออกจากระบบ
-                </ion-label>
-              </ion-item> -->
-
             </ion-menu-toggle>
           </ng-container>
 
-          <ng-container *ngIf="!store">
+          <ng-container *ngIf="user.rider">
+            <ion-menu-toggle auto-hide="false" >
+              <ion-item  (click)="orderList()">
+                <ion-label>
+                    คำสั่งส่งของ
+                </ion-label>
+              </ion-item>
+
+              <ion-item (click)="customer()">
+                <ion-label >
+                  สั่งซื้อสินค้า
+                </ion-label>
+              </ion-item>
+            </ion-menu-toggle>
+          </ng-container>
+
+
+          <ng-container *ngIf="!user.store && !user.rider">
             <ion-menu-toggle auto-hide="false" >
               <ion-item  (click)="customer()">
                 <ion-label>
@@ -95,6 +71,7 @@
               </ion-item>
             </ion-menu-toggle>
           </ng-container>
+          
         </ion-list>
       </ion-content>
     </ion-menu>

@@ -3,18 +3,30 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
+import { CallNumber } from '@ionic-native/call-number/ngx';
 
 import { RidersPageRoutingModule } from './riders-routing.module';
+import { QRCodeModule } from 'angularx-qrcode';
 
 import { RidersPage } from './riders.page';
-
+import { RoutesComponent } from './routes/routes.component';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RidersPageRoutingModule
+    RidersPageRoutingModule,
+    QRCodeModule
   ],
-  declarations: [RidersPage]
+  declarations: [
+    RidersPage, 
+    RoutesComponent
+  ],
+  entryComponents: [
+    RoutesComponent
+  ],
+  providers: [
+    CallNumber
+  ]
 })
 export class RidersPageModule {}

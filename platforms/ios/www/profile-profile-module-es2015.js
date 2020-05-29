@@ -860,6 +860,17 @@ let ToastService = class ToastService {
             toast.present();
         });
     }
+    showLongToast(message, position) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const toast = yield this.toastController.create({
+                message: message,
+                position: position,
+                duration: 30000,
+                color: 'dark'
+            });
+            toast.present();
+        });
+    }
     showToasts(message, position) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             const toast = yield this.toastController.create({

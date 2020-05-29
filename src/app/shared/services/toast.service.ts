@@ -20,6 +20,16 @@ export class ToastService {
 
     toast.present();
   }
+  async showLongToast(message: string, position: 'top' | 'bottom' | 'middle') {
+    const toast = await this.toastController.create({
+      message: message,
+      position: position,
+      duration: 30000,
+      color: 'dark'
+    });
+
+    toast.present();
+  }
 
 
   async showToasts(message: string, position: 'top' | 'bottom' | 'middle') {

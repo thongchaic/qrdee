@@ -1,5 +1,43 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["customer-customer-module"],{
 
+/***/ "./node_modules/@ionic-native/call-number/ngx/index.js":
+/*!*************************************************************!*\
+  !*** ./node_modules/@ionic-native/call-number/ngx/index.js ***!
+  \*************************************************************/
+/*! exports provided: CallNumber */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CallNumber", function() { return CallNumber; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ionic_native_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic-native/core */ "./node_modules/@ionic-native/core/index.js");
+
+
+
+var CallNumber = /** @class */ (function (_super) {
+    Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__extends"])(CallNumber, _super);
+    function CallNumber() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    CallNumber.prototype.callNumber = function (numberToCall, bypassAppChooser) { return Object(_ionic_native_core__WEBPACK_IMPORTED_MODULE_2__["cordova"])(this, "callNumber", { "callbackOrder": "reverse" }, arguments); };
+    CallNumber.prototype.isCallSupported = function () { return Object(_ionic_native_core__WEBPACK_IMPORTED_MODULE_2__["cordova"])(this, "isCallSupported", {}, arguments); };
+    CallNumber.pluginName = "CallNumber";
+    CallNumber.plugin = "call-number";
+    CallNumber.pluginRef = "plugins.CallNumber";
+    CallNumber.repo = "https://github.com/Rohfosho/CordovaCallNumberPlugin";
+    CallNumber.platforms = ["Android", "iOS"];
+    CallNumber = Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"])([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])()
+    ], CallNumber);
+    return CallNumber;
+}(_ionic_native_core__WEBPACK_IMPORTED_MODULE_2__["IonicNativePlugin"]));
+
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyIuLi8uLi8uLi8uLi8uLi9zcmMvQGlvbmljLW5hdGl2ZS9wbHVnaW5zL2NhbGwtbnVtYmVyL25neC9pbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiO0FBQUEsT0FBTyxFQUFFLFVBQVUsRUFBRSxNQUFNLGVBQWUsQ0FBQztBQUMzQyxPQUFPLDhCQUFzQyxNQUFNLG9CQUFvQixDQUFDOztJQStCeEMsOEJBQWlCOzs7O0lBVS9DLCtCQUFVLGFBQUMsWUFBb0IsRUFBRSxnQkFBeUI7SUFTMUQsb0NBQWU7Ozs7OztJQW5CSixVQUFVO1FBRHRCLFVBQVUsRUFBRTtPQUNBLFVBQVU7cUJBaEN2QjtFQWdDZ0MsaUJBQWlCO1NBQXBDLFVBQVUiLCJzb3VyY2VzQ29udGVudCI6WyJpbXBvcnQgeyBJbmplY3RhYmxlIH0gZnJvbSAnQGFuZ3VsYXIvY29yZSc7XG5pbXBvcnQgeyBDb3Jkb3ZhLCBJb25pY05hdGl2ZVBsdWdpbiwgUGx1Z2luIH0gZnJvbSAnQGlvbmljLW5hdGl2ZS9jb3JlJztcblxuLyoqXG4gKiBAbmFtZSBDYWxsIE51bWJlclxuICogQGRlc2NyaXB0aW9uXG4gKiBDYWxsIGEgbnVtYmVyIGRpcmVjdGx5IGZyb20geW91ciBDb3Jkb3ZhL0lvbmljIGFwcGxpY2F0aW9uLlxuICogKipOT1RFKio6IFRoZSBpT1MgU2ltdWxhdG9yIChhbmQgbWF5YmUgQW5kcm9pZCBTaW11bGF0b3JzKSBkbyBub3QgcHJvdmlkZSBhY2Nlc3MgdG8gdGhlIHBob25lIHN1YnN5c3RlbS5cbiAqXG4gKiBAdXNhZ2VcbiAqIGBgYHR5cGVzY3JpcHRcbiAqIGltcG9ydCB7IENhbGxOdW1iZXIgfSBmcm9tICdAaW9uaWMtbmF0aXZlL2NhbGwtbnVtYmVyL25neCc7XG4gKlxuICogY29uc3RydWN0b3IocHJpdmF0ZSBjYWxsTnVtYmVyOiBDYWxsTnVtYmVyKSB7IH1cbiAqXG4gKiAuLi5cbiAqXG4gKlxuICogdGhpcy5jYWxsTnVtYmVyLmNhbGxOdW1iZXIoXCIxODAwMTAxMDEwMVwiLCB0cnVlKVxuICogICAudGhlbihyZXMgPT4gY29uc29sZS5sb2coJ0xhdW5jaGVkIGRpYWxlciEnLCByZXMpKVxuICogICAuY2F0Y2goZXJyID0+IGNvbnNvbGUubG9nKCdFcnJvciBsYXVuY2hpbmcgZGlhbGVyJywgZXJyKSk7XG4gKlxuICogYGBgXG4gKi9cbkBQbHVnaW4oe1xuICBwbHVnaW5OYW1lOiAnQ2FsbE51bWJlcicsXG4gIHBsdWdpbjogJ2NhbGwtbnVtYmVyJyxcbiAgcGx1Z2luUmVmOiAncGx1Z2lucy5DYWxsTnVtYmVyJyxcbiAgcmVwbzogJ2h0dHBzOi8vZ2l0aHViLmNvbS9Sb2hmb3Noby9Db3Jkb3ZhQ2FsbE51bWJlclBsdWdpbicsXG4gIHBsYXRmb3JtczogWydBbmRyb2lkJywgJ2lPUyddXG59KVxuQEluamVjdGFibGUoKVxuZXhwb3J0IGNsYXNzIENhbGxOdW1iZXIgZXh0ZW5kcyBJb25pY05hdGl2ZVBsdWdpbiB7XG4gIC8qKlxuICAgKiBDYWxscyBhIHBob25lIG51bWJlclxuICAgKiBAcGFyYW0ge3N0cmluZ30gbnVtYmVyVG9DYWxsIFRoZSBwaG9uZSBudW1iZXIgdG8gY2FsbCBhcyBhIHN0cmluZ1xuICAgKiBAcGFyYW0ge2Jvb2xlYW59IGJ5cGFzc0FwcENob29zZXIgU2V0IHRvIHRydWUgdG8gYnlwYXNzIHRoZSBhcHAgY2hvb3NlciBhbmQgZ28gZGlyZWN0bHkgdG8gZGlhbGVyXG4gICAqIEByZXR1cm4ge1Byb21pc2U8YW55Pn1cbiAgICovXG4gIEBDb3Jkb3ZhKHtcbiAgICBjYWxsYmFja09yZGVyOiAncmV2ZXJzZSdcbiAgfSlcbiAgY2FsbE51bWJlcihudW1iZXJUb0NhbGw6IHN0cmluZywgYnlwYXNzQXBwQ2hvb3NlcjogYm9vbGVhbik6IFByb21pc2U8YW55PiB7XG4gICAgcmV0dXJuO1xuICB9XG5cbiAgLyoqXG4gICAqIENoZWNrIGlmIGNhbGwgZmVhdHVyZSBpcyBhdmFpbGFibGVcbiAgICogQHJldHVybiB7UHJvbWlzZTxhbnk+fVxuICAgKi9cbiAgQENvcmRvdmEoKVxuICBpc0NhbGxTdXBwb3J0ZWQoKTogUHJvbWlzZTxhbnk+IHtcbiAgICByZXR1cm47XG4gIH1cbn1cbiJdfQ==
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/index.js!./src/app/customer/cartmodal/cartmodal.component.html":
 /*!***************************************************************************************!*\
   !*** ./node_modules/raw-loader!./src/app/customer/cartmodal/cartmodal.component.html ***!
@@ -300,7 +338,7 @@ CustomerPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".ios ion-footer .toolbar:last-child {\n  padding-bottom: calc(constant(safe-area-inset-bottom) + 4px);\n  padding-bottom: calc(env(safe-area-inset-bottom) + 4px);\n  min-height: calc(44px + constant(safe-area-inset-bottom));\n  min-height: calc(44px + env(safe-area-inset-bottom)); }\n\n.rating-container .ion-button {\n  --padding-start: 4px;\n  --padding-end: 4px; }\n\n.rating-container .ion-button ion-icon {\n    color: gray; }\n\n.rating-container .ion-button ion-icon[ng-reflect-name=\"star\"] {\n    color: #ffb400; }\n\n.footer-center {\n  display: block;\n  margin-left: auto;\n  margin-right: auto; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy90aG9uZ2NoYWkvUHJvamVjdHMvcXJkZWUvc3JjL2FwcC9jdXN0b21lci9jdXN0b21lci5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSw0REFBNEQ7RUFDNUQsdURBQXVEO0VBQ3ZELHlEQUF5RDtFQUN6RCxvREFBb0QsRUFBQTs7QUFHdEQ7RUFDRSxvQkFBZ0I7RUFDaEIsa0JBQWMsRUFBQTs7QUFGaEI7SUFLRyxXQUFXLEVBQUE7O0FBTGQ7SUFTRyxjQUFjLEVBQUE7O0FBR2pCO0VBQ0UsY0FBYztFQUNkLGlCQUFpQjtFQUNqQixrQkFBa0IsRUFBQSIsImZpbGUiOiJzcmMvYXBwL2N1c3RvbWVyL2N1c3RvbWVyLnBhZ2Uuc2NzcyIsInNvdXJjZXNDb250ZW50IjpbIi5pb3MgaW9uLWZvb3RlciAudG9vbGJhcjpsYXN0LWNoaWxkIHtcclxuICBwYWRkaW5nLWJvdHRvbTogY2FsYyhjb25zdGFudChzYWZlLWFyZWEtaW5zZXQtYm90dG9tKSArIDRweCk7XHJcbiAgcGFkZGluZy1ib3R0b206IGNhbGMoZW52KHNhZmUtYXJlYS1pbnNldC1ib3R0b20pICsgNHB4KTtcclxuICBtaW4taGVpZ2h0OiBjYWxjKDQ0cHggKyBjb25zdGFudChzYWZlLWFyZWEtaW5zZXQtYm90dG9tKSk7XHJcbiAgbWluLWhlaWdodDogY2FsYyg0NHB4ICsgZW52KHNhZmUtYXJlYS1pbnNldC1ib3R0b20pKTtcclxufVxyXG5cclxuLnJhdGluZy1jb250YWluZXIgLmlvbi1idXR0b24ge1xyXG5cdFx0LS1wYWRkaW5nLXN0YXJ0OiA0cHg7XHJcblx0XHQtLXBhZGRpbmctZW5kOiA0cHg7XHJcblxyXG5cdFx0aW9uLWljb24ge1xyXG5cdFx0XHRjb2xvcjogZ3JheTtcclxuXHRcdH1cclxuXHJcblx0XHRpb24taWNvbltuZy1yZWZsZWN0LW5hbWU9XCJzdGFyXCJdIHtcclxuXHRcdFx0Y29sb3I6ICNmZmI0MDA7XHJcblx0XHR9XHJcbn1cclxuLmZvb3Rlci1jZW50ZXIge1xyXG4gIGRpc3BsYXk6IGJsb2NrO1xyXG4gIG1hcmdpbi1sZWZ0OiBhdXRvO1xyXG4gIG1hcmdpbi1yaWdodDogYXV0bztcclxufVxyXG4iXX0= */"
+module.exports = ".ios ion-footer .toolbar:last-child {\n  padding-bottom: calc(constant(safe-area-inset-bottom) + 4px);\n  padding-bottom: calc(env(safe-area-inset-bottom) + 4px);\n  min-height: calc(44px + constant(safe-area-inset-bottom));\n  min-height: calc(44px + env(safe-area-inset-bottom)); }\n\n.rating-container .ion-button {\n  --padding-start: 4px;\n  --padding-end: 4px; }\n\n.rating-container .ion-button ion-icon {\n    color: gray; }\n\n.rating-container .ion-button ion-icon[ng-reflect-name=\"star\"] {\n    color: #ffb400; }\n\n.footer-center {\n  display: block;\n  margin-left: auto;\n  margin-right: auto; }\n\nion-card, card-ios, card-md {\n  margin-top: 4px  !important;\n  margin-bottom: 4px !important; }\n\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi9Vc2Vycy90aG9uZ2NoYWkvUHJvamVjdHMvcXJkZWUvc3JjL2FwcC9jdXN0b21lci9jdXN0b21lci5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRSw0REFBNEQ7RUFDNUQsdURBQXVEO0VBQ3ZELHlEQUF5RDtFQUN6RCxvREFBb0QsRUFBQTs7QUFHdEQ7RUFDRSxvQkFBZ0I7RUFDaEIsa0JBQWMsRUFBQTs7QUFGaEI7SUFLRyxXQUFXLEVBQUE7O0FBTGQ7SUFTRyxjQUFjLEVBQUE7O0FBR2pCO0VBQ0UsY0FBYztFQUNkLGlCQUFpQjtFQUNqQixrQkFBa0IsRUFBQTs7QUFHcEI7RUFDQywyQkFBMkI7RUFDM0IsNkJBQTZCLEVBQUEiLCJmaWxlIjoic3JjL2FwcC9jdXN0b21lci9jdXN0b21lci5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuaW9zIGlvbi1mb290ZXIgLnRvb2xiYXI6bGFzdC1jaGlsZCB7XHJcbiAgcGFkZGluZy1ib3R0b206IGNhbGMoY29uc3RhbnQoc2FmZS1hcmVhLWluc2V0LWJvdHRvbSkgKyA0cHgpO1xyXG4gIHBhZGRpbmctYm90dG9tOiBjYWxjKGVudihzYWZlLWFyZWEtaW5zZXQtYm90dG9tKSArIDRweCk7XHJcbiAgbWluLWhlaWdodDogY2FsYyg0NHB4ICsgY29uc3RhbnQoc2FmZS1hcmVhLWluc2V0LWJvdHRvbSkpO1xyXG4gIG1pbi1oZWlnaHQ6IGNhbGMoNDRweCArIGVudihzYWZlLWFyZWEtaW5zZXQtYm90dG9tKSk7XHJcbn1cclxuXHJcbi5yYXRpbmctY29udGFpbmVyIC5pb24tYnV0dG9uIHtcclxuXHRcdC0tcGFkZGluZy1zdGFydDogNHB4O1xyXG5cdFx0LS1wYWRkaW5nLWVuZDogNHB4O1xyXG5cclxuXHRcdGlvbi1pY29uIHtcclxuXHRcdFx0Y29sb3I6IGdyYXk7XHJcblx0XHR9XHJcblxyXG5cdFx0aW9uLWljb25bbmctcmVmbGVjdC1uYW1lPVwic3RhclwiXSB7XHJcblx0XHRcdGNvbG9yOiAjZmZiNDAwO1xyXG5cdFx0fVxyXG59XHJcbi5mb290ZXItY2VudGVyIHtcclxuICBkaXNwbGF5OiBibG9jaztcclxuICBtYXJnaW4tbGVmdDogYXV0bztcclxuICBtYXJnaW4tcmlnaHQ6IGF1dG87XHJcbn1cclxuXHJcbmlvbi1jYXJkLCBjYXJkLWlvcywgY2FyZC1tZCB7XHJcblx0bWFyZ2luLXRvcDogNHB4ICAhaW1wb3J0YW50O1xyXG5cdG1hcmdpbi1ib3R0b206IDRweCAhaW1wb3J0YW50O1xyXG5cdC8vbWFyZ2luLWxlZnQ6IDBweCAhaW1wb3J0YW50O1xyXG5cdC8vbWFyZ2luLXJpZ2h0OiAwcHggIWltcG9ydGFudDtcclxufVxyXG4iXX0= */"
 
 /***/ }),
 

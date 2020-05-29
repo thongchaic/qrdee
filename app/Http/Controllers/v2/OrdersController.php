@@ -128,6 +128,8 @@ class OrdersController extends Controller
                 ->update([
                     'requested_at' => Carbon::now()
                 ]);
+
+            Mqtt::ConnectAndPublish( '/qrdee/riders/broadcast' ,  1 );
             return response()->json( $order );
     
         }

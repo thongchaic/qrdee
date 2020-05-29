@@ -7,6 +7,7 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
 
 import { RidersPageRoutingModule } from './riders-routing.module';
 import { QRCodeModule } from 'angularx-qrcode';
+import { IonicMqttModule, MQTTService } from 'ionic-mqtt';
 
 import { RidersPage } from './riders.page';
 import { RoutesComponent } from './routes/routes.component';
@@ -26,6 +27,7 @@ import { RoutesComponent } from './routes/routes.component';
     RoutesComponent
   ],
   providers: [
+    MQTTService,
     CallNumber
   ]
 })

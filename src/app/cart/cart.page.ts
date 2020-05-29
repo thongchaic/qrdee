@@ -227,8 +227,6 @@ removeFromCart(product) {
   this.getCart();
 }
 onKeyUp(event){
-
-
   this.cartService.clearCart();
   this.getCart();
   this.price = event.target.value;
@@ -247,23 +245,18 @@ deleteOrder(member_id){
       {
         text: 'ยกเลิก',
          handler: () => {
-
            this.getOrders();
-
           },
         role: 'cancel',
       },
       {
         text: 'ตกลง',
-
         handler: () => {
-
             this.cartService.deleteOrder(this.store.id,member_id).subscribe((data:any)=>{
               this.getOrders();
             },err=>{
               //alert(JSON.stringify(err));
             });
-
           }
         }
       ]
@@ -308,11 +301,8 @@ deleteOrder(member_id){
         });
       }if(status.data == 2){
 
-
-
           console.log("Find riders.....");
           setTimeout(()=>{
-
             this.cartService.getOrders(this.store.id).subscribe((data:any)=>{
               console.log(data);
               data.forEach(e => {
@@ -321,18 +311,14 @@ deleteOrder(member_id){
                      console.log("incompleted !! ",oo.id);
                      this.cancelRequest(oo.id);
                     // alert(`สินค้า ${oo.product.product_th} ไม่มีผู้รับส่งสินค้า ลองใหม่อีกครั้ง `);//
-                     this.toastService.showLongToast(`สินค้า ${oo.product.product_th} ไม่มีใครรับส่งสินค้า ลองใหม่อีกครั้ง `,'top');
+                     this.toastService.showLongToast(`${oo.product.product_th} ไม่มีการตอบรับส่งสินค้า`,'top');
                    }
                  });
-
               });
 
             }, err=>{
             });
-
-          } , 60000);
-
-
+          } , 240000);//
       }
     });
     return await modal.present();
@@ -390,7 +376,6 @@ deleteOrder(member_id){
       console.log("product_code",product_code);
 
       this.productService.getByProductCode(product_code).subscribe(product => {
-
         if(product.instock === 0) {
           this.toastService.showToast(`สินค้า ${product.product_th} ไม่มีในสต๊อคสินค้า`, 'top')
         }else{
@@ -399,7 +384,6 @@ deleteOrder(member_id){
           this.getCart()
         }
      });
-
 }
 
 
@@ -445,12 +429,12 @@ deleteOrder(member_id){
 
 
 
-getProduc() {
-  this.productService.getAll().subscribe(resp => {
-    this.product_all = resp.products.data;
-    console.log('product_all',this.product_all);
-  });
-}
+  getProduc() {
+    this.productService.getAll().subscribe(resp => {
+      this.product_all = resp.products.data;
+      console.log('product_all',this.product_all);
+    });
+  }
 
 // letScan(product_code){
 //     this.barcodeScanner.scan().then(barcodeData =>{

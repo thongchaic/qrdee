@@ -521,13 +521,13 @@ let CartPage = class CartPage {
                                         console.log("incompleted !! ", oo.id);
                                         this.cancelRequest(oo.id);
                                         // alert(`สินค้า ${oo.product.product_th} ไม่มีผู้รับส่งสินค้า ลองใหม่อีกครั้ง `);//
-                                        this.toastService.showLongToast(`สินค้า ${oo.product.product_th} ไม่มีใครรับส่งสินค้า ลองใหม่อีกครั้ง `, 'top');
+                                        this.toastService.showLongToast(`${oo.product.product_th} ไม่มีการตอบรับส่งสินค้า`, 'top');
                                     }
                                 });
                             });
                         }, err => {
                         });
-                    }, 60000);
+                    }, 240000); //
                 }
             });
             return yield modal.present();
@@ -742,6 +742,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _qrmodal_qrmodal_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../qrmodal/qrmodal.component */ "./src/app/cart/qrmodal/qrmodal.component.ts");
 /* harmony import */ var src_app_shared_services_transaction_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/shared/services/transaction.service */ "./src/app/shared/services/transaction.service.ts");
 /* harmony import */ var _shared_cart_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../shared/cart.service */ "./src/app/cart/shared/cart.service.ts");
+/* harmony import */ var _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../shared/services/toast.service */ "./src/app/shared/services/toast.service.ts");
+
 
 
 
@@ -753,7 +755,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let DvrmodalComponent = class DvrmodalComponent {
-    constructor(router, alertService, geolocation, modalController, cartService, transactionService, route) {
+    constructor(router, alertService, geolocation, modalController, cartService, transactionService, route, _toast) {
         this.router = router;
         this.alertService = alertService;
         this.geolocation = geolocation;
@@ -761,6 +763,7 @@ let DvrmodalComponent = class DvrmodalComponent {
         this.cartService = cartService;
         this.transactionService = transactionService;
         this.route = route;
+        this._toast = _toast;
         this.latitude = 14.8718084;
         this.longitude = 103.4962797;
         this.mylatitude = 14.8718084;
@@ -850,6 +853,7 @@ let DvrmodalComponent = class DvrmodalComponent {
     callRider() {
         this.cartService.callRider(this.store.id, this.order.member_id).subscribe((data) => {
             console.log(data);
+            this._toast.showToast("เรียกคนส่งสินค้าแล้ว", 'top');
             this.closeModal(2);
         }, err => {
         });
@@ -870,7 +874,8 @@ DvrmodalComponent.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"] },
     { type: _shared_cart_service__WEBPACK_IMPORTED_MODULE_8__["CartService"] },
     { type: src_app_shared_services_transaction_service__WEBPACK_IMPORTED_MODULE_7__["TransactionService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"] },
+    { type: _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_9__["ToastService"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('map', { static: false }),
@@ -892,7 +897,8 @@ DvrmodalComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"],
         _shared_cart_service__WEBPACK_IMPORTED_MODULE_8__["CartService"],
         src_app_shared_services_transaction_service__WEBPACK_IMPORTED_MODULE_7__["TransactionService"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"]])
+        _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"],
+        _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_9__["ToastService"]])
 ], DvrmodalComponent);
 
 

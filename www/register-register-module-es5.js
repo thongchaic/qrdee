@@ -418,10 +418,19 @@ var ToastService = /** @class */ (function () {
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.toastController.create({
+                            header: 'ไม่มีผู้ตอบรับส่งสินค้า',
                             message: message,
-                            position: position,
-                            duration: 30000,
-                            color: 'dark'
+                            color: 'dark',
+                            position: 'top',
+                            buttons: [
+                                {
+                                    text: 'ปิด',
+                                    role: 'cancel',
+                                    handler: function () {
+                                        console.log('Cancel clicked');
+                                    }
+                                }
+                            ]
                         })];
                     case 1:
                         toast = _a.sent();

@@ -8,6 +8,7 @@ import { NavController, LoadingController, ToastController } from '@ionic/angula
 import { QrmodalComponent } from '../qrmodal/qrmodal.component';
 import { TransactionService } from 'src/app/shared/services/transaction.service';
 import { CartService } from '../shared/cart.service';
+import { ToastService } from '../../shared/services/toast.service';
 
 
 declare var google;
@@ -38,7 +39,8 @@ export class DvrmodalComponent {
     private modalController: ModalController,
     private cartService: CartService,
     private transactionService: TransactionService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _toast: ToastService
   ) {
 
     this.store = JSON.parse(localStorage.getItem('store'));
@@ -140,6 +142,7 @@ export class DvrmodalComponent {
   callRider(){
     this.cartService.callRider(this.store.id, this.order.member_id ).subscribe((data:any)=>{
       console.log(data);
+      this._toast.showToast("เรียกคนส่งสินค้าแล้ว",'top');
       this.closeModal(2);
 
     }, err=>{

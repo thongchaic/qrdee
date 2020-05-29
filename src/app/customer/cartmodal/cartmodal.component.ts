@@ -120,7 +120,6 @@ export class CartmodalComponent implements OnInit {
 
   }
 
-
   startPayment(){
     // process &
     this.closeModal(3);

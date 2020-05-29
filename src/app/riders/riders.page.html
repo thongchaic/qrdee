@@ -29,7 +29,7 @@
         </ion-thumbnail>
       </ion-col>
   
-      <ion-col size="6" style="line-height: 10px;" (click)="viewOrder(product);">
+      <ion-col size="6" style="line-height: 10px;" (click)="viewOrder(order);">
         <p no-padding>ร้าน {{ order.store.store_name }} </p>
         <small no-padding>ค่าส่ง <ion-badge color="danger">{{ order.store.delivery_price | number }} บาท</ion-badge></small><br>
         <small no-padding>ระยะทาง {{ order.distance | number }} กม. </small><br>

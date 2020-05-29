@@ -162,8 +162,6 @@ export class AppComponent implements OnInit {
         this.event.publish('store:orders',message);
 
       }
-
-
     }catch(e){
       console.log('.e');
       console.log(e);

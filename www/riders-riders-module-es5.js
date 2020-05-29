@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header translucent>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>คำขอให้ส่งสินค้า</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n\n\n  <ion-item lines=\"none\">\n    <ion-button size=\"small\" slot=\"end\" icon-only expand=\"block\" (click)=\"loadRiderOrders()\">\n      <ion-icon  color=\"success\"  name=\"refresh\" ></ion-icon>\n    </ion-button>\n  </ion-item>\n\n\n\n\n  <ion-card  no-margin no-padding *ngFor=\"let order of orders\"  >\n    <ion-row>\n      <ion-col size=\"2\" (click)=\"viewOrder(order);\">\n        <ion-thumbnail style=\"height: 100%; width: 100%; border-radius: 2px;\">\n          <img *ngIf=\"order.store.store_pic\" [src]=\"'https://qrdee.co/app/'+order.store.store_pic\" style=\"height: 100%; width: 100%; border-radius: 4px;\">\n          <img *ngIf=\"!order.store.store_pic\" src=\"/assets/noimg.png\" style=\"height: 100%; width: 100%; border-radius: 4px;\">\n        </ion-thumbnail>\n      </ion-col>\n  \n      <ion-col size=\"6\" style=\"line-height: 10px;\" (click)=\"viewOrder(product);\">\n        <p no-padding>ร้าน {{ order.store.store_name }} </p>\n        <small no-padding>ค่าส่ง <ion-badge color=\"danger\">{{ order.store.delivery_price | number }} บาท</ion-badge></small><br>\n        <small no-padding>ระยะทาง {{ order.distance | number }} กม. </small><br>\n        <small *ngIf=\"order.items.length>0\" no-padding>เมื่อ {{ order.items[0].requested_at }}</small><br>\n\n      </ion-col>\n      <ion-col size=\"4\"><br>\n        <ion-button icon-only (click)=\"acceptOrder(order)\">\n          <ion-icon slot=\"icon-only\" size=\"small\" clear expand=\"block\" name=\"bicycle\"></ion-icon>\n        </ion-button>\n        <ion-button  (click)=\"viewOrder(order)\">\n          <ion-icon slot=\"icon-only\" size=\"small\" color=\"success\" expand=\"block\" name=\"eye\" ></ion-icon>\n        </ion-button>\n      </ion-col>\n    </ion-row>\n  </ion-card>\n\n\n\n\n\n\n</ion-content>\n"
+module.exports = "<ion-header translucent>\n  <ion-toolbar>\n    <ion-buttons slot=\"start\">\n      <ion-menu-button></ion-menu-button>\n    </ion-buttons>\n    <ion-title>คำขอให้ส่งสินค้า</ion-title>\n  </ion-toolbar>\n</ion-header>\n\n<ion-content>\n\n\n\n  <ion-item lines=\"none\">\n    <ion-button size=\"small\" slot=\"end\" icon-only expand=\"block\" (click)=\"loadRiderOrders()\">\n      <ion-icon  color=\"success\"  name=\"refresh\" ></ion-icon>\n    </ion-button>\n  </ion-item>\n\n\n\n\n  <ion-card  no-margin no-padding *ngFor=\"let order of orders\"  >\n    <ion-row>\n      <ion-col size=\"2\" (click)=\"viewOrder(order);\">\n        <ion-thumbnail style=\"height: 100%; width: 100%; border-radius: 2px;\">\n          <img *ngIf=\"order.store.store_pic\" [src]=\"'https://qrdee.co/app/'+order.store.store_pic\" style=\"height: 100%; width: 100%; border-radius: 4px;\">\n          <img *ngIf=\"!order.store.store_pic\" src=\"/assets/noimg.png\" style=\"height: 100%; width: 100%; border-radius: 4px;\">\n        </ion-thumbnail>\n      </ion-col>\n  \n      <ion-col size=\"6\" style=\"line-height: 10px;\" (click)=\"viewOrder(order);\">\n        <p no-padding>ร้าน {{ order.store.store_name }} </p>\n        <small no-padding>ค่าส่ง <ion-badge color=\"danger\">{{ order.store.delivery_price | number }} บาท</ion-badge></small><br>\n        <small no-padding>ระยะทาง {{ order.distance | number }} กม. </small><br>\n        <small *ngIf=\"order.items.length>0\" no-padding>เมื่อ {{ order.items[0].requested_at }}</small><br>\n\n      </ion-col>\n      <ion-col size=\"4\"><br>\n        <ion-button icon-only (click)=\"acceptOrder(order)\">\n          <ion-icon slot=\"icon-only\" size=\"small\" clear expand=\"block\" name=\"bicycle\"></ion-icon>\n        </ion-button>\n        <ion-button  (click)=\"viewOrder(order)\">\n          <ion-icon slot=\"icon-only\" size=\"small\" color=\"success\" expand=\"block\" name=\"eye\" ></ion-icon>\n        </ion-button>\n      </ion-col>\n    </ion-row>\n  </ion-card>\n\n\n\n\n\n\n</ion-content>\n"
 
 /***/ }),
 
@@ -127,8 +127,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/call-number/ngx */ "./node_modules/@ionic-native/call-number/ngx/index.js");
 /* harmony import */ var _riders_routing_module__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./riders-routing.module */ "./src/app/riders/riders-routing.module.ts");
 /* harmony import */ var angularx_qrcode__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! angularx-qrcode */ "./node_modules/angularx-qrcode/dist/index.js");
-/* harmony import */ var _riders_page__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./riders.page */ "./src/app/riders/riders.page.ts");
-/* harmony import */ var _routes_routes_component__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./routes/routes.component */ "./src/app/riders/routes/routes.component.ts");
+/* harmony import */ var ionic_mqtt__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ionic-mqtt */ "./node_modules/ionic-mqtt/dist/index.js");
+/* harmony import */ var _riders_page__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./riders.page */ "./src/app/riders/riders.page.ts");
+/* harmony import */ var _routes_routes_component__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./routes/routes.component */ "./src/app/riders/routes/routes.component.ts");
+
 
 
 
@@ -152,13 +154,14 @@ var RidersPageModule = /** @class */ (function () {
                 angularx_qrcode__WEBPACK_IMPORTED_MODULE_7__["QRCodeModule"]
             ],
             declarations: [
-                _riders_page__WEBPACK_IMPORTED_MODULE_8__["RidersPage"],
-                _routes_routes_component__WEBPACK_IMPORTED_MODULE_9__["RoutesComponent"]
+                _riders_page__WEBPACK_IMPORTED_MODULE_9__["RidersPage"],
+                _routes_routes_component__WEBPACK_IMPORTED_MODULE_10__["RoutesComponent"]
             ],
             entryComponents: [
-                _routes_routes_component__WEBPACK_IMPORTED_MODULE_9__["RoutesComponent"]
+                _routes_routes_component__WEBPACK_IMPORTED_MODULE_10__["RoutesComponent"]
             ],
             providers: [
+                ionic_mqtt__WEBPACK_IMPORTED_MODULE_8__["MQTTService"],
                 _ionic_native_call_number_ngx__WEBPACK_IMPORTED_MODULE_5__["CallNumber"]
             ]
         })
@@ -198,6 +201,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _routes_routes_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./routes/routes.component */ "./src/app/riders/routes/routes.component.ts");
 /* harmony import */ var _shared_services_alert_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../shared/services/alert.service */ "./src/app/shared/services/alert.service.ts");
 /* harmony import */ var _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../shared/services/toast.service */ "./src/app/shared/services/toast.service.ts");
+/* harmony import */ var ionic_mqtt__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ionic-mqtt */ "./node_modules/ionic-mqtt/dist/index.js");
+/* harmony import */ var uuid__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! uuid */ "./node_modules/uuid/dist/esm-browser/index.js");
+
+
 
 
 
@@ -207,18 +214,60 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var RidersPage = /** @class */ (function () {
-    function RidersPage(rider, _loading, _modal, _alert, _toast) {
+    function RidersPage(rider, _loading, _modal, _alert, _toast, mqttService) {
         this.rider = rider;
         this._loading = _loading;
         this._modal = _modal;
         this._alert = _alert;
         this._toast = _toast;
+        this.mqttService = mqttService;
         this.orders = [];
+        this.isView = false;
     }
     RidersPage.prototype.ngOnInit = function () {
+        //'/qrdee/riders/broadcast'
     };
     RidersPage.prototype.ionViewDidEnter = function () {
+        this.mqttConnect();
         this.loadRiderOrders();
+    };
+    RidersPage.prototype.mqttConnect = function () {
+        var _this = this;
+        if (this._mqttClient == null) {
+            var TOPIC = [];
+            var MQTT_CONFIG = {
+                host: "qrdee.co",
+                port: 9001,
+                username: "miot",
+                password: "SrruMIoT@2019",
+                protocol: "ws",
+                path: "/ws",
+                clientId: Object(uuid__WEBPACK_IMPORTED_MODULE_8__["v4"])()
+            };
+            TOPIC = ["/qrdee/riders/broadcast"];
+            console.log("Connecting to mqtt....", TOPIC);
+            console.log(MQTT_CONFIG);
+            try {
+                this._mqttClient = this.mqttService.loadingMqtt(function (lost) {
+                    _this._onConnectionLost(lost);
+                }, function (arrived) {
+                    _this._onMessageArrived(arrived);
+                }, TOPIC, MQTT_CONFIG);
+            }
+            catch (ee) {
+                console.log("MQTT connect errr....");
+                this._mqttClient = null;
+            }
+        }
+    };
+    RidersPage.prototype._onMessageArrived = function (message) {
+        console.log(message);
+        if (!this.isView) {
+            this.loadRiderOrders();
+        }
+    };
+    RidersPage.prototype._onConnectionLost = function (resp) {
+        this._mqttClient == null;
     };
     RidersPage.prototype.loadRiderOrders = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
@@ -226,7 +275,9 @@ var RidersPage = /** @class */ (function () {
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this._loading.create()];
+                    case 0:
+                        this.mqttConnect();
+                        return [4 /*yield*/, this._loading.create()];
                     case 1:
                         loading = _a.sent();
                         return [4 /*yield*/, loading.present()];
@@ -291,17 +342,20 @@ var RidersPage = /** @class */ (function () {
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
-                    case 0: return [4 /*yield*/, this._modal.create({
-                            component: _routes_routes_component__WEBPACK_IMPORTED_MODULE_4__["RoutesComponent"],
-                            componentProps: {
-                                'order': order,
-                                'type': type
-                            }
-                        })];
+                    case 0:
+                        this.isView = true;
+                        return [4 /*yield*/, this._modal.create({
+                                component: _routes_routes_component__WEBPACK_IMPORTED_MODULE_4__["RoutesComponent"],
+                                componentProps: {
+                                    'order': order,
+                                    'type': type
+                                }
+                            })];
                     case 1:
                         modal = _a.sent();
                         modal.onDidDismiss()
                             .then(function (status) {
+                            _this.isView = false;
                             _this.loadRiderOrders();
                         });
                         return [4 /*yield*/, modal.present()];
@@ -315,7 +369,8 @@ var RidersPage = /** @class */ (function () {
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"] },
         { type: _shared_services_alert_service__WEBPACK_IMPORTED_MODULE_5__["AlertService"] },
-        { type: _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_6__["ToastService"] }
+        { type: _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_6__["ToastService"] },
+        { type: ionic_mqtt__WEBPACK_IMPORTED_MODULE_7__["MQTTService"] }
     ]; };
     RidersPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -327,7 +382,8 @@ var RidersPage = /** @class */ (function () {
             _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"],
             _shared_services_alert_service__WEBPACK_IMPORTED_MODULE_5__["AlertService"],
-            _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_6__["ToastService"]])
+            _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_6__["ToastService"],
+            ionic_mqtt__WEBPACK_IMPORTED_MODULE_7__["MQTTService"]])
     ], RidersPage);
     return RidersPage;
 }());
@@ -577,10 +633,19 @@ var ToastService = /** @class */ (function () {
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.toastController.create({
+                            header: 'ไม่มีผู้ตอบรับส่งสินค้า',
                             message: message,
-                            position: position,
-                            duration: 30000,
-                            color: 'dark'
+                            color: 'dark',
+                            position: 'top',
+                            buttons: [
+                                {
+                                    text: 'ปิด',
+                                    role: 'cancel',
+                                    handler: function () {
+                                        console.log('Cancel clicked');
+                                    }
+                                }
+                            ]
                         })];
                     case 1:
                         toast = _a.sent();

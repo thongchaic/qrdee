@@ -566,13 +566,13 @@ var CartPage = /** @class */ (function () {
                                                     console.log("incompleted !! ", oo.id);
                                                     _this.cancelRequest(oo.id);
                                                     // alert(`สินค้า ${oo.product.product_th} ไม่มีผู้รับส่งสินค้า ลองใหม่อีกครั้ง `);//
-                                                    _this.toastService.showLongToast("\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32 " + oo.product.product_th + " \u0E44\u0E21\u0E48\u0E21\u0E35\u0E43\u0E04\u0E23\u0E23\u0E31\u0E1A\u0E2A\u0E48\u0E07\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32 \u0E25\u0E2D\u0E07\u0E43\u0E2B\u0E21\u0E48\u0E2D\u0E35\u0E01\u0E04\u0E23\u0E31\u0E49\u0E07 ", 'top');
+                                                    _this.toastService.showLongToast(oo.product.product_th + " \u0E44\u0E21\u0E48\u0E21\u0E35\u0E01\u0E32\u0E23\u0E15\u0E2D\u0E1A\u0E23\u0E31\u0E1A\u0E2A\u0E48\u0E07\u0E2A\u0E34\u0E19\u0E04\u0E49\u0E32", 'top');
                                                 }
                                             });
                                         });
                                     }, function (err) {
                                     });
-                                }, 60000);
+                                }, 240000); //
                             }
                         });
                         return [4 /*yield*/, modal.present()];
@@ -794,6 +794,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _qrmodal_qrmodal_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../qrmodal/qrmodal.component */ "./src/app/cart/qrmodal/qrmodal.component.ts");
 /* harmony import */ var src_app_shared_services_transaction_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! src/app/shared/services/transaction.service */ "./src/app/shared/services/transaction.service.ts");
 /* harmony import */ var _shared_cart_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../shared/cart.service */ "./src/app/cart/shared/cart.service.ts");
+/* harmony import */ var _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../shared/services/toast.service */ "./src/app/shared/services/toast.service.ts");
+
 
 
 
@@ -805,7 +807,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var DvrmodalComponent = /** @class */ (function () {
-    function DvrmodalComponent(router, alertService, geolocation, modalController, cartService, transactionService, route) {
+    function DvrmodalComponent(router, alertService, geolocation, modalController, cartService, transactionService, route, _toast) {
         this.router = router;
         this.alertService = alertService;
         this.geolocation = geolocation;
@@ -813,6 +815,7 @@ var DvrmodalComponent = /** @class */ (function () {
         this.cartService = cartService;
         this.transactionService = transactionService;
         this.route = route;
+        this._toast = _toast;
         this.latitude = 14.8718084;
         this.longitude = 103.4962797;
         this.mylatitude = 14.8718084;
@@ -914,6 +917,7 @@ var DvrmodalComponent = /** @class */ (function () {
         var _this = this;
         this.cartService.callRider(this.store.id, this.order.member_id).subscribe(function (data) {
             console.log(data);
+            _this._toast.showToast("เรียกคนส่งสินค้าแล้ว", 'top');
             _this.closeModal(2);
         }, function (err) {
         });
@@ -940,7 +944,8 @@ var DvrmodalComponent = /** @class */ (function () {
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"] },
         { type: _shared_cart_service__WEBPACK_IMPORTED_MODULE_8__["CartService"] },
         { type: src_app_shared_services_transaction_service__WEBPACK_IMPORTED_MODULE_7__["TransactionService"] },
-        { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"] }
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"] },
+        { type: _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_9__["ToastService"] }
     ]; };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('map', { static: false }),
@@ -962,7 +967,8 @@ var DvrmodalComponent = /** @class */ (function () {
             _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"],
             _shared_cart_service__WEBPACK_IMPORTED_MODULE_8__["CartService"],
             src_app_shared_services_transaction_service__WEBPACK_IMPORTED_MODULE_7__["TransactionService"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_5__["ActivatedRoute"],
+            _shared_services_toast_service__WEBPACK_IMPORTED_MODULE_9__["ToastService"]])
     ], DvrmodalComponent);
     return DvrmodalComponent;
 }());

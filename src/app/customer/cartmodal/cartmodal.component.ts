@@ -5,6 +5,8 @@ import { ToastService } from '../../shared/services/toast.service';
 import { AlertController } from '@ionic/angular';
 import { FormControl } from '@angular/forms';
 import { CustomerService } from '../shared/customer.service';
+import { TranslateService } from '@ngx-translate/core';
+import { StoreLocationComponent } from '../store-location/store-location.component';
 
 
 @Component({
@@ -28,7 +30,8 @@ export class CartmodalComponent implements OnInit {
     private toastService: ToastService,
     private event : Events,
     private modalController: ModalController,
-    public alertController: AlertController
+    public alertController: AlertController,
+    private _translate: TranslateService
   ) {
     console.log(this.store);
     this.member_cart =  JSON.parse(localStorage.getItem('member_cart'));
@@ -144,6 +147,17 @@ export class CartmodalComponent implements OnInit {
 
   async closeModal(status) {
     await this.modalController.dismiss(status);
+  }
+
+  async storeLocation() {
+    const modal = await this.modalController.create({
+      component: StoreLocationComponent,
+      componentProps: {
+        'latitude': this.store.latitude,
+        'longitude': this.store.longitude,
+      }
+    });
+    return await modal.present();
   }
 
 }

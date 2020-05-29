@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { DeliveryPageRoutingModule } from './delivery-routing.module';
+import { SettingPageRoutingModule } from './setting-routing.module';
 
-import { DeliveryPage } from './delivery.page';
+import { SettingPage } from './setting.page';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
@@ -14,9 +14,9 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     FormsModule,
     IonicModule,
-    DeliveryPageRoutingModule,
-    TranslateModule.forChild()
+    SettingPageRoutingModule,    
+    TranslateModule.forChild(),
   ],
-  declarations: [DeliveryPage]
+  declarations: [SettingPage]
 })
-export class DeliveryPageModule {}
+export class SettingPageModule {}

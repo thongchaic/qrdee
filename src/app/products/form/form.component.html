@@ -5,7 +5,7 @@
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
  -->
-    <ion-title>แก้ไขข้อมูล</ion-title>
+    <ion-title>{{ 'productsPage.form.edit' | translate }}</ion-title>
     <ion-buttons slot="end">
       <ion-back-button  color="danger"  defaultHref="products"></ion-back-button>
     </ion-buttons>
@@ -27,23 +27,33 @@
         </ion-item>
         <ion-grid>
           <ion-row justify-content-center>
-            <ion-button size="small" color="primary" (click)="getPicture()">ถ่ายรูปสินค้า</ion-button>
-            <ion-button size="small" color="secondary" (click)="selectPictures();">เลือกจากอัลบั้ม</ion-button>
+            <ion-button size="small" color="primary" (click)="getPicture()">{{ 'productsPage.form.takePhoto' | translate }}</ion-button>
+            <ion-button size="small" color="secondary" (click)="selectPictures();">{{ 'productsPage.form.selectPhoto' | translate }}</ion-button>
           </ion-row>
         </ion-grid>
       </ion-item-group>
       <ion-item>
-        <ion-label color="primary" position="stacked">ชื่อสินค้า</ion-label>
+        <ion-label color="primary" position="stacked">{{ 'productsPage.form.thName' | translate }}</ion-label>
         <ion-input type="text"  formControlName="product_th"></ion-input>
       </ion-item>
 
       <ion-item>
-        <ion-label color="primary" position="stacked">รายละเอียดสินค้า</ion-label>
+        <ion-label color="primary" position="stacked">{{ 'productsPage.form.thDes' | translate }}</ion-label>
         <ion-textarea  formControlName="details_th"></ion-textarea>
       </ion-item>
 
       <ion-item>
-        <ion-label color="primary" position="stacked">หมวดหมู่สินค้า</ion-label>
+        <ion-label color="primary" position="stacked">{{ 'productsPage.form.enName' | translate }}</ion-label>
+        <ion-input type="text"  formControlName="product_en"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" position="stacked">{{ 'productsPage.form.enDes' | translate }}</ion-label>
+        <ion-textarea  formControlName="details_en"></ion-textarea>
+      </ion-item>
+
+      <ion-item>
+        <ion-label color="primary" position="stacked">{{ 'productsPage.form.category' | translate }}</ion-label>
         <ion-select formControlName="product_type_id">
           <ion-select-option
             *ngFor="let cat of product_types"
@@ -58,13 +68,13 @@
         <ion-row>
           <ion-col>
             <ion-item>
-              <ion-label color="danger" position="stacked">ราคา</ion-label>
+              <ion-label color="danger" position="stacked">{{ 'productsPage.form.price' | translate }}</ion-label>
               <ion-input type="number" formControlName="price"></ion-input>
             </ion-item>
           </ion-col>
           <ion-col>
             <ion-item>
-              <ion-label color="danger" position="stacked">ต้นทุน</ion-label>
+              <ion-label color="danger" position="stacked">{{ 'productsPage.form.cost' | translate }}</ion-label>
               <ion-input type="number" formControlName="cost"></ion-input>
             </ion-item>
           </ion-col>
@@ -79,7 +89,7 @@
     </ion-card-content>
     <ion-button type="submit" shape="round" expand="full" color="primary" (click)="submit()">
      <ion-icon name="logo-buffer"></ion-icon>
-    &nbsp;บันทึก</ion-button>
+    &nbsp;{{ 'productsPage.form.submit' | translate }}</ion-button>
   </ion-card>
 </ion-content>
 

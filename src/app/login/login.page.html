@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>เข้าสู่ระบบ</ion-title>
+    <ion-title>{{ 'loginPage.login' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,7 +13,7 @@
 
 
 
-  <p text-center>ยินดีต้อนรับสู่ตลาดนัดเมืองช้าง</p>
+  <p text-center>{{ 'loginPage.welcome' | translate }}</p>
   <ion-grid>
 
     <ion-row>
@@ -21,7 +21,7 @@
         <ion-button class="btn1" expand="block"  (click)="goRegister_customer();">
           <div class="ion-text-center"  >
             <ion-icon name="cart"></ion-icon><br/>
-            <b>ซื้อสินค้า</b>
+            <b>{{ 'loginPage.buy' | translate }}</b>
           </div>
         </ion-button>
       </ion-col>
@@ -32,7 +32,7 @@
           <ion-button class="btn2" expand="block"  (click)="goRegister_store();">
             <div class="ion-text-center"  >
               <ion-icon name="home"></ion-icon><br/>
-              <b>เปิดร้านใหม่</b>
+              <b>{{ 'loginPage.newStore' | translate }}</b>
             </div>
           </ion-button>
       </ion-col>
@@ -40,7 +40,7 @@
         <ion-button class="btn2" expand="block" (click)="goRegister_logistic();">
           <div class="ion-text-center">
             <ion-icon name="md-bicycle"></ion-icon><br/>
-            <b>ส่งสินค้า</b>
+            <b>{{ 'loginPage.rider' | translate }}</b>
           </div>
         </ion-button>
       </ion-col>
@@ -49,26 +49,25 @@
 
 
   <ion-card>
-    <p no-padding no-margin text-center>เข้าสู่ระบบร้านค้า</p>
+    <p no-padding no-margin text-center>{{ 'loginPage.login' | translate }}</p>
     <form (ngSubmit)="loginForm()">
       <ion-grid>
         <ion-row padding color="primary" size=6 justify-content-center>
           <ion-col>
               <ion-item>
                 <ion-input [ngModelOptions]="{standalone: true}" [(ngModel)]="promptpay"
-                type="text" placeholder="เบอร์โทรศัพท์" ></ion-input>
+                type="text" [placeholder]="'loginPage.telephone' | translate" ></ion-input>
               </ion-item>
               <ion-item>
                 <ion-input  [ngModelOptions]="{standalone: true}" [(ngModel)]="password"
-                type="password" placeholder="รหัสผ่าน"></ion-input>
+                type="password" [placeholder]="'loginPage.password' | translate"></ion-input>
               </ion-item>
               <br>
-              <ion-button type="submit" expand="full"color="primary" shape="round"><b>เข้าสู่ระบบ</b></ion-button>
+              <ion-button type="submit" expand="full"color="primary" shape="round"><b>{{ 'loginPage.login' | translate }}</b></ion-button>
             </ion-col>
         </ion-row>
       </ion-grid>
     </form>
-
   </ion-card>
 
 

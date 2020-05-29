@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>ซื้อสินค้า</ion-title>
+    <ion-title>{{ 'customerPage.buy' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,11 +13,11 @@
 
   <ion-list *ngIf="stores">
       <ion-list-header >
-        <ion-label>ร้านค้าใกล้เคียง</ion-label>
+        <ion-label>{{ 'customerPage.nearbyStores' | translate }}</ion-label>
       </ion-list-header>
       <ion-item *ngIf="stores && stores.length <=0 ">
         <ion-text>
-            ไม่พบร้านบริเวณใกล้ ๆ นี้
+          {{ 'customerPage.storeNotFound' | translate }}
         </ion-text>
       </ion-item>
 
@@ -32,9 +32,9 @@
           </ion-col>
 
           <ion-col size="8" style="line-height: 10px;">
-            <p no-padding>{{ store.store_name }} <ion-badge color="primary">{{store.distance | number }} กม.</ion-badge></p>
-            <small no-padding>{{ store.store_type.store_type_th }}</small><br>
-            <small no-padding>ค่าส่ง {{store.delivery_price}} ฿</small><br>
+            <p no-padding>{{ _translate.getDefaultLang() === 'th' ? store['store_name'] : store['store_name_' + _translate.getDefaultLang()] }} <ion-badge color="primary">{{store.distance | number }} {{ 'customerPage.km' | translate }}</ion-badge></p>
+            <small no-padding>{{ store.store_type['store_type_' + _translate.getDefaultLang()] }}</small><br>
+            <small no-padding>{{ 'customerPage.shippingCost' | translate }} {{store.delivery_price}} ฿</small><br>
             <ul class="rating-container" style="display: inline; list-style: none;">
               <li>
                 <ion-button class="ion-button" fill size="small" *ngFor="let star of [0,1,2,3,4]">
@@ -81,11 +81,11 @@
         <ion-avatar slot="start">
         </ion-avatar>
         <ion-text>
-          <small *ngIf="cart.store_name"><b>ร้าน {{cart.store_name}}</b></small><br>
+          <small *ngIf="cart.store_name"><b>{{cart.store_name}}</b></small><br>
         </ion-text>
         <ion-text slot="end">
-          <small *ngIf="cart.delivery_price">ค่าส่ง {{cart.delivery_price}} ฿</small><br>
-          <small *ngIf="cart.free_delivery_price">(ขั้นต่ำ {{cart.free_delivery_price}} ส่งฟรี)</small>
+          <small *ngIf="cart.delivery_price">{{ 'customerPage.shippingCost' | translate }} {{cart.delivery_price}} ฿</small><br>
+          <small *ngIf="cart.free_delivery_price">({{ 'customerPage.minCost' | translate }} {{cart.free_delivery_price}} {{ 'customerPage.free' | translate }})</small>
         </ion-text>
         <ion-button fill="clear" color="primary" slot="end" (click)="callStore(cart.mobile_number);">
           <ion-icon slot="icon-only" name="ios-call"></ion-icon>
@@ -113,15 +113,15 @@
   <ion-list lines="none">
     <ion-item>
       <ion-text slot="start">
-        <b *ngIf="total_price">รวม {{total_price}} ฿</b>
+        <b *ngIf="total_price">{{ 'customerPage.total' | translate }} {{total_price}} ฿</b>
       </ion-text>
       <ion-text slot="end">
-        <small>**ชำระเงินปลายทางผ่าน QRCode</small>
+        <small>{{ 'customerPage.qrPayment' | translate }}</small>
       </ion-text>
     </ion-item>
   </ion-list>
 
-  <ion-label position="floating">โปรดระบุจุดรับสินค้า</ion-label>
+  <ion-label position="floating">{{ 'customerPage.specifyTargetPoint' | translate }}</ion-label>
     <div #map id="map" style="height:250px;" ></div>
   <br>
 
@@ -130,23 +130,23 @@
   <ion-list lines="none">
 
     <ion-item>
-      <ion-label position="stacked">ชื่อผู้รับ</ion-label>
+      <ion-label position="stacked">{{ 'customerPage.targetName' | translate }}</ion-label>
       <ion-input type="text" [(ngModel)]="firstname" style="background-color:#ded9d9;"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">เบอร์โทรศัพท์</ion-label>
+      <ion-label position="stacked">{{ 'customerPage.telephone' | translate }}</ion-label>
       <ion-input type="text" [(ngModel)]="mobile_number" style="background-color:#ded9d9;"></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-label position="stacked">รายละเอียดเพิ่มเติมสำหรับผู้ส่งของ</ion-label>
+      <ion-label position="stacked">{{ 'customerPage.note' | translate }}</ion-label>
       <ion-textarea [(ngModel)]="notes" style="background-color:#ded9d9;" rows="4" placeholder="ตัวอย่าง. หน้าอาคาร 3 สาขาวิทยาการคอมพิวเตอร์ มหาวิทยาลัยราชภัฏสุรินทร์"></ion-textarea>
     </ion-item>
 
     <ion-item>
       <ion-button size="default" slot="end" (click)="placeOrder();" color="tertiary">
-        ส่งคำสั่งซื้อ
+        {{ 'customerPage.acceptOrder' | translate }}
       </ion-button>
     </ion-item>
   </ion-list>
@@ -156,7 +156,7 @@
   <ion-list *ngIf="carts">
 
       <ion-list-header >
-        <ion-label>รายการซื้อสินค้า</ion-label>
+        <ion-label>{{ 'customerPage.orderList' | translate }}</ion-label>
       </ion-list-header>
 
       <ion-item  *ngFor="let cart of carts">
@@ -165,8 +165,8 @@
             <img *ngIf="!cart.product.thumbnail" src="/assets/noimg.png">
           </ion-avatar>
           <ion-text slot="end">
-            <small *ngIf="cart.product.product_th && cart.store.store_name">{{cart.product.product_th}} จาก {{cart.store.store_name}}</small><br>
-            <small *ngIf="cart.created_at">เมื่อ {{cart.created_at }}</small>
+            <small *ngIf="cart.product.product_th && cart.store.store_name">{{cart.product.product_th}} {{ 'customerPage.from' | translate }} {{cart.store.store_name}}</small><br>
+            <small *ngIf="cart.created_at">{{ 'customerPage.when' | translate }} {{cart.created_at }}</small>
           </ion-text>
           <ion-button fill="clear" color="primary" slot="end" (click)="callStore(cart.store.mobile_number);">
             <ion-icon slot="icon-only" name="ios-call"></ion-icon>
@@ -182,19 +182,19 @@
       <ion-col no-padding>
           <button ion-button  block clear color="primary-alt" (click)="changeTab(0)">
             <ion-icon size="large" name="md-locate"></ion-icon><br>
-            <ion-label>ร้านค้าใกล้ๆ</ion-label>
+            <ion-label>{{ 'customerPage.nearbyStores' | translate }}</ion-label>
           </button>
       </ion-col>
       <ion-col no-padding>
           <button ion-button block clear color="primary-alt" (click)="changeTab(1)">
             <ion-icon size="large" name="md-cart"></ion-icon><br>
-              <ion-label>คำสั่งซื้อ</ion-label>
+              <ion-label>{{ 'customerPage.order' | translate }}</ion-label>
           </button>
       </ion-col>
       <ion-col no-padding>
         <button ion-button block clear color="primary-alt" (click)="changeTab(2)" >
           <ion-icon size="large" name="md-list-box"></ion-icon><br>
-            <ion-label>รายการซื้อ</ion-label>
+            <ion-label>{{ 'customerPage.orderList' | translate }}</ion-label>
         </button>
       </ion-col>
     </ion-row>

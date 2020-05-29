@@ -12,7 +12,7 @@
   <ion-list>
 
     <ion-list-header >
-      <ion-label>คำสั่งซื้อ : ค่าส่ง {{store.delivery_price}} ฿ (ขั้นต่ำ {{store.free_delivery_price}} ส่งฟรี)</ion-label>
+      <ion-label>{{ 'cartPage.order' | translate }} : {{ 'cartPage.shippingCost' | translate }} {{store.delivery_price}} ฿ ({{ 'cartPage.minCost' | translate }} {{store.free_delivery_price}} {{ 'cartPage.free' | translate }})</ion-label>
     </ion-list-header>
 
 
@@ -23,7 +23,7 @@
         <ion-label>
           <h5>
             <ion-text color="dark">{{order.member.firstname}} </ion-text>
-            <ion-badge color="danger"> {{ order.price >= store.free_delivery_price? order.price : order.price+store.delivery_price }} </ion-badge> <ion-text color="dark"> บาท </ion-text>
+            <ion-badge color="danger"> {{ order.price >= store.free_delivery_price? order.price : order.price+store.delivery_price }} </ion-badge> <ion-text color="dark"> {{ 'cartPage.bath' | translate }} </ion-text>
           </h5>
         </ion-label>
         <ion-button fill="clear" color="danger" slot="end" (click)="deleteOrder(order.member.id);">
@@ -44,7 +44,7 @@
             <img *ngIf="!item.product.thumbnail" src="/assets/noimg.png">
         </ion-avatar>
         <ion-label>
-          <h5><ion-text color="dark">{{item.product.product_th}} : {{item.product.price}} บาท x {{ item.qty }} ชิ้น</ion-text></h5>
+          <h5><ion-text color="dark">{{item.product['product_' + _translate.getDefaultLang()]}} : {{item.product.price}} {{ 'cartPage.bath' | translate }} x {{ item.qty }} {{ 'cartPage.each' | translate }}</ion-text></h5>
         </ion-label>
       </ion-item>
 
@@ -59,7 +59,7 @@
   </ion-searchbar> -->
   <ion-item-divider style="background:#f2f2f2;">
     <div slot="start">
-      <h3>จำนวนเงิน</h3>
+      <h3>{{ 'cartPage.amount' | translate }}</h3>
     </div>
     <div slot="end">
       <ion-input style="text-align: right;font-size: 20px" type="number" [(ngModel)]="price" (keyup)="onKeyUp($event)" clearInput></ion-input>
@@ -78,7 +78,7 @@
       <ion-item>
         <ion-button  slot="end" (click)="newTransaction();" color="primary">
           <ion-icon  name="md-qr-scanner"></ion-icon>
-          สร้าง QR
+          {{ 'cartPage.genQr' | translate }}
         </ion-button>
       </ion-item>
       <!-- <ion-item-options side="end">
@@ -87,7 +87,7 @@
     </ion-item-sliding>
 
     <ion-list-header >
-      <ion-label>รายการสินค้า</ion-label>
+      <ion-label>{{ 'cartPage.productList' | translate }}</ion-label>
     </ion-list-header>
 
     <ion-item-sliding *ngFor="let product of products">
@@ -97,7 +97,7 @@
           <img *ngIf="!product.thumbnail" src="/assets/noimg.png">
         </ion-avatar>
         <ion-label>
-          <h5><ion-text color="dark">{{ product.product_th }} </ion-text> <ion-badge color="danger"> {{ product.price }} </ion-badge> <ion-text color="dark">  บาท </ion-text> </h5>
+          <h5><ion-text color="dark">{{ product['product_' + _translate.getDefaultLang()] }} </ion-text> <ion-badge color="danger"> {{ product.price }} </ion-badge> <ion-text color="dark">  {{ 'cartPage.bath' | translate }} </ion-text> </h5>
         </ion-label>
 
         <ion-button fill="clear" color="primary" slot="end" (click)="addToCart(product);">
@@ -121,7 +121,7 @@
         <center>
           <button ion-button  block clear color="primary-alt" (click)="changeTab(0)">
             <ion-icon size="large" name="ios-cart"></ion-icon><br>
-            <ion-label>คำสั่งซื้อ</ion-label>
+            <ion-label>{{ 'cartPage.order' | translate }}</ion-label>
           </button>
         </center>
       </ion-col>
@@ -129,7 +129,7 @@
         <center>
           <button ion-button block clear color="primary-alt" (click)="changeTab(1)">
             <ion-icon size="large" name="ios-cash"></ion-icon><br>
-              <ion-label>รับชำระเงินด้วย QR</ion-label>
+              <ion-label>{{ 'cartPage.qrPayment' | translate }}</ion-label>
           </button>
         </center>
       </ion-col>

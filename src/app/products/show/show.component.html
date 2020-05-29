@@ -2,9 +2,9 @@
   <ion-card *ngIf="product">
     <ion-img [src]="url+product.thumbnail || 'assets/noimg.png'"></ion-img>
     <ion-card-header>
-      <ion-card-subtitle>รหัสสินค้า {{ product.code_product ? product.code_product : '-'}}</ion-card-subtitle>
+      <ion-card-subtitle>{{ 'productsPage.show.productId' | translate }} {{ product.code_product ? product.code_product : '-'}}</ion-card-subtitle>
       <ion-card-title>
-        {{ product.product_th }}
+        {{ product['product_' + _translate.getDefaultLang()] }}
         <!-- <ion-badge color="success" *ngIf="product.incart == 1">เพิ่มลงในตะกร้าแล้ว</ion-badge>
         <ion-button size="small" fill="clear" color="primary" *ngIf="product.incart == 0 && product.allowAdd == 1" (click)="addToCart(product);">
           <ion-icon slot="icon-only" name="basket"></ion-icon>
@@ -13,13 +13,13 @@
     </ion-card-header>
   
     <ion-card-content>
-      <p><strong>ราคาขาย: </strong>{{ product.price }}</p>
-      <p><strong>ราคาต้นทุน: </strong>{{ product.cost }}</p>
-      <p><strong>จำนวนที่เหลืออยู่ในสต๊อค: </strong>{{ product.instock }}</p>
+      <p><strong>{{ 'productsPage.show.price' | translate }}: </strong>{{ product.price }}</p>
+      <p><strong>{{ 'productsPage.show.cost' | translate }}: </strong>{{ product.cost }}</p>
+      <p><strong>{{ 'productsPage.show.amount' | translate }}: </strong>{{ product.instock }}</p>
     </ion-card-content>
   </ion-card>
 </ion-content>
 
 <ion-footer>
-  <ion-button expand="full" color="primary" routerLink="/products" routerDirection="backward">กลับ</ion-button>
+  <ion-button expand="full" color="primary" routerLink="/products" routerDirection="backward">{{ 'productsPage.show.back' | translate }}</ion-button>
 </ion-footer>

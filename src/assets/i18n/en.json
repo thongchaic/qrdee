@@ -1,0 +1,29 @@
+{
+  "sidebar": {
+    "menu": "Menu",
+    "home": "Home",
+    "myProducts": "My Products",
+    "summary": "Summary",
+    "manageStore": "Store",
+    "orderList": "Order List",
+    "buy": "Buy",
+    "login": "Login",
+    "setting": "Setting"
+  },
+  "loginPage": {
+    "lang": "en",
+    "langText": "English",
+    "login": "Login",
+    "welcome": "Welcome",
+    "buy": "Buy",
+    "newStore": "New Store",
+    "rider": "Rider",
+    "telephone": "Telephone",
+    "password": "Password"
+  },
+  "settingPage": {
+    "setting": "Setting",
+    "selectLang": "Language",
+    "selectLanguage": "Select Language"
+  }
+}

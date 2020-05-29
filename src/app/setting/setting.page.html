@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ 'settingPage.setting' | translate }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-chip (click)="selectLang()">
+        <ion-avatar>
+          <img [src]="'assets/images/flags/' + ('loginPage.lang' | translate) + '.png'" width="16" height="11">
+        </ion-avatar>
+        <ion-label>{{ 'loginPage.langText' | translate }}</ion-label>      
+      </ion-chip>
+    </ion-item>
+  </ion-list>
+</ion-content>

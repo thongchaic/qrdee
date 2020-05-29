@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ActivatedRoute, Router,NavigationExtras  } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 // import { Http, Headers, RequestOptions } from '@angular/http';
 
 @Component({
@@ -21,6 +22,7 @@ export class ListComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
+    private _translate: TranslateService
   ) { }
 
   ngOnInit() {

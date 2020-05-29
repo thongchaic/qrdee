@@ -12,7 +12,7 @@ import { BackgroundMode } from '@ionic-native/background-mode/ngx';
 import { Badge } from '@ionic-native/badge/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { UserService } from './shared/user.service';
-
+import { TranslateService } from '@ngx-translate/core';
 
 export declare enum ELocalNotificationTriggerUnit{
     SECOND = 'second',
@@ -54,9 +54,11 @@ export class AppComponent implements OnInit {
     private backgroundMode: BackgroundMode,
     private badge: Badge,
     private network: Network,
-    private _user: UserService
+    private _user: UserService,
+    private _translate: TranslateService
     // private push: Push
   ) {
+    this._translate.setDefaultLang(localStorage.getItem('lang') || 'en');
     // this.currentStore = this._loginService.currentStoreValue;
 
     // localStorage.setItem('background','0');

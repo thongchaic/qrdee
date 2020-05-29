@@ -3,6 +3,7 @@ import { ProductService } from '../shared/product.service';
 import { ActivatedRoute } from '@angular/router';
 // import { Product } from '../shared/product';
 import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-show',
@@ -16,7 +17,8 @@ export class ShowComponent {
 
   constructor(
     private productService: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private _translate: TranslateService
   ) { }
 
   ionViewWillEnter() {

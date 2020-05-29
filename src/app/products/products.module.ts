@@ -17,6 +17,7 @@ import { Camera } from '@ionic-native/camera/ngx';
 // import { WebView } from '@ionic-native/ionic-webview/ngx';
 import { FormsComponent }  from './forms/forms.component';
 import { FormsService } from './shared/forms.service';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -63,7 +64,8 @@ const routes: Routes = [
     FormsModule,
     SharedModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    TranslateModule.forChild()
   ],
   declarations: [
     ProductsPage,

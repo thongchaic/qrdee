@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
 import { LoginStoreService } from './shared/login-store.service';
 import { Router  } from '@angular/router';
-import { NavController, LoadingController } from '@ionic/angular';
+import { NavController, LoadingController, ActionSheetController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { ModalController,Events } from '@ionic/angular';
 import { ToastService } from '../shared/services/toast.service';
 import { Storage } from '@ionic/storage';
 import { UserService } from '../shared/user.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 @Component({
@@ -33,7 +34,9 @@ export class LoginPage  {
     private toastService: ToastService,
     private storage: Storage,
     private _loading: LoadingController,
-    private _user: UserService
+    private _user: UserService,
+    public _actionSheetController: ActionSheetController,
+    private _translate: TranslateService
   ) {
 
     // let store = JSON.parse(localStorage.getItem('store'));
@@ -118,7 +121,5 @@ export class LoginPage  {
       this.router.navigateByUrl('/customer');
     }
 
-
   }
-
 }

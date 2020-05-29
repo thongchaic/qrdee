@@ -3,75 +3,84 @@
     <ion-menu>
       <ion-header>
         <ion-toolbar>
-          <ion-title>เมนู</ion-title>
+          <ion-title>{{ 'sidebar.menu' | translate }}</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
 
-        <ion-list *ngIf="user">
-          <ng-container *ngIf="user.store">
-            <ion-menu-toggle auto-hide="false" >
-              <ion-item (click)="home()">
+        <ion-list>
+          <ng-container *ngIf="user">
+            <ng-container *ngIf="user.store">
+              <ion-menu-toggle auto-hide="false" >
+                <ion-item (click)="home()">
+                  <ion-label>
+                    {{ 'sidebar.home' | translate }}
+                  </ion-label>
+                </ion-item>
+                <ion-item (click)="product()">
+                  <ion-label>
+                    {{ 'sidebar.myProducts' | translate }}
+                  </ion-label>
+                </ion-item>
+              <ion-item  (click)="stats()">
                 <ion-label>
-                    หน้าแรก
+                  {{ 'sidebar.summary' | translate }}
                 </ion-label>
               </ion-item>
-              <ion-item (click)="product()">
-                <ion-label>
-                    สินค้าของฉัน
-                </ion-label>
-              </ion-item>
-            <ion-item  (click)="stats()">
-              <ion-label>
-                สรุปยอดขาย
+                <ion-item (click)="profile()">
+                  <ion-label >
+                    {{ 'sidebar.manageStore' | translate }}
+                  </ion-label>
+                </ion-item>
+                <ion-item  (click)="customer()">
+                  <ion-label>
+                    {{ 'sidebar.buy' | translate }}
+                  </ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+            </ng-container>
+
+            <ng-container *ngIf="user.rider">
+              <ion-menu-toggle auto-hide="false" >
+                <ion-item  (click)="orderList()">
+                  <ion-label>
+                    {{ 'sidebar.orderList' | translate }}
+                  </ion-label>
+                </ion-item>
+
+                <ion-item (click)="customer()">
+                  <ion-label >
+                    {{ 'sidebar.buy' | translate }}
+                  </ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+            </ng-container>
+
+
+            <ng-container *ngIf="!user.store && !user.rider">
+              <ion-menu-toggle auto-hide="false" >
+                <ion-item  (click)="customer()">
+                  <ion-label>
+                    {{ 'sidebar.buy' | translate }}
+                  </ion-label>
+                </ion-item>
+
+                <ion-item (click)="login()">
+                  <ion-label >
+                    {{ 'sidebar.login' | translate }}
+                  </ion-label>
+                </ion-item>
+              </ion-menu-toggle>
+            </ng-container>
+          </ng-container>
+
+          <ion-menu-toggle auto-hide="false" >
+            <ion-item routerLink="setting">
+              <ion-label >
+                {{ 'sidebar.setting' | translate }}
               </ion-label>
             </ion-item>
-              <ion-item (click)="profile()">
-                <ion-label >
-                  จัดการร้านค้า
-                </ion-label>
-              </ion-item>
-              <ion-item  (click)="customer()">
-                <ion-label>
-                    สั่งซื้อสินค้า
-                </ion-label>
-              </ion-item>
-            </ion-menu-toggle>
-          </ng-container>
-
-          <ng-container *ngIf="user.rider">
-            <ion-menu-toggle auto-hide="false" >
-              <ion-item  (click)="orderList()">
-                <ion-label>
-                    คำสั่งส่งของ
-                </ion-label>
-              </ion-item>
-
-              <ion-item (click)="customer()">
-                <ion-label >
-                  สั่งซื้อสินค้า
-                </ion-label>
-              </ion-item>
-            </ion-menu-toggle>
-          </ng-container>
-
-
-          <ng-container *ngIf="!user.store && !user.rider">
-            <ion-menu-toggle auto-hide="false" >
-              <ion-item  (click)="customer()">
-                <ion-label>
-                    ซื้อสินค้า
-                </ion-label>
-              </ion-item>
-
-              <ion-item (click)="login()">
-                <ion-label >
-                  เข้าสู่ระบบ
-                </ion-label>
-              </ion-item>
-            </ion-menu-toggle>
-          </ng-container>
-          
+          </ion-menu-toggle>
         </ion-list>
       </ion-content>
     </ion-menu>

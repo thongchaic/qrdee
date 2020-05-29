@@ -3,9 +3,9 @@
     <!-- <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons> -->
-    <ion-title>ชำระเงินด้วยQR</ion-title>
+    <ion-title>{{ 'cartPage.success' | translate }}</ion-title>
     <ion-button fill="clear" color="danger" slot="end" (click)="forceDissmiss(0);">
-      <ion-icon name="ios-arrow-back"></ion-icon>Back
+      <ion-icon name="ios-arrow-back"></ion-icon>{{ 'cartPage.back' | translate }}
     </ion-button>
   </ion-toolbar>
 </ion-header>
@@ -18,18 +18,18 @@
 
     <ion-row>
       <ion-col size="12">
-        ราคารวม
+        {{ 'cartPage.totalPrice' | translate }}
         <ion-badge color="danger">
         <h2>{{ price | number }}</h2>
-      </ion-badge> บาท
+      </ion-badge> {{ 'cartPage.bath' | translate }}
       </ion-col>
     </ion-row>
     <ion-row>
       <ion-col size="6">
-        <ion-button expand="full" shape="round" color="success" (click)="forceDissmiss(1)">สำเร็จ</ion-button>
+        <ion-button expand="full" shape="round" color="success" (click)="forceDissmiss(1)">{{ 'cartPage.success' | translate }}</ion-button>
       </ion-col>
       <ion-col size="6">
-        <ion-button expand="full" shape="round" color="primary"  (click)="forceDissmiss(0)">ยกเลิก</ion-button>
+        <ion-button expand="full" shape="round" color="primary"  (click)="forceDissmiss(0)">{{ 'cartPage.calcel' | translate }}</ion-button>
       </ion-col>
     </ion-row>
     </ion-card-content>

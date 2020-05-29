@@ -1,0 +1,158 @@
+{
+  "sidebar": {
+    "menu": "เมนู",
+    "home": "หน้าแรก",
+    "myProducts": "สินค้าของฉัน",
+    "summary": "สรุปยอดขาย",
+    "manageStore": "จัดการร้านค้า",
+    "orderList": "คำสั่งส่งของ",
+    "buy": "ซื้อสินค้า",
+    "login": "เข้าสู่ระบบ",
+    "setting": "ตั้งค่า"
+  },
+  "cartPage": {
+    "order": "คำสั่งซื้อ",
+    "cart": "ตะกร้าสินค้า",
+    "back": "กลับ",
+    "cPosition": "ตำแหน่งผู้รับ",
+    "target": "ผู้รับ",
+    "telephone": "เบอร์โทรศัพท์",
+    "product": "สินค้า",
+    "shippingCost": "ค่าขนส่ง",
+    "total": "รวม",
+    "totalPrice": "ราคารวม",
+    "acceptPayment": "รับชำระเงิน",
+    "success": "สำเร็จ",
+    "deliverSuccess": "ส่งสินค้าสำเร็จ",
+    "call": "เรียกคนส่งสินค้า",
+    "qrPayment": "ชำระเงินด้วยQR",
+    "bath": "บาท",
+    "cancel": "ยกเลิก",
+    "minCost": "ขั้นต่่ำ",
+    "free": "ส่งฟรี",
+    "amount": "จำนวนเงิน",
+    "genQr": "สร้าง QR",
+    "productList": "รายการสินค้า"
+  },
+  "customerPage": {
+    "back": "กลับ",
+    "select": "เลือก",
+    "each": "ชิ้น",
+    "minCost": "ขั้นต่่ำ",
+    "free": "ส่งฟรี",
+    "order": "สั่งซื้อ",
+    "specifyLocation": "ระบุตำแหน่ง",
+    "storeLocation": "ตำแหน่งร้าน",
+    "find": "ค้นหาร้าน",
+    "buy": "ซื้อสินค้า",
+    "nearbyStores": "ร้านค้าใกล้เคียง",
+    "storeNotFound": "ไม่พบร้านบริเวณใกล้ ๆ นี้",
+    "shippingCost": "ค่าขนส่ง",
+    "total": "รวม",
+    "qrPayment": "**ชำระเงินปลายทางผ่าน QRCode",
+    "specifyTargetPoint": "โปรดระบุจุดรับสินค้า",
+    "targetName": "ชื่อผู้รับ",
+    "telephone": "เบอร์โทรศัพท์",
+    "note": "รายละเอียดเพิ่มเติมสำหรับผู้ส่งของ",
+    "acceptOrder": "ส่งคำสั่งซื้อ",
+    "orderList": "รายการซื้อ",
+    "from": "จาก",
+    "when": "เมื่อ",
+    "km": "กม."
+  },
+  "deliveryPage": {
+    "delivery": "การขนส่ง",
+    "targetPosition": "ตำแหน่งผู้รับ"
+  },
+  "logisticPage": {
+    "shippingInformation": "ข้อมูลส่งสินค้า",
+    "cName": "ชื่อลูกค้า",
+    "tel": "เบอร์โทร",
+    "submit": "บันทึกการส่งสินค้า",
+    "specifyCode": "ใส่รหัสส่งสินค้า",
+    "transport": "ขนส่ง",
+    "code": "รหัส",
+    "delivery": "ส่งสินค้า",
+    "transportHistory": "ประวัติขนส่งสินค้า",
+    "information": "ข้อมูลผู้ขนส่ง",
+    "form": {
+      "edit": "แก้ไขข้อมูล",
+      "takePhoto": "ถ่ายรูปสินค้า",
+      "selectPhoto": "เลือกจากอัลบั้ม",
+      "firstName": "ชื่อ",
+      "lastName": "นามสกุล",
+      "tel": "เบอร์โทรศัทพ์",
+      "vehicle": "ประเภทรถขนส่ง",
+      "vehicleNumber": "เลขทะเบียนรถ",
+      "vehicleStatus": "เลือกสถานะส่งสินค้า",
+      "submit": "บันทึก"
+    },
+    "history": {
+      "information": "ข้อมูลผู้ขนส่ง",
+      "tel": "เบอร์โทร",
+      "vehicle": "ประเภทรถ",
+      "vehicleNumber": "เลขทะเบียนรถ",
+      "vehicleStatus": "สถานะขนส่ง",
+      "submit": "ปรับปรุงข้อมูล"
+    },
+    "show": {
+      "transport": "ขนส่ง",
+      "history": "ประวัติการขนส่งสินค้า",
+      "to": "ส่งถึง",
+      "when": "เมื่อ"
+
+    }
+  },
+  "productsPage": {
+    "forms": {
+      "position": "ตำแหน่ง",
+      "km": "กม.",
+      "distance": "ระยะทาง"
+    },
+    "form": {
+      "edit": "แก้ไขข้อมูล",
+      "takePhoto": "ถ่ายรูปสินค้า",
+      "selectPhoto": "เลือกจากอัลบั้ม",
+      "thName": "ชื่อสินค้าภาษาไทย",
+      "enName": "ชื่อสินค้าภาษาอังกฤษ",
+      "thDes": "รายละเอียดสินค้าภาษาไทย",
+      "enDes": "รายละเอียดสินค้าภาษาอังกฤษ",
+      "category": "หมวดหมู่สินค้า",
+      "price": "ราคา",
+      "cost": "ต้นทุน",
+      "submit": "บันทึก"
+    },
+    "list": {
+      "myProducts": "สินค้าของฉัน",
+      "addProduct": "เพิ่มสินค้า"
+    },
+    "show": {
+      "productId": "รหัสสินค้า",
+      "price": "ราคาขาย",
+      "cost": "ราคาต้นทุน",
+      "amount": "จำนวนที่เหลืออยู่ในสต๊อค",
+      "back": "กลับ"
+    },
+    "showCustomer": {
+      "price": "ราคา",
+      "description": "รายละเอียด",
+      "back": "กลับ"
+    }
+  },
+  "loginPage": {
+    "lang": "th",
+    "langText": "ภาษาไทย",
+    "login": "เข้าสู่ระบบ",
+    "welcome": "ยินดีต้อนรับสู่ตลาดนัดเมืองช้าง",
+    "buy": "ซื้อสินค้า",
+    "newStore": "เปิดร้านใหม่",
+    "rider": "ส่งสินค้า",
+    "telephone": "เบอร์โทรศัพท์",
+    "password": "รหัสผ่าน"
+  },
+  "settingPage": {
+    "setting": "ตั้งค่า",
+    "selectLang": "ภาษา",
+    "selectLanguage": "เลือกภาษา"
+  }
+}

@@ -23,6 +23,7 @@ import { Events } from '@ionic/angular';
 
 declare var google;
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.page.html',
@@ -90,7 +91,8 @@ export class CartPage {
     private _loading: LoadingController,
     private callNumber: CallNumber,
     private badge: Badge,
-    private event : Events
+    private event : Events,
+    private _translate: TranslateService
   ) {
 
      // this.productService.getAll().subscribe(resp => {

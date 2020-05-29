@@ -9,6 +9,7 @@ import { AlertController } from '@ionic/angular';
 import { ActivatedRoute, Router,NavigationExtras  } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { LoadingController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-list',
@@ -36,7 +37,8 @@ export class ListComponent {
     private alertController: AlertController,
     private router: Router,
     private route: ActivatedRoute,
-    private _loading: LoadingController
+    private _loading: LoadingController,
+    private _translate: TranslateService
   ) {
 
      this.store = JSON.parse(localStorage.getItem('store'));

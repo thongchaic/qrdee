@@ -1,0 +1,13 @@
+<ion-header translucent>
+  <ion-toolbar>
+
+    <ion-title>{{ 'customerPage.storeLocation' | translate }}</ion-title>
+    <ion-button fill="clear" color="danger" slot="end" (click)="dismiss();">
+      <ion-icon name="ios-arrow-back"></ion-icon>{{ 'customerPage.back' | translate }}
+    </ion-button>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+  <div #map id="map" style="height: 100%;"></div>
+</ion-content>

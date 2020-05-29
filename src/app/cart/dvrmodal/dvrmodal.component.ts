@@ -9,6 +9,7 @@ import { QrmodalComponent } from '../qrmodal/qrmodal.component';
 import { TransactionService } from 'src/app/shared/services/transaction.service';
 import { CartService } from '../shared/cart.service';
 import { ToastService } from '../../shared/services/toast.service';
+import { TranslateService } from '@ngx-translate/core';
 
 
 declare var google;
@@ -40,7 +41,8 @@ export class DvrmodalComponent {
     private cartService: CartService,
     private transactionService: TransactionService,
     private route: ActivatedRoute,
-    private _toast: ToastService
+    private _toast: ToastService,
+    private _translate: TranslateService
   ) {
 
     this.store = JSON.parse(localStorage.getItem('store'));

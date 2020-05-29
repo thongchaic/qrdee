@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>สินค้าของฉัน</ion-title>
+    <ion-title>{{ 'productsPage.list.myProducts' | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -25,7 +25,7 @@
         </ion-avatar>
 
         <ion-label>
-          <h5><ion-text color="dark">{{ product.product_th }}</ion-text></h5>
+          <h5><ion-text color="dark">{{ product['product_' + _translate.getDefaultLang() ] }}</ion-text></h5>
         </ion-label>
         <ion-label>
           <h5><ion-text color="dark">{{ product.price }}฿</ion-text></h5>
@@ -49,7 +49,7 @@
 
   <ion-item>
     <ion-label slot="end">
-      <ion-text color="dark"> เพิ่มสินค้า </ion-text>
+      <ion-text color="dark"> {{ 'productsPage.list.addProduct' | translate }} </ion-text>
     </ion-label>
     <ion-button fill="clear" size="large" slot="end" color="primary" routerLink="/products/create">
        <ion-icon name="md-add-circle"></ion-icon>

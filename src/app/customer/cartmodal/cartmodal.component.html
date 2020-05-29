@@ -8,6 +8,9 @@
 
     <div no-margin no-padding>
       <ion-row no-margin no-padding>
+        <ion-col>
+          <ion-button (click)="storeLocation()">ตำแหน่ง</ion-button>
+        </ion-col>
         <ion-col no-margin no-padding>
           {{ store.store_name }}
         </ion-col>
@@ -27,7 +30,7 @@
     </div>
 
     <ion-button fill="clear" size="small" color="danger" slot="end" (click)="forceDissmiss(0);">
-      <ion-icon name="ios-arrow-back"></ion-icon>กลับ
+      <ion-icon name="ios-arrow-back"></ion-icon>{{ 'customerPage.back' | translate }}
     </ion-button>
   </ion-toolbar>
 
@@ -39,11 +42,11 @@
 <ion-grid *ngIf="products">
   <ion-item>
     <ion-text slot="start">
-      <small>เลือกไว้แล้ว {{pick_count}} ชิ้น</small><br>
-      <small> (ขั้นต่ำ {{store.free_delivery_price}} ส่งฟรี)</small>
+      <small>{{ 'customerPage.select' | translate }} {{pick_count}} {{ 'customerPage.each' | translate }}</small><br>
+      <small> ({{ 'customerPage.minCost' | translate }} {{store.free_delivery_price}} {{ 'customerPage.free' | translate }})</small>
     </ion-text>
     <ion-button fill="clear" color="primary" slot="end" (click)="startPayment();">
-      <ion-icon slot="icon-only" name="ios-cash"></ion-icon> สั่งซื้อ
+      <ion-icon slot="icon-only" name="ios-cash"></ion-icon> {{ 'customerPage.order' | translate }}
     </ion-button>
   </ion-item>
     <ion-row responsive-sm wrap no-margin no-padding>
@@ -51,13 +54,13 @@
 
         <ion-card  no-margin no-padding >
           <ion-item>
-            <ion-text>{{ product.product_th }}</ion-text>
-            <ion-badge  color="danger"> {{product.price | number }} บาท </ion-badge>
-            <ion-button fill="outline" slot="end"  (click)="selectItem(product);">เลือก</ion-button>
+            <ion-text>{{ product['product_' + _translate.getDefaultLang()] }}</ion-text>
+            <ion-badge  color="danger"> {{product.price | number }} {{ 'customerPage.bath' | translate }} </ion-badge>
+            <ion-button fill="outline" slot="end"  (click)="selectItem(product);">{{ 'customerPage.select' | translate }}</ion-button>
           </ion-item>
           <ion-card-content  no-margin no-padding *ngIf="product.thumbnail">
             <ion-img   style="height:200px;" [src]="'https://qrdee.co/app/'+product.thumbnail"></ion-img>
-            <ion-text *ngIf="product.details_th"><small> {{ product.details_th }} </small></ion-text>
+            <ion-text *ngIf="product.details_th"><small> {{ product['details_' + _translate.getDefaultLang()] }} </small></ion-text>
           </ion-card-content>
 
           <ion-row no-margin no-padding>

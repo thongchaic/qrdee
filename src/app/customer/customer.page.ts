@@ -13,6 +13,7 @@ import { CustomerService } from './shared/customer.service';
 import { MapmodalComponent } from './mapmodal/mapmodal.component';
 import { Platform } from '@ionic/angular';
 import { IonInfiniteScroll } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var google;
 
@@ -60,10 +61,9 @@ export class CustomerPage implements AfterViewInit{
     private modalController: ModalController,
     private _loading: LoadingController,
     private platform: Platform,
-    private callNumber: CallNumber
+    private callNumber: CallNumber,
+    private _translate: TranslateService
 	){
-
-
     localStorage.setItem('member_cart',JSON.stringify(this.member_cart));
     this.member = JSON.parse(localStorage.getItem('member'));
     if(this.member){

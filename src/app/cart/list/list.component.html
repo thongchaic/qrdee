@@ -1,6 +1,6 @@
 <ion-list *ngIf="cart?.length > 0">
   <ion-list-header>
-    <ion-label>ตะกร้าสินค้า</ion-label>
+    <ion-label>{{ 'cartPage.cart' | translate }}</ion-label>
   </ion-list-header>
 
   <ng-container *ngFor="let product of cart">
@@ -9,7 +9,7 @@
         <img *ngIf="product.thumbnail" [src]="'https://qrdee.co/app/'+product.thumbnail">
         <img *ngIf="!product.thumbnail" src="/assets/noimg.png">
       </ion-avatar>
-      {{ product.product_th }}&nbsp;
+      {{ product['product_' + _translate.getDefaultLang()] }}&nbsp;
       <!-- <ion-badge color="danger" *ngIf="product.instock == 0">หมดสต๊อค</ion-badge> -->
       <ion-badge color="primary" slot="end">{{ product.qty }}</ion-badge>
       <ion-button slot="end" size="large" fill="clear" color="success" [disabled]="product.instock == 0" (click)="addItem(product)">

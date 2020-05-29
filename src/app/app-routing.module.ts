@@ -25,7 +25,11 @@ const routes: Routes = [
   {
     path: 'riders',
     loadChildren: () => import('./riders/riders.module').then( m => m.RidersPageModule)
+  },  {
+    path: 'setting',
+    loadChildren: () => import('./setting/setting.module').then( m => m.SettingPageModule)
   },
+
 ];
 
 

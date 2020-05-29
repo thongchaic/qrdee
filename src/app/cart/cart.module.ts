@@ -18,6 +18,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx'
 import { QRCodeModule } from 'angularx-qrcode';
 import { CallNumber } from '@ionic-native/call-number/ngx';
 import { Badge } from '@ionic-native/badge/ngx';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
@@ -42,7 +43,8 @@ const routes: Routes = [
     SharedModule,
     QRCodeModule,
     // QRScanner,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    TranslateModule.forChild(),
   ],
   declarations: [
     CartPage,

@@ -13,6 +13,7 @@ import { DeliveryComponent } from './delivery/delivery.component';
 import { DeliverysComponent } from './delivery/deliverys/deliverys.component';
 import { File } from '@ionic-native/file/ngx';
 import { Camera } from '@ionic-native/camera/ngx';
+import { TranslateModule } from '@ngx-translate/core';
 // import { WebView } from '@ionic-native/ionic-webview/ngx';
 
 
@@ -57,7 +58,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     SharedModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    TranslateModule.forChild()
   ],
   declarations: [
   LogisticPage,

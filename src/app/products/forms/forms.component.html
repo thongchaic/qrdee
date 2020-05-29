@@ -1,6 +1,6 @@
 <ion-content class="bg">
 
-    <p> ตำแหน่ง</p>
+    <p>{{ 'productsPage.forms.edit' | translate }}</p>
 {{ latitude}}
 {{ longitude}}
 
@@ -15,7 +15,7 @@
                  <img slot="start" [src]="url+store_distance.store_pic || '/assets/noimg.png'" 
                   class="img_store" >
                   <p style="font-weight: bold; font-size: 13px;">
-                  {{store_distance.store_name}}<br> <ion-icon ios="ios-pin" md="md-pin"></ion-icon>ระยะทาง{{store_distance.distance}} กม.
+                  {{store_distance.store_name}}<br> <ion-icon ios="ios-pin" md="md-pin"></ion-icon>{{ 'productsPage.forms.distance' | translate }}{{store_distance.distance}} {{ 'productsPage.forms.km' | translate }}
                 </p>
               </ion-item> 
              </div> <br><br><br><br><br><br> <br> 

@@ -25,6 +25,8 @@ productForm: FormGroup = this.builder.group({
    product_type_id: [1, Validators.required],
    product_th: ['', Validators.required],
    details_th: ['', Validators.required],
+   product_en: [''],
+   details_en: [''],
    price: [0, Validators.required],
    cost: [0, Validators.required],
    thumbnail: null
@@ -105,6 +107,8 @@ this.productService.getProductTypes().subscribe((data:any) => this.product_types
        product_type_id: data.product_type_id,
        product_th: data.product_th,
        details_th: data.details_th,
+       product_en: data.product_en,
+       details_en: data.details_en,
        price: data.price,
        cost: data.cost,
        thumbnail:null

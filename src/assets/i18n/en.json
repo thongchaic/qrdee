@@ -8,9 +8,10 @@
     "orderList": "Order",
     "buy": "Buy",
     "login": "Login",
-    "setting": "Setting"
+    "setting": "Language"
   },
   "cartPage": {
+    "each": "Each",
     "order": "Order",
     "cart": "Cart",
     "back": "Back",
@@ -35,6 +36,8 @@
     "productList": "Product List"
   },
   "customerPage": {
+    "bath":"฿",
+    "position": "Position",
     "back": "Back",
     "select": "Select",
     "each": "Each",

@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
     private _translate: TranslateService
     // private push: Push
   ) {
-    this._translate.setDefaultLang(localStorage.getItem('lang') || 'en');
+    this._translate.setDefaultLang(localStorage.getItem('lang') || 'th');
     // this.currentStore = this._loginService.currentStoreValue;
 
     // localStorage.setItem('background','0');

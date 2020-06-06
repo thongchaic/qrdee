@@ -1,0 +1,261 @@
+{
+  "sidebar": {
+    "menu": "មេញ៉ូ",
+    "home": "ទំព័រដំបូង",
+    "myProducts": "ទំនិញរបស់ខ្ញុំ",
+    "summary": "សរុបចំនួនលក់",
+    "manageStore": "រៀបចំហាង",
+    "orderList": "ការកម្មង់របស់ខ្ញុំ",
+    "buy": "ឈ្មោះទំនិញ",
+    "login": "ចូលប្រព័ន្ធ",
+    "setting": "ភាសា"
+  },
+  "cartPage": {
+    "each": "ដុំ",
+    "order": "កម្មង់ទិញ",
+    "cart": "កន្ត្រកទំនិញ",
+    "back": "ត្រឡប់",
+    "cPosition": "តំណែងអ្នកទទួល",
+    "target": "អ្នកទទួល",
+    "telephone": "លេខទូរសព្ទ",
+    "product": "ទំនិញ",
+    "shippingCost": "តម្លៃដឹកជញ្ជូន",
+    "total": "រួម",
+    "totalPrice": "តម្លៃរួម",
+    "acceptPayment": "ទទួលបង់ប្រាក់",
+    "success": "រួចរាល់",
+    "deliverSuccess": "ផ្ញើទំនិញរួចរាល់",
+    "call": "ហៅអ្នកផ្ញើទំនិញ",
+    "qrPayment": "បង់ប្រាក់ដោយ QR",
+    "bath": "បាត",
+    "cancel": "បោះបង់",
+    "minCost": "តម្លៃអប្បបរមា",
+    "free": "ផ្ញើដោយឥតគិតថ្លៃ",
+    "amount": "ចំនួនប្រាក់",
+    "genQr": "បង្កើត QR",
+    "productList": "បញ្ជីទំនិញ"
+  },
+  "customerPage": {
+    "bath":"฿",
+    "position": "តំណែង",
+    "back": "ត្រឡប់",
+    "select": "ជ្រើសរើស",
+    "each": "ដុំ",
+    "minCost": "តម្លៃអប្បបរមា",
+    "free": "ផ្ញើដោយឥតគិតថ្លៃ",
+    "order": "កម្មង់ទិញ",
+    "specifyLocation": "កំណត់តំណែង",
+    "storeLocation": "តំណែងហាង",
+    "find": "ស្វែងរកហាង",
+    "buy": "ទិញទំនិញ",
+    "nearbyStores": "ហាងនៅក្បែរ",
+    "storeNotFound": "មិនជួបហាងក្បែរៗនេះ",
+    "shippingCost": "តម្លៃដឹកជញ្ជូន",
+    "total": "រួម",
+    "qrPayment": "បង់ប្រាក់នៅកន្លែងអ្នកដោយ QR",
+    "specifyTargetPoint": "សូមមេត្តាបញ្ជាក់កន្លែងទទួលទំនិញ",
+    "targetName": "ឈ្មោះអ្នកទទួល",
+    "telephone": "លេខទូរសព្ទ",
+    "note": "ព័ត៌មានលម្អិតបន្ថែមអំពីអ្នកផ្ញើទំនិញ",
+    "acceptOrder": "ទទួលការកម្មង់ទិញ",
+    "orderList": "បញ្ជីការទិញ",
+    "from": "ពី",
+    "when": "ពេល",
+    "km": "គ.ម"
+  },
+  "deliveryPage": {
+    "delivery": "ការដឹកជញ្ជូន",
+    "targetPosition": "តំណែងអ្នកទទួល"
+  },
+  "logisticPage": {
+    "shippingInformation": "ព័ត៌មានផ្ញើទំនិញ",
+    "cName": "ឈ្មោះអតិថិជន",
+    "tel": "លេខទូរសព្ទ",
+    "submit": "កំណត់ការដឹកជញ្ជូន",
+    "specifyCode": "ដាក់លេខកូដផ្ញើទំនិញ",
+    "transport": "ការដឹកជញ្ជូន",
+    "code": "លេខកូដ",
+    "delivery": "ផ្ញើទំនិញ",
+    "transportHistory": "ប្រវត្តិការដឹកជញ្ជូនទំនិញ",
+    "information": "ព័ត៌មានអ្នកដឹកជញ្ជូន",
+    "form": {
+      "edit": "កែប្រែព័ត៌មាន",
+      "takePhoto": "ថតរូបទំនិញ",
+      "selectPhoto": "ជ្រើសពីអាល់ប៊ុម",
+      "firstName": "ឈ្មោះ",
+      "lastName": "នាមត្រកូល",
+      "tel": "លេខទូរសព្ទ",
+      "vehicle": "ប្រភេទឡានដឹកជញ្ជូន",
+      "vehicleNumber": "លេខឡាន",
+      "vehicleStatus": "ជ្រើសរើសការដឹកជញ្ជូន",
+      "submit": "រក្សាទុក"
+    },
+    "history": {
+      "information": "ព័ត៌មានអ្នកដឹកជញ្ជូន",
+      "tel": "លេខទូរសព្ទ",
+      "vehicle": "ប្រភេទឡាន",
+      "vehicleNumber": "លេខឡាន",
+      "vehicleStatus": "ស្ថានភាពចែកចាយ",
+      "submit": "កែប្រែព័ត៌មាន"
+    },
+    "show": {
+      "transport": "ដឹកជញ្ជូន",
+      "history": "ប្រវត្តិការដឹកជញ្ជូនទំនិញ",
+      "to": "ផ្ញើដល់",
+      "when": "ពេល"
+
+    }
+  },
+  "productsPage": {
+    "forms": {
+      "position": "តំណែង",
+      "km": "គ.ម",
+      "distance": "ចម្ងាយផ្លូវ"
+    },
+    "form": {
+      "edit": "កែប្រែព័ត៌មាន",
+      "takePhoto": "ថតរូបទំនិញ",
+      "selectPhoto": "ជ្រើសពីអាល់ប៊ុម",
+      "thName": "ឈ្មោះទំនិញភាសាថៃ",
+      "enName": "ឈ្មោះទំនិញភាសាអង់គ្លេស",
+      "thDes": "ព័ត៌មានលម្អិតទំនិញភាសាថៃ",
+      "enDes": "ព័ត៌មានលម្អិតទំនិញភាសាអង់គ្លេស",
+      "category": "ក្រុមទំនិញ",
+      "price": "តម្លៃ",
+      "cost": "ដើមទុន",
+      "submit": "រក្សាទុក"
+    },
+    "list": {
+      "myProducts": "ទំនិញរបស់ខ្ញុំ",
+      "addProduct": "បន្ថែមទំនិញ"
+    },
+    "show": {
+      "productId": "លេខកូដទំនិញ",
+      "price": "តម្លៃលក់",
+      "cost": "តម្លៃដើមទុន",
+      "amount": "ចំនួននៅសល់ក្នុងឃ្លាំង",
+      "back": "ត្រឡប់"
+    },
+    "showCustomer": {
+      "price": "តម្លៃ",
+      "description": "ព័ត៌មានលម្អិត",
+      "back": "ត្រឡប់"
+    }
+  },
+  "profilePage": {
+    "manageStore": "រៀបចំហាងទំនិញ",
+    "manageStorePosition": "រៀបចំតំណែងហាង",    
+    "form": {
+      "edit": "កែប្រែព័ត៌មាន",
+      "takePhoto": "ថតរូបទំនិញ",
+      "selectPhoto": "ជ្រើសពីអាល់ប៊ុម",
+      "promptpay": "រួចរាល់ក្នុងការបង់ប្រាក់",
+      "storeTh": "ឈ្មោះហាងភាសាថៃ",
+      "storeEn": "ឈ្មោះហាងភាសាអង់គ្លេស",
+      "firstNameTh": "ឈ្មោះភាសាថៃ",
+      "firstNameEn": "ឈ្មោះភាសាអង់គ្លេស",
+      "lastNameTh": "ឈ្មោះភាសាថៃ",
+      "lastNameEn": "នាមត្រកូលភាសាអង់គ្លេស",
+      "tel": "លេខទូរសព្ទ",
+      "storeType": "ប្រភេទហាង",
+      "submit": "រក្សាទុក",
+      "shippingCost": "ថ្លៃដឹកជញ្ជូន",
+      "minShippingCost": "តម្លៃអប្បបរមា ដឹកជញ្ជូនដោយឥតគិតថ្លៃ"
+    }
+  },
+  "loginPage": {
+    "lang": "kh",
+    "langText": "លេខកូដ",
+    "login": "ចូលប្រព័ន្ធ",
+    "welcome": "សូមស្វាគមន៍មកកាន់ផ្សារណាត់មឿងឆាង",
+    "buy": "ទិញទំនិញ",
+    "newStore": "បើកហាងថ្មី",
+    "rider": "ផ្ញើទំនិញ",
+    "telephone": "លេខទូរសព្ទ",
+    "password": "លេខកូដ"
+  },
+  "registerPage": {
+    "register": "ចុះឈ្មោះហាង",
+    "storePosition": "ទីតាំង",
+    "storeNameTh": "ឈ្មោះភាសាថៃ",
+    "storeNameEn": "ឈ្មោះភាសាអង់គ្លេស",
+    "promptpay": "រួចរាល់ក្នុងការបង់ប្រាក់",
+    "tel": "លេខទូរសព្ទ",
+    "password": "លេខកូដ",
+    "confirmPassword": "បញ្ជាក់លេខកូដ"
+  },
+  "registerCustomerPage": {
+    "register": "ចុះឈ្មោះ",
+    "firstName": "ឈ្មោះ",
+    "lastName": "នាមត្រកូល",
+    "tel": "ទូរសព្ទ",
+    "email": "អ៊ីម៉ែល",
+    "password": "លេខកូដ",
+    "confirmPassword": "បញ្ជាក់លេខកូដ"
+  },
+  "registerLogisticPage": {
+    "register": "ចុះឈ្មោះជាអ្នកផ្ញើទំនិញ",
+    "firstName": "ឈ្មោះ",
+    "lastName": "នាមត្រកូល",
+    "vehicleNumber": "លេខឡាន",
+    "tel": "លេខទូរសព្ទ",
+    "email": "អ៊ីម៉ែល",
+    "password": "លេខកូដ",
+    "confirmPassword": "បញ្ជាក់លេខកូដ"
+  },
+  "riderPage": {
+    "request": "ពាក្យស្នើសុំឱ្យផ្ញើទំនិញ",
+    "store": "ហាង",
+    "shippingCost": "ថ្លៃផ្ញើ",
+    "km": "គ.ម",
+    "when": "ពេល",
+    "distance": "ចម្ងាយផ្លូវ",
+    "routes": {
+      "destination": "ទីកន្លែងផ្ញើទំនិញទៅ",
+      "back": "ត្រឡប់",
+      "store": "ហាង",
+      "shippingCost": "ថ្លៃផ្ញើ",
+      "customer": "អ្នកទទួល",
+      "tel": "ទូរសព្ទ",
+      "qrcode": "QR Code បង់ប្រាក់",
+      "success": "ផ្ញើទំនិញរួចរាល់"
+    }    
+  },
+  "sellStatsPage": {
+    "summary": "សរុបការលក់",
+    "latest": "ថ្មីបំផុត",
+    "sell": "លក់/សេវាកម្ម",
+    "time": "ជាន់/លើក"
+  },
+  "statsPage": {
+    "summary": "សរុបចំនួនលក់",
+    "dailyIncome": "ចំណូលថ្ងៃនេះ",
+    "day": "ក្នុងថ្ងៃនេះ",
+    "monthlyIncome": "ចំណូលខែនេះ",
+    "month": "ខែនេះ",
+    "yearlyIncome": "ចំណូលឆ្នាំនេះ",
+    "year": "ក្នុងឆ្នាំ"
+  },
+  "storeLogisticPage": {
+    "call": "ហៅអ្នកផ្ញើទំនិញ",
+    "tel": "ខល"
+  },
+  "storeOrderPage": {
+    "order": "កម្មង់ទំនិញ",
+    "callRider": "ហៅអ្នកផ្ញើទំនិញ",
+    "tel": "ខល",
+    "code": "លេខកូដផ្ញើទំនិញ",
+    "productOrder": {
+      "order": "កម្មង់ទំនិញ",
+      "productList": "កម្មង់ទំនិញ",
+      "productId": "លេខកូដទំនិញ",
+      "productName": "ទិញទំនិញ",
+      "amount": "ចំនួន"
+    }
+  },
+  "settingPage": {
+    "setting": "កំណត់តម្លៃ",
+    "selectLang": "ភាសា",
+    "selectLanguage": "ជ្រើសរើសភាសា"
+  }
+}
